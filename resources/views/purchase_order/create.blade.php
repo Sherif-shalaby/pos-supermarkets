@@ -88,15 +88,18 @@
                     </div>
                     <div class="card mb-2">
                         <div class="card-body p-2">
-                            <div class="row">
+                            <div class="row mb-2">
                                 <div class="col-md-12">
-                                    <div class="search-box input-group">
-                                        <button type="button" class="btn btn-secondary btn-lg" id="search_button"><i
-                                                class="fa fa-search"></i></button>
+                                    <div class="search-box input-group"
+                                        style="background-color: #e6e6e6;border-radius: 6px!important">
+                                        <button type="button" class="select-button " style="height: auto !important"
+                                            id="search_button"><i class="fa fa-search"></i></button>
                                         <input type="text" name="search_product" id="search_product"
-                                            placeholder="@lang('lang.enter_product_name_to_print_labels')" class="form-control ui-autocomplete-input"
-                                            autocomplete="off">
-                                        <button type="button" class="btn btn-success btn-lg btn-modal"
+                                            placeholder="@lang('lang.enter_product_name_to_print_labels')"
+                                            class="form-control modal-input @if (app()->isLocale('ar')) text-end @else  text-start @endif  ui-autocomplete-input"
+                                            style="width: 80% !important" autocomplete="off">
+                                        <button type="button" class="text-black btn-modal"
+                                            style="background-color: transparent;border: none;outline: none;"
                                             data-href="{{ action('ProductController@create') }}?quick_add=1"
                                             data-container=".view_modal"><i class="fa fa-plus"></i></button>
                                     </div>

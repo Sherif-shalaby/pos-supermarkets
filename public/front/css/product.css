@@ -45,7 +45,7 @@
 }
 
 .select-button-group .bootstrap-select {
-    width: fit-content !important;
+    width: 85% !important;
 }
 
 .select-button-group input {

@@ -56,7 +56,6 @@
         </div>
 
         <div class="col-md-3 px-5">
-
             {!! Form::label('products', __('lang.products'), [
                 'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
             ]) !!}
