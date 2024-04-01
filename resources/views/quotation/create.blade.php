@@ -77,6 +77,10 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
                             <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
                                 <div class="col-md-10">
                                     <div class="search-box input-group"
@@ -89,11 +93,11 @@
                                             style="width: 80% !important" autocomplete="off">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-2 d-flex justify-content-center align-items-center">
                                     @include('quotation.partial.product_selection')
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col-md-12 mt-3">
                                 <div class="table-responsive transaction-list">
                                     <table id="product_table" style="width: 100%;" class="table table-striped">
                                         <thead>
@@ -135,82 +139,117 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <div class="i-checks">
-                                    <input id="block_qty" name="block_qty" type="checkbox" value="1"
-                                        class="form-control-custom">
-                                    <label for="block_qty"><strong>@lang('lang.block_qty')</strong></label>
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div class="col-md-3 ">
+                                    <div class="form-group">
+                                        <div class="i-checks">
+                                            <input id="block_qty" name="block_qty" type="checkbox" value="1"
+                                                class="form-control-custom">
+                                            <label for="block_qty"><strong>@lang('lang.block_qty')</strong></label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('block_for_days', __('lang.block_for_days'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::text('block_for_days', 1, [
+                                            'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            'placeholder' => __('lang.block_for_days'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('validity_days', __('lang.validity_days'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::text('validity_days', null, [
+                                            'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            'placeholder' => __('lang.validity_days'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        <label
+                                            class="form-label d-block mb-1 @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                            for="tax_id">@lang('lang.tax')</label>
+                                        <select class="form-control" name="tax_id" id="tax_id">
+                                            <option value="" selected>No Tax</option>
+                                            @foreach ($taxes as $tax)
+                                                <option data-rate="{{ $tax->rate }}" value="{{ $tax->id }}">
+                                                    {{ $tax->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('discount_type', __('lang.discount_type'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('discount_type', ['fixed' => 'Fixed', 'percentage' => 'Percentage'], 'fixed', [
+                                            'class' => 'form-control',
+                                            'data-live-search' => 'true',
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('discount_value', __('lang.discount_value'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::text('discount_value', null, [
+                                            'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            'placeholder' => __('lang.discount_value'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('terms_and_condition_id', __('lang.terms_and_conditions'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('terms_and_condition_id', $tac, null, [
+                                            'class' => 'selectpicker form-control',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.please_select'),
+                                            'id' => 'terms_and_condition_id',
+                                        ]) !!}
+                                    </div>
+                                    <div class="tac_description_div"><span></span></div>
+                                </div>
+
+                            </div>
+                            <input type="hidden" name="submit_type" id="submit_type" value="save">
+                            <div class="row mb-3 justify-content-center">
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-primary"
+                                        id="submit-btn">@lang('lang.save')</button>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-md-3">
+
+                                    <button type="button" class="btn w-100 btn-secondary"
+                                        id="print-btn">@lang('lang.print')</button>
+                                </div>
+                                <div class="col-md-3">
+
+                                    <button type="button" class="btn w-100 btn-danger" data-toggle="modal"
+                                        data-target="#email_modal">@lang('lang.send')</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('block_for_days', __('lang.block_for_days') . ':') !!}
-                                {!! Form::text('block_for_days', 1, ['class' => 'form-control', 'placeholder' => __('lang.block_for_days')]) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('validity_days', __('lang.validity_days') . ':') !!}
-                                {!! Form::text('validity_days', null, ['class' => 'form-control', 'placeholder' => __('lang.validity_days')]) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="tax_id">@lang('lang.tax')</label>
-                                <select class="form-control" name="tax_id" id="tax_id">
-                                    <option value="" selected>No Tax</option>
-                                    @foreach ($taxes as $tax)
-                                        <option data-rate="{{ $tax->rate }}" value="{{ $tax->id }}">
-                                            {{ $tax->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('discount_type', __('lang.discount_type') . ':') !!}
-                                {!! Form::select('discount_type', ['fixed' => 'Fixed', 'percentage' => 'Percentage'], 'fixed', [
-                                    'class' => 'form-control',
-                                    'data-live-search' => 'true',
-                                ]) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('discount_value', __('lang.discount_value') . ':') !!}
-                                {!! Form::text('discount_value', null, ['class' => 'form-control', 'placeholder' => __('lang.discount_value')]) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('terms_and_condition_id', __('lang.terms_and_conditions'), []) !!}
-                                {!! Form::select('terms_and_condition_id', $tac, null, [
-                                    'class' => 'selectpicker form-control',
-                                    'data-live-search' => 'true',
-                                    'placeholder' => __('lang.please_select'),
-                                    'id' => 'terms_and_condition_id',
-                                ]) !!}
-                            </div>
-                            <div class="tac_description_div"><span></span></div>
-                        </div>
+                    </div>
 
-                    </div>
-                    <input type="hidden" name="submit_type" id="submit_type" value="save">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button type="button" class="btn btn-primary" id="submit-btn">@lang('lang.save')</button>
-                            <button type="button" class="btn btn-secondary" id="print-btn">@lang('lang.print')</button>
-                            <button type="button" class="btn btn-danger" data-toggle="modal"
-                                data-target="#email_modal">@lang('lang.send')</button>
-                        </div>
-                    </div>
 
                     <div class="modal fade" role="dialog" id="email_modal">
                         <div class="modal-dialog" role="document">
@@ -244,8 +283,6 @@
                     {!! Form::close() !!}
                 </div>
             </div>
-        </div>
-        </div>
         </div>
     </section>
 

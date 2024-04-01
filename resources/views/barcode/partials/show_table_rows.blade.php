@@ -21,7 +21,7 @@
                 value="1">
         </td>
         <td>
-            <button type="button" class="btn btn-danger text-white remove_row"><i class="fa fa-times"></i></button>
+            <button type="button" class="btn btn-danger btn-sm remove_row"><i class="fa fa-times"></i></button>
         </td>
     </tr>
 @empty
