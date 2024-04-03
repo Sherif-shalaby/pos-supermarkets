@@ -25,6 +25,7 @@
     height: 30px;
     background-color: #d70007 !important;
     opacity: 1;
+    border-radius: 50% !important;
 }
 
 .header-pill,
@@ -165,7 +166,7 @@ input.form-control-custom:checked+label::before {
     width: 70%;
     margin: auto;
     margin-top: 15px;
-    padding: 0;
+    /* padding: 0; */
     padding-top: 15px;
 }
 
