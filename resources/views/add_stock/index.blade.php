@@ -5,118 +5,174 @@
     @section('title', __('lang.add_stock'))
 @endif
 
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">
+@endsection
 @section('content')
-    <section class="">
-        <div class="col-md-22">
-            <div class="card">
-                <div class="card-header d-flex align-items-center">
-                    @if (request()->segment(1) == 'raw-material')
-                    <h3 class="print-title">@lang('lang.view_all_stock_for_raw_material')</h3>
-                    @else
-                    <h3 class="print-title">@lang('lang.add_stock_list')</h3>
-                    @endif
-                </div>
-                <div class="card-body">
+
+    <section class="forms py-0">
+        <div class="container-fluid">
+            <div
+                class="  d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                @if (request()->segment(1) == 'raw-material')
+                    <h5 class="print-title mb-0 position-relative print-title" style="margin-right: 30px">@lang('lang.view_all_stock_for_raw_material')
+                        <span class="header-pill"></span>
+                    </h5>
+                @else
+                    <h5 class="print-title mb-0 position-relative print-title" style="margin-right: 30px">@lang('lang.add_stock_list')
+                        <span class="header-pill"></span>
+                    </h5>
+                @endif
+            </div>
+            <div class="card my-3">
+                <div class="card-body p-2">
                     <form action="">
                         <input type="hidden" name="is_raw_material" id="is_raw_material"
                             value="@if (request()->segment(1) == 'raw-material') {{ 1 }}@else{{ 0 }} @endif">
-                        <div class="row">
-                            <div class="col-md-3">
+                        <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                            <div class="col-md-3 px-5">
                                 <div class="form-group">
-                                    {!! Form::label('store_id', __('lang.store'), []) !!}
-                                    {!! Form::select('store_id', $stores, request()->store_id, ['class' => 'form-control filters', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
+                                    {!! Form::label('store_id', __('lang.store'), [
+                                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                    ]) !!}
+                                    {!! Form::select('store_id', $stores, request()->store_id, [
+                                        'class' => 'form-control filters',
+                                        'placeholder' => __('lang.all'),
+                                        'data-live-search' => 'true',
+                                    ]) !!}
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 px-5">
                                 <div class="form-group">
-                                    {!! Form::label('supplier_id', __('lang.supplier'), []) !!}
-                                    {!! Form::select('supplier_id', $suppliers, request()->supplier_id, ['class' => 'form-control filters', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
+                                    {!! Form::label('supplier_id', __('lang.supplier'), [
+                                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                    ]) !!}
+                                    {!! Form::select('supplier_id', $suppliers, request()->supplier_id, [
+                                        'class' => 'form-control filters',
+                                        'placeholder' => __('lang.all'),
+                                        'data-live-search' => 'true',
+                                    ]) !!}
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 px-5">
                                 <div class="form-group">
-                                    {!! Form::label('created_by', __('lang.added_by'), []) !!}
-                                    {!! Form::select('created_by', $users, request()->created_by, ['class' => 'form-control filters', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
+                                    {!! Form::label('created_by', __('lang.added_by'), [
+                                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                    ]) !!}
+
+                                    {!! Form::select('created_by', $users, request()->created_by, [
+                                        'class' => 'form-control filters',
+                                        'placeholder' => __('lang.all'),
+                                        'data-live-search' => 'true',
+                                    ]) !!}
                                 </div>
                             </div>
 
-                            <div class="col-md-3">
+                            <div class="col-md-3 px-5">
                                 <div class="form-group">
-                                    {!! Form::label('product_id', __('lang.product'), []) !!}
-                                    {!! Form::select('product_id', $products, request()->product_id, ['class' => 'form-control filters', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
+                                    {!! Form::label('product_id', __('lang.product'), [
+                                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                    ]) !!}
+                                    {!! Form::select('product_id', $products, request()->product_id, [
+                                        'class' => 'form-control filters',
+                                        'placeholder' => __('lang.all'),
+                                        'data-live-search' => 'true',
+                                    ]) !!}
                                 </div>
                             </div>
 
-                            <div class="col-md-2">
+                            <div class="col-md-3 px-5">
                                 <div class="form-group">
-                                    {!! Form::label('start_date', __('lang.start_date'), []) !!}
-                                    {!! Form::text('start_date', request()->start_date, ['class' => 'form-control ', 'id' => 'start_date']) !!}
+                                    {!! Form::label('start_date', __('lang.start_date'), [
+                                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                    ]) !!}
+                                    {!! Form::text('start_date', request()->start_date, [
+                                        'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                                        'id' => 'start_date',
+                                    ]) !!}
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3 px-5">
                                 <div class="form-group">
-                                    {!! Form::label('start_time', __('lang.start_time'), []) !!}
-                                    {!! Form::text('start_time', null, ['class' => 'form-control time_picker sale_filter']) !!}
+                                    {!! Form::label('start_time', __('lang.start_time'), [
+                                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                    ]) !!}
+                                    {!! Form::text('start_time', null, [
+                                        'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start time_picker sale_filter',
+                                    ]) !!}
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3 px-5">
                                 <div class="form-group">
-                                    {!! Form::label('end_date', __('lang.end_date'), []) !!}
-                                    {!! Form::text('end_date', request()->end_date, ['class' => 'form-control ', 'id' => 'end_date']) !!}
+                                    {!! Form::label('end_date', __('lang.end_date'), [
+                                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                    ]) !!}
+                                    {!! Form::text('end_date', request()->end_date, [
+                                        'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                                        'id' => 'end_date',
+                                    ]) !!}
                                 </div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-3 px-5">
                                 <div class="form-group">
-                                    {!! Form::label('end_time', __('lang.end_time'), []) !!}
-                                    {!! Form::text('end_time', null, ['class' => 'form-control time_picker sale_filter']) !!}
+                                    {!! Form::label('end_time', __('lang.end_time'), [
+                                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                    ]) !!}
+                                    {!! Form::text('end_time', null, [
+                                        'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start time_picker sale_filter',
+                                    ]) !!}
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-12 px-5 d-flex justify-content-center align-items-center">
                                 <button type="button"
-                                    class="btn btn-danger clear_filters mt-2 ml-2">@lang('lang.clear_filter')</button>
+                                    class="btn btn-danger col-md-3 clear_filters">@lang('lang.clear_filter')</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
 
-        <div class="table-responsive">
-            <table class="table" id="add_stock_table">
-                <thead>
-                    <tr>
-                        <th>@lang('lang.po_ref_no')</th>
-                        <th>@lang('lang.invoice_no')</th>
-                        <th>@lang('lang.date_and_time')</th>
-                        <th>@lang('lang.invoice_date')</th>
-                        <th>@lang('lang.supplier')</th>
-                        <th>@lang('lang.created_by')</th>
-                        <th class="currencies">@lang('lang.paying_currency')</th>
-                        <th class="sum">@lang('lang.value')</th>
-                        <th class="sum">@lang('lang.paid_amount')</th>
-                        <th class="sum">@lang('lang.pending_amount')</th>
-                        <th>@lang('lang.due_date')</th>
-                        <th>@lang('lang.notes')</th>
-                        <th class="notexport">@lang('lang.action')</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <th class="table_totals" style="text-align: right">@lang('lang.total')</th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-            </table>
+            <div class="card my-3">
+                <div class="card-body p-2">
+                    <div class="table-responsive">
+                        <table class="table" id="add_stock_table">
+                            <thead>
+                                <tr>
+                                    <th>@lang('lang.po_ref_no')</th>
+                                    <th>@lang('lang.invoice_no')</th>
+                                    <th>@lang('lang.date_and_time')</th>
+                                    <th>@lang('lang.invoice_date')</th>
+                                    <th>@lang('lang.supplier')</th>
+                                    <th>@lang('lang.created_by')</th>
+                                    <th class="currencies">@lang('lang.paying_currency')</th>
+                                    <th class="sum">@lang('lang.value')</th>
+                                    <th class="sum">@lang('lang.paid_amount')</th>
+                                    <th class="sum">@lang('lang.pending_amount')</th>
+                                    <th>@lang('lang.due_date')</th>
+                                    <th>@lang('lang.notes')</th>
+                                    <th class="notexport">@lang('lang.action')</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <th class="table_totals" style="text-align: right">@lang('lang.total')</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 @endsection
@@ -129,7 +185,9 @@
                 paging: true,
                 info: false,
                 bAutoWidth: false,
-                order: [[2, 'desc']],
+                order: [
+                    [2, 'desc']
+                ],
                 language: {
                     url: dt_lang_url,
                 },

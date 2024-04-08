@@ -1,222 +1,341 @@
 @extends('layouts.app')
 @section('title', __('lang.internal_stock_return'))
-
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">
+@endsection
 @section('content')
-    <section class="forms">
+    <section class="forms py-0">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h3 class="print-title">@lang('lang.internal_stock_return')</h3>
-                        </div>
-                        {!! Form::open(['url' => action('InternalStockReturnController@store'), 'method' => 'post', 'id' => 'internal_stock_return_form', 'enctype' => 'multipart/form-data']) !!}
-                        <input type="hidden" name="is_raw_material" id="is_raw_material" value="{{ $is_raw_material }}">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
+                <div class="col-md-12 px-1">
+                    <div
+                        class="  d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                        <h5 class="mb-0 position-relative print-title" style="margin-right: 30px">@lang('lang.internal_stock_return')
+                            <span class="header-pill"></span>
+                        </h5>
+                    </div>
+                    {!! Form::open([
+                        'url' => action('InternalStockReturnController@store'),
+                        'method' => 'post',
+                        'id' => 'internal_stock_return_form',
+                        'enctype' => 'multipart/form-data',
+                    ]) !!}
+                    <input type="hidden" name="is_raw_material" id="is_raw_material" value="{{ $is_raw_material }}">
+                    <div class="card my-3">
+                        <div class="card-body p-2">
+                            <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('sender_store_id', __('lang.sender_store') . ':*', []) !!}
-                                        {!! Form::select('sender_store_id', $stores, session('user.store_id'), ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'required', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                                        {!! Form::label('sender_store_id', __('lang.sender_store') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('sender_store_id', $stores, session('user.store_id'), [
+                                            'class' => 'selectpicker form-control',
+                                            'data-live-search' => 'true',
+                                            'required',
+                                            'style' => 'width: 80%',
+                                            'placeholder' => __('lang.please_select'),
+                                        ]) !!}
                                     </div>
                                 </div>
 
-                                <div class="col-md-3">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('status', __('lang.status') . ':*', []) !!}
-                                        {!! Form::select('status', ['received' => __('lang.received'), 'approved' => __('lang.approved'), 'pending' => __('lang.pending'), 'declined' => __('lang.declined'), 'send_the_goods' => __('lang.send_the_goods')], 'pending', ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'required', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                                        {!! Form::label('status', __('lang.status') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select(
+                                            'status',
+                                            [
+                                                'received' => __('lang.received'),
+                                                'approved' => __('lang.approved'),
+                                                'pending' => __('lang.pending'),
+                                                'declined' => __('lang.declined'),
+                                                'send_the_goods' => __('lang.send_the_goods'),
+                                            ],
+                                            'pending',
+                                            [
+                                                'class' => 'selectpicker form-control',
+                                                'data-live-search' => 'true',
+                                                'required',
+                                                'style' => 'width: 80%',
+                                                'placeholder' => __('lang.please_select'),
+                                            ],
+                                        ) !!}
                                     </div>
+                                </div>
+
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('product_class_id', __('lang.product_class'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('product_class_id', $product_classes, request()->product_class_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('category_id', __('lang.category'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('category_id', $categories, request()->category_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('sub_category_id', __('lang.sub_category'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('sub_category_id', $sub_categories, request()->sub_category_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('brand_id', __('lang.brand'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('brand_id', $brands, request()->brand_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('unit_id', __('lang.unit'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('unit_id', $units, request()->unit_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('color_id', __('lang.color'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('color_id', $colors, request()->color_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('size_id', __('lang.size'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('size_id', $sizes, request()->size_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('grade_id', __('lang.grade'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('grade_id', $grades, request()->grade_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('tax_id', __('lang.tax'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('tax_id', $taxes, request()->tax_id, [
+                                            'class' => 'form-control filter selectpicker',
+                                            'data-live-search' => 'true',
+                                            'placeholder' => __('lang.all'),
+                                        ]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-5">
+                                    <div class="form-group">
+                                        {!! Form::label('store_id', __('lang.store'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('store_id', $stores, request()->store_id, [
+                                            'class' => 'form-control filter',
+                                            'placeholder' => __('lang.all'),
+                                            'data-live-search' => 'true',
+                                        ]) !!}
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3 px-5">
+                                    <a class="btn btn-danger"
+                                        href="{{ action('InternalStockReturnController@create') }}">@lang('lang.clear_filters')</a>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class=" mt-3">
-                                        <div class="row">
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('product_class_id', __('lang.product_class') . ':', []) !!}
-                                                    {!! Form::select('product_class_id', $product_classes, request()->product_class_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('category_id', __('lang.category') . ':', []) !!}
-                                                    {!! Form::select('category_id', $categories, request()->category_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('sub_category_id', __('lang.sub_category') . ':', []) !!}
-                                                    {!! Form::select('sub_category_id', $sub_categories, request()->sub_category_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('brand_id', __('lang.brand') . ':', []) !!}
-                                                    {!! Form::select('brand_id', $brands, request()->brand_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('unit_id', __('lang.unit') . ':', []) !!}
-                                                    {!! Form::select('unit_id', $units, request()->unit_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('color_id', __('lang.color') . ':', []) !!}
-                                                    {!! Form::select('color_id', $colors, request()->color_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('size_id', __('lang.size') . ':', []) !!}
-                                                    {!! Form::select('size_id', $sizes, request()->size_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('grade_id', __('lang.grade') . ':', []) !!}
-                                                    {!! Form::select('grade_id', $grades, request()->grade_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('tax_id', __('lang.tax') . ':', []) !!}
-                                                    {!! Form::select('tax_id', $taxes, request()->tax_id, ['class' => 'form-control filter selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <div class="form-group">
-                                                    {!! Form::label('store_id', __('lang.store'), []) !!}
-                                                    {!! Form::select('store_id', $stores, request()->store_id, ['class' => 'form-control filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                                </div>
-                                            </div>
+                        </div>
+                    </div>
 
-                                            <div class="col-md-3">
-                                                <a class="btn btn-danger mt-4"
-                                                    href="{{ action('InternalStockReturnController@create') }}">@lang('lang.clear_filters')</a>
+                    <div class="card my-3">
+                        <div class="card-body p-2">
+                            <div class="mb-3 d-flex flex-wrap @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif"
+                                style="gap:7px">
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <button type="button" value="1"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.image')</button>
-                                            <button type="button" value="7"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.class')</button>
-                                            <button type="button" value="8"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.category')</button>
-                                            <button type="button" value="9"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.sub_category')</button>
-                                            <button type="button" value="10"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.purchase_history')</button>
-                                            <button type="button" value="11"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.batch_number')</button>
-                                            <button type="button" value="12"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.selling_price')</button>
-                                            <button type="button" value="13"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.tax')</button>
-                                            <button type="button" value="14"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.brand')</button>
-                                            <button type="button" value="15"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.unit')</button>
-                                            <button type="button" value="16"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.color')</button>
-                                            <button type="button" value="17"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.size')</button>
-                                            <button type="button" value="18"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.grade')</button>
-                                            <button type="button" value="19"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.expiry_date')</button>
-                                            <button type="button" value="20"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.manufacturing_date')</button>
-                                            <button type="button" value="21"
-                                                class="badge badge-pill badge-primary column-toggle">@lang('lang.discount')</button>
+
+                                <button type="button" value="1"
+                                    class="select_product_button column-toggle">@lang('lang.image')</button>
+                                <button type="button" value="7"
+                                    class="select_product_button column-toggle">@lang('lang.class')</button>
+                                <button type="button" value="8"
+                                    class="select_product_button column-toggle">@lang('lang.category')</button>
+                                <button type="button" value="9"
+                                    class="select_product_button column-toggle">@lang('lang.sub_category')</button>
+                                <button type="button" value="10"
+                                    class="select_product_button column-toggle">@lang('lang.purchase_history')</button>
+                                <button type="button" value="11"
+                                    class="select_product_button column-toggle">@lang('lang.batch_number')</button>
+                                <button type="button" value="12"
+                                    class="select_product_button column-toggle">@lang('lang.selling_price')</button>
+                                <button type="button" value="13"
+                                    class="select_product_button column-toggle">@lang('lang.tax')</button>
+                                <button type="button" value="14"
+                                    class="select_product_button column-toggle">@lang('lang.brand')</button>
+                                <button type="button" value="15"
+                                    class="select_product_button column-toggle">@lang('lang.unit')</button>
+                                <button type="button" value="16"
+                                    class="select_product_button column-toggle">@lang('lang.color')</button>
+                                <button type="button" value="17"
+                                    class="select_product_button column-toggle">@lang('lang.size')</button>
+                                <button type="button" value="18"
+                                    class="select_product_button column-toggle">@lang('lang.grade')</button>
+                                <button type="button" value="19"
+                                    class="select_product_button column-toggle">@lang('lang.expiry_date')</button>
+                                <button type="button" value="20"
+                                    class="select_product_button column-toggle">@lang('lang.manufacturing_date')</button>
+                                <button type="button" value="21"
+                                    class="select_product_button column-toggle">@lang('lang.discount')</button>
+                                @can('product_module.purchase_price.view')
+                                    <button type="button" value="22"
+                                        class="select_product_button column-toggle">@lang('lang.purchase_price')</button>
+                                @endcan
+                            </div>
+
+                            <div id="product_table_div" class="table-responsive">
+                                <table id="product_table" class="table" style="width: auto">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>@lang('lang.image')</th>
+                                            <th>@lang('lang.name')</th>
+                                            <th>@lang('lang.product_code')</th>
+                                            <th>@lang('lang.store')</th>
+                                            <th class="sum">@lang('lang.current_stock')</th>
+                                            <th style="width: 100px;">@lang('lang.qty')</th>
+                                            <th>@lang('lang.class')</th>
+                                            <th>@lang('lang.category')</th>
+                                            <th>@lang('lang.sub_category')</th>
+                                            <th>@lang('lang.purchase_history')</th>
+                                            <th>@lang('lang.batch_number')</th>
+                                            <th>@lang('lang.selling_price')</th>
+                                            <th>@lang('lang.tax')</th>
+                                            <th>@lang('lang.brand')</th>
+                                            <th>@lang('lang.unit')</th>
+                                            <th>@lang('lang.color')</th>
+                                            <th>@lang('lang.size')</th>
+                                            <th>@lang('lang.grade')</th>
+                                            <th>@lang('lang.expiry_date')</th>
+                                            <th>@lang('lang.manufacturing_date')</th>
+                                            <th>@lang('lang.discount')</th>
                                             @can('product_module.purchase_price.view')
-                                                <button type="button" value="22"
-                                                    class="badge badge-pill badge-primary column-toggle">@lang('lang.purchase_price')</button>
+                                                <th>@lang('lang.purchase_price')</th>
                                             @endcan
-                                        </div>
-                                    </div>
-
-                                    <div id="product_table_div" class="table-responsive">
-                                        <table id="product_table" class="table" style="width: auto">
-                                            <thead>
-                                                <tr>
-                                                    <th></th>
-                                                    <th>@lang('lang.image')</th>
-                                                    <th>@lang('lang.name')</th>
-                                                    <th>@lang('lang.product_code')</th>
-                                                    <th>@lang('lang.store')</th>
-                                                    <th class="sum">@lang('lang.current_stock')</th>
-                                                    <th style="width: 100px;">@lang('lang.qty')</th>
-                                                    <th>@lang('lang.class')</th>
-                                                    <th>@lang('lang.category')</th>
-                                                    <th>@lang('lang.sub_category')</th>
-                                                    <th>@lang('lang.purchase_history')</th>
-                                                    <th>@lang('lang.batch_number')</th>
-                                                    <th>@lang('lang.selling_price')</th>
-                                                    <th>@lang('lang.tax')</th>
-                                                    <th>@lang('lang.brand')</th>
-                                                    <th>@lang('lang.unit')</th>
-                                                    <th>@lang('lang.color')</th>
-                                                    <th>@lang('lang.size')</th>
-                                                    <th>@lang('lang.grade')</th>
-                                                    <th>@lang('lang.expiry_date')</th>
-                                                    <th>@lang('lang.manufacturing_date')</th>
-                                                    <th>@lang('lang.discount')</th>
-                                                    @can('product_module.purchase_price.view')
-                                                        <th>@lang('lang.purchase_price')</th>
-                                                    @endcan
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {{-- @include('internal_stock_request.partials.product_table', ['products'
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{-- @include('internal_stock_request.partials.product_table', ['products'
                                             =>
                                             $products]) --}}
-                                            </tbody>
+                                    </tbody>
 
-                                        </table>
-                                    </div>
-                                </div>
+                                </table>
                             </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="card my-3">
+                        <div class="card-body p-2">
                             <input type="hidden" id="product_data" name="product_data" value="[]">
                             <input type="hidden" id="store_array" name="store_array" value="[]">
                             <div class="row">
-                                <div class="col-md-12 p-5" style="text-align: right; font-size: 22px; font-weight: bold;">
-                                    @lang('lang.total'): <span class="final_total_span">{{ (0) }}</span>
+                                <div class="col-md-12 mt-3 d-flex justify-content-center">
+                                    <h4
+                                        class="count_wrapper col-md-6 d-flex @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                        <span class="count_title col-md-6"> @lang('lang.total') </span>
+                                        <span
+                                            class="count_value_style col-md-6 final_total_span">{{ 0 }}</span>
+                                    </h4>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3">
+                            <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('files', __('lang.files'), []) !!} <br>
-                                        {!! Form::file('files[]', null, ['class' => '']) !!}
+                                        {!! Form::label('files', __('lang.files'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::file('files[]', null, ['class' => ' modal-input app()->isLocale("ar") ? text-end : text-start']) !!}
                                     </div>
                                 </div>
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        {!! Form::label('notes', __('lang.notes') . ':', []) !!} <br>
-                                        {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                                        {!! Form::label('notes', __('lang.notes'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::textarea('notes', null, [
+                                            'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            'rows' => 3,
+                                        ]) !!}
                                     </div>
                                 </div>
                             </div>
 
 
-                        </div>
 
-                        <div class="col-sm-12">
-                            <button type="submit" name="submit" id="save" value="save"
-                                class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.request_a_return' )</button>
-                            <a href="{{ action('InternalStockReturnController@create') }}"
-                                class="btn btn-danger pull-right btn-flat mr-2">@lang('lang.cancel')</a>
+                            <div class="d-flex justify-content-center">
+                                <div class="col-md-4 d-flex justify-content-between px-5">
+                                    <button type="submit" name="submit" id="save" value="save"
+                                        class="btn btn-main col-md-12 submit">@lang('lang.request_a_return')</button>
+                                </div>
+                                <div class="col-md-4 d-flex justify-content-between px-5">
+                                    <a href="{{ action('InternalStockReturnController@create') }}"
+                                        class="btn btn-danger col-md-12">@lang('lang.cancel')</a>
+                                </div>
+                            </div>
 
                         </div>
-                        {!! Form::close() !!}
                     </div>
+                    {!! Form::close() !!}
+
                 </div>
             </div>
         </div>
@@ -226,6 +345,21 @@
 @endsection
 
 @section('javascript')
+    <script src="{{ asset('front/js/bootstrap.min.js') }}"></script>
+    <script>
+        // Add an event listener for the 'show.bs.collapse' and 'hide.bs.collapse' events
+        $('#detailsCollapse').on('show.bs.collapse', function() {
+            // Change the arrow icon to 'chevron-up' when the content is expanded
+            $('button[data-bs-target="#detailsCollapse"] i').removeClass('fa-arrow-down').addClass(
+                'fa-arrow-up');
+        });
+
+        $('#detailsCollapse').on('hide.bs.collapse', function() {
+            // Change the arrow icon to 'chevron-down' when the content is collapsed
+            $('button[data-bs-target="#detailsCollapse"] i').removeClass('fa-arrow-up').addClass(
+                'fa-arrow-down');
+        });
+    </script>
     <script type="text/javascript">
         var hidden_column_array = $.cookie('column_visibility') ? JSON.parse($.cookie('column_visibility')) : [];
 

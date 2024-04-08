@@ -1,80 +1,119 @@
 @extends('layouts.app')
 @section('title', __('lang.remove_stock'))
-
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">
+@endsection
 @section('content')
-    <section class="forms">
+    <section class="forms py-0">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h3 class="print-title">@lang('lang.remove_stock')</h3>
-                        </div>
-                        {!! Form::open(['url' => action('RemoveStockController@store'), 'method' => 'post', 'id' => 'remove_stock_form', 'enctype' => 'multipart/form-data']) !!}
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
+                <div class="col-md-12 px-1">
+                    <div
+                        class="d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                        <h5 class="mb-0 position-relative print-title" style="margin-right: 30px">@lang('lang.remove_stock')
+                            <span class="header-pill"></span>
+                        </h5>
+                    </div>
+                    {!! Form::open([
+                        'url' => action('RemoveStockController@store'),
+                        'method' => 'post',
+                        'id' => 'remove_stock_form',
+                        'enctype' => 'multipart/form-data',
+                    ]) !!}
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('store_id', __('lang.store') . ':*', []) !!}
-                                        {!! Form::select('store_id', $stores, null, ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                                        {!! Form::label('store_id', __('lang.store') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('store_id', $stores, null, [
+                                            'class' => 'selectpicker form-control',
+                                            'data-live-search' => 'true',
+                                            'style' => 'width: 80%',
+                                            'placeholder' => __('lang.please_select'),
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('supplier_id', __('lang.supplier') . ':*', []) !!}
-                                        {!! Form::select('supplier_id', $suppliers, null, ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                                        {!! Form::label('supplier_id', __('lang.supplier') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('supplier_id', $suppliers, null, [
+                                            'class' => 'selectpicker form-control',
+                                            'data-live-search' => 'true',
+                                            'style' => 'width: 80%',
+                                            'placeholder' => __('lang.please_select'),
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('invoice_id', __('lang.invoice_no') . ':*', []) !!} <i class="dripicons-question" data-toggle="tooltip"
-                                            title="@lang('lang.invoice_no_remove_stock_info')"></i>
-                                        {!! Form::select('invoice_id', $invoice_nos, null, ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                                        <div class="d-flex">
+                                            {!! Form::label('invoice_id', __('lang.invoice_no') . '*', [
+                                                'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!} <i class="dripicons-question" data-toggle="tooltip"
+                                                title="@lang('lang.invoice_no_remove_stock_info')"></i>
+                                        </div>
+
+                                        {!! Form::select('invoice_id', $invoice_nos, null, [
+                                            'class' => 'selectpicker form-control',
+                                            'data-live-search' => 'true',
+                                            'style' => 'width: 80%',
+                                            'placeholder' => __('lang.please_select'),
+                                        ]) !!}
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="row mb-4 @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div class="col-md-12 d-flex flex-wrap  @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif"
+                                    style="gap:8px">
                                     <button type="button" value="1"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.image')</button>
+                                        class="select_product_button column-toggle">@lang('lang.image')</button>
                                     <button type="button" value="4"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.class')</button>
+                                        class="select_product_button column-toggle">@lang('lang.class')</button>
                                     <button type="button" value="5"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.category')</button>
+                                        class="select_product_button column-toggle">@lang('lang.category')</button>
                                     <button type="button" value="6"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.sub_category')</button>
+                                        class="select_product_button column-toggle">@lang('lang.sub_category')</button>
                                     <button type="button" value="7"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.color')</button>
+                                        class="select_product_button column-toggle">@lang('lang.color')</button>
                                     <button type="button" value="8"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.size')</button>
+                                        class="select_product_button column-toggle">@lang('lang.size')</button>
                                     <button type="button" value="9"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.grade')</button>
+                                        class="select_product_button column-toggle">@lang('lang.grade')</button>
                                     <button type="button" value="10"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.unit')</button>
+                                        class="select_product_button column-toggle">@lang('lang.unit')</button>
                                     <button type="button" value="11"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.current_stock')</button>
+                                        class="select_product_button column-toggle">@lang('lang.current_stock')</button>
                                     <button type="button" value="12"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.supplier')</button>
+                                        class="select_product_button column-toggle">@lang('lang.supplier')</button>
                                     <button type="button" value="13"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.email')</button>
+                                        class="select_product_button column-toggle">@lang('lang.email')</button>
                                     <button type="button" value="14"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.invoice_no')</button>
+                                        class="select_product_button column-toggle">@lang('lang.invoice_no')</button>
                                     <button type="button" value="15"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.invoice_date')</button>
+                                        class="select_product_button column-toggle">@lang('lang.invoice_date')</button>
                                     <button type="button" value="16"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.payment_status')</button>
+                                        class="select_product_button column-toggle">@lang('lang.payment_status')</button>
                                     <button type="button" value="17"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.notes')</button>
+                                        class="select_product_button column-toggle">@lang('lang.notes')</button>
                                     <button type="button" value="18"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.quantity')</button>
+                                        class="select_product_button column-toggle">@lang('lang.quantity')</button>
                                     <button type="button" value="19"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.remove_quantity')</button>
+                                        class="select_product_button column-toggle">@lang('lang.remove_quantity')</button>
                                     @can('product_module.purchase_price.view')
                                         <button type="button" value="20"
-                                            class="badge badge-pill badge-primary column-toggle">@lang('lang.purchase_price')</button>
+                                            class="select_product_button column-toggle">@lang('lang.purchase_price')</button>
                                     @endcan
                                     <button type="button" value="21"
-                                        class="badge badge-pill badge-primary column-toggle">@lang('lang.sell_price')</button>
+                                        class="select_product_button column-toggle">@lang('lang.sell_price')</button>
                                 </div>
                             </div>
 
@@ -116,56 +155,75 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="hidden" name="final_total" id="final_total" value="0">
-                            <div class="row">
-                                <div class="col-md-12"
-                                    style="text-align: right; font-size: 20px; font-weight: bold; padding: 20px;">
-                                    @lang('lang.total'):<span class="final_total_span"></span>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('files', __('lang.files'), []) !!} <br>
-                                        {!! Form::file('files[]', null, ['class' => '']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label('reason', __('lang.reason') . ':', []) !!} <br>
-                                        {!! Form::textarea('reason', null, ['class' => 'form-control', 'rows' => 3]) !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label('notes', __('lang.notes') . ':', []) !!} <br>
-                                        {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => 3]) !!}
-                                    </div>
-                                </div>
-
-                            </div>
-
                         </div>
-                        <input type="hidden" id="is_raw_material" name="is_raw_material" value="{{ $is_raw_material }}">
-                        <input type="hidden" id="product_data" name="product_data" value="[]">
-                        <input type="hidden" id="transaction_array" name="transaction_array" value="[]">
-                        <div class="col-sm-12">
-                            <button type="submit" name="submit" id="print" style="margin: 10px" value="print"
-                                class="btn btn-danger pull-right btn-flat submit">@lang('lang.print')</button>
-                            <button type="submit" name="submit" id="send_to_supplier" style="margin: 10px"
-                                value="send_to_supplier"
-                                class="btn btn-warning pull-right btn-flat submit">@lang('lang.send_to_supplier')</button>
-                            <button type="submit" name="submit" id="save" style="margin: 10px" value="save"
-                                class="btn btn-primary pull-right btn-flat submit">@lang('lang.delete')</button>
-
-                        </div>
-                        {!! Form::close() !!}
                     </div>
+                    <input type="hidden" name="final_total" id="final_total" value="0">
+                    <div class="row">
+                        <div class="col-md-12 mt-3 d-flex justify-content-center">
+                            <h4
+                                class="count_wrapper col-md-6 d-flex @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <span class="count_title col-md-6"> @lang('lang.total') </span>
+                                <span class="count_value_style col-md-6 final_total_span"></span>
+                            </h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 px-5">
+                            <div class="form-group">
+                                {!! Form::label('files', __('lang.files'), [
+                                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                ]) !!}
+                                {!! Form::file('files[]', null, [
+                                    'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                                ]) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('reason', __('lang.reason'), [
+                                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                ]) !!}
+                                {!! Form::textarea('reason', null, [
+                                    'class' => 'form-control  modal-input app()->isLocale("ar") ? text-end : text-start',
+                                    'rows' => 3,
+                                ]) !!}
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                {!! Form::label('notes', __('lang.notes'), [
+                                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                ]) !!}
+                                {!! Form::textarea('notes', null, [
+                                    'class' => 'form-control  modal-input app()->isLocale("ar") ? text-end : text-start',
+                                    'rows' => 3,
+                                ]) !!}
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
+                <input type="hidden" id="is_raw_material" name="is_raw_material" value="{{ $is_raw_material }}">
+                <input type="hidden" id="product_data" name="product_data" value="[]">
+                <input type="hidden" id="transaction_array" name="transaction_array" value="[]">
+                <div class="col-sm-12">
+                    <button type="submit" name="submit" id="print" style="margin: 10px" value="print"
+                        class="btn btn-danger pull-right btn-flat submit">@lang('lang.print')</button>
+                    <button type="submit" name="submit" id="send_to_supplier" style="margin: 10px"
+                        value="send_to_supplier"
+                        class="btn btn-warning pull-right btn-flat submit">@lang('lang.send_to_supplier')</button>
+                    <button type="submit" name="submit" id="save" style="margin: 10px" value="save"
+                        class="btn btn-primary pull-right btn-flat submit">@lang('lang.delete')</button>
+
+                </div>
+                {!! Form::close() !!}
             </div>
+        </div>
+        </div>
         </div>
 
 
@@ -209,7 +267,7 @@
                     }
                 },
                 columnDefs: [{
-                    "targets": [0,1],
+                    "targets": [0, 1],
                     "orderable": false,
                     "searchable": false
                 }],
