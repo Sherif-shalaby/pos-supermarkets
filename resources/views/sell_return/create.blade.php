@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('title', __('lang.sell_return'))
-
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/product.css') }}">
+@endsection
 @section('content')
 
     <div class="container-fluid">
@@ -11,12 +13,22 @@
                         <h4>@lang('lang.sell_return')</h4>
                     </div>
                     <div class="card-body">
-                        {!! Form::open(['url' => action('SellReturnController@store'), 'method' => 'post', 'files' => true, 'class' => 'pos-form', 'id' => 'sell_return_form']) !!}
+                        {!! Form::open([
+                            'url' => action('SellReturnController@store'),
+                            'method' => 'post',
+                            'files' => true,
+                            'class' => 'pos-form',
+                            'id' => 'sell_return_form',
+                        ]) !!}
 
                         <div class="col-md-3">
                             <div class="form-group">
                                 {!! Form::label('store_id', __('lang.store'), []) !!}
-                                {!! Form::select('store_id', $stores, $sale->store_id, ['class' => 'form-control', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
+                                {!! Form::select('store_id', $stores, $sale->store_id, [
+                                    'class' => 'form-control',
+                                    'placeholder' => __('lang.all'),
+                                    'data-live-search' => 'true',
+                                ]) !!}
                             </div>
                         </div>
 
@@ -51,17 +63,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @include(
-                                                    'sell_return.partials.product_row',
-                                                    ['products' => $sale->transaction_sell_lines]
-                                                )
+                                                @include('sell_return.partials.product_row', [
+                                                    'products' => $sale->transaction_sell_lines,
+                                                ])
                                             </tbody>
                                             <tfoot>
                                                 <tr>
                                                     <td></td>
                                                     <td></td>
                                                     <th style="text-align: right">@lang('lang.total')</th>
-                                                    <th><span class="grand_total_span">{{ (0) }}</span>
+                                                    <th><span class="grand_total_span">{{ 0 }}</span>
                                                     </th>
                                                 </tr>
                                             </tfoot>
@@ -93,26 +104,41 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4 @if($sale->delivery_cost_given_to_deliveryman) d-none @endif">
+                            <div class="col-md-4 @if ($sale->delivery_cost_given_to_deliveryman) d-none @endif">
                                 {!! Form::label('delivery_cost_actual', __('lang.The_actual_delivery_cost'), []) !!}
-                                {!! Form::text('delivery_cost_actual', @num_format($sale->delivery_cost), ['class' => 'form-control', 'readonly']) !!}
+                                {!! Form::text('delivery_cost_actual', @num_format($sale->delivery_cost), [
+                                    'class' => 'form-control',
+                                    'readonly',
+                                ]) !!}
                             </div>
-                            <div class="col-md-5 @if($sale->delivery_cost_given_to_deliveryman) d-none  @endif">
+                            <div class="col-md-5 @if ($sale->delivery_cost_given_to_deliveryman) d-none @endif">
                                 {!! Form::label('delivery_cost', __('lang.Discount_from_the_cost_of_delivery'), []) !!}
-                                {!! Form::text('delivery_cost', @num_format($sell_return->delivery_cost??0), ['class' => 'form-control','max'=>@num_format($sale->delivery_cost)]) !!}
+                                {!! Form::text('delivery_cost', @num_format($sell_return->delivery_cost ?? 0), [
+                                    'class' => 'form-control',
+                                    'max' => @num_format($sale->delivery_cost),
+                                ]) !!}
                             </div>
-                            <div class="@if($sale->delivery_cost_given_to_deliveryman) col-md-6 @else col-md-2 @endif">
+                            <div class="@if ($sale->delivery_cost_given_to_deliveryman) col-md-6 @else col-md-2 @endif">
                                 {!! Form::hidden('discount_type', $sale->discount_type, ['class' => 'form-control', 'id' => 'discount_type']) !!}
                                 {!! Form::hidden('discount_value', $sale->discount_value, ['class' => 'form-control', 'id' => 'discount_value']) !!}
 
                                 {!! Form::label('discount_amount', __('lang.discount'), []) !!}
-                                {!! Form::text('discount_amount', !empty($sell_return->discount_amount) ? @num_format($sell_return->discount_amount) : @num_format($sale->discount_amount), ['class' => 'form-control']) !!}
+                                {!! Form::text(
+                                    'discount_amount',
+                                    !empty($sell_return->discount_amount)
+                                        ? @num_format($sell_return->discount_amount)
+                                        : @num_format($sale->discount_amount),
+                                    ['class' => 'form-control'],
+                                ) !!}
                             </div>
-                            <div class="@if($sale->delivery_cost_given_to_deliveryman) col-md-6 @else col-md-1 @endif">
+                            <div class="@if ($sale->delivery_cost_given_to_deliveryman) col-md-6 @else col-md-1 @endif">
                                 {!! Form::label('total_tax', __('lang.tax'), []) !!}
-                                {!! Form::text('total_tax', !empty($sell_return->total_tax) ? @num_format($sell_return->total_tax) : @num_format($sale->total_tax), ['class' => 'form-control']) !!}
-                                <input type="hidden" name="tax_method" id="tax_method"
-                                       value="{{ $sale->tax_method }}">
+                                {!! Form::text(
+                                    'total_tax',
+                                    !empty($sell_return->total_tax) ? @num_format($sell_return->total_tax) : @num_format($sale->total_tax),
+                                    ['class' => 'form-control'],
+                                ) !!}
+                                <input type="hidden" name="tax_method" id="tax_method" value="{{ $sale->tax_method }}">
                                 <input type="hidden" name="tax_rate" id="tax_rate" value="{{ $sale->tax_rate }}">
                                 <input type="hidden" name="tax_type" id="tax_type" value="{{ $sale->tax_type }}">
                             </div>
@@ -124,29 +150,21 @@
                             <div class="col-md-12">
                                 @if (!empty($sell_return))
                                     @if ($sell_return->transaction_payments->count() > 0)
-                                        @include(
-                                            'transaction_payment.partials.payment_form',
-                                            [
-                                                'payment' => $sell_return->transaction_payments->first(),
-                                            ]
-                                        )
+                                        @include('transaction_payment.partials.payment_form', [
+                                            'payment' => $sell_return->transaction_payments->first(),
+                                        ])
                                     @else
-                                        @include(
-                                            'transaction_payment.partials.payment_form'
-                                        )
+                                        @include('transaction_payment.partials.payment_form')
                                     @endif
                                 @else
-                                    @include(
-                                        'transaction_payment.partials.payment_form'
-                                    )
+                                    @include('transaction_payment.partials.payment_form')
                                 @endif
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <label>@lang('lang.notes')</label>
-                                <textarea rows="3" class="form-control" name="notes"
-                                    id="notes">{{ !empty($sell_return) ? $sell_return->notes : '' }}</textarea>
+                                <textarea rows="3" class="form-control" name="notes" id="notes">{{ !empty($sell_return) ? $sell_return->notes : '' }}</textarea>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -176,7 +194,6 @@
 @section('javascript')
     <script src="{{ asset('js/sell_return.js') }}"></script>
     <script>
-
         $(document).ready(function() {
             calculate_sub_totals()
         })
@@ -184,7 +201,7 @@
         $('#delivery_cost').change(function() {
             let max = parseFloat($(this).attr("max"));
             let value_qty = parseFloat($(this).val());
-            if(max < value_qty){
+            if (max < value_qty) {
                 $(this).val(max);
                 swal(
                     "warning",
@@ -194,6 +211,5 @@
             }
             calculate_sub_totals();
         });
-
     </script>
 @endsection

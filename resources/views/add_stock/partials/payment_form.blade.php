@@ -3,7 +3,7 @@
         <input type="hidden" name="transaction_payment_id" value="{{ $payment->id }}">
     @endif
     <div class="row  @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
-        <div class="col-md-3 payment_fields hide">
+        <div class="col-md-3 px-5 payment_fields hide">
             <div class="form-group">
                 {!! Form::label('amount', __('lang.amount') . '*', [
                     'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
@@ -23,7 +23,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 payment_fields hide">
+        <div class="col-md-3 px-5 payment_fields hide">
             <div class="form-group">
                 {!! Form::label('method', __('lang.payment_type') . '*', [
                     'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
@@ -47,7 +47,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 payment_fields hide">
+        <div class="col-md-3 px-5 payment_fields hide">
             <div class="form-group">
                 {!! Form::label('paid_on', __('lang.payment_date'), [
                     'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
@@ -67,7 +67,7 @@
             </div>
         </div>
 
-        <div class="col-md-3 payment_fields hide">
+        <div class="col-md-3 px-5 payment_fields hide">
             <div class="form-group">
                 {!! Form::label('upload_documents', __('lang.upload_documents'), [
                     'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
@@ -77,7 +77,7 @@
                     type="file" name="upload_documents[]" id="upload_documents" multiple>
             </div>
         </div>
-        <div class="col-md-3 not_cash_fields hide">
+        <div class="col-md-3 px-5 not_cash_fields hide">
             <div class="form-group">
                 {!! Form::label('ref_number', __('lang.ref_number') . '*', [
                     'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
@@ -96,7 +96,7 @@
                 ) !!}
             </div>
         </div>
-        <div class="col-md-3 not_cash_fields hide">
+        <div class="col-md-3 px-5 not_cash_fields hide">
             <div class="form-group">
                 {!! Form::label('bank_deposit_date', __('lang.bank_deposit_date') . '*', [
                     'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
@@ -115,7 +115,7 @@
                 ) !!}
             </div>
         </div>
-        <div class="col-md-3 not_cash_fields hide">
+        <div class="col-md-3 px-5 not_cash_fields hide">
             <div class="form-group">
                 {!! Form::label('bank_name', __('lang.bank_name') . '*', [
                     'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
