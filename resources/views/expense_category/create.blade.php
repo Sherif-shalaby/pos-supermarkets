@@ -1,45 +1,48 @@
 @extends('layouts.app')
 @section('title', __('lang.add_expense_category'))
-
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">
+@endsection
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header d-flex align-items-center">
-                    <h4>@lang('lang.add_expense_category')</h4>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            {!! Form::open(['url' => action('ExpenseCategoryController@store'), 'method' => 'post']) !!}
+    <section class="forms py-0">
 
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="name">@lang('lang.name')</label>
-                                        <input type="text" class="form-control" name="name" id="name">
-                                    </div>
-                                </div>
+        <div class="container-fluid">
+            <div
+                class="  d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                <h5 class="mb-0 position-relative print-title" style="margin-right: 30px">@lang('lang.add_expense_category')
+                    <span class="header-pill"></span>
+                </h5>
+            </div>
+
+            {!! Form::open(['url' => action('ExpenseCategoryController@store'), 'method' => 'post']) !!}
+
+            <div class="card my-3">
+                <div class="card-body p-2">
+                    <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                        <div class="col-md-3 px-5">
+                            <div class="form-group">
+                                <label
+                                    class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                    for="name">@lang('lang.name')</label>
+                                <input type="text"
+                                    class="form-control modal-input @if (app()->isLocale('ar')) text-end @else  text-start @endif"
+                                    name="name" id="name">
                             </div>
-                            <div class="row mt-4">
-                                <div class="col-sm-12">
-                                    <input type="submit" class="btn btn-primary" value="@lang('lang.save')"
-                                        name="submit">
-                                </div>
-                            </div>
-                            {!! Form::close() !!}
+                        </div>
+                    </div>
+                    <div class="row my-2 justify-content-center align-items-center">
+                        <div class="col-md-2">
+                            <input type="submit" class="btn btn-main submit-btn" value="@lang('lang.save')" name="submit">
                         </div>
                     </div>
                 </div>
             </div>
+            {!! Form::close() !!}
         </div>
-    </div>
-</div>
+
+    </section>
 @endsection
 
 @section('javascript')
-<script>
-
-</script>
+    <script></script>
 @endsection
