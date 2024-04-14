@@ -1,4 +1,4 @@
-<div class="modal-dialog add_closing_cash" role="document" >
+<div class="modal-dialog add_closing_cash" role="document">
     <div class="modal-content">
 
         {!! Form::open([
@@ -9,11 +9,15 @@
             'class' => 'add_closing_cash_form_class',
         ]) !!}
 
-        <div class="modal-header">
+        <div
+            class="modal-header position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
 
-            <h4 class="modal-title">@lang('lang.add_closing_cash')</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title  px-2 position-relative d-flex align-items-center" style="gap: 5px;">@lang('lang.add_closing_cash')
+            </h5>
+            <button type="button" data-dismiss="modal" aria-label="Close"
+                class="close  btn btn-danger d-flex justify-content-center align-items-center rounded-circle text-white"><span
+                    aria-hidden="true"><i class="dripicons-cross"></i></span></button>
+            <span class="position-absolute modal-border"></span>
         </div>
 
         <div class="modal-body">
@@ -22,7 +26,8 @@
                     <table class="table">
                         <tr>
                             <td><b>@lang('lang.date_and_time')</b></td>
-                            <td>{{ $cash_register->created_at ? \Carbon\Carbon::parse($cash_register->created_at)->format('Y-m-d H:i:s') : now()->format('Y-m-d H:i:s') }}</td>
+                            <td>{{ $cash_register->created_at ? \Carbon\Carbon::parse($cash_register->created_at)->format('Y-m-d H:i:s') : now()->format('Y-m-d H:i:s') }}
+                            </td>
                         </tr>
                         <tr>
                             <td><b>@lang('lang.cash_in')</b></td>
@@ -83,8 +88,8 @@
                             <td><b>@lang('lang.other_cash_sales')</b></td>
                             @foreach ($cr_data as $data)
                                 <td>{{ $data['currency']['symbol'] }}
-                                    @if(($data['cash_register']->total_cash_sales - $data['cash_register']->total_dining_in_cash)>0)
-                                        {{ @num_format($data['cash_register']->total_cash_sales - $data['cash_register']->total_dining_in_cash-$total_latest_payments) }}
+                                    @if ($data['cash_register']->total_cash_sales - $data['cash_register']->total_dining_in_cash > 0)
+                                        {{ @num_format($data['cash_register']->total_cash_sales - $data['cash_register']->total_dining_in_cash - $total_latest_payments) }}
                                     @else
                                         {{ @num_format($data['cash_register']->total_cash_sales - $data['cash_register']->total_dining_in_cash) }}
                                     @endif
@@ -95,10 +100,10 @@
                             <td><b>@lang('lang.total_cash_sale')</b></td>
                             @foreach ($cr_data as $data)
                                 <td>{{ $data['currency']['symbol'] }}
-                                    @if($data['cash_register']->total_cash_sales>0)
-                                    {{ @num_format($data['cash_register']->total_cash_sales-$total_latest_payments) }}
+                                    @if ($data['cash_register']->total_cash_sales > 0)
+                                        {{ @num_format($data['cash_register']->total_cash_sales - $total_latest_payments) }}
                                     @else
-                                    {{ @num_format($data['cash_register']->total_cash_sales) }}
+                                        {{ @num_format($data['cash_register']->total_cash_sales) }}
                                     @endif
                                 </td>
                             @endforeach
@@ -107,10 +112,10 @@
                             <td><b>@lang('lang.total_sales')</b></td>
                             @foreach ($cr_data as $data)
                                 <td>{{ $data['currency']['symbol'] }}
-                                    @if($data['cash_register']->total_sale - $data['cash_register']->total_refund>0)
-                                    {{ @num_format($data['cash_register']->total_sale - $data['cash_register']->total_refund-$total_latest_payments) }}
+                                    @if ($data['cash_register']->total_sale - $data['cash_register']->total_refund > 0)
+                                        {{ @num_format($data['cash_register']->total_sale - $data['cash_register']->total_refund - $total_latest_payments) }}
                                     @else
-                                    {{ @num_format($data['cash_register']->total_sale - $data['cash_register']->total_refund) }}
+                                        {{ @num_format($data['cash_register']->total_sale - $data['cash_register']->total_refund) }}
                                     @endif
                                 </td>
                             @endforeach
@@ -118,19 +123,20 @@
                         <tr>
                             <td><b>@lang('lang.total_latest_payments')</b></td>
                             <td>
-                                @php  
-                                foreach ($cr_data as $data){
-                                    $currency=$data['currency']['symbol'];
-                                    break;
-                                }
+                                @php
+                                    foreach ($cr_data as $data) {
+                                        $currency = $data['currency']['symbol'];
+                                        break;
+                                    }
                                 @endphp
-                                {{$currency}}
+                                {{ $currency }}
                                 {{ @num_format($total_latest_payments) }}
                             </td>
-                            @if(!empty($total_latest_payments) && $total_latest_payments>0)
-                            <td><a data-href="{{action('CashController@showLatestPaymentDetails', $cash_register_id)}}"
-                                data-container=".view_modal" class="btn btn-modal btn-danger text-white close_cash"><i
-                                    class="fa fa-eye"></i> @lang('lang.view')</a></td>
+                            @if (!empty($total_latest_payments) && $total_latest_payments > 0)
+                                <td><a data-href="{{ action('CashController@showLatestPaymentDetails', $cash_register_id) }}"
+                                        data-container=".view_modal"
+                                        class="btn btn-modal btn-danger text-white close_cash"><i class="fa fa-eye"></i>
+                                        @lang('lang.view')</a></td>
                             @endif
                         </tr>
                         <tr>
@@ -259,13 +265,13 @@
             <input type="hidden" name="cash_register_id" value="{{ $cash_register_id }}">
         </div>
 
-        <div class="modal-footer">
-            <button type="submit" name="submit" class="btn btn-primary hide" value="adjustment"
+        <div class="modal-footer d-flex justify-content-center align-content-center gap-3">
+            <button type="submit" name="submit" class="btn btn-main hide" value="adjustment"
                 id="adjust-btn">@lang('lang.adjustment')</button>
-            <button type="submit" name="submit" class="btn btn-primary" value="save"
+            <button type="submit" name="submit" class="btn btn-main" value="save"
                 id="closing-save-btn">@lang('lang.save')</button>
             <button type="button"
-                class="btn btn-default @if ($type == 'logout') close-btn-add-closing-cash @endif"
+                class="btn btn-danger @if ($type == 'logout') close-btn-add-closing-cash @endif"
                 @if ($type != 'logout') data-dismiss="modal" @endif>@lang('lang.close')</button>
         </div>
 
@@ -374,7 +380,7 @@
     });
     $(document).ready(function() {
         $('#add_closing_cash_form').submit(function(e) {
-            e.preventDefault(); 
+            e.preventDefault();
             $(this).validate();
             $.ajax({
                 type: 'POST', // or 'GET' depending on your form's method
