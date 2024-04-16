@@ -48,6 +48,10 @@
     width: 85% !important;
 }
 
+.select-button-group .modal-input {
+    width: 85% !important;
+}
+
 .select-button-group input {
     width: fit-content !important;
 }
@@ -244,4 +248,10 @@ td {
 
 .btn {
     border-radius: 4px !important;
+}
+
+.btn-main,
+.btn-danger {
+    padding-top: .25rem !important;
+    padding-bottom: .25rem !important;
 }
