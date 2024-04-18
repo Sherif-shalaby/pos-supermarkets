@@ -1,52 +1,100 @@
 @extends('layouts.app')
 @section('title', __('lang.sales_promotion_formal_discount'))
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">
+@endsection
 @section('content')
-    <section class="forms">
+    <section class="forms py-0">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h4>@lang('lang.edit_sales_promotion')</h4>
+                <div class="col-md-12 px-1">
+                    <div
+                        class="  d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                        <h5 class="mb-0 position-relative" style="margin-right: 30px">@lang('lang.edit_sales_promotion')
+                            <span class="header-pill"></span>
+                        </h5>
+                    </div>
+                    <div class="card mb-2 d-flex flex-row justify-content-center align-items-center">
+                        <p class="italic mb-0 py-1">
+                            <small>@lang('lang.required_fields_info')</small>
+                        <div style="width: 30px;height: 30px;">
+                            <img class="w-100 h-100" src="{{ asset('front/images/icons/warning.png') }}" alt="warning!">
                         </div>
-                        <div class="card-body">
-                            <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
-                            {!! Form::open(['url' => action('SalesPromotionController@update', $sales_promotion->id), 'id' => 'customer-type-form', 'method' => 'PUT', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
-                            <div class="row">
-                                <div class="col-md-4">
+                        </p>
+                    </div>
+                    {!! Form::open([
+                        'url' => action('SalesPromotionController@update', $sales_promotion->id),
+                        'id' => 'customer-type-form',
+                        'method' => 'PUT',
+                        'class' => '',
+                        'enctype' => 'multipart/form-data',
+                    ]) !!}
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('name', __('lang.name') . ':*') !!}
-                                        {!! Form::text('name', $sales_promotion->name, ['class' => 'form-control', 'required']) !!}
+                                        {!! Form::label('name', __('lang.name') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::text('name', $sales_promotion->name, [
+                                            'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            'required',
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('store_ids', __('lang.store') . ':*') !!}
-                                        {!! Form::select('store_ids[]', $stores, $sales_promotion->store_ids, ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'multiple', 'required']) !!}
+                                        {!! Form::label('store_ids', __('lang.store') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('store_ids[]', $stores, $sales_promotion->store_ids, [
+                                            'class' => 'selectpicker form-control',
+                                            'data-live-search' => 'true',
+                                            'multiple',
+                                            'required',
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('customer_type_ids', __('lang.customer_type') . ':*') !!}
-                                        {!! Form::select('customer_type_ids[]', $customer_types, $sales_promotion->customer_type_ids, ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'multiple', 'required']) !!}
+                                        {!! Form::label('customer_type_ids', __('lang.customer_type') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select('customer_type_ids[]', $customer_types, $sales_promotion->customer_type_ids, [
+                                            'class' => 'selectpicker form-control',
+                                            'data-live-search' => 'true',
+                                            'multiple',
+                                            'required',
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('type', __('lang.type') . ':*') !!}
-                                        {!! Form::select('type', ['item_discount' => __('lang.item_discount'), 'package_promotion' => __('lang.package_promotion')], $sales_promotion->type, ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'placeholder' => __('lang.please_select'), 'required']) !!}
+                                        {!! Form::label('type', __('lang.type') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select(
+                                            'type',
+                                            ['item_discount' => __('lang.item_discount'), 'package_promotion' => __('lang.package_promotion')],
+                                            $sales_promotion->type,
+                                            [
+                                                'class' => 'selectpicker form-control',
+                                                'data-live-search' => 'true',
+                                                'placeholder' => __('lang.please_select'),
+                                                'required',
+                                            ],
+                                        ) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="col-md-6">
-                                        @include(
-                                        'quotation.partial.product_selection'
-                                    )
-                                    </div>
+                                <div class="col-md-3 px-5">
+
+                                    @include('quotation.partial.product_selection')
+
                                 </div>
                                 <div class="col-md-6 product_condition_div">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-6  d-flex justify-content-center align-items-center">
                                             <div class="form-group">
                                                 <div class="i-checks" style="margin-top: 30px">
                                                     <input id="product_condition" name="product_condition"
@@ -57,29 +105,44 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 @if (!$sales_promotion->product_condition) hide @endif" id="product_condition_selection">
-                                            @include('quotation.partial.product_selection',['index'=>'_condition'])
+                                        <div class="col-md-6 @if (!$sales_promotion->product_condition) hide @endif"
+                                            id="product_condition_selection">
+                                            @include('quotation.partial.product_selection', [
+                                                'index' => '_condition',
+                                            ])
 
                                         </div>
                                         <div class="col-md-12  ">
-                                            <table class="table @if (!$sales_promotion->product_condition) hide @endif" id="sale_promotion_table_condition">
-                                                <thead class="bg-success" style="color: white">
-                                                <tr>
-                                                    <th>@lang('lang.name')</th>
-                                                    <th>@lang('lang.name')</th>
-                                                    <th>@lang('lang.name')</th>
-                                                </tr>
+                                            <table class="table @if (!$sales_promotion->product_condition) hide @endif"
+                                                id="sale_promotion_table_condition">
+                                                <thead style="background-color: #21912a;color: white">
+                                                    <tr>
+                                                        <th>@lang('lang.name')</th>
+                                                        <th>@lang('lang.name')</th>
+                                                        <th>@lang('lang.name')</th>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
-                                                @include('sales_promotion.partials.product_conditions_row',['products'=>$condition_products])
+                                                    @include(
+                                                        'sales_promotion.partials.product_conditions_row',
+                                                        [
+                                                            'products' => $condition_products,
+                                                        ]
+                                                    )
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-12 product_details_div mt-5 mb-5">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div class="col-md-12 product_details_div">
                                     <table class="table" id="sale_promotion_table">
-                                        <thead class="bg-success" style="color: white">
+                                        <thead style="background-color: #21912a;color: white">
                                             <tr>
                                                 <th>@lang('lang.image')</th>
                                                 <th>@lang('lang.name')</th>
@@ -96,15 +159,11 @@
                                         </thead>
                                         <tbody>
 
-                                            @include(
-                                                'sales_promotion.partials.product_details_row',
-                                                [
-                                                    'products' => $product_details,
-                                                    'type' => $sales_promotion->type,
-                                                    'package_promotion_qty' =>
-                                                        $sales_promotion->package_promotion_qty,
-                                                ]
-                                            )
+                                            @include('sales_promotion.partials.product_details_row', [
+                                                'products' => $product_details,
+                                                'type' => $sales_promotion->type,
+                                                'package_promotion_qty' => $sales_promotion->package_promotion_qty,
+                                            ])
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -118,93 +177,123 @@
                                             value="{{ $sales_promotion->actual_sell_price }}">
                                     </table>
                                 </div>
-                                <div class="col-md-4">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
+                            <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
                                         <div class="i-checks">
                                             <input id="purchase_condition" name="purchase_condition"
-                                                @if ($sales_promotion->purchase_condition) checked @endif type="checkbox" value="1"
-                                                class="form-control-custom">
-                                            <label
-                                                for="purchase_condition"><strong>@lang('lang.purchase_condition')</strong></label>
+                                                @if ($sales_promotion->purchase_condition) checked @endif type="checkbox"
+                                                value="1" class="form-control-custom">
+                                            <label for="purchase_condition"><strong>@lang('lang.purchase_condition')</strong></label>
                                         </div>
-                                        {!! Form::text('purchase_condition_amount', @num_format($sales_promotion->purchase_condition_amount), ['class' => 'form-control']) !!}
+                                        {!! Form::text('purchase_condition_amount', @num_format($sales_promotion->purchase_condition_amount), [
+                                            'class' => 'form-control  modal-input app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('discount_type', __('lang.discount_type') . ':*') !!}
-                                        {!! Form::select('discount_type', ['fixed' => 'Fixed', 'percentage' => 'Percentage'], $sales_promotion->discount_type, ['class' => 'form-control selecpicker', 'required', 'placeholder' => __('lang.please_select')]) !!}
+                                        {!! Form::label('discount_type', __('lang.discount_type') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::select(
+                                            'discount_type',
+                                            ['fixed' => 'Fixed', 'percentage' => 'Percentage'],
+                                            $sales_promotion->discount_type,
+                                            ['class' => 'form-control selecpicker', 'required', 'placeholder' => __('lang.please_select')],
+                                        ) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('discount_value', __('lang.discount') . ':*') !!}
-                                        {!! Form::text('discount_value', @num_format($sales_promotion->discount_value), ['class' => 'form-control', 'required']) !!}
+                                        {!! Form::label('discount_value', __('lang.discount') . '*', [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::text('discount_value', @num_format($sales_promotion->discount_value), [
+                                            'class' => 'form-control  modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            'required',
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-2">
-                                    <label for="" style="margin-top: 40px;"
-                                        class="new_price @if ($sales_promotion->discount_type == 'package_promotion') hide @endif">@lang('lang.new_price'):
-                                        <span class="new_price_span">{{ @num_format(0) }}</span></label>
-                                </div>
-                                <div class="col-md-1">
-                                    <br>
+                                <div class="col-md-1 d-flex justify-content-center align-items-center">
+
                                     <span class="i-checks">
-                                        <input id="is_discount_permenant" name="is_discount_permenant" type="checkbox" @if($sales_promotion->is_discount_permenant) checked @endif class="form-control-custom">
+                                        <input id="is_discount_permenant" name="is_discount_permenant" type="checkbox"
+                                            @if ($sales_promotion->is_discount_permenant) checked @endif class="form-control-custom">
                                         <label for="is_discount_permenant"><strong>
-                                                    @lang('lang.permenant')
-                            
+                                                @lang('lang.permenant')
+
                                             </strong></label>
                                     </span>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                    <label for=""
+                                        class="new_price @if ($sales_promotion->discount_type == 'package_promotion') hide @endif">@lang('lang.new_price'):
+                                        <span class="new_price_span">{{ @num_format(0) }}</span></label>
+                                </div>
+
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('start_date', __('lang.start_date') . ':') !!}
-                                        {!! Form::text('start_date',!empty($sales_promotion->start_date)? $sales_promotion->start_date:null, ['class' => 'form-control datepicker start_date',$sales_promotion->is_discount_permenant?'disabled':'']) !!}
+                                        {!! Form::label('start_date', __('lang.start_date'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::text('start_date', !empty($sales_promotion->start_date) ? $sales_promotion->start_date : null, [
+                                            'class' => 'form-control datepicker start_date modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            $sales_promotion->is_discount_permenant ? 'disabled' : '',
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 px-5">
                                     <div class="form-group">
-                                        {!! Form::label('end_date', __('lang.end_date') . ':') !!}
-                                        {!! Form::text('end_date',!empty($sales_promotion->end_date)? $sales_promotion->end_date:null, ['class' => 'form-control datepicker end_date',$sales_promotion->is_discount_permenant?'disabled':'']) !!}
+                                        {!! Form::label('end_date', __('lang.end_date'), [
+                                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                        ]) !!}
+                                        {!! Form::text('end_date', !empty($sales_promotion->end_date) ? $sales_promotion->end_date : null, [
+                                            'class' => 'form-control datepicker end_date modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            $sales_promotion->is_discount_permenant ? 'disabled' : '',
+                                        ]) !!}
                                     </div>
                                 </div>
-                                <div class="col-md-4 mt-5">
+                                <div class="col-md-3 px-5 d-flex justify-content-center align-items-center">
                                     <div class="form-group">
                                         <div class="i-checks">
-                                            <input id="generate_barcode" name="generate_barcode" type="checkbox" value="1"
-                                                @if ($sales_promotion->generate_barcode == '1') checked @endif
+                                            <input id="generate_barcode" name="generate_barcode" type="checkbox"
+                                                value="1" @if ($sales_promotion->generate_barcode == '1') checked @endif
                                                 class="form-control-custom">
-                                            <label
-                                                for="generate_barcode"><strong>@lang('lang.generate_barcode')</strong></label>
+                                            <label for="generate_barcode"><strong>@lang('lang.generate_barcode')</strong></label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <br>
+
                             <input type="hidden" name="is_edit_page" id="is_edit_page" value="1">
-                            <input type="hidden" name="sales_promotion_id" id="sales_promotion_id" value="{{$sales_promotion->id}}">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="submit" value="{{ trans('lang.submit') }}" id="submit-btn"
-                                            class="btn btn-primary">
-                                    </div>
+                            <input type="hidden" name="sales_promotion_id" id="sales_promotion_id"
+                                value="{{ $sales_promotion->id }}">
+                            <div class="row my-2 justify-content-center align-items-center">
+                                <div class="col-md-2">
+                                    <input type="submit" value="{{ trans('lang.submit') }}" id="submit-btn"
+                                        class="btn btn-main">
                                 </div>
                             </div>
-                            {!! Form::close() !!}
                         </div>
                     </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
+
     </section>
 @endsection
 
 @section('javascript')
     <script>
         var product_selected = [];
-        $(document).ready(function () {
+        $(document).ready(function() {
             product_table = $("#product_selection_table").DataTable({
                 lengthChange: true,
                 paging: true,
@@ -223,10 +312,12 @@
                 buttons: buttons,
                 processing: true,
                 serverSide: true,
-                aaSorting: [[2, "asc"]],
+                aaSorting: [
+                    [2, "asc"]
+                ],
                 ajax: {
                     url: "/product",
-                    data: function (d) {
+                    data: function(d) {
                         d.product_class_id = $("#filter_product_class_id").val();
                         d.category_id = $("#filter_category_id").val();
                         d.sub_category_id = $("#filter_sub_category_id").val();
@@ -248,70 +339,136 @@
                         d.is_add_stock = $("#is_add_stock").val();
                     },
                 },
-                columnDefs: [
-                    {
-                        targets: [0, 1],
-                        orderable: false,
-                        searchable: false,
-                    },
-                ],
-                columns: [
-                    {
+                columnDefs: [{
+                    targets: [0, 1],
+                    orderable: false,
+                    searchable: false,
+                }, ],
+                columns: [{
                         data: "selection_checkbox",
                         name: "selection_checkbox",
                         searchable: false,
                         orderable: false,
                     },
-                    { data: "image", name: "image" },
-                    { data: "variation_name", name: "products.name" },
-                    { data: "sub_sku", name: "variations.sub_sku" },
-                    { data: "is_service", name: "products.is_service" },
-                    { data: "product_class", name: "product_classes.name" },
-                    { data: "category", name: "categories.name" },
-                    { data: "sub_category", name: "categories.name" },
-                    { data: "purchase_history", name: "purchase_history" },
-                    { data: "batch_number", name: "add_stock_lines.batch_number" },
+                    {
+                        data: "image",
+                        name: "image"
+                    },
+                    {
+                        data: "variation_name",
+                        name: "products.name"
+                    },
+                    {
+                        data: "sub_sku",
+                        name: "variations.sub_sku"
+                    },
+                    {
+                        data: "is_service",
+                        name: "products.is_service"
+                    },
+                    {
+                        data: "product_class",
+                        name: "product_classes.name"
+                    },
+                    {
+                        data: "category",
+                        name: "categories.name"
+                    },
+                    {
+                        data: "sub_category",
+                        name: "categories.name"
+                    },
+                    {
+                        data: "purchase_history",
+                        name: "purchase_history"
+                    },
+                    {
+                        data: "batch_number",
+                        name: "add_stock_lines.batch_number"
+                    },
                     {
                         data: "default_sell_price",
                         name: "variations.default_sell_price",
                     },
-                    { data: "tax", name: "taxes.name" },
-                    { data: "brand", name: "brands.name" },
-                    { data: "unit", name: "units.name" },
-                    { data: "color", name: "colors.name" },
-                    { data: "size", name: "sizes.name" },
-                    { data: "grade", name: "grades.name" },
-                    { data: "current_stock", name: "current_stock", searchable: false },
-                    { data: "customer_type", name: "customer_type" },
-                    { data: "exp_date", name: "add_stock_lines.expiry_date" },
+                    {
+                        data: "tax",
+                        name: "taxes.name"
+                    },
+                    {
+                        data: "brand",
+                        name: "brands.name"
+                    },
+                    {
+                        data: "unit",
+                        name: "units.name"
+                    },
+                    {
+                        data: "color",
+                        name: "colors.name"
+                    },
+                    {
+                        data: "size",
+                        name: "sizes.name"
+                    },
+                    {
+                        data: "grade",
+                        name: "grades.name"
+                    },
+                    {
+                        data: "current_stock",
+                        name: "current_stock",
+                        searchable: false
+                    },
+                    {
+                        data: "customer_type",
+                        name: "customer_type"
+                    },
+                    {
+                        data: "exp_date",
+                        name: "add_stock_lines.expiry_date"
+                    },
                     {
                         data: "manufacturing_date",
                         name: "add_stock_lines.manufacturing_date",
                     },
-                    { data: "discount", name: "discount" },
+                    {
+                        data: "discount",
+                        name: "discount"
+                    },
                     {
                         data: "default_purchase_price",
                         name: "default_purchase_price",
                         searchable: false,
                     },
-                    { data: "supplier", name: "supplier" },
-                    { data: "created_by", name: "users.name" },
-                    { data: "edited_by_name", name: "edited.name" },
-                    { data: "action", name: "action" },
+                    {
+                        data: "supplier",
+                        name: "supplier"
+                    },
+                    {
+                        data: "created_by",
+                        name: "users.name"
+                    },
+                    {
+                        data: "edited_by_name",
+                        name: "edited.name"
+                    },
+                    {
+                        data: "action",
+                        name: "action"
+                    },
                 ],
-                createdRow: function (row, data, dataIndex) {},
-                fnDrawCallback: function (oSettings) {
+                createdRow: function(row, data, dataIndex) {},
+                fnDrawCallback: function(oSettings) {
                     __currency_convert_recursively($("#product_table"));
                 },
             });
         });
 
-        var hidden_column_array = $.cookie("column_visibility")
-            ? JSON.parse($.cookie("column_visibility"))
-            : [];
-        $(document).ready(function () {
-            $.each(hidden_column_array, function (index, value) {
-                $(".column-toggle").each(function () {
+        var hidden_column_array = $.cookie("column_visibility") ?
+            JSON.parse($.cookie("column_visibility")) : [];
+        $(document).ready(function() {
+            $.each(hidden_column_array, function(index, value) {
+                $(".column-toggle").each(function() {
                     if ($(this).val() == value) {
                         toggleColumnVisibility(value, $(this));
                     }
@@ -319,7 +476,7 @@
             });
         });
 
-        $(document).on("click", ".column-toggle", function () {
+        $(document).on("click", ".column-toggle", function() {
             let column_index = parseInt($(this).val());
             toggleColumnVisibility(column_index, $(this));
             if (hidden_column_array.includes(column_index)) {
@@ -332,7 +489,7 @@
             }
 
             //unique array javascript
-            hidden_column_array = $.grep(hidden_column_array, function (v, i) {
+            hidden_column_array = $.grep(hidden_column_array, function(v, i) {
                 return $.inArray(v, hidden_column_array) === i;
             });
 
@@ -351,17 +508,17 @@
                 $(this_btn).addClass("badge-warning");
             }
         }
-        $(document).on("change", ".filter_product", function () {
+        $(document).on("change", ".filter_product", function() {
             product_table.ajax.reload();
             product_table.ajax.reload();
         });
 
-        $(document).on("click", ".clear_filters", function () {
+        $(document).on("click", ".clear_filters", function() {
             $(".filter_product").val("");
             $(".filter_product").selectpicker("refresh");
             product_table.ajax.reload();
         });
-        $(document).on("change", ".product_selected", function () {
+        $(document).on("change", ".product_selected", function() {
             let this_variation_id = $(this).val();
             let this_product_id = $(this).data("product_id");
             if ($(this).prop("checked")) {
@@ -370,7 +527,7 @@
                 obj["variation_id"] = this_variation_id;
                 product_selected.push(obj);
             } else {
-                product_selected = product_selected.filter(function (item) {
+                product_selected = product_selected.filter(function(item) {
                     return (
                         item.product_id !== this_product_id &&
                         item.variation_id !== this_variation_id
@@ -380,20 +537,20 @@
             //remove duplicate object from array
             product_selected = product_selected.filter(
                 (value, index, self) =>
-                    index ===
-                    self.findIndex(
-                        (t) =>
-                            t.product_id === value.product_id &&
-                            t.variation_id === value.variation_id
-                    )
+                index ===
+                self.findIndex(
+                    (t) =>
+                    t.product_id === value.product_id &&
+                    t.variation_id === value.variation_id
+                )
             );
         });
-        $("#select_products_modal").on("shown.bs.modal", function () {
+        $("#select_products_modal").on("shown.bs.modal", function() {
             product_selected = [];
             product_table.ajax.reload();
         });
         //condition
-        $(document).ready(function () {
+        $(document).ready(function() {
             product_table_condition = $("#product_selection_table_condition").DataTable({
                 lengthChange: true,
                 paging: true,
@@ -412,10 +569,12 @@
                 buttons: buttons,
                 processing: true,
                 serverSide: true,
-                aaSorting: [[2, "asc"]],
+                aaSorting: [
+                    [2, "asc"]
+                ],
                 ajax: {
                     url: "/product",
-                    data: function (d) {
+                    data: function(d) {
                         d.product_class_id = $("#filter_product_class_id_condition").val();
                         d.category_id = $("#filter_category_id_condition").val();
                         d.sub_category_id = $("#filter_sub_category_id_condition").val();
@@ -437,74 +596,138 @@
                         d.is_add_stock = $("#is_add_stock").val();
                     },
                 },
-                columnDefs: [
-                    {
-                        targets: [0, 1],
-                        orderable: false,
-                        searchable: false,
-                    },
-                ],
-                columns: [
-                    {
+                columnDefs: [{
+                    targets: [0, 1],
+                    orderable: false,
+                    searchable: false,
+                }, ],
+                columns: [{
                         data: "selection_checkbox",
                         name: "selection_checkbox",
                         searchable: false,
                         orderable: false,
                     },
-                    { data: "image", name: "image" },
-                    { data: "variation_name", name: "products.name" },
-                    { data: "sub_sku", name: "variations.sub_sku" },
-                    { data: "product_class", name: "product_classes.name" },
-                    { data: "category", name: "categories.name" },
-                    { data: "sub_category", name: "categories.name" },
-                    { data: "purchase_history", name: "purchase_history" },
-                    { data: "batch_number", name: "add_stock_lines.batch_number" },
+                    {
+                        data: "image",
+                        name: "image"
+                    },
+                    {
+                        data: "variation_name",
+                        name: "products.name"
+                    },
+                    {
+                        data: "sub_sku",
+                        name: "variations.sub_sku"
+                    },
+                    {
+                        data: "product_class",
+                        name: "product_classes.name"
+                    },
+                    {
+                        data: "category",
+                        name: "categories.name"
+                    },
+                    {
+                        data: "sub_category",
+                        name: "categories.name"
+                    },
+                    {
+                        data: "purchase_history",
+                        name: "purchase_history"
+                    },
+                    {
+                        data: "batch_number",
+                        name: "add_stock_lines.batch_number"
+                    },
                     {
                         data: "default_sell_price",
                         name: "variations.default_sell_price",
                     },
-                    { data: "tax", name: "taxes.name" },
-                    { data: "brand", name: "brands.name" },
-                    { data: "unit", name: "units.name" },
-                    { data: "color", name: "colors.name" },
-                    { data: "size", name: "sizes.name" },
-                    { data: "grade", name: "grades.name" },
-                    { data: "current_stock", name: "current_stock", searchable: false },
-                    { data: "customer_type", name: "customer_type" },
-                    { data: "exp_date", name: "add_stock_lines.expiry_date" },
+                    {
+                        data: "tax",
+                        name: "taxes.name"
+                    },
+                    {
+                        data: "brand",
+                        name: "brands.name"
+                    },
+                    {
+                        data: "unit",
+                        name: "units.name"
+                    },
+                    {
+                        data: "color",
+                        name: "colors.name"
+                    },
+                    {
+                        data: "size",
+                        name: "sizes.name"
+                    },
+                    {
+                        data: "grade",
+                        name: "grades.name"
+                    },
+                    {
+                        data: "current_stock",
+                        name: "current_stock",
+                        searchable: false
+                    },
+                    {
+                        data: "customer_type",
+                        name: "customer_type"
+                    },
+                    {
+                        data: "exp_date",
+                        name: "add_stock_lines.expiry_date"
+                    },
                     {
                         data: "manufacturing_date",
                         name: "add_stock_lines.manufacturing_date",
                     },
-                    { data: "discount", name: "discount" },
+                    {
+                        data: "discount",
+                        name: "discount"
+                    },
                     {
                         data: "default_purchase_price",
                         name: "default_purchase_price",
                         searchable: false,
                     },
-                    { data: "supplier", name: "supplier" },
-                    { data: "created_by", name: "users.name" },
-                    { data: "edited_by_name", name: "edited.name" },
-                    { data: "action", name: "action" },
+                    {
+                        data: "supplier",
+                        name: "supplier"
+                    },
+                    {
+                        data: "created_by",
+                        name: "users.name"
+                    },
+                    {
+                        data: "edited_by_name",
+                        name: "edited.name"
+                    },
+                    {
+                        data: "action",
+                        name: "action"
+                    },
                 ],
-                createdRow: function (row, data, dataIndex) {},
-                fnDrawCallback: function (oSettings) {
+                createdRow: function(row, data, dataIndex) {},
+                fnDrawCallback: function(oSettings) {
                     __currency_convert_recursively($("#product_table_condition"));
                 },
             });
         });
-        $(document).on("click", ".clear_filters_condition", function () {
+        $(document).on("click", ".clear_filters_condition", function() {
             $(".filter_product_condition").val("");
             $(".filter_product_condition").selectpicker("refresh");
             product_table_condition.ajax.reload();
         });
-        $(document).on("change", ".filter_product_condition", function () {
+        $(document).on("change", ".filter_product_condition", function() {
             product_table_condition.ajax.reload();
         });
 
 
 
-        $("#select_products_modal_condition").on("shown.bs.modal", function () {
+        $("#select_products_modal_condition").on("shown.bs.modal", function() {
 
             product_selected = [];
             product_table_condition.ajax.reload();
@@ -522,9 +745,11 @@
             }
         });
         var is_edit_page = $("#is_edit_page").val();
+
         function onlyUnique(value, index, self) {
             return self.indexOf(value) === index;
         }
+
         function calculate_total_prices() {
             var total_purchase_price = 0;
             var total_sell_price = 0;
@@ -543,6 +768,7 @@
             );
             $('#actual_sell_price').val(total_sell_price);
         }
+
         function getProductRows(array) {
             $(".footer_sell_price_total").text(__currency_trans_from_en(0, false));
             $(".footer_purchase_price_total").text(__currency_trans_from_en(0, false));
@@ -586,8 +812,7 @@
                 calculate_total_prices();
             }
 
-            function handleError(error) {
-            }
+            function handleError(error) {}
 
         }
 
@@ -617,19 +842,18 @@
                 $("#sale_promotion_table_condition tbody").append(response);
             }
 
-            function handleError(error) {
-            }
+            function handleError(error) {}
 
         }
         $(document).on('click', '#add-selected-btn', function() {
             product_array = [];
             $('#select_products_modal').modal('hide');
-            product_variations_ids=[];
-            $(".product_variations_ids").each(function () {
+            product_variations_ids = [];
+            $(".product_variations_ids").each(function() {
                 product_variations_ids.push($(this).val());
             });
             $.each(product_selected, function(index, value) {
-                if ($.inArray(value.variation_id, product_variations_ids) == -1){
+                if ($.inArray(value.variation_id, product_variations_ids) == -1) {
                     product_array.push(value.variation_id);
                 }
 
@@ -642,10 +866,10 @@
         $(document).on('click', '#add-selected-btn_condition', function() {
             product_array = [];
             $('#select_products_modal_condition').modal('hide');
-            product_variations_ids=[];
+            product_variations_ids = [];
 
             $.each(product_selected, function(index, value) {
-                if ($.inArray(value.variation_id, product_variations_ids) == -1){
+                if ($.inArray(value.variation_id, product_variations_ids) == -1) {
                     product_array.push(value.variation_id);
                 }
             });
@@ -654,19 +878,19 @@
             getProductRowsCondition(unique_product_array);
             // product_table.ajax.reload();
         });
-        $(document).on("click", ".remove_row_sp", function () {
+        $(document).on("click", ".remove_row_sp", function() {
             const product_id = parseInt($(this).data("product_id"));
             $(this).closest("tr").remove();
-            $(".product_checkbox").filter(function () {
+            $(".product_checkbox").filter(function() {
                 return this.checked && parseInt(this.value) === product_id;
-            }).each(function () {
+            }).each(function() {
                 const index = unique_product_array.indexOf(product_id);
                 unique_product_array.splice(index, 1);
                 this.checked = false;
             });
             calculate_total_prices();
         });
-        $(document).on("click", ".remove_row_cp", function () {
+        $(document).on("click", ".remove_row_cp", function() {
             $(this).closest("td").remove();
         });
     </script>
@@ -683,7 +907,7 @@
             if ($(this).val() === 'package_promotion') {
                 $(".product_condition_div").addClass("hide");
                 $(".qty_hide").removeClass("hide");
-                console.log( $('.new_price').removeClass('hide'));
+                console.log($('.new_price').removeClass('hide'));
             } else {
                 $(".product_condition_div").removeClass("hide");
                 $(".qty_hide").addClass("hide");
@@ -708,44 +932,44 @@
             });
             if (type == 'package_promotion') {
                 if (discount_type == 'fixed') {
-                    new_price = total_sell_price-discount_value;
+                    new_price = total_sell_price - discount_value;
                 }
                 if (discount_type == 'percentage') {
                     // let actual_sell_price = __read_number($('#actual_sell_price'))
-                    new_price =total_sell_price-((total_sell_price * discount_value) / 100);
+                    new_price = total_sell_price - ((total_sell_price * discount_value) / 100);
                 }
             }
             $('.new_price_span').text(__currency_trans_from_en(new_price, false))
 
         })
 
-        $(document).on("change","#is_discount_permenant",function () {
+        $(document).on("change", "#is_discount_permenant", function() {
             $(".start_date").prop('disabled', (i, v) => !v);
             $(".start_date").val(null);
             $(".end_date").prop('disabled', (i, v) => !v);
             $(".end_date").val(null);
         });
 
-        $(document).on('change','.qty',function(){
+        $(document).on('change', '.qty', function() {
             let tr = $(this).closest("tr");
-            let qty=parseInt($(this).val());
+            let qty = parseInt($(this).val());
             let sell_price = __read_number($(tr).find(".sell_price"));
             let purchase_price = __read_number($(tr).find(".purchase_price"));
-            let discount_type=$("#discount_type").val();
-            let newsellprice=qty*sell_price;
-            let newpurchaseprice=qty*purchase_price;
+            let discount_type = $("#discount_type").val();
+            let newsellprice = qty * sell_price;
+            let newpurchaseprice = qty * purchase_price;
             $(tr).find('td:eq(4)').text(newsellprice);
             $(tr).find('td:eq(3)').text(newpurchaseprice);
             calculate_total_prices();
-            let footer_sell_price_total=parseFloat($('.footer_sell_price_total').text())
-            let discount=parseInt($('#discount_value').val());
-            let newprice=footer_sell_price_total;
-            if(discount_type=='fixed'){
-                newprice-=discount;
-            }else if(discount_type=='percentage'){
-                newprice-= (newprice*discount)/100;
+            let footer_sell_price_total = parseFloat($('.footer_sell_price_total').text())
+            let discount = parseInt($('#discount_value').val());
+            let newprice = footer_sell_price_total;
+            if (discount_type == 'fixed') {
+                newprice -= discount;
+            } else if (discount_type == 'percentage') {
+                newprice -= (newprice * discount) / 100;
             }
-            
+
             $('.new_price_span').text(__currency_trans_from_en(newprice, false))
         });
     </script>

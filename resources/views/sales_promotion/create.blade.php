@@ -96,7 +96,6 @@
 
                                 </div>
 
-
                                 <div class="col-md-6 product_condition_div hide">
                                     <div class="row">
                                         <div class="col-md-6 d-flex justify-content-center align-items-center">
@@ -116,7 +115,7 @@
                                         </div>
                                         <div class="col-md-12  ">
                                             <table class="table hide" id="sale_promotion_table_condition">
-                                                <thead class="bg-success" style="color: white">
+                                                <thead style="background-color: #21912a;color: white">
                                                     <tr>
                                                         <th>@lang('lang.name')</th>
                                                         <th>@lang('lang.name')</th>

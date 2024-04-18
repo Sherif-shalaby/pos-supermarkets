@@ -1,51 +1,120 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-        {!! Form::open(['url' => action('MoneySafeTransferController@postTakeMoneyFromSafe', $money_safe_id), 'method' => 'post', 'id' => 'add_money_form']) !!}
+        {!! Form::open([
+            'url' => action('MoneySafeTransferController@postTakeMoneyFromSafe', $money_safe_id),
+            'method' => 'post',
+            'id' => 'add_money_form',
+        ]) !!}
 
-        <div class="modal-header">
+        <div
+            class="modal-header position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
 
-            <h4 class="modal-title">@lang( 'lang.take_money_from_safe' )</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
+            <h5 class="modal-title px-2 position-relative d-flex align-items-center" style="gap: 5px;">@lang('lang.take_money_from_safe')
+            </h5>
+            <button type="button" data-dismiss="modal" aria-label="Close"
+                class="close  btn btn-danger d-flex justify-content-center align-items-center rounded-circle text-white"><span
+                    aria-hidden="true"><i class="dripicons-cross"></i></span></button>
+            <span class="position-absolute modal-border"></span>
         </div>
 
         <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('source_type', __('lang.source_type') . ':*') !!}
-                {!! Form::select('source_type', ['employee' => __('lang.employee'), 'safe' => __('lang.safe')], 'employee', ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'required']) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('source_id', __('lang.source') . ':*') !!}
-                {!! Form::select('source_id', $emplooyes, false, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'required', 'placeholder' => __('lang.please_select')]) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('job_type_id', __('lang.job') . ':*') !!}
-                {!! Form::select('job_type_id', $job_types, false, ['class' => 'form-control', 'required', 'readonly', 'placeholder' => __('lang.please_select')]) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('store_id', __('lang.store') . ':*') !!}
-                {!! Form::select('store_id', $stores, false, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'required', 'placeholder' => __('lang.please_select')]) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('amount', __('lang.amount')) !!}
-                {!! Form::text('amount', null, ['class' => 'form-control', 'placeholder' => __('lang.amount')]) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('currency_id', __('lang.currency') . ':*') !!}
-                {!! Form::select('currency_id', $currencies, false, ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'required']) !!}
-            </div>
+            <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
 
-            <div class="form-group">
-                {!! Form::label('comments', __('lang.comments')) !!}
-                {!! Form::text('comments', null, ['class' => 'form-control', 'placeholder' => __('lang.comments')]) !!}
-            </div>
+                <div class="col-md-6 px-5">
+                    <div class="form-group">
+                        {!! Form::label('source_type', __('lang.source_type') . '*', [
+                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                        ]) !!}
+                        {!! Form::select('source_type', ['employee' => __('lang.employee'), 'safe' => __('lang.safe')], 'employee', [
+                            'class' => 'form-control selectpicker',
+                            'data-live-search' => 'true',
+                            'required',
+                        ]) !!}
+                    </div>
+                </div>
+                <div class="col-md-6 px-5">
+                    <div class="form-group">
+                        {!! Form::label('source_id', __('lang.source') . '*', [
+                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                        ]) !!}
+                        {!! Form::select('source_id', $emplooyes, false, [
+                            'class' => 'form-control selectpicker',
+                            'data-live-search' => 'true',
+                            'required',
+                            'placeholder' => __('lang.please_select'),
+                        ]) !!}
+                    </div>
+                </div>
+                <div class="col-md-6 px-5">
+                    <div class="form-group">
+                        {!! Form::label('job_type_id', __('lang.job') . '*', [
+                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                        ]) !!}
+                        {!! Form::select('job_type_id', $job_types, false, [
+                            'class' => 'form-control modal-input',
+                            'style' => 'height:fit-content;!importnat',
+                            'required',
+                            'readonly',
+                            'placeholder' => __('lang.please_select'),
+                        ]) !!}
+                    </div>
+                </div>
+                <div class="col-md-6 px-5">
+                    <div class="form-group">
+                        {!! Form::label('store_id', __('lang.store') . '*', [
+                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                        ]) !!}
+                        {!! Form::select('store_id', $stores, false, [
+                            'class' => 'form-control selectpicker',
+                            'data-live-search' => 'true',
+                            'required',
+                            'placeholder' => __('lang.please_select'),
+                        ]) !!}
+                    </div>
+                </div>
+                <div class="col-md-6 px-5">
+                    <div class="form-group">
+                        {!! Form::label('amount', __('lang.amount'), [
+                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                        ]) !!}
+                        {!! Form::text('amount', null, [
+                            'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                            'placeholder' => __('lang.amount'),
+                        ]) !!}
+                    </div>
+                </div>
+                <div class="col-md-6 px-5">
+                    <div class="form-group">
+                        {!! Form::label('currency_id', __('lang.currency') . '*', [
+                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                        ]) !!}
+                        {!! Form::select('currency_id', $currencies, false, [
+                            'class' => 'form-control selectpicker',
+                            'data-live-search' => 'true',
+                            'required',
+                        ]) !!}
+                    </div>
+                </div>
 
+                <div class="col-md-6 px-5">
+                    <div class="form-group">
+                        {!! Form::label('comments', __('lang.comments'), [
+                            'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                        ]) !!}
+                        {!! Form::text('comments', null, [
+                            'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                            'placeholder' => __('lang.comments'),
+                        ]) !!}
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">@lang( 'lang.save' )</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'lang.close' )</button>
+        <div class="modal-footer d-flex justify-content-center align-content-center gap-3">
+
+            <button type="submit" class="btn col-md-3 btn-main">@lang('lang.save')</button>
+            <button type="button" class="btn col-md-3 btn-danger" data-dismiss="modal">@lang('lang.close')</button>
         </div>
 
         {!! Form::close() !!}

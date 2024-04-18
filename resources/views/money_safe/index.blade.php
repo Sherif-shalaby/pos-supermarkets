@@ -1,56 +1,71 @@
 @extends('layouts.app')
 @section('title', __('lang.money_safe'))
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/pos-modals.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/stock.css') }}">
+@endsection
 @section('content')
-    <div class="container-fluid">
+    <section class="forms py-0">
 
-        <div class="col-md-12  no-print">
-            <div class="card">
-                <div class="card-header d-flex align-items-center">
-                    <h3 class="print-title">@lang('lang.money_safe')</h3>
+        <div class="container-fluid">
+
+            <div class="col-md-12 px-1 no-print">
+                <div
+                    class="d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                    <h5 class="mb-0 position-relative print-title" style="margin-right: 30px">
+                        @lang('lang.money_safe')
+                        <span class="header-pill"></span>
+                    </h5>
                 </div>
-                <div class="card-header d-flex align-items-center">
-                    @can('safe_module.money_safe.create_and_edit')
-                        <a style="color: white" data-href="{{ action('MoneySafeController@create') }}"
-                            data-container=".view_modal" class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
-                            @lang('lang.add_money_safe')</a>
-                    @endcan
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table" id="money_safe_table">
-                            <thead>
-                                <tr>
-                                    <th>@lang('lang.store')</th>
-                                    <th>@lang('lang.safe_name')</th>
-                                    <th>@lang('lang.type')</th>
-                                    <th>@lang('lang.IBAN')</th>
-                                    <th class="">@lang('lang.current_balance')</th>
-                                    <th>@lang('lang.creation_date')</th>
-                                    <th>@lang('lang.created_by')</th>
-                                    <th>@lang('lang.edited_by')</th>
-                                    <th class="notexport">@lang('lang.action')</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <th class="table_totals">@lang('lang.totals')</th>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+
+                @can('safe_module.money_safe.create_and_edit')
+                    <div class="card mb-2">
+                        <div class="card-body d-flex justify-content-center p-2">
+                            <a style="color: white" data-href="{{ action('MoneySafeController@create') }}"
+                                data-container=".view_modal" class="btn btn-modal btn-main col-md-3"><i
+                                    class="dripicons-plus"></i>
+                                @lang('lang.add_money_safe')</a>
+                        </div>
+                    </div>
+                @endcan
+                <div class="card mb-2">
+                    <div class="card-body p-2">
+                        <div class="table-responsive">
+                            <table class="table" id="money_safe_table">
+                                <thead>
+                                    <tr>
+                                        <th>@lang('lang.store')</th>
+                                        <th>@lang('lang.safe_name')</th>
+                                        <th>@lang('lang.type')</th>
+                                        <th>@lang('lang.IBAN')</th>
+                                        <th class="">@lang('lang.current_balance')</th>
+                                        <th>@lang('lang.creation_date')</th>
+                                        <th>@lang('lang.created_by')</th>
+                                        <th>@lang('lang.edited_by')</th>
+                                        <th class="notexport">@lang('lang.action')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <th class="table_totals">@lang('lang.totals')</th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 @endsection
 
 @section('javascript')

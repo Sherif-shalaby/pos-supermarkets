@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('title', __('lang.sales_promotion_formal_discount'))
 @section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/pos-modals.css') }}">
+
     <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">
 @endsection
 @section('content')
