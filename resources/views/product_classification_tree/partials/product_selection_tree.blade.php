@@ -1,5 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" is-show="0" id="button_product_selection_tree" class="btn btn-primary" data-toggle="modal" data-target="#pctModal" style="margin-top: 30px;">
+<button type="button" is-show="0" id="button_product_selection_tree" class="btn btn-primary" data-toggle="modal"
+    data-target="#pctModal">
     @lang('lang.select_products')
 </button>
 <style>
@@ -26,11 +27,11 @@
 </style>
 <!-- Modal -->
 @php
-$product_class_selected = !empty($pct_data['product_class_selected']) ? $pct_data['product_class_selected'] : [];
-$category_selected = !empty($pct_data['category_selected']) ? $pct_data['category_selected'] : [];
-$sub_category_selected = !empty($pct_data['sub_category_selected']) ? $pct_data['sub_category_selected'] : [];
-$brand_selected = !empty($pct_data['brand_selected']) ? $pct_data['brand_selected'] : [];
-$product_selected = !empty($pct_data['product_selected']) ? $pct_data['product_selected'] : [];
+    $product_class_selected = !empty($pct_data['product_class_selected']) ? $pct_data['product_class_selected'] : [];
+    $category_selected = !empty($pct_data['category_selected']) ? $pct_data['category_selected'] : [];
+    $sub_category_selected = !empty($pct_data['sub_category_selected']) ? $pct_data['sub_category_selected'] : [];
+    $brand_selected = !empty($pct_data['brand_selected']) ? $pct_data['brand_selected'] : [];
+    $product_selected = !empty($pct_data['product_selected']) ? $pct_data['product_selected'] : [];
 
 @endphp
 <div class="modal fade" id="pctModal" tabindex="-1" role="dialog" aria-labelledby="pctModalLabel" aria-hidden="true">
