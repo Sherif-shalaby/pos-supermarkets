@@ -1,23 +1,39 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-        {!! Form::open(['url' => action('ProductClassController@update', $product_class->id), 'method' => 'put', 'id' => 'product_class_add_form']) !!}
+        {!! Form::open([
+            'url' => action('ProductClassController@update', $product_class->id),
+            'method' => 'put',
+            'id' => 'product_class_add_form',
+        ]) !!}
 
-        <div class="modal-header">
+        <div
+            class="modal-header position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
 
-            <h4 class="modal-title">@lang( 'lang.edit' )</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title px-2 position-relative">@lang('lang.edit')</h4>
+            <button type="button"
+                class="close btn btn-danger d-flex justify-content-center align-items-center rounded-circle text-white"
+                data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="position-absolute modal-border"></span>
         </div>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __('lang.name') . ':*') !!}
-                <div class="input-group my-group">
-                    {!! Form::text('name', $product_class->name, ['class' => 'form-control', 'placeholder' => __('lang.name'), 'required', 'readonly' => $product_class->name == 'Extras' ? true : false]) !!}
+        <div
+            class="modal-body row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif align-items-start">
+            <div class="col-sm-6 mb-2">
+
+                {!! Form::label('name', __('lang.name') . '*', [
+                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                ]) !!}
+                <div class="input-group my-group select-button-group">
+                    {!! Form::text('name', $product_class->name, [
+                        'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                        'placeholder' => __('lang.name'),
+                        'required',
+                        'readonly' => $product_class->name == 'Extras' ? true : false,
+                    ]) !!}
                     <span class="input-group-btn">
-                        <button class="btn btn-default bg-white btn-flat translation_btn" type="button"
-                            data-type="product_class"><i class="dripicons-web text-primary fa-lg"></i></button>
+                        <button class="select-button btn-flat translation_btn" type="button"
+                            data-type="product_class"><i class="dripicons-web"></i></button>
                     </span>
                 </div>
             </div>
@@ -26,78 +42,84 @@
                 'translations' => $product_class->translations,
                 'type' => 'product_class',
             ])
-            <div class="form-group">
-                {!! Form::label('description', __('lang.description') . ':') !!}
-                {!! Form::text('description', $product_class->description, ['class' => 'form-control', 'placeholder' => __('lang.description')]) !!}
+            <div class="col-sm-6 mb-2">
+                {!! Form::label('description', __('lang.description'), [
+                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                ]) !!}
+                {!! Form::text('description', $product_class->description, [
+                    'class' => 'form-control  modal-input app()->isLocale("ar") ? text-end : text-start',
+                    'placeholder' => __('lang.description'),
+                ]) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('sort', __('lang.sort') . ':*') !!}
-                {!! Form::number('sort', $product_class->sort, ['class' => 'form-control', 'placeholder' => __('lang.sort'), 'required']) !!}
+            <div class="col-sm-6 mb-2">
+                {!! Form::label('sort', __('lang.sort') . '*', [
+                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                ]) !!}
+                {!! Form::number('sort', $product_class->sort, [
+                    'class' => 'form-control  modal-input app()->isLocale("ar") ? text-end : text-start',
+                    'placeholder' => __('lang.sort'),
+                    'required',
+                ]) !!}
             </div>
-            <div class="form-group">
+
+            <div class="col-md-6 d-flex flex-column mb-2">
+                <label
+                    class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                    for="projectinput2">{{ __('lang.image') }}</label>
+                {{--                                                        <input type="file" id="projectinput2"  class="form-control img" name="image" accept="image/*" /> --}}
+                <div
+                    class="d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+
+
+                    <div class="variants  col-md-6">
+                        <div class='file file--upload w-100'>
+                            <label for='file-input-edit' class="w-100 modal-input m-0">
+                                <i class="fas fa-cloud-upload-alt"></i>Upload
+                            </label>
+                            <!-- <input  id="file-input" multiple type='file' /> -->
+                            <input type="file" id="file-input-edit">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="cropped_product_class_edit_images"></div>
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="preview-edit-container">
+                        @if ($product_class)
+                            <div id="preview{{ $product_class->id }}" class="preview">
+                                @if (!empty($product_class->getFirstMediaUrl('product_class')))
+                                    <img src="{{ $product_class->getFirstMediaUrl('product_class') }}"
+                                        id="img{{ $product_class->id }}" alt="">
+                                @else
+                                    <img src="{{ asset('/uploads/' . session('logo')) }}" alt=""
+                                        id="img{{ $product_class->id }}">
+                                @endif
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-sm-6 d-flex justify-content-end align-items-center">
                 <div class="i-checks">
-                    <input id="status" name="status" type="checkbox" @if ($product_class->status == 1) checked @endif
-                        value="1" class="form-control-custom">
+                    <input id="status" name="status" type="checkbox"
+                        @if ($product_class->status == 1) checked @endif value="1" class="form-control-custom">
                     <label for="status"><strong>
                             @lang('lang.active')
                         </strong></label>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="projectinput2">{{ __('categories.image') }}</label>
-                {{--                                                        <input type="file" id="projectinput2"  class="form-control img" name="image" accept="image/*" />--}}
-                <div class="container mt-3">
-                    <div class="row mx-0"
-                         style="border: 1px solid #ddd;padding: 30px 0px;">
-                        <div class="col-12">
-                            <div class="mt-3">
-                                <div class="row">
-                                    <div class="col-10 offset-1">
-                                        <div class="variants">
-                                            <div class='file file--upload w-100'>
-                                                <label for='file-input-edit'
-                                                       class="w-100">
-                                                    <i class="fas fa-cloud-upload-alt"></i>Upload
-                                                </label>
-                                                <!-- <input  id="file-input" multiple type='file' /> -->
-                                                <input type="file"
-                                                       id="file-input-edit"
-                                                >
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="cropped_product_class_edit_images"></div>
-                        <div class="col-10 offset-1">
-                            <div class="preview-edit-container">
-                                @if($product_class)
-                                    <div id="preview{{ $product_class->id }}" class="preview">
-                                        @if (!empty($product_class->getFirstMediaUrl('product_class')))
-                                            <img src="{{ $product_class->getFirstMediaUrl('product_class') }}"
-                                                 id="img{{  $product_class->id }}" alt="">
-                                        @else
-                                            <img src="{{ asset('/uploads/' . session('logo')) }}" alt=""
-                                                 id="img{{  $product_class->id }}">
-                                        @endif
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <div class="modal-footer">
-            <button id="sub-button-form" class="btn btn-primary">@lang( 'lang.update' )</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'lang.close' )</button>
+        </div>
+        <div class="modal-footer d-flex justify-content-center align-content-center gap-3">
+            <button id="sub-button-form" class="col-3 py-1 btn btn-main">@lang('lang.update')</button>
+            <button type="button" class="col-3 py-1 btn btn-danger" data-dismiss="modal">@lang('lang.close')</button>
         </div>
 
         {!! Form::close() !!}
         <div class="modal fade" id="imagesModal" tabindex="-1" role="dialog" aria-labelledby="imagesModalLabel"
-             aria-hidden="true">
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -110,8 +132,7 @@
                         <div id="croppie-modal-edit" style="display:none">
                             <div id="croppie-container-edit"></div>
                             <button data-dismiss="modal" id="croppie-cancel-btn-edit" type="button"
-                                    class="btn btn-secondary"><i
-                                    class="fas fa-times"></i></button>
+                                class="btn btn-secondary"><i class="fas fa-times"></i></button>
                             <button id="croppie-submit-btn-edit" type="button" class="btn btn-primary"><i
                                     class="fas fa-crop"></i></button>
                         </div>
@@ -124,7 +145,7 @@
 </div><!-- /.modal-dialog -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
 <script>
-    $("#sub-button-form").click(function (e) {
+    $("#sub-button-form").click(function(e) {
         e.preventDefault();
         getProductImages()
         setTimeout(() => {
@@ -160,7 +181,7 @@
                     deleteBtn.innerHTML = '<i style="font-size: 20px;" class="fas fa-trash"></i>';
                     deleteBtn.addEventListener('click', () => {
                         Swal.fire({
-                            title: '{{ __("site.Are you sure?") }}',
+                            title: '{{ __('site.Are you sure?') }}',
                             text: "{{ __("site.You won't be able to delete!") }}",
                             icon: 'warning',
                             showCancelButton: true,
@@ -171,7 +192,7 @@
                             if (result.isConfirmed) {
                                 Swal.fire(
                                     'Deleted!',
-                                    '{{ __("site.Your Image has been deleted.") }}',
+                                    '{{ __('site.Your Image has been deleted.') }}',
                                     'success'
                                 )
                                 files.splice(file, 1)
@@ -198,8 +219,8 @@
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: '{{ __("site.Oops...") }}',
-                    text: '{{ __("site.Sorry , You Should Upload Valid Image") }}',
+                    title: '{{ __('site.Oops...') }}',
+                    text: '{{ __('site.Sorry , You Should Upload Valid Image') }}',
                 })
             }
         }
@@ -264,7 +285,8 @@
             for (let i = 0; i < container[0].children.length; i++) {
                 images.push(container[0].children[i].children[0].src)
                 // console.log(images.push(container[0].children[i].children[0].src))
-                var newInput = $("<input>").attr("type", "hidden").attr("name", "cropImages[]").val(container[0].children[i].children[0].src);
+                var newInput = $("<input>").attr("type", "hidden").attr("name", "cropImages[]").val(container[0]
+                    .children[i].children[0].src);
                 $("#cropped_product_class_edit_images").append(newInput);
             }
             return images
