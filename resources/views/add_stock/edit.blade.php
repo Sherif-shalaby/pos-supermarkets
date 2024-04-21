@@ -192,8 +192,10 @@
                                                     </td>
                                                     <td>
                                                         <input type="text"
-                                                            class="form-control quantity modal-input m-auto @if (app()->isLocale('ar')) text-end @else  text-start @endif  quantity_{{ $loop->index }}"
-                                                            min="{{ !empty($product->product->units) && $product->product->units->pluck('name')[0] == ('piece' || 'Piece' || 'قطعة' || 'قطعه' || '') ? 1 : 0.00001 }}"
+                                                            class="form-control quantity  quantity_{{ $loop->index }}  modal-input m-auto @if (app()->isLocale('ar')) text-end @else  text-start @endif"
+                                                            @if (isset($product->product->units) && count($product->product->units) > 0) min="{{ $product->product->units->pluck('name')[0] == ('piece' || 'Piece' || 'قطعة' || 'قطعه' || '') ? 1 : 0.00001 }}"
+                                                    @else
+                                                        min="0.00001" @endif
                                                             name="add_stock_lines[{{ $loop->index }}][quantity]" required
                                                             value="@if (isset($product->quantity)) {{ preg_match('/\.\d*[1-9]+/', (string) $product->quantity) ? $product->quantity : @num_format($product->quantity) }}@else{{ 1 }} @endif"
                                                             index_id="{{ $loop->index }}">
