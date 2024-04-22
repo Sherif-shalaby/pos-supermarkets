@@ -1,75 +1,89 @@
 @extends('layouts.app')
 @section('title', __('lang.unit'))
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/pos-modals.css') }}">
 
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">
+@endsection
 @section('content')
-<div class="container-fluid">
+    <section class="forms py-0">
 
-    <div class="col-md-12  no-print">
-        <div class="card">
-            <div class="card-header d-flex align-items-center">
-                <h4 class="print-title">@lang('lang.units')</h4>
-            </div>
-            <div class="card-header d-flex align-items-center">
+        <div class="container-fluid">
+
+            <div class="col-md-12 px-1 no-print">
+                <div
+                    class="d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                    <h5 class="mb-0 position-relative print-title" style="margin-right: 30px">
+                        @lang('lang.units')
+                        <span class="header-pill"></span>
+                    </h5>
+                </div>
                 @can('product_module.unit.create_and_edit')
-                <a style="color: white" data-href="{{action('UnitController@create')}}"
-                    data-container=".view_modal" class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
-                    @lang('lang.add_unit')</a>
+                    <div class="card mb-2">
+                        <div class="card-body d-flex justify-content-center p-2">
+                            <a style="color: white" data-href="{{ action('UnitController@create') }}"
+                                data-container=".view_modal" class="btn btn-modal btn-main col-md-3"><i
+                                    class="dripicons-plus"></i>
+                                @lang('lang.add_unit')</a>
+                        </div>
+                    </div>
                 @endcan
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table id="store_table" class="table dataTable">
-                        <thead>
-                            <tr>
-                                <th>@lang('lang.name')</th>
-                                <th class="notexport">@lang('lang.action')</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($units as $unit)
-                            <tr>
-                                <td>{{$unit->name}}</td>
+                <div class="card mb-2">
+                    <div class="card-body p-2">
+                        <div class="table-responsive">
+                            <table id="store_table" class="table dataTable">
+                                <thead>
+                                    <tr>
+                                        <th>@lang('lang.name')</th>
+                                        <th class="notexport">@lang('lang.action')</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($units as $unit)
+                                        <tr>
+                                            <td>{{ $unit->name }}</td>
 
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle"
-                                            data-toggle="dropdown" aria-haspopup="true"
-                                            aria-expanded="false">@lang('lang.action')
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Toggle Dropdown</span>
-                                        </button>
-                                        <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
-                                            user="menu">
-                                            @can('product_module.unit.create_and_edit')
-                                            <li>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">@lang('lang.action')
+                                                        <span class="caret"></span>
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
+                                                        user="menu">
+                                                        @can('product_module.unit.create_and_edit')
+                                                            <li>
 
-                                                <a data-href="{{action('UnitController@edit', $unit->id)}}"
-                                                    data-container=".view_modal" class="btn btn-modal"><i
-                                                        class="dripicons-document-edit"></i> @lang('lang.edit')</a>
-                                            </li>
-                                            <li class="divider"></li>
-                                            @endcan
-                                            @can('product_module.unit.delete')
-                                            <li>
-                                                <a data-href="{{action('UnitController@destroy', $unit->id)}}"
-                                                    data-check_password="{{action('UserController@checkPassword', Auth::user()->id)}}"
-                                                    class="btn text-red delete_item"><i class="fa fa-trash"></i>
-                                                    @lang('lang.delete')</a>
-                                            </li>
-                                            @endcan
-                                        </ul>
-                                    </div>
-                                </td>
-                            </tr>
-
-                            @endforeach
-                        </tbody>
-                    </table>
+                                                                <a data-href="{{ action('UnitController@edit', $unit->id) }}"
+                                                                    data-container=".view_modal" class="btn btn-modal"><i
+                                                                        class="dripicons-document-edit"></i>
+                                                                    @lang('lang.edit')</a>
+                                                            </li>
+                                                            <li class="divider"></li>
+                                                        @endcan
+                                                        @can('product_module.unit.delete')
+                                                            <li>
+                                                                <a data-href="{{ action('UnitController@destroy', $unit->id) }}"
+                                                                    data-check_password="{{ action('UserController@checkPassword', Auth::user()->id) }}"
+                                                                    class="btn text-red delete_item"><i class="fa fa-trash"></i>
+                                                                    @lang('lang.delete')</a>
+                                                            </li>
+                                                        @endcan
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection
 
 @section('javascript')

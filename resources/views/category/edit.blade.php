@@ -1,23 +1,40 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-        {!! Form::open(['url' => action('CategoryController@update', $category->id), 'method' => 'put', 'id' => 'category_add_form', 'files' => true]) !!}
+        {!! Form::open([
+            'url' => action('CategoryController@update', $category->id),
+            'method' => 'put',
+            'id' => 'category_add_form',
+            'files' => true,
+        ]) !!}
 
-        <div class="modal-header">
+        <div
+            class="modal-header position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
 
-            <h4 class="modal-title">@lang( 'lang.edit_category' )</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title px-2 position-relative">@lang('lang.edit_category')
+                <span class=" header-modal-pill"></span>
+            </h4>
+            <button type="button"
+                class="close btn btn-danger d-flex justify-content-center align-items-center rounded-circle text-white"
+                data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="position-absolute modal-border"></span>
         </div>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __('lang.name') . ':*') !!}
-                <div class="input-group my-group">
-                    {!! Form::text('name', $category->name, ['class' => 'form-control', 'placeholder' => __('lang.name'), 'required']) !!}
+        <div
+            class="modal-body row @if (app()->isLocale('ar')) flex-row-reverse justify-content-end @else justify-content-start flex-row @endif align-items-center">
+            <div class="col-sm-6 mb-2">
+                {!! Form::label('name', __('lang.name') . '*', [
+                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                ]) !!}
+                <div class="input-group my-group select-button-group">
+                    {!! Form::text('name', $category->name, [
+                        'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                        'placeholder' => __('lang.name'),
+                        'required',
+                    ]) !!}
                     <span class="input-group-btn">
-                        <button class="btn btn-default bg-white btn-flat translation_btn" type="button"  data-type="category"><i
-                                class="dripicons-web text-primary fa-lg"></i></button>
+                        <button class="select-button btn-flat translation_btn" type="button" data-type="category"><i
+                                class="dripicons-web"></i></button>
                     </span>
                 </div>
             </div>
@@ -26,80 +43,92 @@
                 'translations' => $category->translations,
                 'type' => 'category',
             ])
-            <div class="form-group">
-                {!! Form::label('description', __('lang.description') . ':') !!}
-                {!! Form::text('description', $category->description, ['class' => 'form-control', 'placeholder' => __('lang.description')]) !!}
+            <div class="col-sm-6 mb-2">
+                {!! Form::label('description', __('lang.description'), [
+                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                ]) !!}
+                {!! Form::text('description', $category->description, [
+                    'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                    'placeholder' => __('lang.description'),
+                ]) !!}
             </div>
-            @if ($type=='category')
-                <div class="form-group ">
-                    {!! Form::label('product_class_id', __('lang.class') . ':') !!}
-                    {!! Form::select('product_class_id', $product_classes, $category->product_class_id, ['class' => 'form-control', 'data-live-search' => 'true', 'style' => 'width: 100%', 'placeholder' => __('lang.please_select')]) !!}
+            @if ($type == 'category')
+                <div class="col-sm-6 mb-2">
+                    {!! Form::label('product_class_id', __('lang.class'), [
+                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                    ]) !!}
+                    {!! Form::select('product_class_id', $product_classes, $category->product_class_id, [
+                        'class' => 'form-control modal-input',
+                        'data-live-search' => 'true',
+                        'style' => 'width: 100%',
+                        'placeholder' => __('lang.please_select'),
+                    ]) !!}
                 </div>
             @endif
-            @if ($type=='sub_category' )
-                <div class="form-group ">
-                    {!! Form::label('parent_id', __('lang.parent_category') . ':') !!}
-                    {!! Form::select('parent_id', $categories, $category->parent_id, ['class' => 'form-control', 'data-live-search' => 'true', 'style' => 'width: 100%', 'placeholder' => __('lang.please_select')]) !!}
-                </div>
-            @endif
-            <div class="col-md-12">
-                <div class="form-group">
-                    <label for="projectinput2">{{ __('categories.image') }}</label>
-                    {{--                                                        <input type="file" id="projectinput2"  class="form-control img" name="image" accept="image/*" />--}}
-                    <div class="container mt-3">
-                        <div class="row mx-0"
-                             style="border: 1px solid #ddd;padding: 30px 0px;">
-                            <div class="col-12">
-                                <div class="mt-3">
-                                    <div class="row">
-                                        <div class="col-10 offset-1">
-                                            <div class="variants">
-                                                <div class='file file--upload w-100'>
-                                                    <label for='file-input-edit'
-                                                           class="w-100">
-                                                        <i class="fas fa-cloud-upload-alt"></i>Upload
-                                                    </label>
-                                                    <!-- <input  id="file-input" multiple type='file' /> -->
-                                                    <input type="file"
-                                                           id="file-input-edit"
-                                                    >
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            @if ($type == 'sub_category')
+                <div class="col-md-6  mb-2">
 
-                            <div class="col-10 offset-1">
-                                <div class="preview-edit-container">
-                                    @if($category)
-                                        <div id="preview{{ $category->id }}" class="preview">
-                                            @if (!empty($category->getFirstMediaUrl('category')))
-                                                <img src="{{ $category->getFirstMediaUrl('category') }}"
-                                                     id="img{{  $category->id }}" alt="">
-                                            @else
-                                                <img src="{{ asset('/uploads/'.session('logo')) }}" alt=""
-                                                     id="img{{  $category->id }}">
-                                            @endif
-                                        </div>
+                    {!! Form::label('parent_id', __('lang.parent_category'), [
+                        'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                    ]) !!}
+                    {!! Form::select('parent_id', $categories, $category->parent_id, [
+                        'class' => 'form-control',
+                        'data-live-search' => 'true',
+                        'style' => 'width: 100%',
+                        'placeholder' => __('lang.please_select'),
+                    ]) !!}
+                </div>
+            @endif
+            <div class="col-md-6 d-flex flex-column mb-2">
+
+
+                <label
+                    class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                    for="projectinput2">{{ __('lang.image') }}</label>
+                {{--                                                        <input type="file" id="projectinput2"  class="form-control img" name="image" accept="image/*" /> --}}
+                <div
+                    class="d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                    <div class="variants col-md-6">
+                        <div class='file file--upload w-100'>
+                            <label for='file-input-edit' class="w-100 modal-input m-0">
+                                <i class="fas fa-cloud-upload-alt"></i>Upload
+                            </label>
+                            <!-- <input  id="file-input" multiple type='file' /> -->
+                            <input type="file" id="file-input-edit">
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-6 d-flex justify-content-center">
+                        <div class="preview-edit-container">
+                            @if ($category)
+                                <div id="preview{{ $category->id }}" class="preview">
+                                    @if (!empty($category->getFirstMediaUrl('category')))
+                                        <img src="{{ $category->getFirstMediaUrl('category') }}"
+                                            id="img{{ $category->id }}" alt="">
+                                    @else
+                                        <img src="{{ asset('/uploads/' . session('logo')) }}" alt=""
+                                            id="img{{ $category->id }}">
                                     @endif
                                 </div>
-                            </div>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
         <div id="cropped_images"></div>
-        <div class="modal-footer">
-            <button type="submit" class="btn btn-primary">@lang( 'lang.update' )</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'lang.close' )</button>
+        <div class="modal-footer d-flex justify-content-center align-content-center gap-3">
+
+            <button type="submit" class="btn btn-main col-3 py-1">@lang('lang.update')</button>
+            <button type="button" class="btn btn-danger col-3 py-1" data-dismiss="modal">@lang('lang.close')</button>
         </div>
 
         {!! Form::close() !!}
 
         <div class="modal fade" id="imagesModal" tabindex="-1" role="dialog" aria-labelledby="imagesModalLabel"
-             aria-hidden="true">
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -112,8 +141,7 @@
                         <div id="croppie-modal-edit" style="display:none">
                             <div id="croppie-container-edit"></div>
                             <button data-dismiss="modal" id="croppie-cancel-btn-edit" type="button"
-                                    class="btn btn-secondary"><i
-                                    class="fas fa-times"></i></button>
+                                class="btn btn-secondary"><i class="fas fa-times"></i></button>
                             <button id="croppie-submit-btn-edit" type="button" class="btn btn-primary"><i
                                     class="fas fa-crop"></i></button>
                         </div>
@@ -126,7 +154,7 @@
 </div><!-- /.modal-dialog -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
 <script>
-    $("#sub-button-form").click(function (e) {
+    $("#sub-button-form").click(function(e) {
         e.preventDefault();
         getImages()
         setTimeout(() => {
@@ -162,7 +190,7 @@
                     deleteBtn.innerHTML = '<i style="font-size: 20px;" class="fas fa-trash"></i>';
                     deleteBtn.addEventListener('click', () => {
                         Swal.fire({
-                            title: '{{ __("site.Are you sure?") }}',
+                            title: '{{ __('site.Are you sure?') }}',
                             text: "{{ __("site.You won't be able to delete!") }}",
                             icon: 'warning',
                             showCancelButton: true,
@@ -173,7 +201,7 @@
                             if (result.isConfirmed) {
                                 Swal.fire(
                                     'Deleted!',
-                                    '{{ __("site.Your Image has been deleted.") }}',
+                                    '{{ __('site.Your Image has been deleted.') }}',
                                     'success'
                                 )
                                 files.splice(file, 1)
@@ -200,13 +228,14 @@
             } else {
                 Swal.fire({
                     icon: 'error',
-                    title: '{{ __("site.Oops...") }}',
-                    text: '{{ __("site.Sorry , You Should Upload Valid Image") }}',
+                    title: '{{ __('site.Oops...') }}',
+                    text: '{{ __('site.Sorry , You Should Upload Valid Image') }}',
                 })
             }
         }
         getImages()
     });
+
     function launchImagesCropTool(img) {
         // Set up Croppie options
         const croppieOptions = {
@@ -256,6 +285,7 @@
             });
         });
     }
+
     function getImages() {
         $("#cropped_images").empty();
         setTimeout(() => {
@@ -263,7 +293,8 @@
             let images = [];
             for (let i = 0; i < container[0].children.length; i++) {
                 images.push(container[0].children[i].children[0].src)
-                var newInput = $("<input>").attr("type", "hidden").attr("name", "cropImages[]").val(container[0].children[i].children[0].src);
+                var newInput = $("<input>").attr("type", "hidden").attr("name", "cropImages[]").val(container[0]
+                    .children[i].children[0].src);
                 $("#cropped_images").append(newInput);
             }
             console.log(images)

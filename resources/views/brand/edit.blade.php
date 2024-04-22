@@ -1,69 +1,80 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-        {!! Form::open(['url' => action('BrandController@update', $brand->id), 'method' => 'put', 'id' => 'brand_add_form', 'files' => true ]) !!}
+        {!! Form::open([
+            'url' => action('BrandController@update', $brand->id),
+            'method' => 'put',
+            'id' => 'brand_add_form',
+            'files' => true,
+        ]) !!}
 
-        <div class="modal-header">
-            <h4 class="modal-title">@lang( 'lang.edit' )</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
+        <div
+            class="modal-header  position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+            <h4 class="modal-title px-2 position-relative">@lang('lang.edit')
+                <span class=" header-modal-pill"></span>
+            </h4>
+            <button type="button"
+                class="close btn btn-danger d-flex justify-content-center align-items-center rounded-circle text-white"
+                data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="position-absolute modal-border"></span>
         </div>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
-                {!! Form::text('name', $brand->name, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ), 'required' ]);
-                !!}
+        <div
+            class="modal-body row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif align-items-center">
+            <div class="form-group col-md-6 px-5">
+                {!! Form::label('name', __('lang.name') . '*', [
+                    'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                ]) !!}
+                {!! Form::text('name', $brand->name, [
+                    'class' => 'form-control modal-input app()->isLocale("ar") ? text-end : text-start',
+                    'placeholder' => __('lang.name'),
+                    'required',
+                ]) !!}
             </div>
 
-            <div class="form-group">
-                <label for="projectinput2"> {{ __('categories.image') }}</label>
-                <div class="container mt-3">
-                    <div class="row mx-0" style="border: 1px solid #ddd;padding: 30px 0px;">
-                        <div class="col-12">
-                            <div class="mt-3">
-                                <div class="row">
-                                    <div class="col-10 offset-1">
-                                        <div class="variants">
-                                            <div class='file file--upload w-100'>
-                                                <label for='file-input-edit-brand' class="w-100">
-                                                    <i class="fas fa-cloud-upload-alt"></i>Upload
-                                                </label>
-                                                <input type="file" id="file-input-edit-brand">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-10 offset-1">
-                            <div class="preview-edit-brand-container">
-                                @if($brand)
-                                    <div id="preview{{ $brand->id }}" class="preview">
-                                        @if (!empty($brand->getFirstMediaUrl('brand')))
-                                            <img src="{{ $brand->getFirstMediaUrl('brand') }}"
-                                                 id="img{{  $brand->id }}" alt="">
-                                        @else
-                                            <img src="{{ asset('/uploads/'.session('logo')) }}" alt=""
-                                                 id="img{{  $brand->id }}">
-                                        @endif
-                                    </div>
+            <div class="form-group col-md-6 px-5 d-flex flex-column mb-2">
+                <label
+                    class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                    for="projectinput2"> {{ __('lang.image') }}</label>
+
+                <div class="variants col-md-6">
+                    <div class='file file--upload w-100'>
+                        <label for='file-input-edit-brand' class="w-100  modal-input m-0">
+                            <i class="fas fa-cloud-upload-alt"></i>Upload
+                        </label>
+                        <input type="file" id="file-input-edit-brand">
+                    </div>
+                </div>
+
+                <div class="col-md-6 d-flex justify-content-center">
+
+                    <div class="preview-edit-brand-container">
+                        @if ($brand)
+                            <div id="preview{{ $brand->id }}" class="preview">
+                                @if (!empty($brand->getFirstMediaUrl('brand')))
+                                    <img src="{{ $brand->getFirstMediaUrl('brand') }}" id="img{{ $brand->id }}"
+                                        alt="">
+                                @else
+                                    <img src="{{ asset('/uploads/' . session('logo')) }}" alt=""
+                                        id="img{{ $brand->id }}">
                                 @endif
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+
         <div id="cropped_edit_brand_images"></div>
-        <div class="modal-footer">
-            <button id="submit-edit-brand-btn" class="btn btn-primary">@lang( 'lang.update' )</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'lang.close' )</button>
+        <div class="modal-footer d-flex justify-content-center align-content-center gap-3">
+
+            <button id="submit-edit-brand-btn" class="btn btn-main col-3 py-1">@lang('lang.update')</button>
+            <button type="button" class="btn btn-danger py-1 col-3" data-dismiss="modal">@lang('lang.close')</button>
         </div>
 
         {!! Form::close() !!}
         <div class="modal fade" id="editBrandModal" tabindex="-1" role="dialog" aria-labelledby="editBrandModalLabel"
-             aria-hidden="true">
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -76,8 +87,7 @@
                         <div id="croppie-modal-brand-edit" style="display:none">
                             <div id="croppie-container-brand-edit"></div>
                             <button data-dismiss="modal" id="croppie-cancel-btn-brand-edit" type="button"
-                                    class="btn btn-secondary"><i
-                                    class="fas fa-times"></i></button>
+                                class="btn btn-secondary"><i class="fas fa-times"></i></button>
                             <button id="croppie-submit-btn-brand-edit" type="button" class="btn btn-primary"><i
                                     class="fas fa-crop"></i></button>
                         </div>
@@ -94,12 +104,12 @@
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
 <script>
-    $("#submit-edit-brand-btn").on("click",function (e){
+    $("#submit-edit-brand-btn").on("click", function(e) {
         e.preventDefault();
         getEditBrandImages();
-        setTimeout(()=>{
+        setTimeout(() => {
             $("#brand_add_form").submit();
-        },500)
+        }, 500)
     });
 
     const fileEditBrandInput = document.querySelector('#file-input-edit-brand');
@@ -115,7 +125,7 @@
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             let fileType = file.type.slice(file.type.indexOf('/') + 1);
-            let FileAccept = ["jpg","JPG","jpeg","JPEG","png","PNG","BMP","bmp"];
+            let FileAccept = ["jpg", "JPG", "jpeg", "JPEG", "png", "PNG", "BMP", "bmp"];
             // if (file.type.match('image.*')) {
             if (FileAccept.includes(fileType)) {
                 const reader = new FileReader();
@@ -134,7 +144,7 @@
                     deleteBtn.innerHTML = '<i style="font-size: 20px;" class="fas fa-trash"></i>';
                     deleteBtn.addEventListener('click', () => {
                         Swal.fire({
-                            title: '{{ __("site.Are you sure?") }}',
+                            title: '{{ __('site.Are you sure?') }}',
                             text: "{{ __("site.You won't be able to delete!") }}",
                             icon: 'warning',
                             showCancelButton: true,
@@ -145,7 +155,7 @@
                             if (result.isConfirmed) {
                                 Swal.fire(
                                     'Deleted!',
-                                    '{{ __("site.Your Image has been deleted.") }}',
+                                    '{{ __('site.Your Image has been deleted.') }}',
                                     'success'
                                 )
                                 files.splice(file, 1)
@@ -169,17 +179,18 @@
                     previewEditBrandContainer.appendChild(preview);
                 });
                 reader.readAsDataURL(file);
-            }else{
+            } else {
                 Swal.fire({
                     icon: 'error',
-                    title: '{{ __("site.Oops...") }}',
-                    text: '{{ __("site.Sorry , You Should Upload Valid Image") }}',
+                    title: '{{ __('site.Oops...') }}',
+                    text: '{{ __('site.Sorry , You Should Upload Valid Image') }}',
                 })
             }
         }
 
         getEditBrandImages()
     });
+
     function launchEditBrandCropTool(img) {
         // Set up Croppie options
         const croppieOptions = {
@@ -230,6 +241,7 @@
             });
         });
     }
+
     function getEditBrandImages() {
         setTimeout(() => {
             const container = document.querySelectorAll('.preview-edit-brand-container');
@@ -237,12 +249,11 @@
             $("#cropped_edit_brand_images").empty();
             for (let i = 0; i < container[0].children.length; i++) {
                 images.push(container[0].children[i].children[0].src)
-                var newInput = $("<input>").attr("type", "hidden").attr("name", "cropImages[]").val(container[0].children[i].children[0].src);
+                var newInput = $("<input>").attr("type", "hidden").attr("name", "cropImages[]").val(container[0]
+                    .children[i].children[0].src);
                 $("#cropped_edit_brand_images").append(newInput);
             }
             return images
         }, 300);
     }
-
 </script>
-
