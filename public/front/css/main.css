@@ -255,3 +255,9 @@ td {
     padding-top: .25rem !important;
     padding-bottom: .25rem !important;
 }
+
+.file--upload>label:hover {
+    border-color: #21912A;
+    background-color: #145d1a;
+    color: white !important;
+}
