@@ -255,7 +255,7 @@ $(document).ready(function () {
                             null,
                             null,
                             null,
-                            0,
+                            1,
                             0,
                             $("#search_product").val()
                         );
