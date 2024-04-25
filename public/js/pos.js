@@ -255,7 +255,7 @@ $(document).ready(function () {
                             null,
                             null,
                             null,
-                            1,
+                            0,
                             0,
                             $("#search_product").val()
                         );
@@ -1491,8 +1491,8 @@ $(document).on("click", "#pay-later-btn", function (e) {
         $("#amount").val(0);
         pos_form_obj.submit();
     // }
-    
-    
+
+
 });
 $(document).on("click", "#quick-pay-btn", function (e) {
     //Check if product is present or not.
@@ -1525,14 +1525,14 @@ $("button#update-btn").click(function () {
             // Perform the desired action
             $("#is_edit").val("");
             pos_form_obj.submit();
-    
+
             // Set the flag to true to indicate the button has been clicked
             updateBtnClicked = true;
-    
+
             // Disable the button after it has been clicked
             $(this).prop('disabled', true);
         }
-    
+
 });
 
 $(document).ready(function () {
@@ -1544,7 +1544,7 @@ $(document).ready(function () {
 
             // Convert the text content to a number
             var balance = parseFloat(balanceText);
-        
+
             if(balance > 0){
                 data =
                 data +"&pay_from_balance="+$("#pay_from_balance").val()+
@@ -1556,7 +1556,7 @@ $(document).ready(function () {
                 "&terms_and_condition_id=" +
                 $("#terms_and_condition_id").val();
             }
-            
+
             var url = $(form).attr("action");
             $.ajax({
                 method: "POST",
@@ -2486,9 +2486,9 @@ var updateadd_payment_formClicked = false;
 $(document).on("submit", "form#add_payment_form", function (e) {
     e.preventDefault();
     let data = $(this).serialize();
-    let submitButton = $("#submit_form_button"); 
+    let submitButton = $("#submit_form_button");
     if (!updateadd_payment_formClicked) {
-       
+
         console.log('ojj')
         $.ajax({
             method: "post",
@@ -2504,7 +2504,7 @@ $(document).on("submit", "form#add_payment_form", function (e) {
                 get_recent_transactions();
             },
         });
-    
+
         // Set the flag to true to indicate the button has been clicked
         updateadd_payment_formClicked = true;
 
