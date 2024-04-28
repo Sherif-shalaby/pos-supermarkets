@@ -1,4 +1,4 @@
-<table class="table" id="permission_table">
+<table class="table  @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif" id="permission_table">
     <thead>
         <tr>
             <th class="">
@@ -89,18 +89,36 @@
                             @endphp
                             @if (Spatie\Permission\Models\Permission::where('name', $view_permission)->first())
                                 <td class="">
-                                    {!! Form::checkbox('permissions[' . $view_permission . ']', 1, !empty($user) && !empty($user->hasPermissionTo($view_permission)) ? true : false, ['class' => 'check_box check_box_view', 'title' => __('lang.view')]) !!}
+                                    {!! Form::checkbox(
+                                        'permissions[' . $view_permission . ']',
+                                        1,
+                                        !empty($user) && !empty($user->hasPermissionTo($view_permission)) ? true : false,
+                                        ['class' => 'check_box check_box_view', 'title' => __('lang.view')],
+                                    ) !!}
                                 </td>
                             @endif
                             @if (Spatie\Permission\Models\Permission::where('name', $create_and_edit_permission)->first())
                                 <td class="">
-                                    {!! Form::checkbox('permissions[' . $create_and_edit_permission . ']', 1, !empty($user) && !empty($user->hasPermissionTo($create_and_edit_permission)) ? true : false, ['class' => 'check_box check_box_create', 'title' => __('lang.create_and_edit')]) !!}
+                                    {!! Form::checkbox(
+                                        'permissions[' . $create_and_edit_permission . ']',
+                                        1,
+                                        !empty($user) && !empty($user->hasPermissionTo($create_and_edit_permission)) ? true : false,
+                                        ['class' => 'check_box check_box_create', 'title' => __('lang.create_and_edit')],
+                                    ) !!}
                                 </td>
                             @endif
                             @if (Spatie\Permission\Models\Permission::where('name', $delete_permission)->first())
                                 <td class="">
-                                    @if ($delete_permission != 'sale.pos.delete' && $delete_permission != 'sale.sale.delete' && $delete_permission != 'stock.add_stock.delete')
-                                        {!! Form::checkbox('permissions[' . $delete_permission . ']', 1, !empty($user) && !empty($user->hasPermissionTo($delete_permission)) ? true : false, ['class' => 'check_box check_box_delete', 'title' => __('lang.delete')]) !!}
+                                    @if (
+                                        $delete_permission != 'sale.pos.delete' &&
+                                            $delete_permission != 'sale.sale.delete' &&
+                                            $delete_permission != 'stock.add_stock.delete')
+                                        {!! Form::checkbox(
+                                            'permissions[' . $delete_permission . ']',
+                                            1,
+                                            !empty($user) && !empty($user->hasPermissionTo($delete_permission)) ? true : false,
+                                            ['class' => 'check_box check_box_delete', 'title' => __('lang.delete')],
+                                        ) !!}
                                     @endif
                                 </td>
                             @endif

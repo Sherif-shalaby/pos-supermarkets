@@ -1,90 +1,126 @@
 @extends('layouts.app')
 @section('title', __('lang.employee'))
-
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/stock.css') }}">
+@endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="card-header d-flex align-items-center">
-            <h3 class="print-title">@lang('lang.employees')</h3>
-        </div>
-        @can('hr_management.employee.create_and_edit')
-            <a style="color: white" href="{{ action('EmployeeController@create') }}" class="btn btn-info"><i
-                    class="dripicons-plus"></i>
-                @lang('lang.add_new_employee')</a>
-        @endcan
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <form action="">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('start_date', __('lang.start_date'), []) !!}
-                                        {!! Form::text('start_date', request()->start_date, ['class' => 'form-control filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('start_time', __('lang.start_time'), []) !!}
-                                        {!! Form::text('start_time', request()->start_time, ['class' => 'form-control time_picker filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('end_date', __('lang.end_date'), []) !!}
-                                        {!! Form::text('end_date', request()->end_date, ['class' => 'form-control filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('end_time', __('lang.end_time'), []) !!}
-                                        {!! Form::text('end_time', request()->end_time, ['class' => 'form-control time_picker filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('payment_status', __('lang.payment_status'), []) !!}
-                                        {!! Form::select('payment_status', ['pending' => __('lang.pending'), 'paid' => __('lang.paid')], request()->payment_status, ['class' => 'form-control filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <br>
-                                    <button class="btn btn-primary mt-2 ml-2" type="submit">@lang('lang.filter')</button>
-                                    <a href="{{ action('EmployeeController@index') }}"
-                                        class="btn btn-danger mt-2 ml-2">@lang('lang.clear_filter')</a>
-                                </div>
+    <section class="forms py-0">
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 px-1 no-print">
+                    <div
+                        class="d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                        <h5 class="mb-0 position-relative print-title" style="margin-right: 30px">
+                            @lang('lang.employees')
+                            <span class="header-pill"></span>
+                        </h5>
+                    </div>
+                    @can('hr_management.employee.create_and_edit')
+                        <div class="card mb-2">
+                            <div class="card-body d-flex justify-content-center p-2">
+                                <a style="color: white" href="{{ action('EmployeeController@create') }}"
+                                    class="btn btn-main col-md-3"><i class="dripicons-plus"></i>
+                                    @lang('lang.add_new_employee')</a>
                             </div>
                         </div>
-                    </form>
+                    @endcan
+                    <div class="card my-3">
+                        <div class="card-body p-2">
+                            <form action="">
+                                <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                    <div class="col-md-3 px-5">
+                                        <div class="form-group">
+                                            {!! Form::label('start_date', __('lang.start_date'), [
+                                                'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                            {!! Form::text('start_date', request()->start_date, [
+                                                'class' => 'form-control  filter modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 px-5">
+                                        <div class="form-group">
+                                            {!! Form::label('start_time', __('lang.start_time'), [
+                                                'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                            {!! Form::text('start_time', request()->start_time, [
+                                                'class' => 'form-control time_picker filter modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 px-5">
+                                        <div class="form-group">
+                                            {!! Form::label('end_date', __('lang.end_date'), [
+                                                'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                            {!! Form::text('end_date', request()->end_date, [
+                                                'class' => 'form-control filter modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 px-5">
+                                        <div class="form-group">
+                                            {!! Form::label('end_time', __('lang.end_time'), [
+                                                'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                            {!! Form::text('end_time', request()->end_time, [
+                                                'class' => 'form-control time_picker filter modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 px-5">
+                                        <div class="form-group">
+                                            {!! Form::label('payment_status', __('lang.payment_status'), [
+                                                'class' => 'form-label d-block mb-1 app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
+                                            {!! Form::select(
+                                                'payment_status',
+                                                ['pending' => __('lang.pending'), 'paid' => __('lang.paid')],
+                                                request()->payment_status,
+                                                ['class' => 'form-control filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true'],
+                                            ) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 px-5 d-flex justify-content-center align-items-center">
+                                        <button class="btn btn-main col-md-12" type="submit">@lang('lang.filter')</button>
+                                    </div>
+                                    <div class="col-md-3 px-5 d-flex justify-content-center align-items-center">
+                                        <a href="{{ action('EmployeeController@index') }}"
+                                            class="btn btn-danger col-md-12">@lang('lang.clear_filter')</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="table-responsive">
-                                    <table class="table" id="employee_table">
-                                        <thead>
-                                            <tr>
-                                                <th>@lang('lang.profile_photo')</th>
-                                                <th>@lang('lang.employee_name')</th>
-                                                <th>@lang('lang.email')</th>
-                                                <th>@lang('lang.mobile')</th>
-                                                <th>@lang('lang.job_title')</th>
-                                                <th class="sum">@lang('lang.wage')</th>
-                                                <th>@lang('lang.annual_leave_balance')</th>
-                                                <th>@lang('lang.age')</th>
-                                                <th>@lang('lang.start_working_date')</th>
-                                                <th>@lang('lang.current_status')</th>
-                                                <th>@lang('lang.store')</th>
-                                                <th>@lang('lang.pos')</th>
-                                                <th>@lang('lang.commission')</th>
-                                                <th>@lang('lang.total_paid')</th>
-                                                <th>@lang('lang.pending')</th>
-                                                <th class="notexport">@lang('lang.action')</th>
-                                            </tr>
-                                        </thead>
+                    <div class="card my-3">
+                        <div class="card-body p-2">
+                            <div class="table-responsive">
+                                <table class="table" id="employee_table">
+                                    <thead>
+                                        <tr>
+                                            <th>@lang('lang.profile_photo')</th>
+                                            <th>@lang('lang.employee_name')</th>
+                                            <th>@lang('lang.email')</th>
+                                            <th>@lang('lang.mobile')</th>
+                                            <th>@lang('lang.job_title')</th>
+                                            <th class="sum">@lang('lang.wage')</th>
+                                            <th>@lang('lang.annual_leave_balance')</th>
+                                            <th>@lang('lang.age')</th>
+                                            <th>@lang('lang.start_working_date')</th>
+                                            <th>@lang('lang.current_status')</th>
+                                            <th>@lang('lang.store')</th>
+                                            <th>@lang('lang.pos')</th>
+                                            <th>@lang('lang.commission')</th>
+                                            <th>@lang('lang.total_paid')</th>
+                                            <th>@lang('lang.pending')</th>
+                                            <th class="notexport">@lang('lang.action')</th>
+                                        </tr>
+                                    </thead>
 
-                                        <tbody>
-                                            {{-- @foreach ($employees as $employee)
+                                    <tbody>
+                                        {{-- @foreach ($employees as $employee)
                                                 <tr>
                                                     <td><img src="@if (!empty($employee->getFirstMediaUrl('employee_photo'))) {{ $employee->getFirstMediaUrl('employee_photo') }}@else{{ asset('/uploads/' . session('logo')) }} @endif"
                                                             alt="photo" width="50" height="50">
@@ -270,34 +306,34 @@
                                             @endforeach --}}
 
 
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>{{$currency_symbol}}</td>
-                                                <td></td>
-                                                <th style="text-align: right">@lang('lang.total')</th>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
-
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{ $currency_symbol }}</td>
+                                            <td></td>
+                                            <th style="text-align: right">@lang('lang.total')</th>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+
+    </section>
 @endsection
 
 @section('javascript')
@@ -447,28 +483,28 @@
                     },
                 ],
                 createdRow: function(row, data, dataIndex) {},
-                "footerCallback": function (row, data, start, end, display) {
-                var api = this.api(),
-                        intVal = function (i) {
+                "footerCallback": function(row, data, start, end, display) {
+                    var api = this.api(),
+                        intVal = function(i) {
                             return typeof i === 'string' ?
-                                i.replace(/[, Rs]|(\.\d{2})/g,"")* 1 :
+                                i.replace(/[, Rs]|(\.\d{2})/g, "") * 1 :
                                 typeof i === 'number' ?
                                 i : 0;
                         },
                         total2 = api
-                            .column(5)
-                            .data()
-                            .reduce(function (a, b) {
-                                return intVal(a) + intVal(b);
-                            }, 0);
-                        totalRows = api.page.info().recordsDisplay;
-                
+                        .column(5)
+                        .data()
+                        .reduce(function(a, b) {
+                            return intVal(a) + intVal(b);
+                        }, 0);
+                    totalRows = api.page.info().recordsDisplay;
+
                     $(api.column(5).footer()).html(
-                            total2
-                            );
-                            $(api.column(0).footer()).html(
-                                "{{__('lang.total_rows')}}: " + totalRows
-                            );
+                        total2
+                    );
+                    $(api.column(0).footer()).html(
+                        "{{ __('lang.total_rows') }}: " + totalRows
+                    );
                 },
             });
             $(document).on('change', '.filter', function() {

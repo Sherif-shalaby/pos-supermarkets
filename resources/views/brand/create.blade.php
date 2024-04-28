@@ -59,6 +59,8 @@
             </div>
         </div>
         <div id="cropped_brand_images"></div>
+
+
         <div class="modal-footer d-flex justify-content-center align-content-center gap-3">
             <button id="submit-create-brand-btn"class="col-3 py-1 btn btn-main">@lang('lang.save')</button>
             <button type="button" class="col-3 py-1 btn btn-danger" data-dismiss="modal">@lang('lang.close')</button>
