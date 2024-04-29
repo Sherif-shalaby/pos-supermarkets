@@ -262,3 +262,17 @@ td {
     background-color: #145d1a;
     color: white !important;
 }
+
+.attendance-btn {
+    position: relative;
+}
+
+.attendance-btn::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 60%;
+    height: 3px;
+    background-color: #dadada;
+    margin: auto;
+}

@@ -1,90 +1,134 @@
 @extends('layouts.app')
 @section('title', __('lang.wages_and_compensations'))
-
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/stock.css') }}">
+@endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header d-flex align-items-center">
-                        <h4 class="print-title">@lang('lang.wages_and_compensations')</h4>
+    <section class="forms py-0">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12 px-1">
+                    <div
+                        class="d-flex align-items-center my-2 @if (app()->isLocale('ar')) justify-content-end @else justify-content-start @endif">
+                        <h5 class="print-title mb-0 position-relative print-title" style="margin-right: 30px">
+                            @lang('lang.wages_and_compensations')
+                            <span class="header-pill"></span>
+                        </h5>
                     </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <a class="btn btn-primary ml-4" href="{{ action('WagesAndCompensationController@create') }}">
+                    <div class="card mb-2">
+                        <div class="card-body d-flex justify-content-center p-2">
+                            <a class="btn btn-main col-md-3" href="{{ action('WagesAndCompensationController@create') }}">
                                 <i class="fa fa-plus"></i> @lang('lang.add')</a>
                         </div>
-                        <br>
-                        <div class="col-md-12">
+                    </div>
+
+                    <div class="card mb-2">
+                        <div class="card-body p-2">
                             <form action="">
-                                <div class="row">
-                                    <div class="col-md-3">
+                                <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.date_of_creation') @lang('lang.start_date')</label>
-                                            {!! Form::text('doc_start_date', null, ['class' => 'form-control datepicker']) !!}
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.date_of_creation') @lang('lang.start_date')</label>
+                                            {!! Form::text('doc_start_date', null, [
+                                                'class' => 'form-control datepicker  modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.date_of_creation') @lang('lang.end_date')</label>
-                                            {!! Form::text('doc_end_date', null, ['class' => 'form-control datepicker']) !!}
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.date_of_creation') @lang('lang.end_date')</label>
+                                            {!! Form::text('doc_end_date', null, [
+                                                'class' => 'form-control datepicker  modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.employees')</label>
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.employees')</label>
                                             {!! Form::select('employee_id', $employees, null, ['class' => 'form-control', 'placeholder' => __('lang.all')]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.store')</label>
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.store')</label>
                                             {!! Form::select('store_id', $stores, null, ['class' => 'form-control', 'placeholder' => __('lang.all')]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.job')</label>
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.job')</label>
                                             {!! Form::select('job_type_id', $jobs, null, ['class' => 'form-control', 'placeholder' => __('lang.all')]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.payment_type')</label>
-                                            {!! Form::select('payment_type', $payment_types, null, ['class' => 'form-control', 'placeholder' => __('lang.all')]) !!}
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.payment_type')</label>
+                                            {!! Form::select('payment_type', $payment_types, null, [
+                                                'class' => 'form-control',
+                                                'placeholder' => __('lang.all'),
+                                            ]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.status')</label>
-                                            {!! Form::select('status', ['paid' => 'Paid', 'pending' => 'Pending'], null, ['class' => 'form-control', 'placeholder' => __('lang.all')]) !!}
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.status')</label>
+                                            {!! Form::select('status', ['paid' => 'Paid', 'pending' => 'Pending'], null, [
+                                                'class' => 'form-control',
+                                                'placeholder' => __('lang.all'),
+                                            ]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.payment_start_date')</label>
-                                            {!! Form::text('payment_start_date', null, ['class' => 'form-control datepicker']) !!}
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.payment_start_date')</label>
+                                            {!! Form::text('payment_start_date', null, [
+                                                'class' => 'form-control datepicker  modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 px-5">
                                         <div class="form-group">
-                                            <label for="">@lang('lang.payment_end_date')</label>
-                                            {!! Form::text('payment_end_date', null, ['class' => 'form-control datepicker']) !!}
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="">@lang('lang.payment_end_date')</label>
+                                            {!! Form::text('payment_end_date', null, [
+                                                'class' => 'form-control datepicker  modal-input app()->isLocale("ar") ? text-end : text-start',
+                                            ]) !!}
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <br>
-                                        <button type="submit" class="btn btn-success mt-2">@lang('lang.filter')</button>
+                                    <div class="col-md-3 px-5 d-flex justify-content-center align-items-center">
+
+                                        <button type="submit" class="btn btn-main col-md-12">@lang('lang.filter')</button>
+                                    </div>
+                                    <div class="col-md-3 px-5 d-flex justify-content-center align-items-center">
                                         <a href="{{ action('WagesAndCompensationController@index') }}"
-                                            class="btn btn-danger mt-2">@lang('lang.clear_filter')</a>
+                                            class="btn btn-danger col-md-12">@lang('lang.clear_filter')</a>
                                     </div>
                                 </div>
                             </form>
 
                         </div>
+                    </div>
 
 
-                        <div class="row">
+                    <div class="card my-3">
+                        <div class="card-body p-2">
                             <div class="table-responsive">
                                 <table class="table dataTable">
                                     <thead>
@@ -112,7 +156,9 @@
                                                     {{ $wages_and_compensation->employee_name }}
                                                 </td>
                                                 @php
-                                                    $employee = App\Models\Employee::find($wages_and_compensation->employee_id);
+                                                    $employee = App\Models\Employee::find(
+                                                        $wages_and_compensation->employee_id,
+                                                    );
                                                 @endphp
                                                 <td>
                                                     <img src="@if (!empty($employee->getFirstMediaUrl('employee_photo'))) {{ $employee->getFirstMediaUrl('employee_photo') }}@else{{ asset('uploads/' . session('logo')) }} @endif"
@@ -192,7 +238,8 @@
                 </div>
             </div>
         </div>
-    </div>
+
+    </section>
 @endsection
 
 @section('javascript')
