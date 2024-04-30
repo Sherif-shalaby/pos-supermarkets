@@ -28,7 +28,7 @@
 <li class="nav-item" id="notification-icon">
     <a rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
         class="nav-link dropdown-ite notification-list dropdown-item  d-flex justify-content-center align-items-center"
-        style="color: black;background-color: white; font-size: 15px;width: 24px;height: 24px; border-radius: 8px;padding: 5px"><img
+        style="color: black;background-color: white; font-size: 15px;width: 35px;height: 35px; border-radius: 8px;padding: 3px"><img
             class="w-100 h-100" src="{{ asset('front/images/icons/notification.png') }}" alt="">
         @if ($new_count > 0)
             <span class="badge badge-danger notification-number">{{ $new_count }}</span>

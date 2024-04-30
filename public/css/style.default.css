@@ -198,7 +198,7 @@ nav.navbar .navbar-holder {
 nav.navbar a {
     font-size: 14px;
     color: #303030;
-    line-height: 60px;
+    /* line-height: 60px; */
     position: relative;
     padding: 0 3px;
 }
@@ -1364,7 +1364,7 @@ button {
     margin-bottom: 0;
 }
 
-.login-page form,
+
 .register-page form {
     margin: 2rem auto 1rem;
     max-width: 300px;
