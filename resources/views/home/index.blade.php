@@ -1,53 +1,78 @@
 @extends('layouts.app')
 @section('title', __('lang.dashboard'))
-
+@section('style')
+    <link rel="stylesheet" type="text/css" href="{{ url('front/css/stock.css') }}">
+@endsection
 @php
     $module_settings = App\Models\System::getProperty('module_settings');
     $module_settings = !empty($module_settings) ? json_decode($module_settings, true) : [];
 @endphp
 @section('content')
     @if (!empty($module_settings['dashboard']))
-        <div class="row">
-            <div class="container-fluid">
-                <div class="col-md-12">
-                    <div class="brand-text float-left mt-4">
+        <div class="container-fluid">
+            <div class="row justify-content-center mt-3">
+                <div class="col-md-10">
+                    {{-- <div class="brand-text float-left mt-4">
                         <h3>@lang('lang.welcome') <span>{{ Auth::user()->name }}</span> </h3>
-                    </div>
+                    </div> --}}
                     @if (auth()->user()->can('superadmin') || auth()->user()->is_admin || auth()->user()->can('dashboard.profit.view'))
                         @if (strtolower(session('user.job_title')) != 'deliveryman')
-                            <div class="filter-toggle btn-group">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <label for="store_id"><b>@lang('lang.store')</b></label>
-                                        {!! Form::select('store_id', $stores, session('user.is_superadmin') ? null : key($stores), [
-                                            'class' => 'form-control ',
-                                            'multiple',
-                                            'data-live-search' => 'true',
-                                            'id' => 'store_id',
-                                        ]) !!}
+                            <div class="card rounded-lg mb-3">
+                                <div class="card-body p-2">
+                                    <div
+                                        class="row justify-content-between @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                        <div class="col-md-2">
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="store_id"><b>@lang('lang.store')</b></label>
+                                            {!! Form::select('store_id', $stores, session('user.is_superadmin') ? null : key($stores), [
+                                                'class' => 'form-control ',
+                                                'multiple',
+                                                'data-live-search' => 'true',
+                                                'id' => 'store_id',
+                                            ]) !!}
 
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="from_date"><b>@lang('lang.from_date')</b></label>
-                                        <input type="date" class="form-control filter" name="from_date" id="from_date"
-                                            value="{{ date('Y-m-01') }}" placeholder="{{ __('lang.from_date') }}">
-
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="start_time"><b>@lang('lang.start_time')</b></label>
-                                            {!! Form::text('start_time', null, ['class' => 'form-control time_picker filter', 'id' => 'start_time']) !!}
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <label for="to_date"><b>@lang('lang.to_date')</b></label>
-                                        <input type="date" class="form-control filter" name="to_date" id="to_date"
-                                            value="{{ date('Y-m-t') }}" placeholder="{{ __('lang.to_date') }}">
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group">
-                                            <label for="end_time"><b>@lang('lang.end_time')</b></label>
-                                            {!! Form::text('end_time', null, ['class' => 'form-control time_picker filter', 'id' => 'end_time']) !!}
+                                        <div class="col-md-2">
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="from_date"><b>@lang('lang.from_date')</b></label>
+                                            <input type="date"
+                                                class="form-control filter  modal-input m-auto @if (app()->isLocale('ar')) text-end @else  text-start @endif"
+                                                name="from_date" id="from_date" value="{{ date('Y-m-01') }}"
+                                                placeholder="{{ __('lang.from_date') }}">
+
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label
+                                                    class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                    for="start_time"><b>@lang('lang.start_time')</b></label>
+                                                {!! Form::text('start_time', null, [
+                                                    'class' => 'form-control time_picker filter modal-input app()->isLocale("ar") ? text-end : text-start',
+                                                    'id' => 'start_time',
+                                                ]) !!}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <label
+                                                class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                for="to_date"><b>@lang('lang.to_date')</b></label>
+                                            <input type="date"
+                                                class="form-control filter  modal-input m-auto @if (app()->isLocale('ar')) text-end @else  text-start @endif"
+                                                name="to_date" id="to_date" value="{{ date('Y-m-t') }}"
+                                                placeholder="{{ __('lang.to_date') }}">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="form-group">
+                                                <label
+                                                    class="form-label d-block mb-1  @if (app()->isLocale('ar')) text-end @else text-start @endif"
+                                                    for="end_time"><b>@lang('lang.end_time')</b></label>
+                                                {!! Form::text('end_time', null, [
+                                                    'class' => 'form-control time_picker filter modal-input app()->isLocale("ar") ? text-end : text-start',
+                                                    'id' => 'end_time',
+                                                ]) !!}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

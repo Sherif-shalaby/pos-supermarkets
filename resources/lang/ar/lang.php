@@ -1458,5 +1458,6 @@ return [
     'online_payments' => 'المدفوعات الإلكترونية',
     'sell_current_stock_value' => 'قيمة المخزون الحالي(سعر البيع)',
     'login' => 'تسجيل الدخول',
-    'welcome' => 'اهلا و سهلا'
+    'welcome' => 'اهلا و سهلا',
+    'invoice' => 'الفاتورة',
 ];

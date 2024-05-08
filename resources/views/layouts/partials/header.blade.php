@@ -4,7 +4,7 @@
     $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
 @endphp
 <header class="header no-print" style="background-color: #a0d8a1">
-    <nav class="navbar">
+    <nav class="navbar py-2">
         <div class="container-fluid">
             <div class="navbar-holder d-flex align-items-center justify-content-between">
                 <a id="toggle-btn" href="#" class="menu-btn px-1"
@@ -33,29 +33,22 @@
                                 <img src="{{ asset('front/images/icons Png/hed/Icon awesome-file-invoice.png') }}"
                                     alt="" style="width: 100%;height: 100%;">
                             </div>
-                            <span class="ml-2 text-bold">Invoice</span>
+                            <span class="ml-2 text-bold">@lang('lang.invoice')</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        {{-- <a target="_blank" href="{{action('ContactUsController@getUserContactUs')}}" id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
-                            style="background-image: url('{{asset('images/handshake.jpg')}}');" class="btn no-print">
-                        </a> --}}
-                        <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $watsapp_numbers }}"
-                            id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
-                            style="border-radius:8px;width: 35px;height: 35px;"
-                            class="btn bg-white no-print d-flex justify-content-center align-items-center">
-                            <img style="width: 100%" src="{{ asset('images/watsapp.jpg') }}" alt="watsapp">
-                        </a>
-                    </li>
-                    <li class="nav-item"><button class="btn-danger btn-sm hide" id="power_off_btn" data-toggle="tooltip"
-                            data-title="@lang('lang.shut_down')"><i class="fa fa-power-off"></i></button></li>
                     @can('sale.pos.create_and_edit')
-                        <li class="nav-item"><a class="dropdown-item btn-pos btn-sm"
-                                href="{{ action('SellPosController@create') }}"><i class="dripicons-shopping-bag"></i><span>
-                                    @lang('lang.pos')</span></a></li>
+                        <li class="nav-item">
+                            <a class="d-flex justify-content-center align-items-center bg-white px-2 btn"
+                                href="{{ action('SellPosController@create') }}" style="border-radius: 8px;height: 35px;">
+                                <div style="width: 13px;height: 18px;" class="mb-1">
+
+                                    <img src="{{ asset('front/images/icons Png/hed/Icon awesome-shopping-bag.png') }}"
+                                        alt="" style="width: 100%;height: 100%;">
+                                </div>
+                                <span class="ml-2 text-bold">@lang('lang.pos')</span>
+                            </a>
+                        </li>
                     @endcan
-                    <li class="nav-item"><a id="btnFullscreen"><i class="dripicons-expand"></i></a></li>
-                    @include('layouts.partials.notification_list')
                     @php
                         $config_languages = config('constants.langs');
                         $languages = [];
@@ -65,8 +58,11 @@
                     @endphp
                     <li class="nav-item">
                         <a rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" class="nav-link dropdown-item"><i class="dripicons-web"></i>
-                            <span>{{ __('lang.language') }}</span> <i class="fa fa-angle-down"></i></a>
+                            aria-expanded="false"
+                            class="d-flex justify-content-center align-items-center bg-white px-2 btn"
+                            style="border-radius: 8px;height: 35px;">
+                            <i class="dripicons-web m-0 text-black"></i>
+                        </a>
                         <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                             @foreach ($languages as $key => $lang)
                                 <li>
@@ -75,18 +71,22 @@
                                         {{ $lang }}</a>
                                 </li>
                             @endforeach
-
                         </ul>
                     </li>
 
-                    {{-- <li class="nav-item">
-                        <a class="dropdown-item" href="{{action('HomeController@getHelp')}}" target="_blank"><i
-                                class="dripicons-information"></i> @lang('lang.help')</a>
-                    </li> --}}
+                    @include('layouts.partials.notification_list')
+
+
                     <li class="nav-item">
                         <a rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" class="nav-link dropdown-item"><i class="dripicons-user"></i>
-                            <span>{{ ucfirst(Auth::user()->name) }}</span> <i class="fa fa-angle-down"></i>
+                            aria-expanded="false"
+                            class="d-flex justify-content-center align-items-center bg-white px-2 btn"
+                            style="border-radius: 8px;height: 35px;">
+                            <div style="width: 15px;height: 18px;">
+
+                                <img src="{{ asset('front/images/icons Png/hed/Icon awesome-user-alt.png') }}"
+                                    alt="" style="width: 100%;height: 100%;">
+                            </div>
                         </a>
                         <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                             @php
@@ -128,6 +128,38 @@
                             </li>
                         </ul>
                     </li>
+
+                    <li class="nav-item">
+                        {{-- <a target="_blank" href="{{action('ContactUsController@getUserContactUs')}}" id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
+                            style="background-image: url('{{asset('images/handshake.jpg')}}');" class="btn no-print">
+                        </a> --}}
+                        <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $watsapp_numbers }}"
+                            id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
+                            style="border-radius:8px;width: 35px;height: 35px;"
+                            class="btn bg-white no-print d-flex justify-content-center align-items-center">
+                            <img style="width: 100%" src="{{ asset('images/watsapp.jpg') }}" alt="watsapp">
+                        </a>
+                    </li>
+
+                    <li class="nav-item"><a id="btnFullscreen" style="border-radius:8px;width: 35px;height: 35px;"
+                            class="btn bg-white no-print d-flex justify-content-center align-items-center">
+                            <i class="dripicons-expand m-0"></i></a></li>
+
+                    <li class="nav-item">
+                        <button id="power_off_btn" data-toggle="tooltip" data-title="@lang('lang.shut_down')"
+                            style="border-radius:8px;width: 35px;height: 35px;"
+                            class="btn hide bg-danger text-white no-print d-flex justify-content-center align-items-center">
+                            <i class="fa fa-power-off"></i></button>
+                    </li>
+
+
+
+
+                    {{-- <li class="nav-item">
+                        <a class="dropdown-item" href="{{action('HomeController@getHelp')}}" target="_blank"><i
+                                class="dripicons-information"></i> @lang('lang.help')</a>
+                    </li> --}}
+
                 </ul>
             </div>
         </div>

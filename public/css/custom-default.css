@@ -685,7 +685,7 @@ nav.navbar {
 }
 
 nav.navbar .nav-item a i {
-    color: #21912A;
+    /* color: #21912A; */
     font-size: 14px;
     margin-right: 5px;
     vertical-align: middle;
