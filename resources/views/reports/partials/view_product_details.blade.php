@@ -122,6 +122,8 @@
                         <thead>
                             <tr class="bg-success text-white">
                                 <th>@lang('lang.name')</th>
+                                <th>@lang('lang.customer_name')</th>
+                                <th>@lang('lang.mobile_number')</th>
                                 <th>@lang('lang.sku')</th>
                                 <th>@lang('lang.invoice_no')</th>
                                 <th>@lang('lang.date')</th>
@@ -141,6 +143,8 @@
                                             {{ $sale->product->name }}
                                         @endif
                                     </td>
+                                    <td>{{ $sale->customer_name }}</td>
+                                    <td>{{ $sale->customer_phone }}</td>
                                     <td>{{ $sale->variation->sub_sku ?? '' }}</td>
                                     <td>{{ $sale->transaction->invoice_no ?? '' }}</td>
                                     <td>{{ !empty($sale->transaction->transaction_date) ? @format_date($sale->transaction->transaction_date) : '' }}

@@ -441,10 +441,15 @@ button:focus,
 }
 
 .count-title {
-    background: #fff;
-    border-radius: 5px;
+    background: #cbe7cc;
+    height: 100%;
+    border-radius: 10px;
     box-shadow: 0 0 35px 0 rgba(154, 161, 171, 0.15);
     padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .dashboard-counts {
@@ -728,7 +733,7 @@ nav.navbar .nav-item li.notifications a i {
 
 .nav-tabs .nav-item .nav-link.active {
     border-color: transparent;
-    border-bottom: 2px solid #21912A;
+    /* border-bottom: 2px solid #21912A; */
 }
 
 .dropdown-item {

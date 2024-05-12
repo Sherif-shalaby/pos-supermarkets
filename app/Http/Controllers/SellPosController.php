@@ -217,7 +217,7 @@ class SellPosController extends Controller
                     $paid_amount = $balance;
                     $balance = 0;
                 }
-                
+
                 $remaining_due_amount += $paid_amount;
                 $customer->added_balance = $customer->added_balance - $paid_amount;
                 $customer->save();
@@ -1002,9 +1002,13 @@ class SellPosController extends Controller
                 })
                 ->where('is_raw_material', 0)
                 ->whereNull('variations.deleted_at');
-            if (!empty(request()->store_id)) {
-                $query->where('product_stores.store_id', request()->store_id);
-            }
+                $produc=$query->select('variations.id')->get();
+                $p_store=$query->select('product_stores.variation_id')->get();
+                if($produc == $p_store){
+                    if (!empty(request()->store_id)  ) {
+                        $query->where('product_stores.store_id', request()->store_id);
+                    }
+                }
             $selectRaws = [
                 'products.id as product_id',
                 'products.name',

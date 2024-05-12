@@ -13,7 +13,7 @@
             <div class="row justify-content-center mt-3">
                 <div class="col-md-10">
                     {{-- <div class="brand-text float-left mt-4">
-                        <h3>@lang('lang.welcome') <span>{{ Auth::user()->name }}</span> </h3>
+                        <h6>@lang('lang.welcome') <span>{{ Auth::user()->name }}</span> </h6>
                     </div> --}}
                     @if (auth()->user()->can('superadmin') || auth()->user()->is_admin || auth()->user()->can('dashboard.profit.view'))
                         @if (strtolower(session('user.job_title')) != 'deliveryman')
@@ -86,35 +86,41 @@
             <div class="container-fluid">
                 @if (auth()->user()->can('superadmin') || auth()->user()->is_admin)
                     <div class="row">
-
                         <!-- Count item widget-->
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" style="min-height: 200px">
                             <div class="wrapper count-title text-center">
-                                <div class="icon"><i class="fa fa-cubes" style="color: #498636"></i>
+                                <div style="width: 20px">
+                                    <img class="w-100" src="{{ asset('front/images/icons Png/blockchain.png') }}"
+                                        alt="@lang('lang.current_stock_value')">
                                 </div>
-                                <div class="name"><strong style="color: #498636">@lang('lang.current_stock_value')</strong>
+                                <div class="name"><strong>@lang('lang.current_stock_value')</strong>
                                 </div>
                                 <div class="count-number current_stock_value-data">
                                     {{ @num_format(0) }}</div>
                             </div>
                         </div>
                         <!-- Count item widget-->
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" style="min-height: 200px">
                             <div class="wrapper count-title text-center">
-                                <div class="icon"><i class="dripicons-graph-bar" style="color: #733686"></i>
+                                <div style="width: 20px">
+                                    <img class="w-100" src="{{ asset('front/images/icons Png/statistics.png') }}"
+                                        alt="@lang('lang.revenue')">
                                 </div>
-                                <div class="name"><strong style="color: #733686">@lang('lang.revenue')</strong>
+                                <div class="name"><strong>@lang('lang.revenue')</strong>
                                 </div>
                                 <div class="count-number revenue-data">{{ @num_format(0) }}
                                 </div>
                             </div>
                         </div>
                         <!-- Count item widget-->
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" style="min-height: 200px">
                             <div class="wrapper count-title text-center">
-                                <div class="icon"><i class="dripicons-return" style="color: #ff8952"></i>
+                                <div style="width: 20px">
+                                    <img class="w-100"
+                                        src="{{ asset('front/images/icons Png/Icon ionic-md-return-right.png') }}"
+                                        alt="@lang('lang.sale_return')">
                                 </div>
-                                <div class="name"><strong style="color: #ff8952">@lang('lang.sale_return')</strong>
+                                <div class="name"><strong>@lang('lang.sale_return')</strong>
                                 </div>
                                 <div class="count-number sell_return-data">
                                     {{ @num_format(0) }}
@@ -122,87 +128,102 @@
                             </div>
                         </div>
                         <!-- Count item widget-->
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" style="min-height: 200px">
                             <div class="wrapper count-title text-center">
-                                <div class="icon"><i class="dripicons-media-loop" style="color: #297ff9"></i>
+                                <div style="width: 20px">
+                                    <img class="w-100"
+                                        src="{{ asset('front/images/icons Png/Icon material-monetization-on.png') }}"
+                                        alt="@lang('lang.total_taxes')">
                                 </div>
-                                <div class="name"><strong style="color: #297ff9">@lang('lang.total_taxes')</strong>
+                                <div class="name"><strong>@lang('lang.total_taxes')</strong>
                                 </div>
                                 <div class="count-number total_tax">{{ @num_format(0) }}
                                 </div>
                             </div>
                         </div>
                         <!-- Count item widget-->
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" style="min-height: 200px">
                             <div class="wrapper count-title text-center">
-                                <div class="icon"><i class="dripicons-media-loop" style="color: #00c689"></i>
+                                <div style="width: 20px">
+                                    <img class="w-100" src="{{ asset('front/images/icons Png/upload-file.png') }}"
+                                        alt="@lang('lang.purchase_return')">
                                 </div>
-                                <div class="name"><strong style="color: #00c689">@lang('lang.purchase_return')</strong>
+                                <div class="name"><strong>@lang('lang.purchase_return')</strong>
                                 </div>
                                 <div class="count-number purchase_return-data">
                                     {{ @num_format(0) }}</div>
                             </div>
                         </div>
                         <!-- Count item widget-->
-                        <div class="col-sm-2">
+                        <div class="col-sm-2" style="min-height: 200px">
                             <div class="wrapper count-title text-center">
-                                <div class="icon"><i class="dripicons-trophy" style="color: #297ff9"></i>
+                                <div style="width: 20px">
+                                    <img class="w-100" src="{{ asset('front/images/icons Png/bouquet.png') }}"
+                                        alt="@lang('lang.profit')">
                                 </div>
-                                <div class="name"><strong style="color: #297ff9">@lang('lang.profit')</strong>
+                                <div class="name"><strong>@lang('lang.profit')</strong>
                                 </div>
                                 <div class="count-number profit-data">{{ @num_format(0) }}
                                 </div>
                             </div>
                         </div>
-
-
-                        {{-- </div> --}}
+                    </div>
                 @endif
-            </div>
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="wrapper count-title text-center" style="margin-top: 20px;">
-                        <div class="icon"><i class="fa fa-cubes" style="color: #498636"></i>
-                        </div>
-                        <div class="name"><strong style="color: #498636">@lang('lang.sell_current_stock_value')</strong>
-                        </div>
-                        <div class="count-number sell_current_stock_value-data">
-                            {{ @num_format(0) }}</div>
-                    </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="wrapper count-title text-center" style="margin-top: 20px;">
-                        <div class="icon"><i class="dripicons-trophy" style="color: #3f6dad"></i>
-                        </div>
-                        <div class="name"><strong style="color: #3f6dad">@lang('lang.net_profit')</strong>
-                        </div>
-                        <div class="count-number net_profitt-data">{{ @num_format(0) }}
+                <div class="row">
+                    <div class="col-sm-2">
+                        <div class="wrapper count-title text-center" style="margin-top: 20px;">
+                            <div style="width: 20px">
+                                <img class="w-100" src="{{ asset('front/images/icons Png/blockchain.png') }}"
+                                    alt="@lang('lang.sell_current_stock_value')">
+                            </div>
+                            <div class="name"><strong>@lang('lang.sell_current_stock_value')</strong>
+                            </div>
+                            <div class="count-number sell_current_stock_value-data">
+                                {{ @num_format(0) }}</div>
                         </div>
                     </div>
+                    <div class="col-sm-2">
+                        <div class="wrapper count-title text-center" style="margin-top: 20px;">
+                            <div style="width: 20px">
+                                <img class="w-100" src="{{ asset('front/images/icons Png/bouquet.png') }}"
+                                    alt="@lang('lang.net_profit')">
+                            </div>
+                            <div class="name"><strong>@lang('lang.net_profit')</strong>
+                            </div>
+                            <div class="count-number net_profitt-data">{{ @num_format(0) }}
+                            </div>
+                        </div>
 
-                </div>
-                <div class="col-sm-2">
-                    <div class="wrapper count-title text-center" style="margin-top: 20px;">
-                        <div class="icon"><i class="dripicons-trophy" style="color: #3f6dad"></i>
-                        </div>
-                        <div class="name"><strong style="color: #3f6dad">@lang('lang.expense')</strong>
-                        </div>
-                        <div class="count-number expense-data">{{ @num_format(0) }}
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="wrapper count-title text-center" style="margin-top: 20px;">
+                            <div style="width: 20px">
+                                <img class="w-100"
+                                    src="{{ asset('front/images/icons Png/Icon material-monetization-on.png') }}"
+                                    alt="@lang('lang.expense')">
+                            </div>
+                            <div class="name"><strong>@lang('lang.expense')</strong>
+                            </div>
+                            <div class="count-number expense-data">{{ @num_format(0) }}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-2">
-                    <div class="wrapper count-title text-center" style="margin-top: 20px;">
-                        <div class="icon"><i class="dripicons-trophy" style="color: #3f6dad"></i>
-                        </div>
-                        <div class="name"><strong style="color: #3f6dad">@lang('lang.purchase')</strong>
-                        </div>
-                        <div class="count-number purchase-data">{{ @num_format(0) }}
+                    <div class="col-sm-2">
+                        <div class="wrapper count-title text-center" style="margin-top: 20px;">
+                            <div style="width: 20px">
+                                <img class="w-100"
+                                    src="{{ asset('front/images/icons Png/Icon material-monetization-on.png') }}"
+                                    alt="@lang('lang.purchase')">
+                            </div>
+                            <div class="name"><strong>@lang('lang.purchase')</strong>
+                            </div>
+                            <div class="count-number purchase-data">{{ @num_format(0) }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            </div>
+
 
             <div class="container-fluid" id="chart_and_table_section">
                 {{-- @include('home.partials.chart_and_table') --}}
@@ -288,165 +309,165 @@
                     let sell_currenct_stock_string_p = '<div>';
                     let sell_currenct_stock_string_m = '<div>';
                     result.forEach(element => {
-                        currenct_stock_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                        currenct_stock_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.current_stock_value}"
                                             data-orig_value="${element.data.current_stock_value}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.current_stock_value, false)}</span>
-                                        </h3>
+                                        </h6>
                                       `;
-                        currenct_stock_string_p += `<h5 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                        currenct_stock_string_p += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.current_stock_value_product}"
-                                            data-orig_value="${element.data.current_stock_value_product}"><span class="symbol" style="padding-right: 10px;">
+                                            data-orig_value="${element.data.current_stock_value_product}"><span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
-                                                class="total">${__currency_trans_from_en(element.data.current_stock_value_product, false)}</span>
-                                        <span style="color: #3fc3ee">P</span>
-                                        </h5>`;
-                        currenct_stock_string_m += `<h5 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                                class="total" style="padding: 3px 15px !important;">${__currency_trans_from_en(element.data.current_stock_value_product, false)}  <span class="mx-2">P</span></span>
+
+                                        </h6>`;
+                        currenct_stock_string_m += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                             data-currency_id="${element.currency.currency_id}"
                             data-is_default="${element.currency.is_default}"
                             data-conversion_rate="${element.currency.conversion_rate}"
                             data-base_conversion="${element.currency.conversion_rate * element.data.current_stock_value_material}"
-                            data-orig_value="${element.data.current_stock_value_material}"><span class="symbol" style="padding-right: 10px;">
+                            data-orig_value="${element.data.current_stock_value_material}"><span class="symbol py-1" >
                                 ${element.currency.symbol}</span>
                             <span
-                                class="total">${__currency_trans_from_en(element.data.current_stock_value_material, false)}</span>
-                        <span style="color: #3fc3ee">M</span>
-                        </h5>`;
-                        revenue_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                class="total" style="padding: 3px 15px !important;">${__currency_trans_from_en(element.data.current_stock_value_material, false)}  <span class="mx-2">M</span></span>
+
+                        </h6>`;
+                        revenue_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.revenue}"
                                             data-orig_value="${element.data.revenue}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.revenue, false)}</span>
-                                        </h3>`;
+                                        </h6>`;
 
 
-                        sell_return_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                        sell_return_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.sell_return}"
                                             data-orig_value="${element.data.sell_return}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.sell_return, false)}</span>
-                                        </h3>`;
-                        purchase_return_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                        </h6>`;
+                        purchase_return_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.purchase_return}"
                                             data-orig_value="${element.data.purchase_return}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.purchase_return, false)}</span>
-                                        </h3>`;
-                        total_tax_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                        </h6>`;
+                        total_tax_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.total_tax}"
                                             data-orig_value="${element.data.total_tax}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.total_tax, false)}</span>
-                                        </h3>`;
-                        profit_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                        </h6>`;
+                        profit_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.profit}"
                                             data-orig_value="${element.data.profit}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.profit, false)}</span>
-                                        </h3>`;
-                        net_profit_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                        </h6>`;
+                        net_profit_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.net_profit}"
                                             data-orig_value="${element.data.net_profit}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.net_profit, false)}</span>
-                                        </h3>`;
-                        expense_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                        </h6>`;
+                        expense_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.expense}"
                                             data-orig_value="${element.data.expense}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.expense, false)}</span>
-                                        </h3>`;
-                        purchase_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                        </h6>`;
+                        purchase_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.purchase}"
                                             data-orig_value="${element.data.purchase}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.purchase, false)}</span>
-                                        </h3>`;
+                                        </h6>`;
 
-                        sell_currenct_stock_string += `<h3 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                        sell_currenct_stock_string += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.sell_current_stock_value}"
                                             data-orig_value="${element.data.sell_current_stock_value}">
-                                            <span class="symbol" style="padding-right: 10px;">
+                                            <span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
                                                 class="total">${__currency_trans_from_en(element.data.sell_current_stock_value, false)}</span>
-                                        </h3>
+                                        </h6>
                                       `;
-                        sell_currenct_stock_string_p += `<h5 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                        sell_currenct_stock_string_p += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                                             data-currency_id="${element.currency.currency_id}"
                                             data-is_default="${element.currency.is_default}"
                                             data-conversion_rate="${element.currency.conversion_rate}"
                                             data-base_conversion="${element.currency.conversion_rate * element.data.sell_current_stock_value_product}"
-                                            data-orig_value="${element.data.sell_current_stock_value_product}"><span class="symbol" style="padding-right: 10px;">
+                                            data-orig_value="${element.data.sell_current_stock_value_product}"><span class="symbol py-1" >
                                                 ${element.currency.symbol}</span>
                                             <span
-                                                class="total">${__currency_trans_from_en(element.data.sell_current_stock_value_product, false)}</span>
-                                        <span style="color: #3fc3ee">P</span>
-                                        </h5>`;
-                        sell_currenct_stock_string_m += `<h5 class="dashboard_currency currency_total_${element.currency.currency_id}"
+                                                class="total" style="padding: 3px 15px !important;">${__currency_trans_from_en(element.data.sell_current_stock_value_product, false)} <span class="mx-2">P</span></span>
+
+                                        </h6>`;
+                        sell_currenct_stock_string_m += `<h6 class="dashboard_currency currency_total_${element.currency.currency_id}"
                             data-currency_id="${element.currency.currency_id}"
                             data-is_default="${element.currency.is_default}"
                             data-conversion_rate="${element.currency.conversion_rate}"
                             data-base_conversion="${element.currency.conversion_rate * element.data.sell_current_stock_value_material}"
-                            data-orig_value="${element.data.sell_current_stock_value_material}"><span class="symbol" style="padding-right: 10px;">
+                            data-orig_value="${element.data.sell_current_stock_value_material}"><span class="symbol py-1" >
                                 ${element.currency.symbol}</span>
                             <span
-                                class="total">${__currency_trans_from_en(element.data.sell_current_stock_value_material, false)}</span>
-                        <span style="color: #3fc3ee">M</span>
-                        </h5>`;
+                                class="total" style="padding: 3px 15px !important;">${__currency_trans_from_en(element.data.sell_current_stock_value_material, false)}  <span class="mx-2">M</span></span>
+
+                        </h6>`;
 
                     });
                     currenct_stock_string += `</div>`;

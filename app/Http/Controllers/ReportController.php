@@ -1585,11 +1585,12 @@ class ReportController extends Controller
         }
         $stock_detials = $stock_detial_query->get();
 
-        $sell_query = TransactionSellLine::leftjoin('transactions', 'transaction_sell_lines.transaction_id', 'transactions.id');
+        $sell_query = TransactionSellLine::leftjoin('transactions', 'transaction_sell_lines.transaction_id', 'transactions.id')
+        ->leftJoin('customers', 'transactions.customer_id', '=', 'customers.id');
         if (!empty($store_id)) {
             $sell_query->where('transactions.store_id', $store_id);
         }
-        $sales = $sell_query->where('product_id', $id)->select('transaction_sell_lines.*')->get();
+        $sales = $sell_query->where('product_id', $id)->select('transaction_sell_lines.*', 'customers.name as customer_name', 'customers.mobile_number as customer_phone')->get();
 
         $add_stock_query = AddStockLine::leftjoin('transactions', 'add_stock_lines.transaction_id', 'transactions.id');
         if (!empty($store_id)) {
