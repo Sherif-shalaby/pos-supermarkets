@@ -31,16 +31,10 @@
                     <nav class="navbar">
                         <div class="container-fluid">
                             <div class="navbar-holder d-flex align-items-center justify-content-between">
-                                <a id="toggle-btn" href="#">
-                                    <div class=" rounded-lg px-1 d-flex justify-content-center align-items-center"
-                                        style="background-color: white;border-radius: 6px;width: 24px;height: 24px;">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="1.5em"
-                                            viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                            <path
-                                                d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-                                        </svg>
-                                    </div>
-                                    </i>
+                                <a id="toggle-btn" href="#"class="menu-btn px-1"
+                                    style="width: 30px;background-color: white;height: 30px;display: flex;justify-content: center;align-items: center;">
+                                    <img src="{{ asset('front/images/icons Png/hed/Icon ionic-md-menu.png') }}"
+                                        alt="menu" style="width: 100%;height: 50%;">
                                 </a>
 
                                 <div class="navbar-header">
@@ -49,29 +43,33 @@
                                         <li class="nav-item">
                                             <a href="{{ action('SellController@create') }}" id="commercial_invoice_btn"
                                                 data-toggle="tooltip" data-title="@lang('lang.add_sale')"
-                                                class="btn no-print dropdown-item  d-flex justify-content-center align-items-center"
-                                                style="color: black;background-color: white; font-size: 15px;width: 24px;height: 24px; border-radius: 8px;padding: 5px"><img
-                                                    class="w-100 h-100"
-                                                    src="{{ asset('images/396 Commercial Invoice Icon.png') }}"
-                                                    alt="invoice">
+                                                class="d-flex no-print justify-content-center align-items-center bg-white px-2 btn"
+                                                style="border-radius: 8px;height: 35px;">
+                                                <div style="width: 15px;height: 18px;">
+                                                    <img class="w-100 h-100"
+                                                        src="{{ asset('images/396 Commercial Invoice Icon.png') }}"
+                                                        alt="invoice">
+                                                </div>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a target="_blank"
                                                 href="https://api.whatsapp.com/send?phone={{ $watsapp_numbers }}"
                                                 id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
-                                                class="btn no-print dropdown-item  d-flex justify-content-center align-items-center"
-                                                style="color: black;background-color: white; font-size: 15px;width: 24px;height: 24px; border-radius: 8px;padding: 5px">
-                                                <img class="w-100 h-100" src="{{ asset('images/watsapp.jpg') }}"
-                                                    alt="whatsapp">
+                                                class="d-flex no-print justify-content-center align-items-center bg-white px-2 btn"
+                                                style="border-radius: 8px;height: 35px;">
+                                                <div style="width: 15px;height: 18px;">
+                                                    <img class="w-100 h-100" src="{{ asset('images/watsapp.jpg') }}"
+                                                        alt="whatsapp">
+                                                </div>
                                             </a>
                                         </li>
                                         <li class="nav-item">
                                             <a rel="nofollow" data-target="#" href="#" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="false"
-                                                class=" dropdown-item  d-flex justify-content-center align-items-center"
-                                                style="color: black;background-color: white; font-size: 15px;width: 24px;height: 24px; border-radius: 8px;"><i
-                                                    class="dripicons-web m-0" style="color: black"></i>
+                                                class="dropdown-item d-flex justify-content-center align-items-center bg-white px-2 btn"
+                                                style="border-radius: 8px;height: 35px;">
+                                                <i class="dripicons-web m-0" style="color: black"></i>
 
                                             </a>
                                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
@@ -88,20 +86,17 @@
                                         </li>
                                         @include('layouts.partials.notification_list')
 
-                                        <li class="nav-item"> <button
-                                                class="btn-danger btn btn-sm hide font-weight-bold d-flex justify-content-center align-items-center py-0 px-3 "
-                                                id="power_off_btn"
-                                                style="color: white;font-size: 15px;width: 24px;height: 24px; border-radius: 8px;"><i
-                                                    class="fa fa-power-off"></i>
+                                        <li class="nav-item"> <button id="power_off_btn"
+                                                style="border-radius:8px;width: 35px;height: 35px;"
+                                                class="btn hide bg-danger text-white no-print d-flex justify-content-center align-items-center">
+                                                <i class="fa fa-power-off"></i>
                                             </button></li>
 
                                         <li class="nav-item"><a
-                                                class=" dropdown-item  d-flex justify-content-center align-items-center"
-                                                style="color: black;background-color: white; font-size: 15px;width: 24px;height: 24px; border-radius: 8px;padding: 5px"
-                                                id="btnFullscreen" title="Full Screen">
-                                                <img class="w-100 h-100"
-                                                    src="{{ asset('front/images/icons/full screen.png') }}"
-                                                    alt="Full Screen">
+                                                class="d-flex dropdown-item justify-content-center align-items-center bg-white px-2 btn"
+                                                style="border-radius: 8px;height: 35px;" id="btnFullscreen"
+                                                title="Full Screen">
+                                                <i class="dripicons-expand m-0"></i>
                                             </a>
                                         </li>
                                         </li>
@@ -113,19 +108,15 @@
                                             }
                                         @endphp
 
-                                        <li class="nav-item d-flex justify-content-center align-items-center"
-                                            style="color: black;background-color: white; font-size: 15px;width: 24px;height: 24px; border-radius: 8px;list-style: none">
+                                        <li class="nav-item">
                                             <a rel="nofollow" data-target="#" href="#" data-toggle="dropdown"
                                                 aria-haspopup="true" aria-expanded="false"
-                                                class=" dropdown-item d-flex justify-content-center align-items-center"
-                                                style="padding: 6px">
-
-                                                <svg xmlns="http://www.w3.org/2000/svg" height="1em"
-                                                    viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-                                                    <path
-                                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z" />
-                                                </svg>
-
+                                                class="d-flex dropdown-item justify-content-center align-items-center bg-white px-2 btn"
+                                                style="border-radius: 8px;height: 35px;">
+                                                <div style="width: 15px;height: 18px;">
+                                                    <img src="{{ asset('front/images/icons Png/hed/Icon awesome-user-alt.png') }}"
+                                                        alt="" style="width: 100%;height: 100%;">
+                                                </div>
                                             </a>
                                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
                                                 user="menu">
@@ -384,7 +375,7 @@
 
                                                 <span class="input-group-btn">
                                                     @can('customer_module.customer.create_and_edit')
-                                                        <a style="background-color: #F9C751;
+                                                        <a style="background-color: var(--complementary-color-1);
                                         width: 100%;
                                         height: 100%;
                                         border-radius: 16px;
@@ -468,7 +459,7 @@
 
                                                 <label
                                                     class="d-none justify-content-center align-items-center height-responsive"
-                                                    style="background-color: #21912A;
+                                                    style="background-color: var(--secondary-color);
                                                 width: 100%;
 
                                                 border-radius: 16px;
@@ -499,7 +490,7 @@
                                                 <label
                                                     class="d-flex justify-content-center justify-content-md-between align-items-center height-responsive"
                                                     for="customer_balance"
-                                                    style="background-color: #21912A;
+                                                    style="background-color: var(--secondary-color);
                                                 width: fit-content;
                                                 height: 100%;
                                                 border-radius: 16px;
@@ -524,7 +515,7 @@
                                     width: 100%">
                                                 <label for="points"
                                                     class="d-flex justify-content-center justify-content-md-between align-items-center height-responsive"
-                                                    style="background-color: #21912A;
+                                                    style="background-color: var(--secondary-color);
                                                 width: fit-content;
                                                 height: 100%;
                                                 border-radius: 16px;
@@ -582,7 +573,7 @@
                                                                         margin: auto;
                                                                         width: 100%">
                                         <button type="button"
-                                            style="background-color: #F9C751;
+                                            style="background-color: var(--complementary-color-1);
                                                                                 width: fit-content;
                                                                                 height: 100%;
                                                                                 border: none;
@@ -810,7 +801,7 @@
                                                         width: 100%;">
                                                     <span
                                                         class="totals-title d-flex justify-content-center align-items-center height-responsive pl-2 pl-lg-2 promotion-padding"
-                                                        style="background-color: #21912A;
+                                                        style="background-color: var(--secondary-color);
                                                 width: fit-content;
                                                 height: 100%;
                                                 border-radius: 16px;
@@ -854,7 +845,7 @@
 
                                                 <span
                                                     class=" height-responsive d-flex justify-content-center align-items-center"
-                                                    style="background-color: #21912A;
+                                                    style="background-color: var(--secondary-color);
                                                 width: fit-content;
                                                 height: 100%;
                                                 border-radius: 16px;
@@ -961,7 +952,7 @@
                                 <div
                                     class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="cash"
-                                        style="background: #21912A;display: flex;justify-content: center;gap: 10px;"
+                                        style="background: var(--secondary-color);display: flex;justify-content: center;gap: 10px;"
                                         type="button" class="btn btn-custom w-75 pos-button payment-btn"
                                         data-toggle="modal" data-target="#add-payment" data-backdrop="static"
                                         data-keyboard="false" id="cash-btn">
@@ -975,8 +966,8 @@
                                 </div>
                                 <div
                                     class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
-                                    <button data-method="coupon" style="background: #21912A" type="button"
-                                        class="btn  w-75 pos-button btn-custom" data-toggle="modal"
+                                    <button data-method="coupon" style="background: var(--secondary-color)"
+                                        type="button" class="btn  w-75 pos-button btn-custom" data-toggle="modal"
                                         data-target="#coupon_modal" id="coupon-btn"><i class="fa fa-tag"></i>
                                         @lang('lang.coupon')</button>
                                 </div>
@@ -986,7 +977,7 @@
                                     <div
                                         class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                         <button data-method="paypal"
-                                            style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;font-size: 10px"
+                                            style="background-color: var(--secondary-color);display: flex;justify-content: center;gap: 10px;font-size: 10px"
                                             type="button" class="btn btn-custom w-75 pos-button  payment-btn"
                                             data-toggle="modal" data-target="#add-payment" data-backdrop="static"
                                             data-keyboard="false" id="paypal-btn">
@@ -1002,7 +993,7 @@
                                 <div
                                     class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="draft"
-                                        style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"
+                                        style="background-color: var(--secondary-color);display: flex;justify-content: center;gap: 10px;"
                                         type="button" data-toggle="modal" data-target="#sale_note_modal"
                                         class="btn  w-75 pos-button btn-custom">
                                         <div style="width: 18px">
@@ -1026,7 +1017,7 @@
                                 <div
                                     class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button
-                                        style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"
+                                        style="background-color: var(--secondary-color);display: flex;justify-content: center;gap: 10px;"
                                         type="button" class="btn  w-75 pos-button btn-custom"
                                         id="recent-transaction-btn">
                                         <div style="width: 18px">
@@ -1041,7 +1032,7 @@
                                 <div
                                     class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="online-order"
-                                        style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"type="button"
+                                        style="background-color: var(--secondary-color);display: flex;justify-content: center;gap: 10px;"type="button"
                                         class="btn w-75 pos-button  btn-custom" id="view-online-order-btn"
                                         data-href="{{ action('SellPosController@getOnlineOrderTransactions') }}">
                                         <div style="width: 18px">
@@ -1056,7 +1047,7 @@
                                 <div
                                     class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="pay-later"
-                                        style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"
+                                        style="background-color: var(--secondary-color);display: flex;justify-content: center;gap: 10px;"
                                         type="button" class="btn  w-75 pos-button btn-custom" id="pay-later-btn">
                                         <div style="width: 18px">
                                             <img class="w-100 h-100"
@@ -1069,7 +1060,7 @@
                                 <div
                                     class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="draft"
-                                        style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"
+                                        style="background-color: var(--secondary-color);display: flex;justify-content: center;gap: 10px;"
                                         type="button" class="btn  w-75 pos-button  btn-custom" id="view-draft-btn"
                                         data-href="{{ action('SellPosController@getDraftTransactions') }}">
                                         <div style="width: 18px">
@@ -1082,7 +1073,7 @@
                                 </div>
                                 <div
                                     class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
-                                    <button data-method="cash" style="background: #21912A" type="button"
+                                    <button data-method="cash" style="background: var(--secondary-color)" type="button"
                                         class="btn w-75 pos-button btn-custom" id="quick-pay-btn"><i
                                             class="fa fa-money"></i>
                                         @lang('lang.quick_pay')</button>

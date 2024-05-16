@@ -88,7 +88,7 @@
                         <div class="badge badge-primary">@lang('lang.latest') 5</div>
                     </div>
 
-                    <div class="p-2" style="background-color: #21912a;border-radius: 8px">
+                    <div class="p-2" style="background-color: var(--secondary-color);border-radius: 8px">
                         <ul class="nav nav-tabs mb-2 border-0 justify-content-around" role="tablist">
                             <li class="nav-item">
                                 <a class="nav-link active" href="#sale-latest" role="tab"
@@ -110,7 +110,7 @@
 
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane fade show active" id="sale-latest">
-                                <div class="table-responsive">
+                                <div class="table-responsive" style="background-color: white">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -146,7 +146,7 @@
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="purchase-latest">
-                                <div class="table-responsive">
+                                <div class="table-responsive" style="background-color: white">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -182,7 +182,7 @@
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="quotation-latest">
-                                <div class="table-responsive">
+                                <div class="table-responsive" style="background-color: white">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -218,7 +218,7 @@
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane fade" id="payment-latest">
-                                <div class="table-responsive">
+                                <div class="table-responsive" style="background-color: white">
                                     <table class="table">
                                         <thead>
                                             <tr>
@@ -264,9 +264,9 @@
                         </h5>
                         <div class="badge badge-primary">@lang('lang.top') 5</div>
                     </div>
-                    <div class="p-2" style="background-color: #21912a;border-radius: 8px">
+                    <div class="p-2" style="background-color: var(--secondary-color);border-radius: 8px">
 
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="background-color: white">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -305,9 +305,9 @@
                     </div>
 
 
-                    <div class="p-2" style="background-color: #21912a;border-radius: 8px">
+                    <div class="p-2" style="background-color: var(--secondary-color);border-radius: 8px">
 
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="background-color: white">
                             <table class="table">
                                 <thead>
                                     <tr>
@@ -345,9 +345,9 @@
                         </h5>
                         <div class="badge badge-primary">@lang('lang.top') 5</div>
                     </div>
-                    <div class="p-2" style="background-color: #21912a;border-radius: 8px">
+                    <div class="p-2" style="background-color: var(--secondary-color);border-radius: 8px">
 
-                        <div class="table-responsive">
+                        <div class="table-responsive" style="background-color: white">
                             <table class="table">
                                 <thead>
                                     <tr>

@@ -4,14 +4,14 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: #21912A;
+    background-color: var(--secondary-color);
 }
 
 .section-header-pill {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #21912A;
+    background-color: var(--secondary-color);
 }
 
 
@@ -70,7 +70,7 @@
     align-items: center;
     gap: 8px;
     padding: 5px 20px;
-    background-color: #cbe7cc;
+    background-color: var(--primary-color);
     border-radius: 8px;
     outline: none !important;
     border: none !important;
@@ -86,7 +86,7 @@
     outline: none;
     border: none;
     color: white;
-    background-color: #f9c751;
+    background-color: var(--complementary-color-1);
     border-radius: 6px;
     height: 100%;
 }
@@ -98,7 +98,7 @@
 
 #submit-btn,
 .submit-btn {
-    background-color: #21912A;
+    background-color: var(--secondary-color);
     color: white;
     width: 100%;
     border-radius: 6px;
@@ -107,7 +107,7 @@
 }
 
 .btn-main {
-    background-color: #21912A !important;
+    background-color: var(--secondary-color) !important;
     color: white !important;
 }
 
@@ -181,7 +181,7 @@ td {
 .select_product_button {
     border: none;
     outline: none;
-    background-color: #cbe7cc;
+    background-color: var(--primary-color);
     border-radius: 6px;
     padding: 8px 25px;
     margin: 7px;
@@ -191,12 +191,12 @@ td {
 }
 
 .select_product_button:hover {
-    background-color: #21912A;
+    background-color: var(--secondary-color);
     color: white;
 }
 
 .dt-buttons .table-btns {
-    background-color: #f9c751 !important;
+    background-color: var(--complementary-color-1) !important;
     color: white !important;
     border-radius: 6px !important;
     margin: 7px !important;
@@ -205,7 +205,7 @@ td {
 }
 
 .dt-buttons .table-btns:hover {
-    background-color: #21912A !important;
+    background-color: var(--secondary-color) !important;
 }
 
 .count_wrapper {
@@ -227,7 +227,7 @@ td {
 
 .count_title {
     position: relative;
-    background-color: #21912A;
+    background-color: var(--secondary-color);
     color: white;
     padding: 5px 20px;
     font-size: 14px;
@@ -268,7 +268,7 @@ td {
 }
 
 .file--upload>label:hover {
-    border-color: #21912A;
+    border-color: var(--secondary-color);
     background-color: #145d1a;
     color: white !important;
 }
@@ -288,6 +288,6 @@ td {
 }
 
 table button.dropdown-toggle {
-    background-color: #21912A !important;
+    background-color: var(--secondary-color) !important;
     color: white !important;
 }

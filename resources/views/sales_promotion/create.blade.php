@@ -115,7 +115,7 @@
                                         </div>
                                         <div class="col-md-12  ">
                                             <table class="table hide" id="sale_promotion_table_condition">
-                                                <thead style="background-color: #21912a;color: white">
+                                                <thead style="background-color: var(--secondary-color);color: white">
                                                     <tr>
                                                         <th>@lang('lang.name')</th>
                                                         <th>@lang('lang.name')</th>
@@ -140,7 +140,7 @@
                             <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
                                 <div class="col-md-12 product_details_div">
                                     <table class="table" id="sale_promotion_table">
-                                        <thead class="" style="background-color: #21912a;color: white">
+                                        <thead class="" style="background-color: var(--secondary-color);color: white">
                                             <tr>
                                                 <th>@lang('lang.image')</th>
                                                 <th>@lang('lang.name')</th>

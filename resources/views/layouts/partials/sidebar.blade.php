@@ -9,7 +9,7 @@
         <div class="main-menu">
             <ul id="side-main-menu" class="side-menu list-unstyled">
                 @if (!empty($module_settings['dashboard']))
-                    <li><a href="{{ url('/home') }}"> <i
+                    <li class="side_main_menu_link"><a class="link" href="{{ url('/home') }}"> <i
                                 class="dripicons-meter"></i><span>{{ __('lang.dashboard') }}</span></a></li>
                 @endif
                 @if (!empty($module_settings['product_module']))
@@ -321,8 +321,8 @@
                     @if (session('system_mode') != 'restaurant')
                         @if (auth()->user()->can('quotation_for_customers.quotation.view') ||
                                 auth()->user()->can('quotation_for_customers.quotation.create_and_edit'))
-                            <li class="side_main_menu_link"><a href="#quotation_for_customers" aria-expanded="false"
-                                    data-toggle="collapse"> <i
+                            <li class="side_main_menu_link"><a class="link" href="#quotation_for_customers"
+                                    aria-expanded="false" data-toggle="collapse"> <i
                                         class="fa fa-random"></i><span>{{ __('lang.quotation_for_customers') }}</span><span></a>
                                 <ul id="quotation_for_customers"
                                     class="collapse list-unstyled @if (in_array(request()->segment(1), ['quotation'])) show @endif">
@@ -487,7 +487,7 @@
                             auth()->user()->can('cash.add_cash_out.view') ||
                             auth()->user()->can('cash.view_details.create_and_edit') ||
                             auth()->user()->can('cash.view_details.view'))
-                        <li class="side_main_menu_link"><a href="#cash" aria-expanded="false"
+                        <li class="side_main_menu_link"><a class="link" href="#cash" aria-expanded="false"
                                 data-toggle="collapse"> <i
                                     class="fa fa-money"></i><span>{{ __('lang.cash') }}</span><span></a>
                             <ul id="cash"
@@ -1279,8 +1279,8 @@
                             @endcan
                         </ul>
                     </li>
-                    <li class="@if (request()->segment(1) == 'tutorials' && empty(request()->segment(2))) active @endif">
-                        <a href="{{ action('TutorialController@getTutorialsCategoryGuide') }}"><i
+                    <li class="side_main_menu_link @if (request()->segment(1) == 'tutorials' && empty(request()->segment(2))) active @endif">
+                        <a class="link" href="{{ action('TutorialController@getTutorialsCategoryGuide') }}"><i
                                 class="fa fa-info-circle"></i><span>{{ __('lang.tutorials') }}</span></a>
                     </li>
                 @endif

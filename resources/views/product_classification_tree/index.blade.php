@@ -11,9 +11,9 @@
         }
 
         .accordion-toggle {
-            background-color: #cbe7cc;
+            background-color: var(--primary-color);
             color: #222 !important;
-            border: 1px solid #21912A;
+            border: 1px solid var(--secondary-color);
             width: 100%;
             padding: 5px;
             border-radius: 6px;
@@ -25,34 +25,34 @@
         .accordion-inner .accordion-toggle {
 
             color: #fff !important;
-            background-color: #21912A;
+            background-color: var(--secondary-color);
             transition: 0.4s;
         }
 
         .accordion-toggle:hover {
             text-decoration: none;
             color: #fff !important;
-            background-color: #21912A;
+            background-color: var(--secondary-color);
         }
 
         .accordion-toggle:focus {
             text-decoration: none;
             color: #fff !important;
-            background-color: #21912A;
+            background-color: var(--secondary-color);
         }
 
         .accordion-inner .accordion-toggle:hover {
             text-decoration: none;
-            background-color: #cbe7cc;
+            background-color: var(--primary-color);
             color: #222 !important;
-            border: 1px solid #21912A;
+            border: 1px solid var(--secondary-color);
         }
 
         .accordion-inner .accordion-toggle:focus {
             text-decoration: none;
             color: #fff !important;
-            border: 1px solid #21912A;
-            background-color: #21912A
+            border: 1px solid var(--secondary-color);
+            background-color: var(--secondary-color)
         }
     </style>
     <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">

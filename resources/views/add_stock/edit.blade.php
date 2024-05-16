@@ -122,7 +122,7 @@
                                     <div class="search-box modal-input input-group">
                                         <button type="button"
                                             class="btn h-100 d-flex justify-content-center align-items-center"
-                                            style="background-color: #f9c751" id="search_button"><i
+                                            style="background-color: var(--complementary-color-1)" id="search_button"><i
                                                 class="fa fa-search text-white"></i></button>
                                         <input type="text" name="search_product" id="search_product"
                                             placeholder="@lang('lang.enter_product_name_to_print_labels')" style="background-color: transparent"

@@ -4,14 +4,14 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    background-color: #21912A;
+    background-color: var(--secondary-color);
 }
 
 .section-header-pill {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: #21912A;
+    background-color: var(--secondary-color);
 }
 
 
@@ -65,25 +65,35 @@
     align-items: center;
     gap: 8px;
     padding: 5px 20px;
-    background-color: #cbe7cc;
+    background-color: var(--primary-color);
     border-radius: 8px;
     outline: none !important;
     border: none !important;
-    transition: 0.6s;
+    transition: 0.3s;
 }
 
 .toggle-button:hover {
-    color: black !important;
-    background-color: #b4e7b5;
+    color: var(--white) !important;
+    background-color: var(--secondary-color);
+}
+
+.toggle-button:hover .toggle-pill {
+    background-color: var(--white);
 }
 
 .select-button {
     outline: none;
     border: none;
     color: white;
-    background-color: #f9c751;
+    background-color: var(--complementary-color-1);
     border-radius: 6px;
     height: 100%;
+    transition: 0.3s;
+}
+
+.select-button:hover {
+
+    background-color: var(--secondary-color);
 }
 
 .select-button-group {
@@ -93,17 +103,31 @@
 
 #submit-btn,
 .submit-btn {
-    background-color: #21912A;
-    color: white;
+    background-color: var(--secondary-color);
+    color: var(--white);
     width: 100%;
     border-radius: 6px;
     font-weight: 500;
     font-size: 1rem;
+    transition: 0.3s;
 }
 
+#submit-btn:hover {
+    background-color: var(--complementary-color-1);
+}
+
+.submit-btn:hover {
+    background-color: var(--complementary-color-1);
+}
+
+
 .btn-main {
-    background-color: #21912A !important;
+    background-color: var(--secondary-color) !important;
     color: white !important;
+}
+
+.btn-main:hover {
+    background-color: var(--complementary-color-1) !important;
 }
 
 .close {
@@ -168,7 +192,7 @@ td {
 .select_product_button {
     border: none;
     outline: none;
-    background-color: #cbe7cc;
+    background-color: var(--primary-color);
     border-radius: 6px;
     padding: 0px 12px;
     transition: 0.6s;
@@ -177,12 +201,12 @@ td {
 }
 
 .select_product_button:hover {
-    background-color: #21912A;
+    background-color: var(--secondary-color);
     color: white;
 }
 
 .dt-buttons .table-btns {
-    background-color: #f9c751 !important;
+    background-color: var(--complementary-color-1) !important;
     color: white !important;
     border-radius: 6px !important;
     margin: 5px 0 !important;
@@ -190,7 +214,7 @@ td {
 }
 
 .dt-buttons .table-btns:hover {
-    background-color: #21912A !important;
+    background-color: var(--secondary-color) !important;
 }
 
 .count_wrapper {
@@ -212,7 +236,7 @@ td {
 
 .count_title {
     position: relative;
-    background-color: #21912A;
+    background-color: var(--secondary-color);
     color: white;
     padding: 5px 20px;
     font-size: 14px;

@@ -7,7 +7,7 @@
 </style>
 
 @section('content')
-    <section class="m-0 p-0 d-flex pt-5" style="width: 100vw;height: 100vh;background-color: #a0d8a1">
+    <section class="m-0 p-0 d-flex pt-5" style="width: 100vw;height: 100vh;background-color: #var(--primary-color)">
         <div class="col-md-5 d-flex flex-column justify-content-center align-items-center">
             <h1 class="text-white">
                 {{ trans('lang.welcome') }}
@@ -33,7 +33,7 @@
                     style="width: 70%">
                     @csrf
                     <div class="d-flex flex-column mb-3 w-100">
-                        <label style="color: #21912a;font-weight: 700;font-size: 20px" class="mb-1"
+                        <label style="color: var(--secondary-color);font-weight: 700;font-size: 20px" class="mb-1"
                             for="country_code">{{ trans('lang.country_code') }}</label>
                         <select class="form-control selectpicker" name="country_code" data-live-search="true">
                             <option data-countryCode="US" value="1" selected>USA (+1)</option>
@@ -253,32 +253,33 @@
                         </select>
                     </div>
                     <div class="d-flex flex-column mb-3 w-100">
-                        <label style="color: #21912a;font-weight: 700;font-size: 20px" class="mb-1"
+                        <label style="color: var(--secondary-color);font-weight: 700;font-size: 20px" class="mb-1"
                             for="phone_number">{{ trans('lang.phone_number') }}</label>
                         <input id="phone_number" type="phone_number" name="phone_number" required class="input-material"
                             value="" placeholder="{{ trans('lang.phone_number') }}"
-                            style="border: 5px solid #21912a;border-radius: 10px">
+                            style="border: 5px solid var(--secondary-color);border-radius: 10px">
                         @if ($errors->has('phone_number'))
                             <div class="error">{{ $errors->first('phone_number') }}</div>
                         @endif
 
                     </div>
                     <div class="d-flex flex-column mb-3 w-100">
-                        <label style="color: #21912a;font-weight: 700;font-size: 20px" class="mb-1"
+                        <label style="color: var(--secondary-color);font-weight: 700;font-size: 20px" class="mb-1"
                             for="email">{{ trans('lang.email') }}</label>
                         <input id="email" type="email" name="email" required class="input-material"
                             value="" placeholder="{{ trans('lang.email') }}"
-                            style="border: 5px solid #21912a;border-radius: 10px">
+                            style="border: 5px solid var(--secondary-color);border-radius: 10px">
                         @if ($errors->has('email'))
                             <div class="error">{{ $errors->first('email') }}</div>
                         @endif
                     </div>
 
                     <div class="d-flex flex-column mb-3 w-100">
-                        <label style="color: #21912a;font-weight: 700;font-size: 20px" class="mb-1"
+                        <label style="color: var(--secondary-color);font-weight: 700;font-size: 20px" class="mb-1"
                             for="message">{{ trans('lang.message') }}</label>
-                        <textarea name="message" id="message" rows="6" style="border: 5px solid #21912a;border-radius: 10px"
-                            class="form-control input-material" placeholder="@lang('lang.your_message')"></textarea>
+                        <textarea name="message" id="message" rows="6"
+                            style="border: 5px solid var(--secondary-color);border-radius: 10px" class="form-control input-material"
+                            placeholder="@lang('lang.your_message')"></textarea>
                         @if ($errors->has('message'))
                             <div class="error">{{ $errors->first('message') }}</div>
                         @endif

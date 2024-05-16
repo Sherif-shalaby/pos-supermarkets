@@ -164,7 +164,8 @@
 
 
                     <span class="input-group-btn">
-                        <button type="button" style="background-color:#21912A;color: white;border-radius: 6px"
+                        <button type="button"
+                            style="background-color:var(--secondary-color);color: white;border-radius: 6px"
                             class="btn btn-lg plus p-0 p-lg-1">
                             <span class="dripicons-plus"></span>
                         </button>
@@ -227,7 +228,7 @@
                     <div class="d-flex justify-content-center align-items-center">
 
                         <button type="button"
-                            style="border: none;outline: none;background-color:#21912A;color: white;border-radius: 6px"
+                            style="border: none;outline: none;background-color:var(--secondary-color);color: white;border-radius: 6px"
                             class="btn btn-lg" id="search_button"><span class="plus_sign_text">+</span></button>
 
                         <input type="text"

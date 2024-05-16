@@ -14,7 +14,7 @@
     @endphp
 
 
-    <section class="m-0 p-0 d-flex pt-5" style="width: 100vw;height: 100vh;background-color: #a0d8a1">
+    <section class="m-0 p-0 d-flex pt-5" style="width: 100vw;height: 100vh;background-color: var(--primary-color)">
         <div class="col-md-7 d-flex flex-column justify-content-center align-items-center">
             <h1 class="text-white">
                 {{ trans('lang.welcome') }}
@@ -69,18 +69,19 @@
                 <form method="POST" action="{{ route('login') }}" id="login-form" style="width: 60%">
                     @csrf
                     <div class="d-flex flex-column mb-3 w-100">
-                        <label style="color: #21912a;font-weight: 700;font-size: 20px" class="mb-1"
+                        <label style="color: var(--secondary-color);font-weight: 700;font-size: 20px" class="mb-1"
                             for="email">{{ trans('lang.email') }}</label>
                         <input id="email" type="email" name="email" required value=""
-                            placeholder="{{ trans('lang.email') }}" style="border: 7px solid #21912a;border-radius: 10px">
+                            placeholder="{{ trans('lang.email') }}"
+                            style="border: 7px solid var(--secondary-color);border-radius: 10px">
                     </div>
 
                     <div class="d-flex flex-column w-100">
-                        <label style="color: #21912a;font-weight: 700;font-size: 20px" class="mb-1"
+                        <label style="color: var(--secondary-color);font-weight: 700;font-size: 20px" class="mb-1"
                             for="password">{{ trans('lang.password') }}</label>
                         <input id="password" type="password" name="password" required value=""
                             placeholder="{{ trans('lang.password') }}"
-                            style="border: 7px solid #21912a;border-radius: 10px">
+                            style="border: 7px solid var(--secondary-color);border-radius: 10px">
                     </div>
 
                     @if ($errors->has('email'))

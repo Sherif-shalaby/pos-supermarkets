@@ -17,6 +17,27 @@
     @include('layouts.partials.css')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('style')
+    {{-- COLOR --}}
+    <style>
+        :root {
+            --primary-color: #e3f2fd;
+            /* Light Blue */
+            --secondary-color: #27aae2;
+            /* Bright Blue */
+            --tertiary-color: #1565c0;
+            /* Dark Blue */
+            --complementary-color-1: #5bb9b0;
+            /* Muted Blue-Green */
+            --complementary-color-2: #a5d6a7;
+            /* Light Muted Blue-Green */
+            --text-color: #333;
+            /* Dark Gray for Text */
+            --white: #fff;
+            /* Dark Gray for Text */
+            --accent-color: #e57373;
+            /* Soft Muted Red */
+        }
+    </style>
     <style>
         .mCSB_draggerRail {
             width: 16px !important;
@@ -178,12 +199,12 @@
         }
 
         .file--upload>label {
-            color: #21912A;
-            border-color: #21912A;
+            color: var(--secondary-color);
+            border-color: var(--secondary-color);
         }
 
         .file--upload>label:hover {
-            border-color: #21912A;
+            border-color: var(--secondary-color);
             background-color: #145d1a
         }
 
@@ -269,7 +290,7 @@
     @if (request()->segment(1) != 'pos')
         @include('layouts.partials.header')
     @endif
-    <div class="@if (request()->segment(1) != 'pos') page @else pos-page @endif">
+    <div class="@if (request()->segment(1) != 'pos') page @else pos-page active @endif">
         @include('layouts.partials.sidebar')
         <div style="display:none" id="content" class="animate-bottom">
             @foreach ($errors->all() as $message)

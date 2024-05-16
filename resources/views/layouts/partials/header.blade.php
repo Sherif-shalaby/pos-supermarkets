@@ -3,7 +3,7 @@
     $site_title = App\Models\System::getProperty('site_title');
     $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
 @endphp
-<header class="header no-print" style="background-color: #a0d8a1">
+<header class="header no-print" style="background-color: var(--primary-color)">
     <nav class="navbar py-2">
         <div class="container-fluid">
             <div class="navbar-holder d-flex align-items-center justify-content-between">
@@ -83,7 +83,6 @@
                             class="d-flex justify-content-center align-items-center bg-white px-2 btn"
                             style="border-radius: 8px;height: 35px;">
                             <div style="width: 15px;height: 18px;">
-
                                 <img src="{{ asset('front/images/icons Png/hed/Icon awesome-user-alt.png') }}"
                                     alt="" style="width: 100%;height: 100%;">
                             </div>
@@ -143,7 +142,8 @@
 
                     <li class="nav-item"><a id="btnFullscreen" style="border-radius:8px;width: 35px;height: 35px;"
                             class="btn bg-white no-print d-flex justify-content-center align-items-center">
-                            <i class="dripicons-expand m-0"></i></a></li>
+                            <i class="dripicons-expand m-0"></i></a>
+                    </li>
 
                     <li class="nav-item">
                         <button id="power_off_btn" data-toggle="tooltip" data-title="@lang('lang.shut_down')"

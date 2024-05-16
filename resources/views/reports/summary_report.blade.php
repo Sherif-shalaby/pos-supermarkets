@@ -102,7 +102,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.purchase')</h3>
                                                 </th>
 
@@ -137,7 +138,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.sale')</h3>
                                                 </th>
 
@@ -172,7 +174,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.sale_return')</h3>
                                                 </th>
 
@@ -202,7 +205,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.purchase_return')</h3>
                                                 </th>
 
@@ -241,7 +245,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.profit_loss')</h3>
                                                 </th>
 
@@ -272,7 +277,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.profit_loss')</h3>
                                                 </th>
 
@@ -314,7 +320,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.net_profit_net_loss')</h3>
                                                 </th>
 
@@ -364,7 +371,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.payment_receied')</h3>
                                                 </th>
 
@@ -429,7 +437,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.payment_sent')</h3>
                                                 </th>
 
@@ -476,7 +485,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.expense')</h3>
                                                 </th>
 
@@ -502,7 +512,8 @@
                                     <table class="table">
                                         <thead>
                                             <tr>
-                                                <th colspan="2" style="font-size: 1.2 rem; color: #21912a;">
+                                                <th colspan="2"
+                                                    style="font-size: 1.2 rem; color: var(--secondary-color);">
                                                     <h3 style="font-size: 1rem" class="mb-0">@lang('lang.payroll')</h3>
                                                 </th>
 
