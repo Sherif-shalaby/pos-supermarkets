@@ -23,7 +23,7 @@ nav.navbar {
 
 @media (min-width:992px) {
     .height-responsive {
-        height: 30px;
+        height: 45px;
         font-size: 16px;
     }
 
@@ -128,14 +128,15 @@ nav.navbar {
 
 @media (min-width:992px) {
     .image-responsive {
-        width: 37px;
-        height: 37px;
+        width: 40px;
+        height: 40px;
     }
 }
 
 .image-responsive {
-    width: 25px;
-    height: 25px;
+    width: 40px;
+    height: 40px;
+
 }
 
 .filterLabel {

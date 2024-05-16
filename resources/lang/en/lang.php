@@ -1474,5 +1474,7 @@ return [
     'add_new' => "Add New",
     'sell_current_stock_value' => 'Current Stock Value (sell price)',
     'login' => 'Log in',
-    'welcome' => 'Welcome'
+    'welcome' => 'Welcome',
+    'classification' => 'Classification',
+
 ];

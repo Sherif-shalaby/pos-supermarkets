@@ -29,8 +29,8 @@ nav.navbar a.menu-btn:hover {
 .side-navbar li a:hover,
 .side-navbar li.active>a,
 .side-navbar li a[aria-expanded="true"] {
-    background: #f8f8f8;
-    color: #21912A;
+    /* background: #f8f8f8;
+    color: #21912A; */
     text-decoration: none;
 }
 
@@ -645,7 +645,7 @@ section {
 }
 
 .side-navbar li a {
-    padding: 5px 10px;
+    /* padding: 5px 10px; */
 }
 
 .side-navbar li a i {
@@ -1211,7 +1211,7 @@ div.has-error>.form-text {
     background-color: #fff;
     bottom: 0;
     left: 0;
-    padding: 0 10px;
+    padding: 10px;
     position: fixed;
     z-index: 999;
 }

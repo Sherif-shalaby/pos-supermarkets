@@ -1460,4 +1460,5 @@ return [
     'login' => 'تسجيل الدخول',
     'welcome' => 'اهلا و سهلا',
     'invoice' => 'الفاتورة',
+    'classification' => 'تصنيف',
 ];

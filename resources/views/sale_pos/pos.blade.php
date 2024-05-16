@@ -130,7 +130,10 @@
                                             <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
                                                 user="menu">
                                                 @php
-                                                    $employee = App\Models\Employee::where('user_id', Auth::user()->id)->first();
+                                                    $employee = App\Models\Employee::where(
+                                                        'user_id',
+                                                        Auth::user()->id,
+                                                    )->first();
                                                 @endphp
                                                 <li style="text-align: center">
                                                     <img src="@if (!empty($employee->getFirstMediaUrl('employee_photo'))) {{ $employee->getFirstMediaUrl('employee_photo') }}@else{{ asset('images/default.jpg') }} @endif"
@@ -321,7 +324,7 @@
                                     color: #373737;
                                                 box-shadow: 0 8px 6px -5px #bbb;
                                     padding: 12px;
-                                    width: fit-content;
+                                    width: 100%;
                                    "
                                                 data-toggle="modal" data-target="#delivery-cost-modal">
 
@@ -341,7 +344,7 @@
                                     color: #373737;
                                                 box-shadow: 0 8px 6px -5px #bbb;
                                     padding: 12px;
-                                    width: fit-content;
+                                    width: 100%;
                                    ">
                                                 <svg xmlns="http://www.w3.org/2000/svg" height="1.5em"
                                                     viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -718,7 +721,9 @@
 
                                                 <div class="col-6 font-responsive" style="padding: 0">
                                                     @php
-                                                        $default_invoice_toc = App\Models\System::getProperty('invoice_terms_and_conditions');
+                                                        $default_invoice_toc = App\Models\System::getProperty(
+                                                            'invoice_terms_and_conditions',
+                                                        );
                                                         if (!empty($default_invoice_toc)) {
                                                             $toc_hidden = $default_invoice_toc;
                                                         } else {
@@ -792,7 +797,7 @@
 
                                     <div class="card">
 
-                                        <div class="d-flex flex-column flex-lg-row mx-auto mb-1" style="width: 80%">
+                                        <div class="d-flex flex-column flex-lg-row mx-auto py-2 mb-1" style="width: 80%">
 
                                             <div
                                                 class="col-lg-6 d-flex justify-content-between align-items-center mb-1 mb-lg-0">
@@ -804,7 +809,7 @@
                                                         box-shadow: 0 8px 6px -5px #bbb ;
                                                         width: 100%;">
                                                     <span
-                                                        class="totals-title d-flex justify-content-center align-items-center height-responsive pl-2 pl-lg-0 promotion-padding"
+                                                        class="totals-title d-flex justify-content-center align-items-center height-responsive pl-2 pl-lg-2 promotion-padding"
                                                         style="background-color: #21912A;
                                                 width: fit-content;
                                                 height: 100%;
@@ -951,9 +956,10 @@
 
                         <div class="payment-options row table_room_hide"
                             style=" width: @if (session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket') 100%; @else 50%; @endif">
-                            <div class="col-md-12 d-flex justify-content-center align-items-center mb-3  @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif"
+                            <div class="col-md-12 flex-wrap d-flex justify-content-start justify-content-lg-center align-items-center mb-3  @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif"
                                 style="font-size: 16px;font-weight: 600">
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="cash"
                                         style="background: #21912A;display: flex;justify-content: center;gap: 10px;"
                                         type="button" class="btn btn-custom w-75 pos-button payment-btn"
@@ -967,7 +973,8 @@
                                         @lang('lang.pay')
                                     </button>
                                 </div>
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="coupon" style="background: #21912A" type="button"
                                         class="btn  w-75 pos-button btn-custom" data-toggle="modal"
                                         data-target="#coupon_modal" id="coupon-btn"><i class="fa fa-tag"></i>
@@ -976,7 +983,8 @@
 
 
                                 @if (session('system_mode') != 'restaurant')
-                                    <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                    <div
+                                        class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                         <button data-method="paypal"
                                             style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;font-size: 10px"
                                             type="button" class="btn btn-custom w-75 pos-button  payment-btn"
@@ -991,7 +999,8 @@
                                         </button>
                                     </div>
                                 @endif
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="draft"
                                         style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"
                                         type="button" data-toggle="modal" data-target="#sale_note_modal"
@@ -1004,7 +1013,8 @@
                                         @lang('lang.draft')
                                     </button>
                                 </div>
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button style="background-color: #ff0000;" type="button"
                                         class="btn  w-75 pos-button btn-custom" id="cancel-btn"
                                         onclick="return confirmCancel()"><i class="fa fa-close"></i>
@@ -1012,8 +1022,9 @@
                                 </div>
                             </div>
                             <div
-                                class="col-md-12 d-flex justify-content-center align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                class="col-md-12 flex-wrap d-flex justify-content-start justify-content-lg-center align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button
                                         style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"
                                         type="button" class="btn  w-75 pos-button btn-custom"
@@ -1027,7 +1038,8 @@
                                     </button>
                                 </div>
 
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="online-order"
                                         style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"type="button"
                                         class="btn w-75 pos-button  btn-custom" id="view-online-order-btn"
@@ -1041,7 +1053,8 @@
                                     </button>
                                 </div>
 
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="pay-later"
                                         style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"
                                         type="button" class="btn  w-75 pos-button btn-custom" id="pay-later-btn">
@@ -1053,7 +1066,8 @@
                                         @lang('lang.pay_later')
                                     </button>
                                 </div>
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="draft"
                                         style="background-color: #21912A;display: flex;justify-content: center;gap: 10px;"
                                         type="button" class="btn  w-75 pos-button  btn-custom" id="view-draft-btn"
@@ -1066,7 +1080,8 @@
                                         @lang('lang.view_draft')
                                     </button>
                                 </div>
-                                <div class="col-md-2 d-flex justify-content-center align-items-center">
+                                <div
+                                    class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                     <button data-method="cash" style="background: #21912A" type="button"
                                         class="btn w-75 pos-button btn-custom" id="quick-pay-btn"><i
                                             class="fa fa-money"></i>

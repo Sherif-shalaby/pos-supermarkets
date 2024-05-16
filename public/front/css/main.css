@@ -162,12 +162,20 @@
 
 th {
     padding: 5px !important;
-    font-size: 11px;
+    font-size: 12px;
+    font-weight: 700;
+    min-width: 85px;
     text-align: center;
+    color: #111;
+    background-color: #ececec !important;
 }
 
 td {
     padding: .25rem !important;
+    font-size: 14px;
+    font-weight: 700;
+    vertical-align: middle !important;
+    text-align: center;
 }
 
 .select_product_button {
@@ -175,7 +183,8 @@ td {
     outline: none;
     background-color: #cbe7cc;
     border-radius: 6px;
-    padding: 0px 12px;
+    padding: 8px 25px;
+    margin: 7px;
     transition: 0.6s;
     font-size: 14px;
     font-weight: 600;
@@ -190,8 +199,9 @@ td {
     background-color: #f9c751 !important;
     color: white !important;
     border-radius: 6px !important;
-    margin: 5px 0 !important;
+    margin: 7px !important;
     transition: 0.6s;
+    padding: 8px 15px;
 }
 
 .dt-buttons .table-btns:hover {
@@ -275,4 +285,9 @@ td {
     height: 3px;
     background-color: #dadada;
     margin: auto;
+}
+
+table button.dropdown-toggle {
+    background-color: #21912A !important;
+    color: white !important;
 }
