@@ -2432,7 +2432,7 @@ a.text-primary:hover {
 .dropdown-menu {
     z-index: 1000;
     min-width: 10rem;
-    padding: 1rem 0.5rem;
+    padding: 0.5rem;
     margin: 0.125rem 0 0;
     font-size: 13px;
     line-height: 2;

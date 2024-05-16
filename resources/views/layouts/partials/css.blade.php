@@ -41,7 +41,27 @@
 
 <!-- Custom stylesheet - for your changes-->
 <link rel="stylesheet" href="{{ asset('css/custom-default.css') }}" type="text/css" id="custom-style">
-
+{{-- COLOR --}}
+<style>
+    :root {
+        --primary-color: #e3f2fd;
+        /* Light Blue */
+        --secondary-color: #27aae2;
+        /* Bright Blue */
+        --tertiary-color: #1565c0;
+        /* Dark Blue */
+        --complementary-color-1: #5bb9b0;
+        /* Muted Blue-Green */
+        --complementary-color-2: #a5d6a7;
+        /* Light Muted Blue-Green */
+        --text-color: #333;
+        /* Dark Gray for Text */
+        --white: #fff;
+        /* Dark Gray for Text */
+        --accent-color: #e57373;
+        /* Soft Muted Red */
+    }
+</style>
 <style>
     .bs-searchbox .form-control {
         width: 100% !important;

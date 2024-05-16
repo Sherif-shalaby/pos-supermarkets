@@ -99,7 +99,7 @@ input.form-control-custom:checked+label::before {
 }
 
 .btn-primary {
-    color: color-yiq(var(--secondary-color));
+    color: var(--white);
     background-color: var(--secondary-color);
     border-color: var(--secondary-color);
 }
@@ -583,8 +583,8 @@ th span.number-in-words {
 }
 
 .btn-primary:hover {
-    background-color: #6244a6;
-    border-color: #6244a6;
+    background-color: var(--complementary-color-1);
+    border-color: var(--complementary-color-1);
 }
 
 a:hover {
@@ -821,6 +821,11 @@ nav.navbar .nav-item li.notifications a i {
     text-align: right;
 }
 
+.dropdown-menu.edit-options li {
+    border-bottom: 1px solid #eee;
+    padding: 0px;
+}
+
 .dropdown-menu.edit-options li a,
 .dropdown-menu.edit-options li .btn-link {
     color: var(--secondary-color);
@@ -828,6 +833,7 @@ nav.navbar .nav-item li.notifications a i {
     text-align: left;
     text-decoration: none;
     width: 100%;
+    padding: 6px;
 }
 
 .dropdown-menu.edit-options li a:hover,

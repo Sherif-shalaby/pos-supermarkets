@@ -2,6 +2,47 @@
 @section('title', __('lang.raw_materials'))
 @section('style')
     <link rel="stylesheet" type="text/css" href="{{ url('front/css/main.css') }}">
+    <style>
+        .wrapper1,
+        .wrapper2 {
+            overflow-x: scroll;
+            overflow-y: hidden;
+        }
+
+        .wrapper1 {
+            height: 20px;
+        }
+
+        .div1 {
+            height: 20px;
+        }
+
+        .div2 {
+            overflow: auto;
+            /* width: fit-content; */
+        }
+
+
+
+        .wrapper1 {
+            margin-top: 28px;
+        }
+
+        .wrapper2 {
+            margin-bottom: 36px;
+        }
+
+        @media(max-width:767px) {
+            .wrapper1 {
+                margin-top: 95px;
+            }
+        }
+
+
+        .table-scroll-wrapper {
+            width: fit-content !important;
+        }
+    </style>
 @endsection
 @section('content')
     <section class="forms py-0">
@@ -37,7 +78,7 @@
                                     'variation_id',
                                     __('lang.product') .
                                         ':
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        (' .
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        (' .
                                         __('lang.that_raw_materials_are_used_for') .
                                         ')',
                                     [
@@ -46,7 +87,7 @@
                                 ) !!}
                                 {!! Form::select('variation_id', $products, request()->variation_id, [
                                     'class' => 'form-control filter_product
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        selectpicker',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        selectpicker',
                                     'data-live-search' => 'true',
                                     'placeholder' => __('lang.all'),
                                 ]) !!}
@@ -60,8 +101,8 @@
                                 ]) !!}
                                 {!! Form::select('brand_id', $brands, request()->brand_id, [
                                     'class' => 'form-control
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        filter_product
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        selectpicker',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        filter_product
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        selectpicker',
                                     'data-live-search' => 'true',
                                     'placeholder' => __('lang.all'),
                                 ]) !!}
@@ -89,7 +130,7 @@
                                 ]) !!}
                                 {!! Form::select('created_by', $users, request()->created_by, [
                                     'class' => 'form-control filter_product
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        selectpicker',
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        selectpicker',
                                     'data-live-search' => 'true',
                                     'placeholder' => __('lang.all'),
                                 ]) !!}
@@ -147,46 +188,55 @@
 
             <div class="card my-3">
                 <div class="card-body p-2">
-                    <div class="table-responsive">
-                        <table id="raw_material_table" class="table ajax_view" style="width: auto">
-                            <thead>
-                                <tr>
-                                    <th>@lang('lang.image')</th>
-                                    <th>@lang('lang.name')</th>
-                                    <th>@lang('lang.product_code')</th>
-                                    <th>@lang('lang.purchase_history')</th>
-                                    <th>@lang('lang.batch_number')</th>
-                                    <th>@lang('lang.brand')</th>
-                                    <th class="sum">@lang('lang.current_stock')</th>
-                                    <th>@lang('lang.unit')</th>
-                                    <th>@lang('lang.manufacturing_date')</th>
-                                    <th>@lang('lang.expiry_date')</th>
-                                    <th>@lang('lang.created_by')</th>
-                                    <th>@lang('lang.edited_by')</th>
-                                    <th>@lang('lang.products')</th>
-                                    <th>@lang('lang.supplier')</th>
-                                    @can('product_module.purchase_price.view')
-                                        <th>@lang('lang.purchase_price')</th>
-                                    @endcan
-                                    <th class="notexport">@lang('lang.action')</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                    <div class="wrapper1 ">
+                        <div class="div1"></div>
+                    </div>
+                    <div class="wrapper2">
+                        <div class="div2 table-scroll-wrapper">
+                            <!-- content goes here -->
+                            <div style="min-width: 2000px;max-height: 70vh;min-height:60vh;overflow: auto">
+                                <table id="raw_material_table" class="table ajax_view table-hover"
+                                    style="width: 100% !important">
+                                    <thead>
+                                        <tr>
+                                            <th>@lang('lang.image')</th>
+                                            <th>@lang('lang.name')</th>
+                                            <th>@lang('lang.product_code')</th>
+                                            <th>@lang('lang.purchase_history')</th>
+                                            <th>@lang('lang.batch_number')</th>
+                                            <th>@lang('lang.brand')</th>
+                                            <th class="sum">@lang('lang.current_stock')</th>
+                                            <th>@lang('lang.unit')</th>
+                                            <th>@lang('lang.manufacturing_date')</th>
+                                            <th>@lang('lang.expiry_date')</th>
+                                            <th>@lang('lang.created_by')</th>
+                                            <th>@lang('lang.edited_by')</th>
+                                            <th>@lang('lang.products')</th>
+                                            <th>@lang('lang.supplier')</th>
+                                            @can('product_module.purchase_price.view')
+                                                <th>@lang('lang.purchase_price')</th>
+                                            @endcan
+                                            <th class="notexport">@lang('lang.action')</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <th style="text-align: right">@lang('lang.total')</th>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <th style="text-align: right">@lang('lang.total')</th>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -399,5 +449,31 @@
             $('.filter_product').selectpicker('refresh')
             raw_material_table.ajax.reload();
         })
+    </script>
+
+    <script>
+        // Select both elements by their class names
+        var div1 = document.querySelector('.div1');
+        var div2 = document.querySelector('.div2');
+
+        // Get the width of the "div2" element
+        var div2Width = div2.offsetWidth;
+
+        // Set the width of "div1" to the width of "div2"
+        div1.style.width = div2Width + 'px';
+        // the problem##################################
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var wrapper1 = document.querySelector(".wrapper1");
+            var wrapper2 = document.querySelector(".wrapper2");
+
+            wrapper1.addEventListener("scroll", function() {
+                wrapper2.scrollLeft = wrapper1.scrollLeft;
+            });
+
+            wrapper2.addEventListener("scroll", function() {
+                wrapper1.scrollLeft = wrapper2.scrollLeft;
+            });
+        });
     </script>
 @endsection

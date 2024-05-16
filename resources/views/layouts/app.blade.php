@@ -17,27 +17,7 @@
     @include('layouts.partials.css')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('style')
-    {{-- COLOR --}}
-    <style>
-        :root {
-            --primary-color: #e3f2fd;
-            /* Light Blue */
-            --secondary-color: #27aae2;
-            /* Bright Blue */
-            --tertiary-color: #1565c0;
-            /* Dark Blue */
-            --complementary-color-1: #5bb9b0;
-            /* Muted Blue-Green */
-            --complementary-color-2: #a5d6a7;
-            /* Light Muted Blue-Green */
-            --text-color: #333;
-            /* Dark Gray for Text */
-            --white: #fff;
-            /* Dark Gray for Text */
-            --accent-color: #e57373;
-            /* Soft Muted Red */
-        }
-    </style>
+
     <style>
         .mCSB_draggerRail {
             width: 16px !important;
@@ -363,6 +343,8 @@
         <!-- This will be printed -->
         <section class="invoice print_closing_cash print-only" id="print_closing_cash"> </section>
     </div>
+
+
 
     <script type="text/javascript">
         base_path = "{{ url('/') }}";
