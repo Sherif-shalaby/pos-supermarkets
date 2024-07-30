@@ -20,20 +20,20 @@
             <div class="form-group">
                 {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ), 'required'
-                ]);
+                ])
                 !!}
             </div>
             <div class="form-group">
                 {!! Form::label('description', __( 'lang.description' )) !!}
                 {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => __(
                 'lang.description' )
-                ]);
+                ])
                 !!}
             </div>
             <div class="form-group">
                 {!! Form::label('link', __( 'lang.link' ) . ':*') !!}
                 {!! Form::text('link', null, ['class' => 'form-control', 'placeholder' => __( 'lang.link' ), 'required'
-                ]);
+                ])
                 !!}
             </div>
             {{-- <div class="form-group">

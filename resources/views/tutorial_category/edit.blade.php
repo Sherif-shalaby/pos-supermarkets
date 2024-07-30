@@ -1,7 +1,8 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-        {!! Form::open(['url' => action('TutorialCategoryController@update', $tutorial_category->id), 'method' => 'put', 'id'
+        {!! Form::open(['url' => action('TutorialCategoryController@update', $tutorial_category->id), 'method' => 'put',
+        'id'
         =>'tutorial_add_form', 'files' => true ])
         !!}
 
@@ -15,17 +16,19 @@
         <div class="modal-body">
             <div class="form-group">
                 {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
-                {!! Form::text('name', $tutorial_category->name, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ),
+                {!! Form::text('name', $tutorial_category->name, ['class' => 'form-control', 'placeholder' => __(
+                'lang.name' ),
                 'required'
-                ]);
+                ])
                 !!}
             </div>
             <div class="form-group">
                 {!! Form::label('description', __( 'lang.description' )) !!}
-                {!! Form::textarea('description', $tutorial_category->description, ['class' => 'form-control', 'placeholder' =>
+                {!! Form::textarea('description', $tutorial_category->description, ['class' => 'form-control',
+                'placeholder' =>
                 __(
                 'lang.description' )
-                ]);
+                ])
                 !!}
             </div>
 

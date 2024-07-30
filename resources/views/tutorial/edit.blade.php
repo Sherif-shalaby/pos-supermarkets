@@ -23,7 +23,7 @@
                 {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
                 {!! Form::text('name', $tutorial->name, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ),
                 'required'
-                ]);
+                ])
                 !!}
             </div>
             <div class="form-group">
@@ -31,14 +31,14 @@
                 {!! Form::textarea('description', $tutorial->description, ['class' => 'form-control', 'placeholder' =>
                 __(
                 'lang.description' )
-                ]);
+                ])
                 !!}
             </div>
             <div class="form-group">
                 {!! Form::label('link', __( 'lang.link' ) . ':*') !!}
                 {!! Form::text('link', $tutorial->link, ['class' => 'form-control', 'placeholder' => __( 'lang.link' ),
                 'required'
-                ]);
+                ])
                 !!}
             </div>
             {{-- <div class="form-group">
@@ -67,5 +67,5 @@
 </div><!-- /.modal-dialog -->
 
 <script>
-  $('.selectpicker').selectpicker('refresh');
+    $('.selectpicker').selectpicker('refresh');
 </script>

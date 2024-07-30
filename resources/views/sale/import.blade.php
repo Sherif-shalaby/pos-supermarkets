@@ -101,7 +101,7 @@
                                     {!! Form::text('discount_value', null, ['class' => 'form-control', 'placeholder' =>
                                     __(
                                     'lang.discount_value' ),
-                                    'required' ]);
+                                    'required' ])
                                     !!}
                                 </div>
                             </div>

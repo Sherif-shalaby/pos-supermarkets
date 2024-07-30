@@ -16,7 +16,7 @@
                 {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
                 {!! Form::text('name', $customer_size->name, ['class' => 'form-control', 'placeholder' => __(
                 'lang.name' ), 'required'
-                ]);
+                ])
                 !!}
             </div>
             <div class="row">
@@ -36,13 +36,15 @@
                                     <label for="">{{$value}}</label>
                                 </td>
                                 <td>
-                                    <input type="number" data-name="{{$key}}" name="{{$key}}[cm]" class="form-control cm_size" step="any"
+                                    <input type="number" data-name="{{$key}}" name="{{$key}}[cm]"
+                                        class="form-control cm_size" step="any"
                                         value="{{@num_format($customer_size->$key['cm'])}}"
                                         placeholder="@lang('lang.cm')">
                                 </td>
                                 <td>
-                                    <input type="number" data-name="{{$key}}" name="{{$key}}[inches]" class="form-control inches_size"
-                                        step="any" value="{{@num_format($customer_size->$key['inches'])}}"
+                                    <input type="number" data-name="{{$key}}" name="{{$key}}[inches]"
+                                        class="form-control inches_size" step="any"
+                                        value="{{@num_format($customer_size->$key['inches'])}}"
                                         placeholder="@lang('lang.inches')">
                                 </td>
                             </tr>
@@ -66,7 +68,7 @@
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 <script>
-$(document).on('change', '.cm_size', function(){
+    $(document).on('change', '.cm_size', function(){
     let row = $(this).closest('tr');
     let cm_size = __read_number(row.find('.cm_size'));
     let inches_size = cm_size * 0.393701;
