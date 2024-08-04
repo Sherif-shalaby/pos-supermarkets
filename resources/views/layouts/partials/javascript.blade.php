@@ -1,5 +1,5 @@
 @php
-    $moment_time_format = App\Models\System::getProperty('time_format') == '12' ? 'hh:mm A' : 'HH:mm';
+$moment_time_format = App\Models\System::getProperty('time_format') == '12' ? 'hh:mm A' : 'HH:mm';
 @endphp
 <script>
     var moment_time_format = "{{ $moment_time_format }}";
@@ -29,8 +29,8 @@
 <script type="text/javascript" src="{{ asset('vendor/jquery.cookie/jquery.cookie.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/jquery-validation/jquery.validate.min.js') }}"></script>
-<script type="text/javascript"
-    src="{{ asset('vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+{{-- <script type="text/javascript"
+    src="{{ asset('vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script> --}}
 <script type="text/javascript" src="{{ asset('js/charts-custom.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/front.js') }}"></script>
 <script type="text/javascript" src="{{ asset('vendor/daterange/js/knockout-3.4.2.js') }}"></script>

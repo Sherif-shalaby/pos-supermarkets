@@ -1461,4 +1461,6 @@ return [
     'welcome' => 'اهلا و سهلا',
     'invoice' => 'الفاتورة',
     'classification' => 'تصنيف',
+    'products_filter' => "فلاتر المنتجات",
+    'products_other_filter' => "فلاتر اخرى للمنتجات"
 ];

@@ -1476,5 +1476,6 @@ return [
     'login' => 'Log in',
     'welcome' => 'Welcome',
     'classification' => 'Classification',
-
+    'products_filter' => "Products Filter",
+    'products_other_filter' => "Products Other Filter"
 ];

@@ -1,7 +1,7 @@
 @php
-    $logo = App\Models\System::getProperty('logo');
-    $site_title = App\Models\System::getProperty('site_title');
-    $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
+$logo = App\Models\System::getProperty('logo');
+$site_title = App\Models\System::getProperty('site_title');
+$watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
 @endphp
 <header class="header no-print" style="background-color: var(--primary-color)">
     <nav class="navbar py-2">
@@ -15,7 +15,7 @@
                 </a>
                 {{-- <span class="brand-big">
                     @if ($logo)
-                        <img src="{{ asset('/uploads/' . $logo) }}" width="50">&nbsp;&nbsp;
+                    <img src="{{ asset('/uploads/' . $logo) }}" width="50">&nbsp;&nbsp;
                     @endif
                     <a href="{{ url('/') }}">
                         <h1 class="d-inline">{{ $site_title }}</h1>
@@ -37,24 +37,24 @@
                         </a>
                     </li>
                     @can('sale.pos.create_and_edit')
-                        <li class="nav-item">
-                            <a class="d-flex justify-content-center align-items-center bg-white px-2 btn"
-                                href="{{ action('SellPosController@create') }}" style="border-radius: 8px;height: 35px;">
-                                <div style="width: 13px;height: 18px;" class="mb-1">
+                    <li class="nav-item">
+                        <a class="d-flex justify-content-center align-items-center bg-white px-2 btn"
+                            href="{{ action('SellPosController@create') }}" style="border-radius: 8px;height: 35px;">
+                            <div style="width: 26px;height: 26px;" class="mb-0">
 
-                                    <img src="{{ asset('front/images/icons Png/hed/Icon awesome-shopping-bag.png') }}"
-                                        alt="" style="width: 100%;height: 100%;">
-                                </div>
-                                <span class="ml-2 text-bold">@lang('lang.pos')</span>
-                            </a>
-                        </li>
+                                <img src="{{ asset('front/images/cash-machine.png') }}" alt=""
+                                    style="width: 100%;height: 100%;">
+                            </div>
+                            <span class="ml-2 text-bold">@lang('lang.pos')</span>
+                        </a>
+                    </li>
                     @endcan
                     @php
-                        $config_languages = config('constants.langs');
-                        $languages = [];
-                        foreach ($config_languages as $key => $value) {
-                            $languages[$key] = $value['full_name'];
-                        }
+                    $config_languages = config('constants.langs');
+                    $languages = [];
+                    foreach ($config_languages as $key => $value) {
+                    $languages[$key] = $value['full_name'];
+                    }
                     @endphp
                     <li class="nav-item">
                         <a rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true"
@@ -65,11 +65,10 @@
                         </a>
                         <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                             @foreach ($languages as $key => $lang)
-                                <li>
-                                    <a href="{{ action('GeneralController@switchLanguage', $key) }}"
-                                        class="btn btn-link">
-                                        {{ $lang }}</a>
-                                </li>
+                            <li>
+                                <a href="{{ action('GeneralController@switchLanguage', $key) }}" class="btn btn-link">
+                                    {{ $lang }}</a>
+                            </li>
                             @endforeach
                         </ul>
                     </li>
@@ -83,13 +82,13 @@
                             class="d-flex justify-content-center align-items-center bg-white px-2 btn"
                             style="border-radius: 8px;height: 35px;">
                             <div style="width: 15px;height: 18px;">
-                                <img src="{{ asset('front/images/icons Png/hed/Icon awesome-user-alt.png') }}"
-                                    alt="" style="width: 100%;height: 100%;">
+                                <img src="{{ asset('front/images/icons Png/hed/Icon awesome-user-alt.png') }}" alt=""
+                                    style="width: 100%;height: 100%;">
                             </div>
                         </a>
                         <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
                             @php
-                                $employee = App\Models\Employee::where('user_id', Auth::user()->id)->first();
+                            $employee = App\Models\Employee::where('user_id', Auth::user()->id)->first();
                             @endphp
                             <li style="text-align: center">
                                 <img src="@if (!empty($employee->getFirstMediaUrl('employee_photo'))) {{ $employee->getFirstMediaUrl('employee_photo') }}@else{{ asset('images/default.jpg') }} @endif"
@@ -100,20 +99,20 @@
                                     @lang('lang.profile')</a>
                             </li>
                             @can('settings.general_settings.view')
-                                <li>
-                                    <a href="{{ action('SettingController@getGeneralSetting') }}"><i
-                                            class="dripicons-gear"></i> @lang('lang.settings')</a>
-                                </li>
+                            <li>
+                                <a href="{{ action('SettingController@getGeneralSetting') }}"><i
+                                        class="dripicons-gear"></i> @lang('lang.settings')</a>
+                            </li>
                             @endcan
                             <li>
                                 <a href="{{ url('my-transactions/' . date('Y') . '/' . date('m')) }}"><i
                                         class="dripicons-swap"></i> @lang('lang.my_transactions')</a>
                             </li>
                             @if (Auth::user()->role_id != 5)
-                                <li>
-                                    <a href="{{ url('my-holidays/' . date('Y') . '/' . date('m')) }}"><i
-                                            class="dripicons-vibrate"></i> @lang('lang.my_holidays')</a>
-                                </li>
+                            <li>
+                                <a href="{{ url('my-holidays/' . date('Y') . '/' . date('m')) }}"><i
+                                        class="dripicons-vibrate"></i> @lang('lang.my_holidays')</a>
+                            </li>
                             @endif
 
                             <li>
@@ -129,7 +128,8 @@
                     </li>
 
                     <li class="nav-item">
-                        {{-- <a target="_blank" href="{{action('ContactUsController@getUserContactUs')}}" id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
+                        {{-- <a target="_blank" href="{{action('ContactUsController@getUserContactUs')}}"
+                            id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
                             style="background-image: url('{{asset('images/handshake.jpg')}}');" class="btn no-print">
                         </a> --}}
                         <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $watsapp_numbers }}"
