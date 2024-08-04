@@ -497,7 +497,8 @@ button:focus,
 }
 
 .bootstrap-select .btn-link {
-    color: var(--secondary-color);
+    color: var(--tertiary-color);
+    font-weight: 500;
 }
 
 .form-control,
