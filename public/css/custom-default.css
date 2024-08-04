@@ -140,7 +140,7 @@ input.form-control-custom:checked+label::before {
 }
 
 a {
-    color: var(--secondary-color);
+    color: var(--tertiary-color);
     text-decoration: none;
 }
 
@@ -829,7 +829,7 @@ nav.navbar .nav-item li.notifications a i {
 
 .dropdown-menu.edit-options li a,
 .dropdown-menu.edit-options li .btn-link {
-    color: var(--secondary-color);
+    color: var(--tertiary-color);
     display: block;
     text-align: left;
     text-decoration: none;

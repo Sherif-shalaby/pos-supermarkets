@@ -13,14 +13,15 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                         style="width: 100%;height: 50%;">
                     {{-- <i class="fa fa-bars" style="margin-top: 10px !important;"> </i> --}}
                 </a>
-                {{-- <span class="brand-big">
+                <span class="brand-big">
                     @if ($logo)
                     <img src="{{ asset('/uploads/' . $logo) }}" width="50">&nbsp;&nbsp;
                     @endif
                     <a href="{{ url('/') }}">
-                        <h1 class="d-inline">{{ $site_title }}</h1>
+                        <h1 style="font-weight: 400" class="d-inline">{{ $site_title }}</h1>
                     </a>
-                </span> --}}
+                </span>
+
 
                 <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
                     <li class="nav-item">
@@ -36,6 +37,29 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                             <span class="ml-2 text-bold">@lang('lang.invoice')</span>
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        {{-- <a target="_blank" href="{{action('ContactUsController@getUserContactUs')}}"
+                            id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
+                            style="background-image: url('{{asset('images/handshake.jpg')}}');" class="btn no-print">
+                        </a> --}}
+                        <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $watsapp_numbers }}"
+                            id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
+                            style="border-radius:8px;width: 35px;height: 35px;"
+                            class="btn bg-white no-print d-flex justify-content-center align-items-center">
+                            <img style="width: 100%" src="{{ asset('images/watsapp.jpg') }}" alt="watsapp">
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <button id="power_off_btn" data-toggle="tooltip" data-title="@lang('lang.shut_down')"
+                            style="border-radius:8px;width: 35px;height: 35px;"
+                            class="btn hide bg-danger text-white no-print d-flex justify-content-center align-items-center">
+                            <i class="fa fa-power-off"></i></button>
+                    </li>
+
+
+
                     @can('sale.pos.create_and_edit')
                     <li class="nav-item">
                         <a class="d-flex justify-content-center align-items-center bg-white px-2 btn"
@@ -49,6 +73,14 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                         </a>
                     </li>
                     @endcan
+
+                    <li class="nav-item"><a id="btnFullscreen" style="border-radius:8px;width: 35px;height: 35px;"
+                            class="btn bg-white no-print d-flex justify-content-center align-items-center">
+                            <i class="dripicons-expand m-0"></i></a>
+                    </li>
+
+                    @include('layouts.partials.notification_list')
+
                     @php
                     $config_languages = config('constants.langs');
                     $languages = [];
@@ -73,7 +105,6 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                         </ul>
                     </li>
 
-                    @include('layouts.partials.notification_list')
 
 
                     <li class="nav-item">
@@ -127,30 +158,6 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                         </ul>
                     </li>
 
-                    <li class="nav-item">
-                        {{-- <a target="_blank" href="{{action('ContactUsController@getUserContactUs')}}"
-                            id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
-                            style="background-image: url('{{asset('images/handshake.jpg')}}');" class="btn no-print">
-                        </a> --}}
-                        <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $watsapp_numbers }}"
-                            id="contact_us_btn" data-toggle="tooltip" data-title="@lang('lang.contact_us')"
-                            style="border-radius:8px;width: 35px;height: 35px;"
-                            class="btn bg-white no-print d-flex justify-content-center align-items-center">
-                            <img style="width: 100%" src="{{ asset('images/watsapp.jpg') }}" alt="watsapp">
-                        </a>
-                    </li>
-
-                    <li class="nav-item"><a id="btnFullscreen" style="border-radius:8px;width: 35px;height: 35px;"
-                            class="btn bg-white no-print d-flex justify-content-center align-items-center">
-                            <i class="dripicons-expand m-0"></i></a>
-                    </li>
-
-                    <li class="nav-item">
-                        <button id="power_off_btn" data-toggle="tooltip" data-title="@lang('lang.shut_down')"
-                            style="border-radius:8px;width: 35px;height: 35px;"
-                            class="btn hide bg-danger text-white no-print d-flex justify-content-center align-items-center">
-                            <i class="fa fa-power-off"></i></button>
-                    </li>
 
 
 
