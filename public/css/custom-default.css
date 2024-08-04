@@ -746,7 +746,7 @@ nav.navbar .nav-item li.notifications a i {
 
 .dropdown-item.selected {
     background-color: #f8f8f8;
-    color: var(--secondary-color);
+    color: var(--tertiary-color);
 }
 
 /*
