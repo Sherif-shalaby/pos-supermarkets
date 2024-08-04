@@ -139,7 +139,7 @@
         <div class="card" style="height: 100%;margin-bottom:0 ">
 
             <div class="card-body" style="padding: 0;height: 100%">
-                <div class="col-lg-12 mt-1 table-container" style="height: 100%">
+                <div class="col-lg-12 px-0 mt-1 table-container" style="height: 100%">
                     <div class="filter-window" style="width: 100% !important; height: 100% !important">
 
                         <div class="category mt-3" style="height: 100%;width: 100%">
@@ -210,7 +210,7 @@
 
                     </div>
 
-                    <div class="table-responsive" style="max-height: 470px">
+                    <div class="table-responsive" style="height: 495px">
                         <table id="filter-product-table" class="table no-shadow product-list"
                             style="width: 100%; border: 0px;overflow: scroll">
                             <tbody>

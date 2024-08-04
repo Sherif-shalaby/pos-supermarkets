@@ -1,5 +1,5 @@
-@forelse ($products->chunk(5) as $chunk)
-<tr style="font-size: 11px; padding: 5px;">
+@forelse ($products->chunk(2) as $chunk)
+<tr style="font-size: 11px; padding: 5px;" class="p-0">
     @foreach ($chunk as $product)
     @php
     $Variation = \App\Models\Variation::where('id', $product->variation_id)->first();
@@ -12,7 +12,7 @@
 
     @endphp
     <td style="padding-top: 0px; padding-bottom: 0px;width:100px;min-width:100px;max-width:100px"
-        class="product-img sound-btn filter_product_add" data-is_service="{{ $product->is_service }}"
+        class="product-img sound-btn filter_product_add px-2" data-is_service="{{ $product->is_service }}"
         data-qty_available="{{ $product->qty_available - $product->block_qty }}" data-product_id="{{ $product->id }}"
         data-variation_id="{{ $product->variation_id }}" title="{{ $product->name }}"
         data-product="{{ $product->name . ' (' . $product->variation_name . ')' }}">
