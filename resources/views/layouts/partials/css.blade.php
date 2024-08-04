@@ -46,7 +46,7 @@
     :root {
         --primary-color: #e3f2fd;
         /* Light Blue */
-        --secondary-color: #27aae2;
+        --secondary-color: #84ceed;
         /* Bright Blue */
         --tertiary-color: #1565c0;
         /* Dark Blue */

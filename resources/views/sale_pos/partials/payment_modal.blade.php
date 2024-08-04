@@ -2,13 +2,14 @@
 <div id="add-payment" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
     <div role="document" class="modal-dialog modal-lg">
         <div class="modal-content">
-            {{--  --}}
+            {{-- --}}
             <div
                 class="modal-header position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
                 <h5 id="exampleModalLabel" class="modal-title position-relative d-flex align-items-center"
                     style="gap: 5px;">@lang('lang.finalize_sale')
                     <span class=" header-pill"></span>
                 </h5>
+                <button id="submit-btn" type="button" class="btn btn-main mt-3">@lang('lang.submit')</button>
                 <button type="button" data-dismiss="modal" aria-label="Close"
                     class="close btn btn-danger d-flex justify-content-center align-items-center rounded-circle text-white close-payment-madal">
                     <span aria-hidden="true">
@@ -48,8 +49,8 @@
                                             </label>
                                             <span class="change  col-md-6 modal-g-value">0.00</span>
                                             <span class="position-absolute madal-gray-bg"></span>
-                                            <input type="hidden" name="payments[0][change_amount]"
-                                                class="change_amount" id="change_amount">
+                                            <input type="hidden" name="payments[0][change_amount]" class="change_amount"
+                                                id="change_amount">
                                             <input type="hidden" name="payments[0][pending_amount]"
                                                 class="pending_amount">
                                         </div>
@@ -57,8 +58,8 @@
                                     <div class="col-md-12">
                                         <button type="button"
                                             class="ml-1 btn btn-danger add_to_customer_balance hide">@lang('lang.add_to_customer_balance')</button>
-                                        <input type="hidden" name="add_to_customer_balance"
-                                            id="add_to_customer_balance" value="0">
+                                        <input type="hidden" name="add_to_customer_balance" id="add_to_customer_balance"
+                                            value="0">
                                     </div>
 
                                     <div
@@ -68,8 +69,8 @@
                                                 class="modal-label mb-1 @if (app()->isLocale('ar')) d-block text-end @endif">@lang('lang.payment_method')
                                                 *</label>
                                             {!! Form::select('payments[0][method]', $payment_types, null, [
-                                                'class' => 'modal-input method payment_way',
-                                                'required',
+                                            'class' => 'modal-input method payment_way',
+                                            'required',
                                             ]) !!}
                                         </div>
                                         <div
@@ -101,15 +102,14 @@
                                     </div>
 
 
-                                    <span class="position-absolute modal-border"></span>
+                                    <span class="position-absolute modal-border" style="bottom: -5px"></span>
 
                                     {{-- -------- hidden -------- --}}
                                     <div class="form-group col-md-12 mt-3 hide card_field">
                                         <div class="row">
                                             <div class="col-md-4">
                                                 <label>@lang('lang.card_number') *</label>
-                                                <input type="text" name="payments[0][card_number]"
-                                                    class="form-control">
+                                                <input type="text" name="payments[0][card_number]" class="form-control">
                                             </div>
                                             {{-- <div class="col-md-3">
                                                 <label>@lang('lang.card_security')</label>
@@ -118,13 +118,11 @@
                                             </div> --}}
                                             <div class="col-md-2">
                                                 <label>@lang('lang.month')</label>
-                                                <input type="text" name="payments[0][card_month]"
-                                                    class="form-control">
+                                                <input type="text" name="payments[0][card_month]" class="form-control">
                                             </div>
                                             <div class="col-md-2">
                                                 <label>@lang('lang.year')</label>
-                                                <input type="text" name="payments[0][card_year]"
-                                                    class="form-control">
+                                                <input type="text" name="payments[0][card_year]" class="form-control">
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +146,7 @@
 
                             </div>
 
-                            <h4 class="col-md-12 mt-3 @if (app()->isLocale('ar')) d-block text-end @endif">
+                            <h4 class="col-md-12 mt-0 @if (app()->isLocale('ar')) d-block text-end @endif">
                                 @lang('lang.quick_cash')
                             </h4>
                             <div class="col-md-12 mb-3 d-flex position-relative  @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif qc"
@@ -177,22 +175,21 @@
                                             type="button">500</button>
                                     </div>
                                     <div class="col-md-2">
-                                        <button class="btn btn-block btn-main py-1 qc-btn sound-btn"
-                                            data-amount="1000" type="button">1000</button>
+                                        <button class="btn btn-block btn-main py-1 qc-btn sound-btn" data-amount="1000"
+                                            type="button">1000</button>
                                     </div>
                                 </div>
                                 <div class="col-md-1">
                                     <button class="btn btn-block btn-danger py-1 qc-btn sound-btn" data-amount="0"
                                         type="button">
-                                        <i class="fa fa-arrow-rotate-left"></i>
+                                        <i class="dripicons-cross"></i>
                                     </button>
                                 </div>
                                 <span class="position-absolute modal-buttons-border"></span>
                             </div>
 
                             <div class="col-md-12 mt-3 btn-add-payment">
-                                <button type="button" id="add_payment_row"
-                                    class="btn border-r6 btn-main  btn-block">
+                                <button type="button" id="add_payment_row" class="btn border-r6 btn-main  btn-block">
                                     @lang('lang.add_payment_row')</button>
                             </div>
 
@@ -216,21 +213,22 @@
                                     </div>
                                     <div class="col-md-4">
                                         <h6 class="bg-success" style="color: #fff; padding: 10px 15px;">
-                                            @lang('lang.remaining_balance'): <span class="remaining_balance_text"></span> </h6>
+                                            @lang('lang.remaining_balance'): <span
+                                                class="remaining_balance_text"></span> </h6>
                                         <input type="hidden" name="remaining_deposit_balance"
                                             id="remaining_deposit_balance" value="0">
                                     </div>
                                     <div class="col-md-6">
                                         <button type="button"
                                             class="ml-1 btn btn-danger add_to_deposit">@lang('lang.add_to_deposit')</button>
-                                        <input type="hidden" name="add_to_deposit" id="add_to_deposit"
-                                            value="0">
+                                        <input type="hidden" name="add_to_deposit" id="add_to_deposit" value="0">
                                     </div>
                                 </div>
                             </div>
 
                             @php
-                                $show_the_window_printing_prompt = App\Models\System::getProperty('show_the_window_printing_prompt');
+                            $show_the_window_printing_prompt =
+                            App\Models\System::getProperty('show_the_window_printing_prompt');
                             @endphp
 
 
@@ -274,24 +272,26 @@
                             <div class="form-group col-md-12 px-4">
                                 <label
                                     class="modal-label mb-1 @if (app()->isLocale('ar')) d-block text-end @endif">@lang('lang.payment_note')</label>
-                                <textarea id="payment_note" rows="2" class="form-control" name="payment_note"></textarea>
+                                <textarea id="payment_note" rows="1" class="form-control"
+                                    name="payment_note"></textarea>
                             </div>
                             <div class="col-md-12 px-4 form-group">
                                 <label
                                     class="modal-label mb-1 @if (app()->isLocale('ar')) d-block text-end @endif">@lang('lang.sale_note')</label>
-                                <textarea rows="3" class="form-control" name="sale_note" id="sale_note">{{ !empty($transaction) ? $transaction->sale_note : '' }}</textarea>
+                                <textarea rows="1" class="form-control" name="sale_note"
+                                    id="sale_note">{{ !empty($transaction) ? $transaction->sale_note : '' }}</textarea>
                             </div>
                             <div class="col-md-12 px-4 form-group">
                                 <label
                                     class="modal-label mb-1 @if (app()->isLocale('ar')) d-block text-end @endif">@lang('lang.staff_note')</label>
-                                <textarea rows="3" class="form-control staff_note" name="staff_note">{{ !empty($transaction) ? $transaction->staff_note : '' }}</textarea>
+                                <textarea rows="1" class="form-control staff_note"
+                                    name="staff_note">{{ !empty($transaction) ? $transaction->staff_note : '' }}</textarea>
                             </div>
 
                             <div class="col-md-12 px-4 payment_fields">
-                                <input type="hidden" name="uploaded_file_names" id="uploaded_file_names"
-                                    value="">
+                                <input type="hidden" name="uploaded_file_names" id="uploaded_file_names" value="">
                                 {!! Form::label('upload_documents', __('lang.upload_documents'), [
-                                    'class' => 'modal-label mb-1 app()->isLocale("ar")) ? d-block text-end : "" ',
+                                'class' => 'modal-label mb-1 app()->isLocale("ar")) ? d-block text-end : "" ',
                                 ]) !!}
                                 <label for="upload_documents" class="upload_documents">
                                     <input type="file" class=" w-100 h-100" name="upload_documents[]"
@@ -304,16 +304,16 @@
                         <div class="col-md-12 mb-3 position-relative">
                             <div class="i-checks">
                                 <input id="print_the_transaction" name="print_the_transaction" type="checkbox"
-                                    @if (!empty($show_the_window_printing_prompt) && $show_the_window_printing_prompt == '1') checked @endif value="1"
-                                    class="form-control-custom">
-                                <label for="print_the_transaction"><strong>@lang('lang.print_the_transaction')</strong></label>
+                                    class="form-control-custom" @if (!empty($show_the_window_printing_prompt) &&
+                                    $show_the_window_printing_prompt=='1' ) checked @endif value="1">
+                                <label
+                                    for="print_the_transaction"><strong>@lang('lang.print_the_transaction')</strong></label>
                             </div>
                             <span class="position-absolute modal-border"></span>
                         </div>
-                        <div class="col-md-12 d-flex">
-                            <button id="submit-btn" type="button"
-                                class="btn btn-main mt-3">@lang('lang.submit')</button>
-                        </div>
+                        {{-- <div class="col-md-12 d-flex">
+
+                        </div> --}}
 
                     </div>
 

@@ -710,7 +710,7 @@ nav.navbar a.menu-btn i[class*="icon-"] {
     }
 }
 
-@media (min-width: 768px) {
+(min-width: 768px) {
     .dashboard-header p {
         font-size: 0.9em;
     }
@@ -2980,4 +2980,31 @@ a>code {
     font-size: 11px !important;
     width: 12% !important;
     margin: 2px 5px;
+}
+
+
+.pos-products {
+    margin-bottom: 500px
+}
+
+@media (min-width: 768px) {
+    .pos-products {
+        margin-bottom: 0;
+    }
+}
+
+.pos-conditions {
+    margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+    .pos-conditions {
+        margin-bottom: 250px;
+    }
+}
+
+@media (min-width: 992px) {
+    .pos-conditions {
+        margin-bottom: 0;
+    }
 }

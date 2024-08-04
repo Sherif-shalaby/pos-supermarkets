@@ -651,7 +651,7 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                 </div>
                             </div>
 
-                            <div class=" py-2 col-12" style="border-radius: 8px;">
+                            <div class=" py-2 col-12 pos-conditions" style="border-radius: 8px;">
                                 <div class="card mb-2">
                                     <div class="d-flex flex-column flex-md-row align-items-center justify-content-between mx-auto"
                                         style="width: 80%;">
@@ -1127,9 +1127,10 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                 <div id="recentTransaction" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
                     class="modal text-left">
 
-                    <div class="modal-dialog modal-xl" role="document" style="max-width: 65%;">
+                    <div class="modal-dialog modal-xl" role="document" style="min-width: 95%;">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div
+                                class="modal-header position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
                                 <h5 class="modal-title">@lang('lang.recent_transactions')
                                     <span class="header-pill"></span>
                                 </h5>
@@ -1243,7 +1244,7 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                 <div id="draftTransaction" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
                     class="modal text-left">
 
-                    <div class="modal-dialog" role="document" style="width: 65%">
+                    <div class="modal-dialog" role="document" style="min-width: 95%;">
                         <div class="modal-content">
                             <div
                                 class="modal-header position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
@@ -1319,7 +1320,7 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                 <div id="onlineOrderTransaction" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
                     class="modal text-left">
 
-                    <div class="modal-dialog" role="document" style="width: 65%">
+                    <div class="modal-dialog" role="document" style="min-width: 95%;">
                         <div class="modal-content">
                             <div
                                 class="modal-header position-relative border-0 d-flex justify-content-between align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
