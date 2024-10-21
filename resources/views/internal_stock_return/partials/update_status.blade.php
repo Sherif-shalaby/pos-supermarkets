@@ -5,12 +5,11 @@
         => 'post', 'id' =>
         'update_status_form' ]) !!}
 
-        <div class="modal-header">
+
+        <x-modal-header>
 
             <h4 class="modal-title">@lang( 'lang.update_status' ) ({{$transaction->invoice_no}})</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-        </div>
+        </x-modal-header>
 
         <div class="modal-body">
             <div class="row">
@@ -64,7 +63,8 @@
                                     {{$product->variation->sub_sku}}
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control quantity" min=1 max="{{preg_match('/\.\d*[1-9]+/', (string)$product->quantity) ? $product->quantity : @num_format($product->quantity)}}"
+                                    <input type="text" class="form-control quantity" min=1
+                                        max="{{preg_match('/\.\d*[1-9]+/', (string)$product->quantity) ? $product->quantity : @num_format($product->quantity)}}"
                                         name="transfer_lines[{{$loop->index}}][quantity]" required
                                         value="@if(isset($product->quantity)){{preg_match('/\.\d*[1-9]+/', (string)$product->quantity) ? $product->quantity : @num_format($product->quantity)}}@else{{1}}@endif">
                                 </td>
@@ -74,7 +74,9 @@
                                         value="@if(isset($product->purchase_price)){{@num_format($product->purchase_price)}}@else{{0}}@endif">
                                 </td>
                                 <td>
-                                    <span class="sub_total_span">{{preg_match('/\.\d*[1-9]+/', (string)$product->sub_total) ? $product->sub_total : @num_format($product->sub_total)}}</span>
+                                    <span class="sub_total_span">{{preg_match('/\.\d*[1-9]+/',
+                                        (string)$product->sub_total) ? $product->sub_total :
+                                        @num_format($product->sub_total)}}</span>
                                     <input type="hidden" class="form-control sub_total"
                                         name="transfer_lines[{{$loop->index}}][sub_total]"
                                         value="{{preg_match('/\.\d*[1-9]+/', (string)$product->sub_total) ? $product->sub_total : @num_format($product->sub_total)}}">
@@ -99,8 +101,8 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="update-status">@lang( 'lang.update' )</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'lang.close' )</button>
+            <button type="submit" class="btn btn-primary col-6" id="update-status">@lang( 'lang.update' )</button>
+            <button type="button" class="btn btn-default col-6" data-dismiss="modal">@lang( 'lang.close' )</button>
         </div>
 
         {!! Form::close() !!}

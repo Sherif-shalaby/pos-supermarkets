@@ -57,14 +57,14 @@ $(document).ready(function () {
     // Custom Scrollbar
     // ------------------------------------------------------ //
 
-    if ($(window).outerWidth() > 992) {
-        $(
-            "nav.side-navbar,.table-container,.transaction-list"
-        ).mCustomScrollbar({
-            theme: "light",
-            scrollInertia: 200,
-        });
-    }
+    // if ($(window).outerWidth() > 992) {
+    //     $(
+    //         "nav.side-navbar,.table-container,.transaction-list"
+    //     ).mCustomScrollbar({
+    //         theme: "light",
+    //         scrollInertia: 200,
+    //     });
+    // }
 
     $(document).scroll(function () {
         var y = $(this).scrollTop();

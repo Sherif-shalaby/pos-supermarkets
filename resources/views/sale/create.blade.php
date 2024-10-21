@@ -91,9 +91,8 @@
                                                 @if(session('system_mode') != 'restaurant')
                                                 <th style="width: 10%">{{__('lang.current_stock')}}</th>
                                                 @endif
-                                                <th
-                                                style="width: 10%;">
-                                                @lang('lang.action')</th>
+                                                <th style="width: 10%;">
+                                                    @lang('lang.action')</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -153,7 +152,7 @@
                             <div class="form-group">
                                 {!! Form::label('discount_value', __( 'lang.discount_value' ) . ':*') !!}
                                 {!! Form::text('discount_value', null, ['class' => 'form-control', 'placeholder' => __(
-                                'lang.discount_value' )]);
+                                'lang.discount_value' )])
                                 !!}
                             </div>
                         </div>
@@ -187,8 +186,8 @@
                             </div>
                             <div class="col-md-3 mt-1 payment_fields hide">
                                 <label>@lang('lang.received_amount') *</label>
-                                <input type="text" name="payments[0][amount]" class="form-control numkey received_amount" required
-                                    id="amount" step="any">
+                                <input type="text" name="payments[0][amount]"
+                                    class="form-control numkey received_amount" required id="amount" step="any">
                             </div>
                             <div class="col-md-3 mt-1 payment_fields hide">
                                 <label>@lang('lang.paying_amount') *</label>
@@ -317,12 +316,11 @@
                         aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
+
+                                <x-modal-header>
+
                                     <h5 class="modal-title" id="sendModalLabel">@lang('lang.emails')</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
+                                </x-modal-header>
                                 <div class="modal-body">
                                     <div class="col-md-12">
                                         <div class="form-group">
@@ -334,10 +332,10 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
+                                    <button type="button" class="btn btn-default col-6"
                                         data-dismiss="modal">@lang('lang.close')</button>
                                     <button type="submit" name="action" value="send" id="send-btn"
-                                        class="btn btn-primary">@lang('lang.send')</button>
+                                        class="btn btn-primary col-6">@lang('lang.send')</button>
                                 </div>
                             </div>
                         </div>

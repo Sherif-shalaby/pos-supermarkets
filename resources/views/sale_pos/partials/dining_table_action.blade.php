@@ -1,27 +1,31 @@
 <!-- order_discount modal -->
 <div role="document" class="modal-dialog">
     <div class="modal-content">
-        <div class="modal-header">
+
+
+        <x-modal-header>
+
             <h5 class="modal-title">{{ $dining_table->name }}</h5>
-            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span
-                    aria-hidden="true"><i class="dripicons-cross"></i></span></button>
-        </div>
+        </x-modal-header>
         <div class="modal-body">
             <div class="form-group">
                 {!! Form::label('table_status', __('lang.status') . ':*') !!}
-                {!! Form::select('table_status', $status_array, 'order', ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.please_select')]) !!}
+                {!! Form::select('table_status', $status_array, 'order', ['class' => 'form-control selectpicker',
+                'data-live-search' => 'true', 'placeholder' => __('lang.please_select')]) !!}
             </div>
             <div class="row reserve_div hide">
                 <div class="col-md-4">
                     <div class="form-group">
                         {!! Form::label('table_customer_name', __('lang.customer_name') . ':*') !!}
-                        {!! Form::text('table_customer_name', $dining_table->customer_name, ['class' => 'form-control', 'placeholder' => __('lang.customer_name'), 'required']) !!}
+                        {!! Form::text('table_customer_name', $dining_table->customer_name, ['class' => 'form-control',
+                        'placeholder' => __('lang.customer_name'), 'required']) !!}
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         {!! Form::label('table_customer_mobile_number', __('lang.mobile_number') . ':*') !!}
-                        {!! Form::text('table_customer_mobile_number', $dining_table->customer_mobile_number, ['class' => 'form-control', 'placeholder' => __('lang.mobile_number'), 'required']) !!}
+                        {!! Form::text('table_customer_mobile_number', $dining_table->customer_mobile_number, ['class'
+                        => 'form-control', 'placeholder' => __('lang.mobile_number'), 'required']) !!}
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -36,8 +40,8 @@
             <input type="hidden" name="discount_amount" id="discount_amount">
             <div class="modal-footer">
                 <button type="button" name="discount_btn" id="table_action_btn"
-                    class="btn btn-primary">@lang('lang.save')</button>
-                <button type="button" name="cancel" class="btn btn-default"
+                    class="btn btn-primary col-6">@lang('lang.save')</button>
+                <button type="button" name="cancel" class="btn btn-default col-6"
                     data-dismiss="modal">@lang('lang.cancel')</button>
             </div>
         </div>

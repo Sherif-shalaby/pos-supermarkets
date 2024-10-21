@@ -1,98 +1,97 @@
 @extends('layouts.app')
 @section('title', __('lang.product'))
 @section('content')
-    <section class="forms">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="row mr-2 ml-2">
-                            <div class="card-header d-flex align-items-center col-md-7">
-                                <h4>@lang('lang.add_new_product')</h4>
-                            </div>
+<section class="forms">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="row mr-2 ml-2">
+                        <div class="card-header d-flex align-items-center col-md-7">
+                            <h4>@lang('lang.add_new_product')</h4>
                         </div>
-                        <div class="card-body">
-                            <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
-                            {!! Form::open(['url' => action('ProductController@store'), 'id' => 'product-form', 'method' => 'POST', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
-                            @include('product.partial.create_product_form')
-                            <div class="row">
-                                <div class="col-md-4 mt-5">
-                                    <div class="form-group">
-                                        <input type="button" value="{{ trans('lang.save') }}" id="submit-btn"
-                                            class="btn btn-primary">
-                                    </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
+                        {!! Form::open(['url' => action('ProductController@store'), 'id' => 'product-form', 'method' =>
+                        'POST', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
+                        @include('product.partial.create_product_form')
+                        <div class="row">
+                            <div class="col-md-4 mt-5">
+                                <div class="form-group">
+                                    <input type="button" value="{{ trans('lang.save') }}" id="submit-btn"
+                                        class="btn btn-primary">
                                 </div>
                             </div>
-                            <div id="cropped_images"></div>
-                            {!! Form::close() !!}
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="modal fade" id="product_cropper_modal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">@lang('lang.crop_image_before_upload')</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="img-container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <img src="" id="product_sample_image" />
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product_preview_div"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" id="product_crop" class="btn btn-primary">@lang('lang.crop')</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div id="croppie-modal" style="display:none">
-                        <div id="croppie-container"></div>
-                        <button data-dismiss="modal" id="croppie-cancel-btn" type="button" class="btn btn-secondary"><i
-                                class="fas fa-times"></i></button>
-                        <button id="croppie-submit-btn" type="button" class="btn btn-primary"><i
-                                class="fas fa-crop"></i></button>
+                        <div id="cropped_images"></div>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
+
+<div class="modal fade" id="product_cropper_modal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <x-modal-header>
+
+                <h5 class="modal-title">@lang('lang.crop_image_before_upload')</h5>
+            </x-modal-header>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img src="" id="product_sample_image" />
+                        </div>
+                        <div class="col-md-4">
+                            <div class="product_preview_div"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="product_crop" class="btn btn-primary col-6">@lang('lang.crop')</button>
+                <button type="button" class="btn btn-default col-6" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+            <x-modal-header>
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+
+            </x-modal-header>
+            <div class="modal-body">
+                <div id="croppie-modal" style="display:none">
+                    <div id="croppie-container"></div>
+                    <button data-dismiss="modal" id="croppie-cancel-btn" type="button" class="btn btn-secondary"><i
+                            class="fas fa-times"></i></button>
+                    <button id="croppie-submit-btn" type="button" class="btn btn-primary"><i
+                            class="fas fa-crop"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 
 @section('javascript')
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
-    <script>
-        const fileInput = document.querySelector('#file-input');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
+<script>
+    const fileInput = document.querySelector('#file-input');
         const previewContainer = document.querySelector('.preview-container');
         const croppieModal = document.querySelector('#croppie-modal');
         const croppieContainer = document.querySelector('#croppie-container');
@@ -242,14 +241,14 @@
             }, 500);
         }
 
-    </script>
+</script>
 
-    <script>
-        function get_unit(units,row_id) {
+<script>
+    function get_unit(units,row_id) {
             $v=document.getElementById('select_unit_id_'+row_id).value;
 
             $.each(units, function(key, value) {
-                
+
                 if($v == key){
                     $('#number_vs_base_unit_'+row_id).val(value);
                     if(value == 1){
@@ -262,10 +261,10 @@
                 }
             });
         }
-    </script>
-    <script src="{{ asset('js/product.js') }}"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
+</script>
+<script src="{{ asset('js/product.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
             $('#discount_customer_types').selectpicker('selectAll');
             $('#store_ids').selectpicker('selectAll');
 
@@ -280,5 +279,5 @@
         $('.v_unit').on('change', function() {
             alert( this.value );
         });
-    </script>
+</script>
 @endsection

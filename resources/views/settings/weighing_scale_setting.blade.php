@@ -25,7 +25,7 @@
                         {!! Form::label('label_prefix', __('lang.weighing_barcode_prefix') . ':') !!}
                         {!! Form::text('weighing_scale_setting[label_prefix]',
                         isset($weighing_scale_setting['label_prefix']) ? $weighing_scale_setting['label_prefix'] : null,
-                        ['class' => 'form-control', 'id' => 'label_prefix']); !!}
+                        ['class' => 'form-control', 'id' => 'label_prefix']) !!}
                     </div>
                 </div>
 
@@ -36,7 +36,7 @@
                         {!! Form::select('weighing_scale_setting[product_sku_length]', [1,2,3,4,5,6,7,8,9],
                         isset($weighing_scale_setting['product_sku_length']) ?
                         $weighing_scale_setting['product_sku_length'] : 4, ['class' => 'form-control select2', 'style'
-                        => 'width: 100%;', 'id' => 'product_sku_length']); !!}
+                        => 'width: 100%;', 'id' => 'product_sku_length']) !!}
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
 
                         {!! Form::select('weighing_scale_setting[qty_length]', [1,2,3,4,5],
                         isset($weighing_scale_setting['qty_length']) ? $weighing_scale_setting['qty_length'] : 3,
-                        ['class' => 'form-control select2', 'style' => 'width: 100%;', 'id' => 'qty_length']); !!}
+                        ['class' => 'form-control select2', 'style' => 'width: 100%;', 'id' => 'qty_length']) !!}
                     </div>
                 </div>
 
@@ -56,7 +56,7 @@
                         {!! Form::select('weighing_scale_setting[qty_length_decimal]', [1,2,3,4],
                         isset($weighing_scale_setting['qty_length_decimal']) ?
                         $weighing_scale_setting['qty_length_decimal'] : 2, ['class' => 'form-control select2', 'style'
-                        => 'width: 100%;', 'id' => 'qty_length_decimal']); !!}
+                        => 'width: 100%;', 'id' => 'qty_length_decimal']) !!}
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -65,8 +65,9 @@
                         {!! Form::select('weighing_scale_setting[last_digits_type]', ['price' => __('lang.price'),
                         'quantity' => __('lang.quantity')],
                         isset($weighing_scale_setting['last_digits_type']) ?
-                        $weighing_scale_setting['last_digits_type'] : 'quantity', ['class' => 'form-control select2', 'style'
-                        => 'width: 100%;', 'id' => 'last_digits_type', 'required']); !!}
+                        $weighing_scale_setting['last_digits_type'] : 'quantity', ['class' => 'form-control select2',
+                        'style'
+                        => 'width: 100%;', 'id' => 'last_digits_type', 'required']) !!}
                     </div>
                 </div>
             </div>

@@ -27,7 +27,7 @@
                                             ['class'
                                             => 'form-control',
                                             'placeholder' => __(
-                                            'lang.coupon_code' ), 'required', 'autocomplete' => 'off' ]);
+                                            'lang.coupon_code' ), 'required', 'autocomplete' => 'off' ])
                                             !!}
                                             <div class="input-group-append">
                                                 <button type="button" class="btn btn-default btn-sm refresh_code"><i
@@ -39,7 +39,8 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         {!! Form::label('customer_type_ids', __( 'lang.customer_type' ) . ':*') !!}
-                                        {!! Form::select('customer_type_ids[]', $customer_types, false, ['class' => 'selectpicker
+                                        {!! Form::select('customer_type_ids[]', $customer_types, false, ['class' =>
+                                        'selectpicker
                                         form-control', 'data-live-search' => "true", 'multiple', 'required']) !!}
                                     </div>
                                 </div>
@@ -65,7 +66,7 @@
                                         {!! Form::label('amount', __( 'lang.amount' ) . ':*') !!}
                                         {!! Form::text('amount', null, ['class' => 'form-control', 'placeholder' => __(
                                         'lang.amount' ),
-                                        'required' ]);
+                                        'required' ])
                                         !!}
                                     </div>
                                 </div>
@@ -78,7 +79,7 @@
                                         </label>
                                         {!! Form::text('amount_to_be_purchase', null, ['class' => 'form-control
                                         amount_to_be_purchase' ,
-                                        'placeholder' => __( 'lang.amount_to_be_purchase' ) ]);
+                                        'placeholder' => __( 'lang.amount_to_be_purchase' ) ])
                                         !!}
                                     </div>
                                 </div>
@@ -90,7 +91,7 @@
                                         {!! Form::label('expiry_date', __( 'lang.expiry_date' ) . ':*') !!}
                                         {!! Form::text('expiry_date', null, ['class' => 'form-control datepicker',
                                         'placeholder' => __(
-                                        'lang.expiry_date' )]);
+                                        'lang.expiry_date' )])
                                         !!}
                                     </div>
                                 </div>

@@ -19,7 +19,7 @@
                                 <div class="form-group">
                                     {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
                                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __(
-                                    'lang.name' ), 'required' ]);
+                                    'lang.name' ), 'required' ])
                                     !!}
                                 </div>
                             </div>
@@ -33,12 +33,12 @@
                         </div>
                         <br>
                         <div class="row">
-                           <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="submit" value="{{trans('lang.submit')}}" id="submit-btn"
-                                    class="btn btn-primary">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <input type="submit" value="{{trans('lang.submit')}}" id="submit-btn"
+                                        class="btn btn-primary">
+                                </div>
                             </div>
-                           </div>
                         </div>
                         {!! Form::close() !!}
                     </div>

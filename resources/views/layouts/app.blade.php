@@ -17,15 +17,7 @@
     @include('layouts.partials.css')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @yield('style')
-    <style>
-        .mCSB_draggerRail {
-            width: 16px !important;
-        }
 
-        .mCSB_dragger_bar {
-            width: 10px !important;
-        }
-    </style>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <style>
@@ -37,6 +29,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, 170px);
         }
+
         .preview-brand-container {
             /* display: flex;
             flex-wrap: wrap;
@@ -45,6 +38,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, 170px);
         }
+
         .preview-container {
             /* display: flex;
             flex-wrap: wrap;
@@ -53,6 +47,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, 170px);
         }
+
         .preview-class-container {
             /* display: flex;
             flex-wrap: wrap;
@@ -61,6 +56,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, 170px);
         }
+
         .preview-edit-product-container {
             /* display: flex;
             flex-wrap: wrap;
@@ -262,25 +258,28 @@
 <body onload="myFunction()">
     <div id="loader"></div>
     @if (request()->segment(1) != 'pos')
-        @include('layouts.partials.header')
+    @include('layouts.partials.header')
     @endif
     <div class="@if (request()->segment(1) != 'pos') page @else pos-page @endif">
         @include('layouts.partials.sidebar')
         <div style="display:none" id="content" class="animate-bottom">
             @foreach ($errors->all() as $message)
-                <div class="alert alert-danger alert-dismissible text-center">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>{{ $message }}
-                </div>
+            <div class="alert alert-danger alert-dismissible text-center">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>{{ $message }}
+            </div>
             @endforeach
             <input type="hidden" id="__language" value="{{ session('language') }}">
             <input type="hidden" id="__decimal" value=".">
-            <input type="hidden" id="__currency_precision" value="{{ !empty(App\Models\System::getProperty('numbers_length_after_dot')) ? App\Models\System::getProperty('numbers_length_after_dot') : 5 }}">
+            <input type="hidden" id="__currency_precision"
+                value="{{ !empty(App\Models\System::getProperty('numbers_length_after_dot')) ? App\Models\System::getProperty('numbers_length_after_dot') : 5 }}">
             <input type="hidden" id="__currency_symbol" value="$">
             <input type="hidden" id="__currency_thousand_separator" value=",">
             <input type="hidden" id="__currency_symbol_placement" value="before">
-            <input type="hidden" id="__precision" value="{{ !empty(App\Models\System::getProperty('numbers_length_after_dot')) ? App\Models\System::getProperty('numbers_length_after_dot') : 5 }}">
-            <input type="hidden" id="__quantity_precision" value="{{ !empty(App\Models\System::getProperty('numbers_length_after_dot')) ? App\Models\System::getProperty('numbers_length_after_dot') : 5 }}">
+            <input type="hidden" id="__precision"
+                value="{{ !empty(App\Models\System::getProperty('numbers_length_after_dot')) ? App\Models\System::getProperty('numbers_length_after_dot') : 5 }}">
+            <input type="hidden" id="__quantity_precision"
+                value="{{ !empty(App\Models\System::getProperty('numbers_length_after_dot')) ? App\Models\System::getProperty('numbers_length_after_dot') : 5 }}">
             <input type="hidden" id="system_mode" value="{{ env('SYSTEM_MODE') }}">
             @yield('content')
         </div>
@@ -288,16 +287,15 @@
         @include('layouts.partials.footer')
 
 
-        <div class="modal view_modal no-print" role="dialog" aria-hidden="true" ></div>
+        <div class="modal view_modal no-print" role="dialog" aria-hidden="true"></div>
         <div class="modal" id="cropper_modal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+
+                    <x-modal-header>
+
                         <h5 class="modal-title">@lang('lang.crop_image_before_upload')</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
+                    </x-modal-header>
                     <div class="modal-body">
                         <div class="img-container">
                             <div class="row">
@@ -311,24 +309,23 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="crop" class="btn btn-primary">@lang('lang.crop')</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" id="crop" class="btn btn-primary col-6">@lang('lang.crop')</button>
+                        <button type="button" class="btn btn-default col-6" data-dismiss="modal">Cancel</button>
                     </div>
                 </div>
             </div>
         </div>
 
         @php
-            $cash_register = App\Models\CashRegister::where('user_id', Auth::user()->id)
-                ->where('status', 'open')
-                ->first();
+        $cash_register = App\Models\CashRegister::where('user_id', Auth::user()->id)
+        ->where('status', 'open')
+        ->first();
         @endphp
         <input type="hidden" name="is_register_close" id="is_register_close"
             value="@if (!empty($cash_register)) {{ 0 }}@else{{ 1 }} @endif">
         <input type="hidden" name="cash_register_id" id="cash_register_id"
             value="@if (!empty($cash_register)) {{ $cash_register->id }} @endif">
-        <div id="closing_cash_modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-            class="modal">
+        <div id="closing_cash_modal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal">
         </div>
 
         <!-- This will be printed -->
@@ -473,14 +470,14 @@
                 $('nav.side-navbar').removeClass('shrink');
             }
         @endif
-        function myFunction() {
-            setTimeout(showPage, 150);
-        }
+        // function myFunction() {
+        //     setTimeout(showPage, 150);
+        // }
 
-        function showPage() {
-            document.getElementById("loader").style.display = "none";
-            document.getElementById("content").style.display = "block";
-        }
+        // function showPage() {
+        //     document.getElementById("loader").style.display = "none";
+        //     document.getElementById("content").style.display = "block";
+        // }
 
         $("div.alert").delay(3000).slideUp(750);
 
@@ -665,6 +662,34 @@
         })
         $.fn.modal.Constructor.prototype._enforceFocus = function() {};
         $('input').attr('autocomplete', 'off');
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+                loadPrimaryColor();
+                setTimeout(showPage, 150);
+                });
+
+                function showPage() {
+                document.getElementById("loader").style.display = "none";
+                document.getElementById("content").style.display = "block";
+                }
+
+                function changePrimaryColor(color , hoverColor) {
+
+                document.documentElement.style.setProperty('--primary-color', color);
+                document.documentElement.style.setProperty('--primary-color-hover', hoverColor);
+                localStorage.setItem('supermarket-primaryColor', color);
+                localStorage.setItem('supermarket-primaryColorHover', hoverColor);
+                }
+
+                function loadPrimaryColor() {
+                const savedColor = localStorage.getItem('supermarket-primaryColor');
+                const savedColorHover = localStorage.getItem('supermarket-primaryColorHover');
+                if (savedColor) {
+                document.documentElement.style.setProperty('--primary-color', savedColor);
+                document.documentElement.style.setProperty('--primary-color-hover', savedColorHover);
+                }
+                }
     </script>
 </body>
 

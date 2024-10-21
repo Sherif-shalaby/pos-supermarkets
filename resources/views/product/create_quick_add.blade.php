@@ -4,12 +4,10 @@
         {!! Form::open(['url' => action('ProductController@store'), 'method' => 'post', 'id' => $quick_add ?
         'product-form-quick-add': 'product-form' ]) !!}
 
-        <div class="modal-header">
+        <x-modal-header>
 
             <h4 class="modal-title">@lang( 'lang.add_product' )</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-        </div>
+        </x-modal-header>
 
         <div class="modal-body">
             <input type="hidden" name="active" value="1">
@@ -17,23 +15,22 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="i-checks">
-                        <input id="is_service" name="is_service" type="checkbox"
-                               @if (session('system_mode') == 'restaurant') checked
-                               @elseif(!empty($recent_product) && $recent_product->is_service == 1) checked @endif
-                               class="form-control-custom">
+                        <input @if (session('system_mode')=='restaurant' ) checked @elseif(!empty($recent_product) &&
+                            $recent_product->is_service == 1) checked @endif
+                        class="form-control-custom" id="is_service" name="is_service" type="checkbox">
                         <label for="is_service"><strong>
                                 @if (session('system_mode') == 'restaurant')
-                                    @lang('lang.or_add_new_product')
+                                @lang('lang.or_add_new_product')
                                 @else
-                                    @lang('lang.add_new_service')
+                                @lang('lang.add_new_service')
                                 @endif
                             </strong></label>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="i-checks">
-                        <input id="have_weight" name="have_weight" type="checkbox"  value="1"
-                               class="form-control-custom">
+                        <input id="have_weight" name="have_weight" type="checkbox" value="1"
+                            class="form-control-custom">
                         <label for="have_weight"><strong>@lang('lang.have_weight')</strong></label>
                     </div>
                 </div>
@@ -41,25 +38,32 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         {!! Form::label('store_ids', __('lang.store'), []) !!}
-                        {!! Form::select('store_ids[]', $stores_select, array_keys($stores_select), ['class' => 'selectpicker form-control filter_product', 'placeholder' => __('lang.all'), 'data-live-search' => 'true', 'style' => 'width: 80%', 'multiple']) !!}
+                        {!! Form::select('store_ids[]', $stores_select, array_keys($stores_select), ['class' =>
+                        'selectpicker form-control filter_product', 'placeholder' => __('lang.all'), 'data-live-search'
+                        => 'true', 'style' => 'width: 80%', 'multiple']) !!}
                     </div>
                 </div>
                 <div class="col-md-4 supplier_div">
                     <div class="form-group supplier_div">
                         {!! Form::label('supplier_id', __('lang.supplier'), []) !!}
                         <div class="input-group my-group">
-                            {!! Form::select('supplier_id', $suppliers, !empty($recent_product->supplier) ? $recent_product->supplier->id : false, ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                            {!! Form::select('supplier_id', $suppliers, !empty($recent_product->supplier) ?
+                            $recent_product->supplier->id : false, ['class' => 'selectpicker form-control',
+                            'data-live-search' => 'true', 'style' => 'width: 80%', 'placeholder' =>
+                            __('lang.please_select')]) !!}
                             <span class="input-group-btn">
-                    @can('supplier_module.supplier.create_and_edit')
-                                    <button type="button" class="btn-modal btn btn-default bg-white btn-flat"
-                                            data-href="{{ action('SupplierController@create') }}?quick_add=1"
-                                            data-container=".view_modal"><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
+                                @can('supplier_module.supplier.create_and_edit')
+                                <button type="button" class="btn-modal btn btn-default bg-white btn-flat"
+                                    data-href="{{ action('SupplierController@create') }}?quick_add=1"
+                                    data-container=".view_modal"><i
+                                        class="fa fa-plus-circle text-primary fa-lg"></i></button>
                                 @endcan
-                </span>
+                            </span>
                         </div>
                     </div>
                 </div>
-                @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket')
+                @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') ==
+                'supermarket')
                 <div class="col-md-4">
                     <div class="form-group">
                         {!! Form::label('product_class_id', __('lang.class') . ' *', []) !!}
@@ -115,7 +119,8 @@
                         => __('lang.sku')]) !!}
                     </div>
                 </div>
-                @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket')
+                @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') ==
+                'supermarket')
                 <div class="col-md-4">
                     <div class="form-group">
                         {!! Form::label('multiple_units', __('lang.unit'), []) !!}
@@ -144,7 +149,8 @@
 
                     </div>
                 </div>
-                @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket')
+                @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') ==
+                'supermarket')
                 <div class="col-md-4">
                     <div class="form-group">
                         {!! Form::label('multiple_grades', __('lang.grade'), []) !!}
@@ -172,7 +178,8 @@
                         <textarea name="product_details" id="product_details" class="form-control" rows="3"></textarea>
                     </div>
                 </div>
-                @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket')
+                @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') ==
+                'supermarket')
                 <div class="col-md-4">
                     <div class="form-group">
                         {!! Form::label('barcode_type', __('lang.barcode_type') . ' *', []) !!}
@@ -192,10 +199,13 @@
                 @can('product_module.purchase_price.create_and_edit')
                 <div class="col-md-4 supplier_div">
                     <div class="form-group">
-                        {!! Form::label('purchase_price', session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket' ? __('lang.purchase_price') :
+                        {!! Form::label('purchase_price', session('system_mode') == 'pos' || session('system_mode') ==
+                        'garments' || session('system_mode') == 'supermarket' ? __('lang.purchase_price') :
                         __('lang.cost') . ' *', []) !!}
                         {!! Form::text('purchase_price', null, ['class' => 'form-control', 'placeholder' =>
-                        session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket' ? __('lang.purchase_price') : __('lang.cost'), 'required']) !!}
+                        session('system_mode') == 'pos' || session('system_mode') == 'garments' ||
+                        session('system_mode') == 'supermarket' ? __('lang.purchase_price') : __('lang.cost'),
+                        'required']) !!}
                     </div>
                 </div>
                 @endcan
@@ -230,19 +240,19 @@
                 <div class="col-md-12">
                     <table class="table table-bordered" id="consumption_table_discount">
                         <thead>
-                        <tr>
-                            <th style="width: 20%;">@lang('lang.discount_type')</th>
-                            <th style="width: 15%;">@lang('lang.discount')</th>
-                            <th style="width: 20%;">@lang('lang.discount_start_date')</th>
-                            <th style="width: 20%;">@lang('lang.discount_end_date')</th>
-                            <th style="width: 20%;">@lang('lang.customer_type') <i class="dripicons-question" data-toggle="tooltip"
-                                                                                   title="@lang('lang.discount_customer_info')"></i></th>
-                            <th style="width: 5%;"><button class="btn btn-xs btn-success add_discount_row"
-                                                           type="button"><i class="fa fa-plus"></i></button></th>
-                        </tr>
+                            <tr>
+                                <th style="width: 20%;">@lang('lang.discount_type')</th>
+                                <th style="width: 15%;">@lang('lang.discount')</th>
+                                <th style="width: 20%;">@lang('lang.discount_start_date')</th>
+                                <th style="width: 20%;">@lang('lang.discount_end_date')</th>
+                                <th style="width: 20%;">@lang('lang.customer_type') <i class="dripicons-question"
+                                        data-toggle="tooltip" title="@lang('lang.discount_customer_info')"></i></th>
+                                <th style="width: 5%;"><button class="btn btn-xs btn-success add_discount_row"
+                                        type="button"><i class="fa fa-plus"></i></button></th>
+                            </tr>
                         </thead>
                         <tbody>
-                        @include('product.partial.raw_discount', ['row_id' => 0])
+                            @include('product.partial.raw_discount', ['row_id' => 0])
                         </tbody>
                     </table>
                     <input type="hidden" name="raw_discount_index" id="raw_discount_index" value="1">
@@ -339,8 +349,9 @@
 
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="submit-btn-add-product">@lang( 'lang.save' )</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'lang.close' )</button>
+            <button type="button" class="btn btn-primary col-6" id="submit-btn-add-product">@lang( 'lang.save'
+                )</button>
+            <button type="button" class="btn btn-default col-6" data-dismiss="modal">@lang( 'lang.close' )</button>
         </div>
 
         {!! Form::close() !!}

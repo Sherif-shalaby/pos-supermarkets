@@ -49,12 +49,16 @@
                                 <div class="form-group supplier_div">
                                     {!! Form::label('supplier_id', __('lang.supplier'), []) !!}
                                     <div class="input-group my-group">
-                                        {!! Form::select('supplier_id', $suppliers, !empty($raw_material->supplier) ? $raw_material->supplier->id : false, ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                                        {!! Form::select('supplier_id', $suppliers, !empty($raw_material->supplier) ?
+                                        $raw_material->supplier->id : false, ['class' => 'selectpicker form-control',
+                                        'data-live-search' => 'true', 'style' => 'width: 80%', 'placeholder' =>
+                                        __('lang.please_select')]) !!}
                                         <span class="input-group-btn">
                                             @can('supplier_module.supplier.create_and_edit')
-                                                <button type="button" class="btn-modal btn btn-default bg-white btn-flat"
-                                                    data-href="{{ action('SupplierController@create') }}?quick_add=1"
-                                                    data-container=".view_modal"><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
+                                            <button type="button" class="btn-modal btn btn-default bg-white btn-flat"
+                                                data-href="{{ action('SupplierController@create') }}?quick_add=1"
+                                                data-container=".view_modal"><i
+                                                    class="fa fa-plus-circle text-primary fa-lg"></i></button>
                                             @endcan
                                         </span>
                                     </div>
@@ -139,7 +143,8 @@
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="" class="unit_label" style="margin-top: 37px;">{{$raw_material->alert_quantity_unit->name??''}}</label>
+                                        <label for="" class="unit_label"
+                                            style="margin-top: 37px;">{{$raw_material->alert_quantity_unit->name??''}}</label>
                                     </div>
                                     <div class="col-md-6 hide">
                                         <div class="form-group">
@@ -239,12 +244,12 @@
 <div class="modal fade" id="product_cropper_modal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+
+
+            <x-modal-header>
                 <h5 class="modal-title">@lang('lang.crop_image_before_upload')</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
-            </div>
+
+            </x-modal-header>
             <div class="modal-body">
                 <div class="img-container">
                     <div class="row">
@@ -258,8 +263,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" id="product_crop" class="btn btn-primary">@lang('lang.crop')</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" id="product_crop" class="btn btn-primary col-6">@lang('lang.crop')</button>
+                <button type="button" class="btn btn-default col-6" data-dismiss="modal">Cancel</button>
             </div>
         </div>
     </div>
@@ -272,8 +277,8 @@
 <script type="text/javascript">
 
 </script>
-<script> 
-$("#submit-btn").on("click", function (e) {
+<script>
+    $("#submit-btn").on("click", function (e) {
     e.preventDefault();
     setTimeout(() => {
         if ($("#product-edit-form").valid()) {

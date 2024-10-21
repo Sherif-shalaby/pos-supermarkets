@@ -5,19 +5,18 @@
         'post', 'id' => 'pay_customer_due_form' ])
         !!}
 
-        <div class="modal-header">
 
+        <x-modal-header>
             <h4 class="modal-title">@lang( 'lang.pay_customer_due' )</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-        </div>
+
+        </x-modal-header>
 
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <input type="hidden" value="{{$extract_due}}" name="extract_due"/>
+                            <input type="hidden" value="{{$extract_due}}" name="extract_due" />
                             <label for="">@lang('lang.customer_name'): {{$customer->name}}</label> <br>
                             <label for="">@lang('lang.mobile'): {{$customer->mobile}}</label><br>
                             <label for="">@lang('lang.address'): {{$customer->address}}</label><br>
@@ -32,7 +31,7 @@
                             {!! Form::label('amount', __('lang.amount'). ':*', []) !!} <br>
                             {!! Form::text('amount', @num_format($due), ['class' => 'form-control', 'placeholder'
                             => __('lang.amount')]) !!}
-                            <input type="hidden" value="{{@num_format($due)}}" name="balance"/>
+                            <input type="hidden" value="{{@num_format($due)}}" name="balance" />
                         </div>
                     </div>
 
@@ -49,16 +48,17 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             {!! Form::label('paid_on', __('lang.payment_date'). ':', []) !!} <br>
-                            {!! Form::text('paid_on', @format_date(date('Y-m-d')), ['class' => 'form-control datepicker', 'readonly',
+                            {!! Form::text('paid_on', @format_date(date('Y-m-d')), ['class' => 'form-control
+                            datepicker', 'readonly',
                             'placeholder' => __('lang.payment_date')]) !!}
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6 mt-1">
                         <label class="change_text">@lang('lang.change'): </label>
                         <spand class="change" class="ml-2">0.00</spand>
                         <div class="col-md-6">
-                            <button type="button" 
+                            <button type="button"
                                 class="ml-1 btn btn-danger add_to_customer_balance hide">@lang('lang.add_to_customer_balance')</button>
                             <input type="hidden" name="add_to_customer_balance" id="add_to_customer_balance" value="0">
                         </div>
@@ -97,8 +97,9 @@
         </div>
 
         <div class="modal-footer">
-            <button type="submit" id="pay_due" class="btn btn-primary pay_due">@lang( 'lang.save' )</button>
-            <button type="button" id="close_modal_button" class="btn btn-default" data-dismiss="modal">@lang( 'lang.close' )</button>
+            <button type="submit" id="pay_due" class="btn btn-primary col-6 pay_due">@lang( 'lang.save' )</button>
+            <button type="button" id="close_modal_button" class="btn btn-default col-6" data-dismiss="modal">@lang(
+                'lang.close' )</button>
         </div>
 
         {!! Form::close() !!}
@@ -107,7 +108,6 @@
 </div><!-- /.modal-dialog -->
 
 <script>
-
     $('.selectpicker').selectpicker('refresh');
     $('.datepicker').datepicker({
         language: '{{session('language')}}',
@@ -137,7 +137,7 @@ $('#amount').on('change', function () {
                 $('.change').text(change.toFixed(2));
                 $(document).on("click", ".add_to_customer_balance", function () {
                     $('.change').text(change.toFixed(2)); // Update the change value
-                    
+
                     // if ($('.payment_way').val() !== 'deposit') {
                         $('#add_to_customer_balance').val(change.toFixed(2));
                         console.log($('#add_to_customer_balance').val());

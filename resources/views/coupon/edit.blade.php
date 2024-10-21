@@ -23,7 +23,7 @@
                                             {!! Form::text('coupon_code', $coupon->coupon_code, ['class' =>
                                             'form-control',
                                             'placeholder' => __(
-                                            'lang.coupon_code' ), 'required' ]);
+                                            'lang.coupon_code' ), 'required' ])
                                             !!}
                                             <div class="input-group-append">
                                                 <button type="button" class="btn btn-default btn-sm refresh_code"><i
@@ -35,14 +35,16 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         {!! Form::label('customer_type_ids', __( 'lang.customer_type' ) . ':*') !!}
-                                        {!! Form::select('customer_type_ids[]', $customer_types, $coupon->customer_type_ids, ['class' => 'selectpicker
+                                        {!! Form::select('customer_type_ids[]', $customer_types,
+                                        $coupon->customer_type_ids, ['class' => 'selectpicker
                                         form-control', 'data-live-search' => "true", 'multiple', 'required']) !!}
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         {!! Form::label('store_ids', __( 'lang.store' ) . ':*') !!}
-                                        {!! Form::select('store_ids[]', $stores, $coupon->store_ids, ['class' => 'selectpicker
+                                        {!! Form::select('store_ids[]', $stores, $coupon->store_ids, ['class' =>
+                                        'selectpicker
                                         form-control', 'data-live-search' => "true", 'multiple', 'required', 'id' =>
                                         'store_ids']) !!}
                                     </div>
@@ -62,7 +64,7 @@
                                         'form-control',
                                         'placeholder'
                                         => __( 'lang.amount' ),
-                                        'required' ]);
+                                        'required' ])
                                         !!}
                                     </div>
                                 </div>
@@ -78,7 +80,7 @@
                                         {!! Form::text('amount_to_be_purchase', $coupon->amount_to_be_purchase,
                                         ['class' =>
                                         'form-control amount_to_be_purchase' ,
-                                        'placeholder' => __( 'lang.amount_to_be_purchase' ) ]);
+                                        'placeholder' => __( 'lang.amount_to_be_purchase' ) ])
                                         !!}
                                     </div>
                                 </div>

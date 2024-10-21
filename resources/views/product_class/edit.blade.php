@@ -1,20 +1,21 @@
 <div class="modal-dialog" role="document">
     <div class="modal-content">
 
-        {!! Form::open(['url' => action('ProductClassController@update', $product_class->id), 'method' => 'put', 'id' => 'product_class_add_form']) !!}
+        {!! Form::open(['url' => action('ProductClassController@update', $product_class->id), 'method' => 'put', 'id' =>
+        'product_class_add_form']) !!}
 
-        <div class="modal-header">
 
+        <x-modal-header>
             <h4 class="modal-title">@lang( 'lang.edit' )</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-        </div>
+
+        </x-modal-header>
 
         <div class="modal-body">
             <div class="form-group">
                 {!! Form::label('name', __('lang.name') . ':*') !!}
                 <div class="input-group my-group">
-                    {!! Form::text('name', $product_class->name, ['class' => 'form-control', 'placeholder' => __('lang.name'), 'required', 'readonly' => $product_class->name == 'Extras' ? true : false]) !!}
+                    {!! Form::text('name', $product_class->name, ['class' => 'form-control', 'placeholder' =>
+                    __('lang.name'), 'required', 'readonly' => $product_class->name == 'Extras' ? true : false]) !!}
                     <span class="input-group-btn">
                         <button class="btn btn-default bg-white btn-flat translation_btn" type="button"
                             data-type="product_class"><i class="dripicons-web text-primary fa-lg"></i></button>
@@ -22,22 +23,24 @@
                 </div>
             </div>
             @include('layouts.partials.translation_inputs', [
-                'attribute' => 'name',
-                'translations' => $product_class->translations,
-                'type' => 'product_class',
+            'attribute' => 'name',
+            'translations' => $product_class->translations,
+            'type' => 'product_class',
             ])
             <div class="form-group">
                 {!! Form::label('description', __('lang.description') . ':') !!}
-                {!! Form::text('description', $product_class->description, ['class' => 'form-control', 'placeholder' => __('lang.description')]) !!}
+                {!! Form::text('description', $product_class->description, ['class' => 'form-control', 'placeholder' =>
+                __('lang.description')]) !!}
             </div>
             <div class="form-group">
                 {!! Form::label('sort', __('lang.sort') . ':*') !!}
-                {!! Form::number('sort', $product_class->sort, ['class' => 'form-control', 'placeholder' => __('lang.sort'), 'required']) !!}
+                {!! Form::number('sort', $product_class->sort, ['class' => 'form-control', 'placeholder' =>
+                __('lang.sort'), 'required']) !!}
             </div>
             <div class="form-group">
                 <div class="i-checks">
                     <input id="status" name="status" type="checkbox" @if ($product_class->status == 1) checked @endif
-                        value="1" class="form-control-custom">
+                    value="1" class="form-control-custom">
                     <label for="status"><strong>
                             @lang('lang.active')
                         </strong></label>
@@ -45,24 +48,20 @@
             </div>
             <div class="form-group">
                 <label for="projectinput2">{{ __('categories.image') }}</label>
-                {{--                                                        <input type="file" id="projectinput2"  class="form-control img" name="image" accept="image/*" />--}}
+                {{-- <input type="file" id="projectinput2" class="form-control img" name="image" accept="image/*" />--}}
                 <div class="container mt-3">
-                    <div class="row mx-0"
-                         style="border: 1px solid #ddd;padding: 30px 0px;">
+                    <div class="row mx-0" style="border: 1px solid #ddd;padding: 30px 0px;">
                         <div class="col-12">
                             <div class="mt-3">
                                 <div class="row">
                                     <div class="col-10 offset-1">
                                         <div class="variants">
                                             <div class='file file--upload w-100'>
-                                                <label for='file-input-edit'
-                                                       class="w-100">
+                                                <label for='file-input-edit' class="w-100">
                                                     <i class="fas fa-cloud-upload-alt"></i>Upload
                                                 </label>
                                                 <!-- <input  id="file-input" multiple type='file' /> -->
-                                                <input type="file"
-                                                       id="file-input-edit"
-                                                >
+                                                <input type="file" id="file-input-edit">
                                             </div>
                                         </div>
                                     </div>
@@ -73,15 +72,15 @@
                         <div class="col-10 offset-1">
                             <div class="preview-edit-container">
                                 @if($product_class)
-                                    <div id="preview{{ $product_class->id }}" class="preview">
-                                        @if (!empty($product_class->getFirstMediaUrl('product_class')))
-                                            <img src="{{ $product_class->getFirstMediaUrl('product_class') }}"
-                                                 id="img{{  $product_class->id }}" alt="">
-                                        @else
-                                            <img src="{{ asset('/uploads/' . session('logo')) }}" alt=""
-                                                 id="img{{  $product_class->id }}">
-                                        @endif
-                                    </div>
+                                <div id="preview{{ $product_class->id }}" class="preview">
+                                    @if (!empty($product_class->getFirstMediaUrl('product_class')))
+                                    <img src="{{ $product_class->getFirstMediaUrl('product_class') }}"
+                                        id="img{{  $product_class->id }}" alt="">
+                                    @else
+                                    <img src="{{ asset('/uploads/' . session('logo')) }}" alt=""
+                                        id="img{{  $product_class->id }}">
+                                    @endif
+                                </div>
                                 @endif
                             </div>
                         </div>
@@ -91,27 +90,25 @@
         </div>
 
         <div class="modal-footer">
-            <button id="sub-button-form" class="btn btn-primary">@lang( 'lang.update' )</button>
-            <button type="button" class="btn btn-default" data-dismiss="modal">@lang( 'lang.close' )</button>
+            <button id="sub-button-form" class="btn btn-primary col-6">@lang( 'lang.update' )</button>
+            <button type="button" class="btn btn-default col-6" data-dismiss="modal">@lang( 'lang.close' )</button>
         </div>
 
         {!! Form::close() !!}
         <div class="modal fade" id="imagesModal" tabindex="-1" role="dialog" aria-labelledby="imagesModalLabel"
-             aria-hidden="true">
+            aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
-                    <div class="modal-header">
+
+                    <x-modal-header>
                         <h5 class="modal-title" id="imagesModalLabel">Modal title</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+
+                    </x-modal-header>
                     <div class="modal-body">
                         <div id="croppie-modal-edit" style="display:none">
                             <div id="croppie-container-edit"></div>
                             <button data-dismiss="modal" id="croppie-cancel-btn-edit" type="button"
-                                    class="btn btn-secondary"><i
-                                    class="fas fa-times"></i></button>
+                                class="btn btn-secondary"><i class="fas fa-times"></i></button>
                             <button id="croppie-submit-btn-edit" type="button" class="btn btn-primary"><i
                                     class="fas fa-crop"></i></button>
                         </div>

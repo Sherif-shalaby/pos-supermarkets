@@ -21,14 +21,15 @@
                                     {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
                                     {!! Form::text('name', $customer_type->name, ['class' => 'form-control',
                                     'placeholder' => __(
-                                    'lang.name' ), 'required' ]);
+                                    'lang.name' ), 'required' ])
                                     !!}
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('store', __( 'lang.store' ) . ':*') !!}
-                                    {!! Form::select('stores[]', $stores, $customer_type->customer_type_store->pluck('store_id'), ['class' => 'selectpicker
+                                    {!! Form::select('stores[]', $stores,
+                                    $customer_type->customer_type_store->pluck('store_id'), ['class' => 'selectpicker
                                     form-control', 'data-live-search' => "true", 'multiple', 'required']) !!}
                                 </div>
                             </div>

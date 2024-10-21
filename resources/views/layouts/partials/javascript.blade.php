@@ -15,8 +15,11 @@ $moment_time_format = App\Models\System::getProperty('time_format') == '12' ? 'h
 <script type="text/javascript" src="{{asset('vendor/daterange/js/moment.min.js') }}"></script>
 
 <script type="text/javascript" src="{{asset('vendor/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-<script type="text/javascript" src="{{asset('vendor/bootstrap-datepicker/locales/bootstrap-datepicker.'.session('language').'.min.js') }}"></script>
-<script type="text/javascript" src="{{asset('vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}"></script>
+<script type="text/javascript"
+    src="{{asset('vendor/bootstrap-datepicker/locales/bootstrap-datepicker.'.session('language').'.min.js') }}">
+</script>
+<script type="text/javascript" src="{{asset('vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js')}}">
+</script>
 
 <script type="text/javascript" src="{{asset('vendor/bootstrap-toggle/js/bootstrap-toggle.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('vendor/bootstrap/js/bootstrap-select.min.js') }}"></script>
@@ -28,8 +31,8 @@ $moment_time_format = App\Models\System::getProperty('time_format') == '12' ? 'h
 </script>
 <script type="text/javascript" src="{{asset('vendor/chart.js/Chart.min.js') }}"></script>
 <script type="text/javascript" src="{{asset('vendor/jquery-validation/jquery.validate.min.js') }}"></script>
-<script type="text/javascript"
-    src="{{asset('vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+{{-- <script type="text/javascript"
+    src="{{asset('vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js') }}"></script> --}}
 <script type="text/javascript" src="{{asset('js/charts-custom.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/front.js') }}"></script>
 <script type="text/javascript" src="{{asset('vendor/daterange/js/knockout-3.4.2.js') }}"></script>
@@ -69,4 +72,3 @@ $moment_time_format = App\Models\System::getProperty('time_format') == '12' ? 'h
 <script type="text/javascript" src="{{asset('js/currency_exchange.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/customer.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/cropper.js') }}"></script>
-
