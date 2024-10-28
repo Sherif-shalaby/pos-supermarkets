@@ -4,9 +4,17 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+
+        <x-page-title>
+
             <h3 class="print-title">@lang('lang.due_report')</h3>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -67,8 +75,8 @@
 
                         <tbody>
                             @php
-                                $total_paid = 0;
-                                $total_due = 0;
+                            $total_paid = 0;
+                            $total_due = 0;
                             @endphp
                             @foreach ($dues as $due)
                             <tr>
@@ -89,11 +97,11 @@
                                         <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
                                             user="menu">
                                             {{-- @can('sale.pos.create_and_edit')
-                                                <li>
+                                            <li>
 
-                                                    <a data-href="{{action('SellController@print', $due->id)}}"
-                                            class="btn print-invoice"><i class="dripicons-print"></i>
-                                            @lang('lang.generate_invoice')</a>
+                                                <a data-href="{{action('SellController@print', $due->id)}}"
+                                                    class="btn print-invoice"><i class="dripicons-print"></i>
+                                                    @lang('lang.generate_invoice')</a>
                                             </li>
                                             <li class="divider"></li>
                                             @endcan --}}
@@ -109,8 +117,8 @@
                                             @can('sale.pos.create_and_edit')
                                             <li>
 
-                                                <a href="{{action('SellController@edit', $due->id)}}"
-                                                    class="btn"><i class="dripicons-document-edit"></i>
+                                                <a href="{{action('SellController@edit', $due->id)}}" class="btn"><i
+                                                        class="dripicons-document-edit"></i>
                                                     @lang('lang.edit')</a>
                                             </li>
                                             <li class="divider"></li>
@@ -154,8 +162,8 @@
                                 </td>
                             </tr>
                             @php
-                                $total_paid += $due->transaction_payments->sum('amount');
-                                $total_due += $due->final_total - $due->transaction_payments->sum('amount');
+                            $total_paid += $due->transaction_payments->sum('amount');
+                            $total_due += $due->final_total - $due->transaction_payments->sum('amount');
                             @endphp
                             @endforeach
                         </tbody>

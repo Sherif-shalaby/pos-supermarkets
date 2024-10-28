@@ -4,9 +4,16 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h4>@lang('lang.summary_report')</h4>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -239,7 +246,8 @@
                                 <tr>
                                     <td>@lang('lang.profit')</td>
                                     <td style="text-align: right">
-                                        {{@num_format($sales->total_amount - $add_stocks->total_amount - $sale_returns->total_amount + $purchase_returns->total_amount)}}
+                                        {{@num_format($sales->total_amount - $add_stocks->total_amount -
+                                        $sale_returns->total_amount + $purchase_returns->total_amount)}}
                                     </td>
                                 </tr>
                             </tbody>
@@ -313,7 +321,8 @@
                                 </tr>
                                 <tr>
                                     <td>@lang('lang.bank_transfer')</td>
-                                    <td style="text-align: right">{{@num_format($payment_received->total_bank_transfer)}}</td>
+                                    <td style="text-align: right">
+                                        {{@num_format($payment_received->total_bank_transfer)}}</td>
                                 </tr>
                                 <tr>
                                     <td>@lang('lang.credit_card')</td>
@@ -321,7 +330,8 @@
                                 </tr>
                                 <tr>
                                     <td>@lang('lang.gift_card')</td>
-                                    <td style="text-align: right">{{@num_format($payment_received->total_gift_card)}}</td>
+                                    <td style="text-align: right">{{@num_format($payment_received->total_gift_card)}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>@lang('lang.paypal')</td>
@@ -364,7 +374,8 @@
                                 </tr>
                                 <tr>
                                     <td>@lang('lang.bank_transfer')</td>
-                                    <td style="text-align: right">{{@num_format($payment_sent->total_bank_transfer)}}</td>
+                                    <td style="text-align: right">{{@num_format($payment_sent->total_bank_transfer)}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>@lang('lang.credit_card')</td>

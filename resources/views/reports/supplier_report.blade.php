@@ -4,9 +4,16 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h3 class="print-title">@lang('lang.supplier_report')</h3>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -105,7 +112,8 @@
                                         </td>
                                         <td>{{@num_format($add_stock->final_total)}}</td>
                                         <td>{{@num_format($add_stock->transaction_payments->sum('amount'))}}</td>
-                                        <td>{{@num_format($add_stock->final_total - $add_stock->transaction_payments->sum('amount'))}}
+                                        <td>{{@num_format($add_stock->final_total -
+                                            $add_stock->transaction_payments->sum('amount'))}}
                                         </td>
                                         <td>@if($add_stock->status == 'received')<span
                                                 class="badge badge-success">@lang('lang.completed')</span>@else
@@ -304,10 +312,12 @@
                                         </td>
                                         <td>{{@num_format($purchase_order->final_total)}}</td>
                                         <td>{{@num_format($purchase_order->transaction_payments->sum('amount'))}}</td>
-                                        <td>{{@num_format($purchase_order->final_total - $purchase_order->transaction_payments->sum('amount'))}}
+                                        <td>{{@num_format($purchase_order->final_total -
+                                            $purchase_order->transaction_payments->sum('amount'))}}
                                         </td>
                                         <td>@if($purchase_order->status == 'final')<span
-                                                class="badge badge-success">@lang('lang.completed')</span>@elseif($purchase_order->status == 'sent_admin') Sent Admin @else
+                                                class="badge badge-success">@lang('lang.completed')</span>@elseif($purchase_order->status
+                                            == 'sent_admin') Sent Admin @else
                                             {{ucfirst($purchase_order->status)}} @endif</td>
                                         <td>
 
@@ -401,7 +411,8 @@
                                         </td>
                                         <td>{{@num_format($return->final_total)}}</td>
                                         <td>{{@num_format($return->transaction_payments->sum('amount'))}}</td>
-                                        <td>{{@num_format($return->final_total - $return->transaction_payments->sum('amount'))}}
+                                        <td>{{@num_format($return->final_total -
+                                            $return->transaction_payments->sum('amount'))}}
                                         </td>
                                         <td>@if($return->status == 'final')<span
                                                 class="badge badge-success">@lang('lang.completed')</span>@else

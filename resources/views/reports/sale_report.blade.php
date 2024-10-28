@@ -4,9 +4,17 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+
+        <x-page-title>
+
             <h3 class="print-title">@lang('lang.sale_report')</h3>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -79,7 +87,7 @@
                                 <th class="sum">@lang('lang.sold_amount')</th>
                                 <th class="sum">@lang('lang.sold_qty')</th>
                                 <th class="sum">@lang('lang.in_stock')</th>
-                                <th >@lang('lang.sale_note')</th>
+                                <th>@lang('lang.sale_note')</th>
                             </tr>
                         </thead>
 
@@ -89,7 +97,8 @@
                                 <td>{{$transaction->product_name}}</td>
                                 <td> {{@num_format($transaction->sold_amount)}}</td>
                                 <td> {{@num_format($transaction->sold_qty)}}</td>
-                                <td> {{preg_match('/\.\d*[1-9]+/', (string)$transaction->in_stock) ? $transaction->in_stock : @num_format($transaction->in_stock) }}</td>
+                                <td> {{preg_match('/\.\d*[1-9]+/', (string)$transaction->in_stock) ?
+                                    $transaction->in_stock : @num_format($transaction->in_stock) }}</td>
                                 <td> {{$transaction->sale_note}}</td>
                             </tr>
 

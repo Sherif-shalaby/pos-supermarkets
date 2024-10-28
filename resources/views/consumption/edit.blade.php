@@ -7,12 +7,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+                    <x-page-title>
+
                         <h4>@lang('lang.edit_consumption')</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
                     <div class="card-body">
                         <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
-                        {!! Form::open(['url' => action('ConsumptionController@update', $consumption->id), 'id' => 'consumption-form',
+                        {!! Form::open(['url' => action('ConsumptionController@update', $consumption->id), 'id' =>
+                        'consumption-form',
                         'method'
                         =>
                         'PUT', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
@@ -41,7 +49,8 @@
                             <div class="col-md-3">
                                 {!! Form::label('date_and_time', __('lang.date_and_time'), []) !!}
                                 <input type="datetime-local" id="date_and_time" name="date_and_time"
-                                    value="@if(!empty($consumption->transaction_id)){{\Carbon\Carbon::parse($consumption->date_and_time)->format('Y-m-d\TH:i')}}@else{{$consumption->date_and_time}}@endif" class="form-control">
+                                    value="@if(!empty($consumption->transaction_id)){{\Carbon\Carbon::parse($consumption->date_and_time)->format('Y-m-d\TH:i')}}@else{{$consumption->date_and_time}}@endif"
+                                    class="form-control">
 
                             </div>
                         </div>
@@ -60,7 +69,8 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @include('consumption.partial.consumption_row', ['row_id' => 0, 'consumption' => $consumption])
+                                @include('consumption.partial.consumption_row', ['row_id' => 0, 'consumption' =>
+                                $consumption])
                             </tbody>
                         </table>
 

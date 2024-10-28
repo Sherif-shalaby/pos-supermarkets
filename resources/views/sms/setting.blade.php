@@ -7,9 +7,15 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+                    <x-page-title>
+
                         <h4>@lang('lang.settings')</h4>
-                    </div>
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
+
                     {!! Form::open(['url' => action('SmsController@saveSetting'), 'method' => 'post', 'id' => 'sms_form'
                     ]) !!}
                     <div class="col-md-12">
@@ -17,21 +23,24 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="sms_username">{{__('lang.username')}}:</label>
-                                    <input type="text" class="form-control" id="sms_username" name="sms_username" required
+                                    <input type="text" class="form-control" id="sms_username" name="sms_username"
+                                        required
                                         value="@if(!empty($settings['sms_username'])){{$settings['sms_username']}}@endif">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="sms_password">{{__('lang.password')}}:</label>
-                                    <input type="text" class="form-control" id="sms_password" name="sms_password" required
+                                    <input type="text" class="form-control" id="sms_password" name="sms_password"
+                                        required
                                         value="@if(!empty($settings['sms_password'])){{$settings['sms_password']}}@endif">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="sms_sender_name">{{__('lang.sender_name')}}:</label>
-                                    <input type="text" class="form-control" id="sms_sender_name" name="sms_sender_name" required
+                                    <input type="text" class="form-control" id="sms_sender_name" name="sms_sender_name"
+                                        required
                                         value="@if(!empty($settings['sms_sender_name'])){{$settings['sms_sender_name']}}@endif">
                                 </div>
                             </div>

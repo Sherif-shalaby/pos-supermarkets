@@ -7,20 +7,31 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+                    <x-page-title>
+
                         <h4>@lang('lang.sms')</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
+
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('employee_id', __('lang.employee'), []) !!}
-                                    {!! Form::select('employee_id[]', $employees, explode(',', $sms->mobile_numbers), ['class' => 'form-control selectpicker', 'multiple', 'id' => 'employee_id' ,'placeholder' => __('lang.please_select')]) !!}
+                                    {!! Form::select('employee_id[]', $employees, explode(',', $sms->mobile_numbers),
+                                    ['class' => 'form-control selectpicker', 'multiple', 'id' => 'employee_id'
+                                    ,'placeholder' => __('lang.please_select')]) !!}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {!! Form::open(['url' => action('SmsController@update', $sms->id), 'method' => 'put', 'id' => 'sms_form'
+                    {!! Form::open(['url' => action('SmsController@update', $sms->id), 'method' => 'put', 'id' =>
+                    'sms_form'
                     ]) !!}
                     <div class="col-md-12">
                         <div class=" row">

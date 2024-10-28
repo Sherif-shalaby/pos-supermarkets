@@ -205,9 +205,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+                    <x-page-title>
+
                         <h4>@lang('lang.edit_product')</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
                     <div class="card-body">
                         <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
                         {!! Form::open(['url' => action('ProductController@update', $product->id), 'id' =>

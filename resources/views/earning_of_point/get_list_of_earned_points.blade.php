@@ -7,9 +7,17 @@
 
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header d-flex align-items-center">
+
+
+            <x-page-title>
+
                 <h4 class="print-title">@lang('lang.list_of_earn_point_by_transactions')</h4>
-            </div>
+
+
+                <x-slot name="buttons">
+
+                </x-slot>
+            </x-page-title>
             <div class="card-body">
 
                 <div class="table-responsive">
@@ -36,7 +44,8 @@
                                 <td>{{$transaction->store->name ?? ''}}</td>
                                 <td>{{ucfirst($transaction->created_by_user->name ?? '')}}</td>
                                 <td>{{$transaction->customer->name ?? ''}}</td>
-                                <td style="color: rgb(85, 85, 231)"><a data-href="{{action('SellController@show', $transaction->id)}}"
+                                <td style="color: rgb(85, 85, 231)"><a
+                                        data-href="{{action('SellController@show', $transaction->id)}}"
                                         data-container=".view_modal"
                                         class="btn btn-modal">{{$transaction->invoice_no}}</a></td>
                                 <td>

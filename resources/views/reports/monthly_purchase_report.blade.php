@@ -4,9 +4,16 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h4>@lang('lang.monthly_purchase_report')</h4>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         @if(session('user.is_superadmin'))
         <form action="">
             <div class="col-md-12">

@@ -7,9 +7,16 @@
 
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header d-flex align-items-center">
+
+            <x-page-title>
+
                 <h4 class="print-title">@lang('lang.list_of_redeemed_point_by_transactions')</h4>
-            </div>
+
+
+                <x-slot name="buttons">
+
+                </x-slot>
+            </x-page-title>
             <div class="card-body">
 
                 <div class="table-responsive">
@@ -30,9 +37,9 @@
                         </thead>
                         <tbody>
                             @php
-                                $total_paid = 0;
-                                $total_point_earned = 0;
-                                $total_balance = 0;
+                            $total_paid = 0;
+                            $total_point_earned = 0;
+                            $total_balance = 0;
                             @endphp
                             @foreach($transactions as $transaction)
                             <tr>
@@ -61,9 +68,9 @@
 
                             </tr>
                             @php
-                                $total_paid += $transaction->transaction_payments->sum('amount');
-                                $total_point_earned += $transaction->rp_redeemed;
-                                $total_balance += $transaction->customer->total_rp;
+                            $total_paid += $transaction->transaction_payments->sum('amount');
+                            $total_point_earned += $transaction->rp_redeemed;
+                            $total_balance += $transaction->customer->total_rp;
                             @endphp
                             @endforeach
                         </tbody>

@@ -4,9 +4,17 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+
+        <x-page-title>
+
             <h3 class="print-title">@lang('lang.product_quantity_alert_report')</h3>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -74,16 +82,19 @@
                                 <td> {{@num_format($item->alert_quantity)}}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">@lang('lang.action')
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">@lang('lang.action')
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
-                                        <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
+                                        <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
+                                            user="menu">
                                             @can('product_module.product.view')
                                             <li>
                                                 <a data-href="{{action('ProductController@show', $item->id)}}"
-                                                    data-container=".view_modal" class="btn btn-modal"><i class="fa fa-eye"></i>
+                                                    data-container=".view_modal" class="btn btn-modal"><i
+                                                        class="fa fa-eye"></i>
                                                     @lang('lang.view')</a>
                                             </li>
                                             <li class="divider"></li>

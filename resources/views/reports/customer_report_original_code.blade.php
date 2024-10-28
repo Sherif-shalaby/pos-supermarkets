@@ -4,9 +4,17 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+
+        <x-page-title>
             <h3 class="print-title">@lang('lang.customer_report')</h3>
-        </div>
+
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -100,8 +108,10 @@
                                     @foreach ($sales as $sale)
                                     <tr>
                                         <td>{{@format_date($sale->transaction_date)}}</td>
-                                        <td>{{$sale->invoice_no}} @if(!empty($sale->return_parent))<a data-href="{{action('SellReturnController@show', $sale->id)}}"
-                                            data-container=".view_modal" class="btn btn-modal" style="color: #007bff;">R</a>@endif</td>
+                                        <td>{{$sale->invoice_no}} @if(!empty($sale->return_parent))<a
+                                                data-href="{{action('SellReturnController@show', $sale->id)}}"
+                                                data-container=".view_modal" class="btn btn-modal"
+                                                style="color: #007bff;">R</a>@endif</td>
                                         <td>@if(!empty($sale->customer)){{$sale->customer->name}}@endif</td>
                                         <td>
                                             @foreach ($sale->transaction_sell_lines as $line)
@@ -111,7 +121,8 @@
                                         </td>
                                         <td>{{@num_format($sale->final_total)}}</td>
                                         <td>{{@num_format($sale->transaction_payments->sum('amount'))}}</td>
-                                        <td>{{@num_format($sale->final_total - $sale->transaction_payments->sum('amount'))}}
+                                        <td>{{@num_format($sale->final_total -
+                                            $sale->transaction_payments->sum('amount'))}}
                                         </td>
                                         <td>@if($sale->status == 'final')<span
                                                 class="badge badge-success">@lang('lang.completed')</span>@else
@@ -127,11 +138,11 @@
                                                 <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
                                                     user="menu">
                                                     {{-- @can('sale.pos.create_and_edit')
-                                                            <li>
+                                                    <li>
 
-                                                                <a data-href="{{action('SellController@print', $sale->id)}}"
-                                                    class="btn print-invoice"><i class="dripicons-print"></i>
-                                                    @lang('lang.generate_invoice')</a>
+                                                        <a data-href="{{action('SellController@print', $sale->id)}}"
+                                                            class="btn print-invoice"><i class="dripicons-print"></i>
+                                                            @lang('lang.generate_invoice')</a>
                                                     </li>
                                                     <li class="divider"></li>
                                                     @endcan --}}
@@ -249,11 +260,11 @@
                                                 <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
                                                     user="menu">
                                                     {{-- @can('sale.pos.create_and_edit')
-                                                        <li>
+                                                    <li>
 
-                                                            <a data-href="{{action('SellController@print', $payment->id)}}"
-                                                    class="btn print-invoice"><i class="dripicons-print"></i>
-                                                    @lang('lang.generate_invoice')</a>
+                                                        <a data-href="{{action('SellController@print', $payment->id)}}"
+                                                            class="btn print-invoice"><i class="dripicons-print"></i>
+                                                            @lang('lang.generate_invoice')</a>
                                                     </li>
                                                     <li class="divider"></li>
                                                     @endcan --}}
@@ -362,7 +373,8 @@
                                         </td>
                                         <td>{{@num_format($quotation->final_total)}}</td>
                                         <td>{{@num_format($quotation->transaction_payments->sum('amount'))}}</td>
-                                        <td>{{@num_format($quotation->final_total - $quotation->transaction_payments->sum('amount'))}}
+                                        <td>{{@num_format($quotation->final_total -
+                                            $quotation->transaction_payments->sum('amount'))}}
                                         </td>
                                         <td>@if($quotation->status == 'final')<span
                                                 class="badge badge-success">@lang('lang.completed')</span>@else
@@ -476,7 +488,8 @@
                                         </td>
                                         <td>{{@num_format($return->final_total)}}</td>
                                         <td>{{@num_format($return->transaction_payments->sum('amount'))}}</td>
-                                        <td>{{@num_format($return->final_total - $return->transaction_payments->sum('amount'))}}
+                                        <td>{{@num_format($return->final_total -
+                                            $return->transaction_payments->sum('amount'))}}
                                         </td>
                                         <td>@if($return->status == 'final')<span
                                                 class="badge badge-success">@lang('lang.completed')</span>@else

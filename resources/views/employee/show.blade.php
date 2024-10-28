@@ -12,10 +12,19 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex align-items-center">
-                    <h4>@lang('lang.employee') </h4> <a href="{{action('EmployeeController@sendLoginDetails', $employee->id)}}"
-                        class="btn btn-primary btn-xs" style="margin-left: 10px;"><i class="fa fa-paper-plane"></i> @lang('lang.send_credentials')</a>
-                </div>
+                <x-page-title>
+
+
+                    <h4>@lang('lang.employee') </h4>
+
+                    <x-slot name="buttons">
+                        <a href="{{action('EmployeeController@sendLoginDetails', $employee->id)}}"
+                            class="btn btn-primary btn-xs" style="margin-left: 10px;"><i class="fa fa-paper-plane"></i>
+                            @lang('lang.send_credentials')</a>
+
+                    </x-slot>
+                </x-page-title>
+
                 <div class="card-body">
                     <div class="row">
                         <div class="col-md-8">
@@ -64,8 +73,8 @@
                         @foreach ($number_of_leaves as $number_of_leave)
                         <div class="col-sm-6">
                             <div class="i-checks">
-                                <label
-                                    for="number_of_leaves{{$number_of_leave->id}}"><strong>{{$number_of_leave->name ?? ''}}</strong></label>
+                                <label for="number_of_leaves{{$number_of_leave->id}}"><strong>{{$number_of_leave->name
+                                        ?? ''}}</strong></label>
                                 {{$number_of_leave->number_of_days}}
                             </div>
                         </div>
@@ -81,7 +90,8 @@
 
                                     <label for="fixed_wage"><strong>@lang('lang.fixed_wage')</strong></label> <br>
                                     <label for="">@lang('lang.fixed_wage_value') :</label>
-                                    {{!empty($employee->fixed_wage_value) ? @num_format($employee->fixed_wage_value) : null}} <br>
+                                    {{!empty($employee->fixed_wage_value) ? @num_format($employee->fixed_wage_value) :
+                                    null}} <br>
                                     <label for="">@lang('lang.payment_cycle') :</label> {{$employee->payment_cycle}}
                                 </div>
                             </div>
@@ -93,22 +103,27 @@
                             <div class="form-group">
                                 <div class="" style="margin-top: 20px">
                                     <label for="commission"><strong>@lang('lang.commission_%'): </strong></label>
-                                    {{!empty($employee->commission_value) ? @num_format($employee->commission_value) : null}}
+                                    {{!empty($employee->commission_value) ? @num_format($employee->commission_value) :
+                                    null}}
                                 </div>
                             </div>
                             <label for="">@lang('lang.comission_type'): </label>
                             {{!empty($employee->commission_type) ? ucfirst($employee->commission_type) : null}} <br>
                             <label for="">@lang('lang.commission_calculation_period'): </label>
-                            {{!empty($commission_calculation_period[$employee->commission_calculation_period]) ? $commission_calculation_period[$employee->commission_calculation_period] : null}}
+                            {{!empty($commission_calculation_period[$employee->commission_calculation_period]) ?
+                            $commission_calculation_period[$employee->commission_calculation_period] : null}}
                             <br>
                             <label for="">@lang('lang.commission_customer_types'): </label>
-                            {{!empty($employee->commission_customer_types) ? implode(', ', $employee->commission_customer_type->pluck('name')->toArray()) : null}}
+                            {{!empty($employee->commission_customer_types) ? implode(', ',
+                            $employee->commission_customer_type->pluck('name')->toArray()) : null}}
                             <br>
                             <label for="">@lang('lang.commission_stores'): </label>
-                            {{!empty($employee->commission_stores) ? implode(', ', $employee->commission_store->pluck('name')->toArray()) : null}}
+                            {{!empty($employee->commission_stores) ? implode(', ',
+                            $employee->commission_store->pluck('name')->toArray()) : null}}
                             <br>
                             <label for="">@lang('lang.commission_cashiers'): </label>
-                            {{!empty($employee->commission_cashiers) ? implode(', ', $employee->commission_cashier->pluck('name')->toArray()) : null}}
+                            {{!empty($employee->commission_cashiers) ? implode(', ',
+                            $employee->commission_cashier->pluck('name')->toArray()) : null}}
                             <br>
                             @endif
                         </div>
@@ -233,7 +248,8 @@
                                                 $key_module.'.'.$key_sub_module.'.create_and_edit';
                                                 $delete_permission = $key_module.'.'.$key_sub_module.'.delete';
                                                 @endphp
-                                                @if(Spatie\Permission\Models\Permission::where('name', $view_permission)->first())
+                                                @if(Spatie\Permission\Models\Permission::where('name',
+                                                $view_permission)->first())
                                                 <td class="">
                                                     {!! Form::checkbox('permissions['.$view_permission.']', 1,
                                                     !empty($user)
@@ -242,7 +258,8 @@
                                                     ['class' => 'check_box', 'disabled']) !!}
                                                 </td>
                                                 @endif
-                                                @if(Spatie\Permission\Models\Permission::where('name', $create_and_edit_permission)->first())
+                                                @if(Spatie\Permission\Models\Permission::where('name',
+                                                $create_and_edit_permission)->first())
                                                 <td class="">
                                                     {!! Form::checkbox('permissions['.$create_and_edit_permission.']',
                                                     1,
@@ -252,7 +269,8 @@
                                                     'check_box', 'disabled']) !!}
                                                 </td>
                                                 @endif
-                                                @if(Spatie\Permission\Models\Permission::where('name', $delete_permission)->first())
+                                                @if(Spatie\Permission\Models\Permission::where('name',
+                                                $delete_permission)->first())
                                                 <td class="">
                                                     {!! Form::checkbox('permissions['.$delete_permission.']', 1,
                                                     !empty($user) &&

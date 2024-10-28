@@ -4,9 +4,17 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+
+        <x-page-title>
+
             <h4>@lang('lang.best_seller_report')</h4>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         @if(session('user.is_superadmin'))
         <form action="">
             <div class="col-md-12">
@@ -33,11 +41,12 @@
         <div class="card-body">
             <div class="col-md-12">
                 @php
-                    $color = '#733686';
-                    $color_rgba = 'rgba(115, 54, 134, 0.8)';
+                $color = '#733686';
+                $color_rgba = 'rgba(115, 54, 134, 0.8)';
 
                 @endphp
-                <canvas id="bestSeller" data-color="{{$color}}" data-color_rgba="{{$color_rgba}}" data-product = "{{json_encode($product)}}" data-sold_qty="{{json_encode($sold_qty)}}" ></canvas>
+                <canvas id="bestSeller" data-color="{{$color}}" data-color_rgba="{{$color_rgba}}"
+                    data-product="{{json_encode($product)}}" data-sold_qty="{{json_encode($sold_qty)}}"></canvas>
             </div>
         </div>
     </div>

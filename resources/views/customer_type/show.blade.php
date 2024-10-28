@@ -4,9 +4,16 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h4>@lang('lang.customer_details')</h4>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -35,8 +42,8 @@
             <div class="col-md-12">
                 <ul class="nav nav-tabs ml-4 mt-3" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link @if(empty(request()->show) || request()->show == 'customers') active @endif" href="#customers" role="tab"
-                            data-toggle="tab">@lang('lang.customers')</a>
+                        <a class="nav-link @if(empty(request()->show) || request()->show == 'customers') active @endif"
+                            href="#customers" role="tab" data-toggle="tab">@lang('lang.customers')</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link @if(request()->show == 'discounts') active @endif" href="#store-discount"
@@ -47,7 +54,8 @@
                 </ul>
 
                 <div class="tab-content">
-                    <div role="tabpanel" class="tab-pane fade @if(empty(request()->show) ||  request()->show == 'customers') show active @endif"
+                    <div role="tabpanel"
+                        class="tab-pane fade @if(empty(request()->show) ||  request()->show == 'customers') show active @endif"
                         id="customers">
                         <div class="table-responsive">
                             <table id="store_table" class="table dataTable">
@@ -69,23 +77,26 @@
                                         <td>{{$customer->customer_type->name}}</td>
                                         <td>{{$customer->name}}</td>
                                         <td>@if(!empty($customer->getFirstMediaUrl('customer_photo')))<img
-                                                src="{{$customer->getFirstMediaUrl('customer_photo')}}" alt="photo" width="50"
-                                                height="50">@endif</td>
+                                                src="{{$customer->getFirstMediaUrl('customer_photo')}}" alt="photo"
+                                                width="50" height="50">@endif</td>
                                         <td>{{$customer->mobile_number}}</td>
                                         <td>{{$customer->address}}</td>
                                         <td>{{@format_date($customer->created_at)}}</td>
                                         <td>{{$customer->created_by_user->name ?? ''}}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
-                                                    aria-haspopup="true" aria-expanded="false">@lang('lang.action')
+                                                <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                                                    data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">@lang('lang.action')
                                                     <span class="caret"></span>
                                                     <span class="sr-only">Toggle Dropdown</span>
                                                 </button>
-                                                <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
+                                                <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
+                                                    user="menu">
                                                     @can('customer_module.customer.view')
                                                     <li>
-                                                        <a href="{{action('CustomerController@show', $customer->id)}}" class="btn">
+                                                        <a href="{{action('CustomerController@show', $customer->id)}}"
+                                                            class="btn">
                                                             <i class="dripicons-document"></i> @lang('lang.view')</a>
                                                     </li>
                                                     <li class="divider"></li>
@@ -100,7 +111,8 @@
                                                     @can('adjustment.customer_balance_adjustment.create_and_edit')
                                                     <li>
                                                         <a href="{{action('CustomerBalanceAdjustmentController@create', ['customer_id' => $customer->id])}}"
-                                                            class="btn"><i class="fa fa-adjust"></i> @lang('lang.adjust_customer_balance')</a>
+                                                            class="btn"><i class="fa fa-adjust"></i>
+                                                            @lang('lang.adjust_customer_balance')</a>
                                                     </li>
                                                     <li class="divider"></li>
                                                     @endcan
@@ -108,8 +120,8 @@
                                                     <li>
 
                                                         <a href="{{action('CustomerPointAdjustmentController@create', ['customer_id' => $customer->id])}}"
-                                                             class="btn"><i
-                                                                class="fa fa-adjust"></i> @lang('lang.adjust_customer_points')</a>
+                                                            class="btn"><i class="fa fa-adjust"></i>
+                                                            @lang('lang.adjust_customer_points')</a>
                                                     </li>
                                                     <li class="divider"></li>
                                                     @endcan

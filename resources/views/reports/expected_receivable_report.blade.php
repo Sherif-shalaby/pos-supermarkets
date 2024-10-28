@@ -4,9 +4,16 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h3 class="print-title">@lang('lang.expected_receivable_report')</h3>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -111,8 +118,10 @@
                             @foreach($sales as $sale)
                             <tr>
                                 <td>{{@format_date($sale->transaction_date)}}</td>
-                                <td>{{$sale->invoice_no}} @if(!empty($sale->return_parent))<a data-href="{{action('SellReturnController@show', $sale->id)}}"
-                                    data-container=".view_modal" class="btn btn-modal" style="color: #007bff;">R</a>@endif</td>
+                                <td>{{$sale->invoice_no}} @if(!empty($sale->return_parent))<a
+                                        data-href="{{action('SellReturnController@show', $sale->id)}}"
+                                        data-container=".view_modal" class="btn btn-modal"
+                                        style="color: #007bff;">R</a>@endif</td>
                                 <td>@if(!empty($sale->customer)){{$sale->customer->name}}@endif</td>
                                 <td>{{ucfirst($sale->status)}}</td>
                                 <td>@if(!empty($payment_status_array[$sale->payment_status])){{$payment_status_array[$sale->payment_status]}}@endif

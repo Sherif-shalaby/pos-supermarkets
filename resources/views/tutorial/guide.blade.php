@@ -6,11 +6,18 @@
 
     <div class="col-md-12  no-print">
         <div class="card">
-            <div class="card-header d-flex align-items-center">
-                <a style="color: white" href="{{action('TutorialController@getTutorialsCategoryGuide')}}" class="btn btn-info ml-2"><i
-                    class="fa fa-arrow-left"></i>
-                @lang('lang.back')</a>
-            </div>
+
+            <x-page-title>
+
+
+
+                <x-slot name="buttons">
+                    <a style="color: white" href="{{action('TutorialController@getTutorialsCategoryGuide')}}"
+                        class="btn btn-info ml-2"><i class="fa fa-arrow-left"></i>
+                        @lang('lang.back')</a>
+
+                </x-slot>
+            </x-page-title>
             <div class="card-body">
                 <div class="row">
                     <table class="table table-bordered" id="tutorial_table">
@@ -22,8 +29,7 @@
                         </thead>
                         <tbody>
                             @forelse ($tutorialsDataArray as $item)
-                            <tr class="tr" style="cursor: pointer;"
-                                data-href="{{$item['link']}}">
+                            <tr class="tr" style="cursor: pointer;" data-href="{{$item['link']}}">
                                 <td>{{$item['name']}}</td>
                                 <td>{{@format_date($item['created_at'])}}</td>
                             </tr>

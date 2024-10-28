@@ -7,9 +7,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+                    <x-page-title>
+
                         <h4>@lang('lang.purchase_order')</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
                     {!! Form::open(['url' => action('PurchaseOrderController@store'), 'method' => 'post', 'id' =>
                     'purchase_order_form']) !!}
                     <div class="card-body">
@@ -75,7 +82,8 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 25%" class="col-sm-8">@lang( 'lang.products' )</th>
-                                            @if(session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket')
+                                            @if(session('system_mode') == 'pos' || session('system_mode') == 'garments'
+                                            || session('system_mode') == 'supermarket')
                                             <th style="width: 25%" class="col-sm-4">@lang( 'lang.sku' )</th>
                                             @endif
                                             <th style="width: 25%" class="col-sm-4">@lang( 'lang.quantity' )</th>

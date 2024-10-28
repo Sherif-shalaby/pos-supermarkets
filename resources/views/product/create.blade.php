@@ -6,11 +6,17 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="row mr-2 ml-2">
-                        <div class="card-header d-flex align-items-center col-md-7">
-                            <h4>@lang('lang.add_new_product')</h4>
-                        </div>
-                    </div>
+
+
+                    <x-page-title>
+
+
+                        <h4>@lang('lang.add_new_product')</h4>
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
                     <div class="card-body">
                         <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
                         {!! Form::open(['url' => action('ProductController@store'), 'id' => 'product-form', 'method' =>

@@ -7,12 +7,20 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+                    <x-page-title>
+
                         <h4>@lang('lang.sms')</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
+
+
                     <div class="col-md-12">
-                        <input id="select_all" name="select_all" type="checkbox" value="1"
-                        class="form-control-custom">
+                        <input id="select_all" name="select_all" type="checkbox" value="1" class="form-control-custom">
                         <label for="select_all"><strong>@lang('lang.select_all')</strong></label>
                     </div>
                     <div class="col-md-12">
@@ -20,7 +28,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('employee_id', __('lang.employee'), []) !!}
-                                    {!! Form::select('employee_id[]', ['select_all' => __('lang.select_all')] + $employees, !empty($employee_mobile_number) ?
+                                    {!! Form::select('employee_id[]', ['select_all' => __('lang.select_all')] +
+                                    $employees, !empty($employee_mobile_number) ?
                                     [$employee_mobile_number] : false, ['class' => 'form-control selectpicker',
                                     'multiple',
                                     'data-live-search' =>'true' ,'id' => 'employee_id']) !!}
@@ -29,7 +38,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('customer_id', __('lang.customer'), []) !!}
-                                    {!! Form::select('customer_id[]', ['select_all' => __('lang.select_all')] + $customers, !empty($customer_mobile_number) ?
+                                    {!! Form::select('customer_id[]', ['select_all' => __('lang.select_all')] +
+                                    $customers, !empty($customer_mobile_number) ?
                                     [$customer_mobile_number] : false, ['class' => 'form-control selectpicker',
                                     'multiple',
                                     'data-live-search' =>'true' ,'id' => 'customer_id']) !!}
@@ -38,7 +48,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('supplier_id', __('lang.supplier'), []) !!}
-                                    {!! Form::select('supplier_id[]', ['select_all' => __('lang.select_all')] + $suppliers, !empty($supplier_mobile_number) ?
+                                    {!! Form::select('supplier_id[]', ['select_all' => __('lang.select_all')] +
+                                    $suppliers, !empty($supplier_mobile_number) ?
                                     [$supplier_mobile_number] : false, ['class' => 'form-control selectpicker',
                                     'multiple',
                                     'data-live-search' =>'true' ,'id' => 'supplier_id']) !!}

@@ -4,9 +4,17 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+
+        <x-page-title>
+
             <h4>@lang('lang.payment_report')</h4>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -66,7 +74,7 @@
                                 <th>@lang('lang.sale_ref')</th>
                                 <th>@lang('lang.purchase_ref')</th>
                                 <th>@lang('lang.paid_by')</th>
-                                <th  class="sum">@lang('lang.amount')</th>
+                                <th class="sum">@lang('lang.amount')</th>
                                 <th>@lang('lang.created_by')</th>
                                 <th class="notexport">@lang('lang.action')</th>
                             </tr>
@@ -99,8 +107,8 @@
                                             <li>
 
                                                 <a data-href="{{action('SellController@print', $transaction->id)}}"
-                                            class="btn print-invoice"><i class="dripicons-print"></i>
-                                            @lang('lang.generate_invoice')</a>
+                                                    class="btn print-invoice"><i class="dripicons-print"></i>
+                                                    @lang('lang.generate_invoice')</a>
                                             </li>
                                             <li class="divider"></li>
                                             @endcan --}}
@@ -116,8 +124,9 @@
                                             @can('sale.pos.create_and_edit')
                                             <li>
 
-                                                <a href="{{action('SellController@edit', $transaction->id)}}" class="btn"><i
-                                                        class="dripicons-document-edit"></i> @lang('lang.edit')</a>
+                                                <a href="{{action('SellController@edit', $transaction->id)}}"
+                                                    class="btn"><i class="dripicons-document-edit"></i>
+                                                    @lang('lang.edit')</a>
                                             </li>
                                             <li class="divider"></li>
                                             @endcan

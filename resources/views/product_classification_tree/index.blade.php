@@ -24,9 +24,14 @@
     <div class="row">
         <div class="col-md-8 no-print">
             <div class="card">
-                <div class="card-header d-flex align-items-center">
+
+
+                <x-page-title>
+
                     <h4>@lang('lang.product_classification_tree')</h4>
-                </div>
+
+                </x-page-title>
+
                 <div class="card-body">
 
                     @foreach ($product_classes as $class)
@@ -65,7 +70,8 @@
                                     'categories.name')->groupBy('categories.id')->get();
                                     @endphp
                                     @foreach ($categories as $category)
-                                    <div class="accordion" id="{{@replace_space($class->id . 'category_'.$category->name.'_'.$i)}}"
+                                    <div class="accordion"
+                                        id="{{@replace_space($class->id . 'category_'.$category->name.'_'.$i)}}"
                                         style="margin-left: 20px;">
                                         <div class="accordion-group">
                                             <div class="accordion-heading">
@@ -103,11 +109,18 @@
                                                     @endphp
                                                     @if($brands->count() == 0 && $sub_categories->count() == 0)
                                                     @php
-                                                        $products = App\Models\Product::leftjoin('variations', 'products.id', 'variations.product_id')->where('category_id', $category->id)->whereNotNull('products.name')->select('products.id', 'products.name', 'variations.name as variation_name','variations.sub_sku as sku', 'variations.default_sell_price as sell_price')->groupBy('variations.id')->get();
+                                                    $products = App\Models\Product::leftjoin('variations',
+                                                    'products.id', 'variations.product_id')->where('category_id',
+                                                    $category->id)->whereNotNull('products.name')->select('products.id',
+                                                    'products.name', 'variations.name as
+                                                    variation_name','variations.sub_sku as sku',
+                                                    'variations.default_sell_price as
+                                                    sell_price')->groupBy('variations.id')->get();
                                                     @endphp
                                                     @foreach ($products as $product)
-                                                    @include('product_classification_tree.partials.product_inner_part', [
-                                                        'product' => $product,
+                                                    @include('product_classification_tree.partials.product_inner_part',
+                                                    [
+                                                    'product' => $product,
                                                     ])
                                                     @endforeach
                                                     @endif
@@ -158,7 +171,8 @@
                                                                     @if (!empty($brands) && $brands->count() > 0)
                                                                     @include('product_classification_tree.partials.brand_inner_part',
                                                                     ['brands' => $brands, 'product_class_id' =>
-                                                                    $class->id, 'category_id' => $category->id, 'sub_category_id' => $sub_category->id])
+                                                                    $class->id, 'category_id' => $category->id,
+                                                                    'sub_category_id' => $sub_category->id])
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -224,7 +238,10 @@
                                                 <div class="col-md-6">
                                                     <div class="col-md-12">
                                                         <label style="color: #222;">@lang('lang.stock'):
-                                                            @if(!empty($current_stock)){{preg_match('/\.\d*[1-9]+/', (string)$current_stock->current_stock) ? $current_stock->current_stock : @num_format($current_stock->current_stock)}}@endif</label>
+                                                            @if(!empty($current_stock)){{preg_match('/\.\d*[1-9]+/',
+                                                            (string)$current_stock->current_stock) ?
+                                                            $current_stock->current_stock :
+                                                            @num_format($current_stock->current_stock)}}@endif</label>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label style="color: #222;">@lang('lang.price'):
@@ -259,7 +276,8 @@
         </div>
         <div class="col-md-4" style="margin-top: 80px;">
             <div class="card">
-                <h4>{{number_format(App\Models\Product::leftjoin('variations', 'products.id', 'variations.product_id')->count())}} @lang('lang.items')</h4>
+                <h4>{{number_format(App\Models\Product::leftjoin('variations', 'products.id',
+                    'variations.product_id')->count())}} @lang('lang.items')</h4>
                 <h4>{{number_format(App\Models\ProductClass::count())}} @lang('lang.product_class')</h4>
                 <h4>{{number_format(App\Models\Category::whereNull('parent_id')->count())}} @lang('lang.category')</h4>
                 <h4>{{number_format(App\Models\Category::whereNotNull('parent_id')->count())}}

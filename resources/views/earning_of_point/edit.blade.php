@@ -7,9 +7,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+                    <x-page-title>
                         <h4>@lang('lang.edit_earning_of_point_system')</h4>
-                    </div>
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
                     <div class="card-body">
                         <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
                         {!! Form::open(['url' => action('EarningOfPointController@update', $earning_of_point->id), 'id'
@@ -73,7 +77,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <input type="submit" value="{{trans('lang.submit')}}" id="submit-btn"
-                                    class="btn btn-primary">
+                                        class="btn btn-primary">
                                 </div>
                             </div>
                         </div>

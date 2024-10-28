@@ -5,9 +5,16 @@
 <section class="">
     <div class="col-md-12">
         <div class="card">
-            <div class="card-header d-flex align-items-center">
+
+            <x-page-title>
+
                 <h3 class="print-title">@lang('lang.compensated_from_supplier')</h3>
-            </div>
+
+
+                <x-slot name="buttons">
+
+                </x-slot>
+            </x-page-title>
             <div class="card-body">
                 <form action="">
                     <div class="row">
@@ -91,8 +98,7 @@
                         {{@num_format($remove_stock->compensated_value)}}
                     </td>
                     <td><a data-href="{{action('GeneralController@viewUploadedFiles', ['model_name' => 'Transaction', 'model_id' => $remove_stock->id, 'collection_name' => 'remove_stock'])}}"
-                            data-container=".view_modal"
-                            class="btn btn-modal">@lang('lang.view')</a></td>
+                            data-container=".view_modal" class="btn btn-modal">@lang('lang.view')</a></td>
                     <td>
 
                         <div class="btn-group">

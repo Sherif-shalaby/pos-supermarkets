@@ -7,9 +7,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex align-items-center">
+
+                <x-page-title>
+
                     <h4>@lang('lang.purchase_return')</h4>
-                </div>
+
+
+                    <x-slot name="buttons">
+
+                    </x-slot>
+                </x-page-title>
                 <div class="card-body">
                     {!! Form::open(['url' => action('PurchaseReturnController@store'), 'method' => 'post', 'files' =>
                     true, 'class' => 'pos-form', 'id' => 'purchase_return_form']) !!}
@@ -126,7 +133,8 @@
                     <div class="col-md-3 due_fields hide">
                         <div class="form-group">
                             {!! Form::label('notify_before_days', __('lang.notify_before_days'). ':', []) !!} <br>
-                            {!! Form::text('notify_before_days', !empty($payment) ? $payment->notify_before_days : null, ['class' =>
+                            {!! Form::text('notify_before_days', !empty($payment) ? $payment->notify_before_days : null,
+                            ['class' =>
                             'form-control',
                             'placeholder' => __('lang.notify_before_days')]) !!}
                         </div>

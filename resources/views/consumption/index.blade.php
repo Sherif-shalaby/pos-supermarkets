@@ -2,119 +2,145 @@
 @section('title', __('lang.list_view_the_consumption_of_raw_material'))
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-8">
-            @can('product_module.consumption.create_and_edit')
-            <a style="color: white" href="{{action('ConsumptionController@create')}}" class="btn btn-info"><i
-                    class="dripicons-plus"></i>
-                @lang('lang.add_manual_consumption')</a>
-            @endcan
+<section class="forms py-2">
+    <div class="container-fluid px-2">
+
+
+        <x-page-title>
+
+            <h1>@lang('lang.list_view_the_consumption_of_raw_material')</h1>
+
+            <x-slot name="buttons">
+
+                @can('product_module.consumption.create_and_edit')
+                <a style="color: white" href="{{action('ConsumptionController@create')}}" class="btn btn-info"><i
+                        class="dripicons-plus"></i>
+                    @lang('lang.add_manual_consumption')</a>
+                @endcan
+            </x-slot>
+        </x-page-title>
+
+
+        <x-collapse collapse-id="Filter" button-class="d-flex btn-secondary" group-class="mb-1" body-class="py-1">
+
+            <x-slot name="button">
+                {{-- @lang('lang.filter') --}}
+                <div style="width: 20px">
+                    <img class="w-100" src="{{ asset('front/white-filter.png') }}" alt="">
+                </div>
+            </x-slot>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('start_date', __('lang.start_date'), []) !!}
+                            {!! Form::text('start_date', request()->start_date, ['class' => 'form-control filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('start_time', __('lang.start_time'), []) !!}
+                            {!! Form::text('start_time', null, ['class' => 'form-control time_picker filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('end_date', __('lang.end_date'), []) !!}
+                            {!! Form::text('end_date', request()->end_date, ['class' => 'form-control filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('end_time', __('lang.end_time'), []) !!}
+                            {!! Form::text('end_time', null, ['class' => 'form-control time_picker filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('raw_material_id', __('lang.raw_material') . ':
+                            ('.__('lang.that_raw_materials_are_used_for').')', []) !!}
+                            {!! Form::select('raw_material_id', $raw_materials, request()->raw_material_id, ['class'
+                            => 'form-control filter
+                            selectpicker', 'data-live-search' =>'true', 'placeholder' => __('lang.all')]) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('brand_id', __('lang.brand'), []) !!}
+                            {!! Form::select('brand_id', $brands, request()->brand_id, ['class' => 'form-control
+                            filter
+                            selectpicker', 'data-live-search' =>'true', 'placeholder' => __('lang.all')]) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('variation_id', __('lang.product'), []) !!}
+                            {!! Form::select('variation_id', $products, request()->variation_id, ['class'
+                            => 'form-control filter
+                            selectpicker', 'data-live-search' =>'true', 'placeholder' => __('lang.all')]) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('store_id', __('lang.store'), []) !!}
+                            {!! Form::select('store_id', $stores, request()->store_id, ['class' =>
+                            'form-control filter', 'placeholder' => __('lang.all'),'data-live-search'=>"true"])
+                            !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('created_by', __('lang.chef'), []) !!}
+                            {!! Form::select('created_by', $users, request()->created_by, ['class'
+                            => 'form-control filter
+                            selectpicker', 'data-live-search' =>'true', 'placeholder' => __('lang.all')]) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-danger mt-4 clear_filters">@lang('lang.clear_filters')</button>
+                    </div>
+                </div>
+            </div>
+        </x-collapse>
+
+        <div
+            class="top-controls py-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+
         </div>
-        <div class="col-md-4">
-            <div class="print-title  pt-2" ><h1>@lang('lang.list_view_the_consumption_of_raw_material')</h1></div>
-        </div>
-    </div>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="table-responsive">
+                    <table id="raw_material_table" class="table" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>@lang('lang.raw_material')</th>
+                                <th>@lang('lang.current_stock')</th>
+                                <th>@lang('lang.value_of_current_stock')</th>
+                                <th>@lang('lang.products')</th>
+                                <th>@lang('lang.chef')</th>
+                                <th>@lang('lang.remaining_qty_sufficient_for')</th>
 
-    <div class="card mt-3">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-2">
-                    <div class="form-group">
-                        {!! Form::label('start_date', __('lang.start_date'), []) !!}
-                        {!! Form::text('start_date', request()->start_date, ['class' => 'form-control filter']) !!}
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        {!! Form::label('start_time', __('lang.start_time'), []) !!}
-                        {!! Form::text('start_time', null, ['class' => 'form-control time_picker filter']) !!}
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        {!! Form::label('end_date', __('lang.end_date'), []) !!}
-                        {!! Form::text('end_date', request()->end_date, ['class' => 'form-control filter']) !!}
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-group">
-                        {!! Form::label('end_time', __('lang.end_time'), []) !!}
-                        {!! Form::text('end_time', null, ['class' => 'form-control time_picker filter']) !!}
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        {!! Form::label('raw_material_id', __('lang.raw_material') . ':
-                        ('.__('lang.that_raw_materials_are_used_for').')', []) !!}
-                        {!! Form::select('raw_material_id', $raw_materials, request()->raw_material_id, ['class'
-                        => 'form-control filter
-                        selectpicker', 'data-live-search' =>'true', 'placeholder' => __('lang.all')]) !!}
-                    </div>
-                </div>
+                                <th class="notexport">@lang('lang.action')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                <div class="col-md-3">
-                    <div class="form-group">
-                        {!! Form::label('brand_id', __('lang.brand'), []) !!}
-                        {!! Form::select('brand_id', $brands, request()->brand_id, ['class' => 'form-control
-                        filter
-                        selectpicker', 'data-live-search' =>'true', 'placeholder' => __('lang.all')]) !!}
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        {!! Form::label('variation_id', __('lang.product'), []) !!}
-                        {!! Form::select('variation_id', $products, request()->variation_id, ['class'
-                        => 'form-control filter
-                        selectpicker', 'data-live-search' =>'true', 'placeholder' => __('lang.all')]) !!}
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
-                        {!! Form::label('store_id', __('lang.store'), []) !!}
-                        {!! Form::select('store_id', $stores, request()->store_id, ['class' =>
-                        'form-control filter', 'placeholder' => __('lang.all'),'data-live-search'=>"true"])
-                        !!}
-                    </div>
-                </div>
-
-                <div class="col-md-3">
-                    <div class="form-group">
-                        {!! Form::label('created_by', __('lang.chef'), []) !!}
-                        {!! Form::select('created_by', $users, request()->created_by, ['class'
-                        => 'form-control filter
-                        selectpicker', 'data-live-search' =>'true', 'placeholder' => __('lang.all')]) !!}
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-danger mt-4 clear_filters">@lang('lang.clear_filters')</button>
+                        </tbody>
+                        <tfoot>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>
+        <div
+            class="bottom-controls mt-1 p-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+            <!-- Pagination and other controls can go here -->
+        </div>
+
     </div>
-
-</div>
-<div class="table-responsive">
-    <table id="raw_material_table" class="table" style="width: 100%">
-        <thead>
-            <tr>
-                <th>@lang('lang.raw_material')</th>
-                <th>@lang('lang.current_stock')</th>
-                <th>@lang('lang.value_of_current_stock')</th>
-                <th>@lang('lang.products')</th>
-                <th>@lang('lang.chef')</th>
-                <th>@lang('lang.remaining_qty_sufficient_for')</th>
-
-                <th class="notexport">@lang('lang.action')</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-        <tfoot>
-        </tfoot>
-    </table>
-</div>
+</section>
 @endsection
 
 @section('javascript')
@@ -173,6 +199,16 @@
             fnDrawCallback: function(oSettings) {
                 __currency_convert_recursively($('#raw_material_table'));
             },
+            initComplete: function (settings, json) {
+            // Move elements into the .top-controls div after DataTable initializes
+            $('.top-controls').append($('.dataTables_length').addClass('d-flex col-lg-3 col-9 mb-3 mb-lg-0 justify-content-center'));
+            $('.top-controls').append($('.dt-buttons').addClass('col-lg-6 col-12 mb-3 mb-lg-0 d-flex dt-gap justify-content-center'));
+            $('.top-controls').append($('.dataTables_filter').addClass('col-lg-3 col-9'));
+
+
+            $('.bottom-controls').append($('.dataTables_paginate').addClass('col-lg-2 col-9 p-0'));
+            $('.bottom-controls').append($('.dataTables_info'));
+            }
         });
 
         $(document).on('change', '.filter', function(){

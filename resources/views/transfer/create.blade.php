@@ -7,12 +7,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+                    <x-page-title>
+
                         <h4>@lang('lang.add_transfer')</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
                     {!! Form::open(['url' => action('TransferController@store'), 'method' => 'post', 'id' =>
                     'add_transfer_form', 'enctype' => 'multipart/form-data' ]) !!}
-                     <input type="hidden" name="is_raw_material" id="is_raw_material" value="{{ $is_raw_material }}">
+                    <input type="hidden" name="is_raw_material" id="is_raw_material" value="{{ $is_raw_material }}">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-3">

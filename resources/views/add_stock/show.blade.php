@@ -10,9 +10,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center no-print">
+
+                    <x-page-title>
+
                         <h4>@lang('lang.invoice_no'): {{$add_stock->invoice_no}}</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
 
                     <div class="card-body">
                         <div class="row">
@@ -28,7 +35,8 @@
                                 <b>{{$supplier->mobile_number ?? ''}}</b>
                             </div>
                             <div class="col-md-4">
-                                {!! Form::label('address', __('lang.address'), []) !!}: <b>{{$supplier->address ?? ''}}</b>
+                                {!! Form::label('address', __('lang.address'), []) !!}: <b>{{$supplier->address ??
+                                    ''}}</b>
                             </div>
                             <div class="col-md-4">
                                 {!! Form::label('store', __('lang.store'), []) !!}: <b>{{$add_stock->store->name ??
@@ -150,11 +158,11 @@
                                 <div class="form-group">
                                     {!! Form::label('files', __('lang.files'), []) !!}: <br>
                                     @php
-                                        $mediaItems = $add_stock->getMedia('add_stock');
+                                    $mediaItems = $add_stock->getMedia('add_stock');
                                     @endphp
                                     @if(!empty($mediaItems))
                                     @foreach ($mediaItems as $item)
-                                        <a href="{{$item->getUrl()}}">{{$item->name}}</a> <br>
+                                    <a href="{{$item->getUrl()}}">{{$item->name}}</a> <br>
                                     @endforeach
 
                                     @endif

@@ -7,9 +7,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex align-items-center">
+
+                <x-page-title>
+
+
                     <h4>@lang('lang.add_sale')</h4>
-                </div>
+
+                    <x-slot name="buttons">
+
+                    </x-slot>
+                </x-page-title>
                 <div class="card-body">
                     {!! Form::open(['url' => action('SellPosController@store'), 'method' => 'post', 'files' =>
                     true, 'class' => 'pos-form', 'id' => 'add_sale_form']) !!}

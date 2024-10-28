@@ -7,9 +7,16 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex align-items-center">
+
+                <x-page-title>
+
                     <h4>@lang('lang.attendance')</h4>
-                </div>
+
+
+                    <x-slot name="buttons">
+
+                    </x-slot>
+                </x-page-title>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-sm-12">

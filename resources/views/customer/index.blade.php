@@ -2,100 +2,137 @@
 @section('title', __('lang.customer'))
 
 @section('content')
-    <div class="container-fluid">
-        <div class="card-header d-flex align-items-center">
+
+
+<section class="forms py-2">
+    <div class="container-fluid px-2">
+
+
+        <x-page-title>
+
+
             <h3 class="print-title">@lang('lang.all_customers')</h3>
-        </div>
-        <a style="color: white" href="{{ action('CustomerController@create') }}" class="btn btn-info"><i
-                class="dripicons-plus"></i>
-            @lang('lang.customer')</a>
 
-    </div>
-    <div class="row">
-        <div class="col-sm-12">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('start_date', __('lang.start_date'), []) !!}
-                                {!! Form::date('startdate', request()->start_date, ['class' => 'form-control','id'=>'startdate']) !!}
-                            </div>
-                        </div>
-                
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('end_date', __('lang.end_date'), []) !!}
-                                {!! Form::date('enddate', request()->end_date, ['class' => 'form-control ','id'=>'enddate']) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                {!! Form::label('customer_type_id', __('lang.customer_type') . ':', []) !!}
-                                {!! Form::select('customer_type_id', $customer_types, request()->customer_type_id, [
-                                        'class' => 'form-control 
-                                                            selectpicker',
-                                        'data-live-search' => 'true',
-                                        'placeholder' => __('lang.all'),
-                                        'id'=>'customer_type_id'
-                                ]) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <button type="button" class="btn btn-success mt-4 filter_product">@lang('lang.filter')</button>
+            <x-slot name="buttons">
 
-                            <button class="btn btn-danger mt-4 clear_filters">@lang('lang.clear_filters')</button>
-                        
-                        </div> 
+                <a style="color: white" href="{{ action('CustomerController@create') }}" class="btn btn-info"><i
+                        class="dripicons-plus"></i>
+                    @lang('lang.customer')</a>
+            </x-slot>
+        </x-page-title>
+
+
+        <x-collapse collapse-id="Filter" button-class="d-flex btn-secondary" group-class="mb-1" body-class="py-1">
+
+            <x-slot name="button">
+                {{-- @lang('lang.filter') --}}
+                <div style="width: 20px">
+                    <img class="w-100" src="{{ asset('front/white-filter.png') }}" alt="">
+                </div>
+            </x-slot>
+
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('start_date', __('lang.start_date'), []) !!}
+                            {!! Form::date('startdate', request()->start_date, ['class' =>
+                            'form-control','id'=>'startdate']) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('end_date', __('lang.end_date'), []) !!}
+                            {!! Form::date('enddate', request()->end_date, ['class' => 'form-control ','id'=>'enddate'])
+                            !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('customer_type_id', __('lang.customer_type') . ':', []) !!}
+                            {!! Form::select('customer_type_id', $customer_types, request()->customer_type_id, [
+                            'class' => 'form-control
+                            selectpicker',
+                            'data-live-search' => 'true',
+                            'placeholder' => __('lang.all'),
+                            'id'=>'customer_type_id'
+                            ]) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="btn btn-success mt-4 filter_product">@lang('lang.filter')</button>
+
+                        <button class="btn btn-danger mt-4 clear_filters">@lang('lang.clear_filters')</button>
+
                     </div>
                 </div>
+            </div>
+        </x-collapse>
+
+
+        <div
+            class="top-controls py-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+
+        </div>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="table-responsive">
+                    <table id="store_table" class="table" style="width: auto">
+                        <thead>
+                            <tr>
+                                <th>@lang('lang.customer_type')</th>
+                                <th>@lang('lang.photo')</th>
+                                <th>@lang('lang.name')</th>
+                                <th>@lang('lang.mobile_number')</th>
+                                <th>@lang('lang.address')</th>
+                                <th class="sum">@lang('lang.balance')</th>
+                                <th class="sum_purchase">@lang('lang.purchases')</th>
+                                <th class="sum_discounts">@lang('lang.discount')</th>
+                                <th class="sum_points">@lang('lang.points')</th>
+                                {{-- <th>@lang('lang.added_balance')</th> --}}
+                                <th>@lang('lang.created_by')</th>
+                                <th>@lang('lang.joining_date')</th>
+                                <th class="notexport">@lang('lang.action')</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                {{-- <td></td> --}}
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div
+            class="bottom-controls mt-1 p-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+            <!-- Pagination and other controls can go here -->
         </div>
     </div>
-    <div class="table-responsive">
-        <table id="store_table" class="table" style="width: auto">
-            <thead>
-                <tr>
-                    <th>@lang('lang.customer_type')</th>
-                    <th>@lang('lang.photo')</th>
-                    <th>@lang('lang.name')</th>
-                    <th>@lang('lang.mobile_number')</th>
-                    <th>@lang('lang.address')</th>
-                    <th class="sum">@lang('lang.balance')</th>
-                    <th class="sum_purchase">@lang('lang.purchases')</th>
-                    <th class="sum_discounts">@lang('lang.discount')</th>
-                    <th class="sum_points">@lang('lang.points')</th>
-                    {{-- <th>@lang('lang.added_balance')</th> --}}
-                    <th>@lang('lang.created_by')</th>
-                    <th>@lang('lang.joining_date')</th>
-                    <th class="notexport">@lang('lang.action')</th>
-                </tr>
-            </thead>
-            <tbody>
-        
-            </tbody>
-            <tfoot>
-                <tr>
-                    {{-- <td></td> --}}
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+</section>
+
+
 @endsection
 
 @section('javascript')
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
             store_table = $('#store_table').DataTable({
                 lengthChange: true,
                 paging: true,
@@ -256,6 +293,16 @@
                             }
                         });
                 },
+                initComplete: function (settings, json) {
+                // Move elements into the .top-controls div after DataTable initializes
+                $('.top-controls').append($('.dataTables_length').addClass('d-flex col-lg-3 col-9 mb-3 mb-lg-0 justify-content-center'));
+                $('.top-controls').append($('.dt-buttons').addClass('col-lg-6 col-12 mb-3 mb-lg-0 d-flex dt-gap justify-content-center'));
+                $('.top-controls').append($('.dataTables_filter').addClass('col-lg-3 col-9'));
+
+
+                $('.bottom-controls').append($('.dataTables_paginate').addClass('col-lg-2 col-9 p-0'));
+                $('.bottom-controls').append($('.dataTables_info'));
+                }
             });
 
         });
@@ -350,7 +397,7 @@
                 }
             });
 
-            
+
         });
         $(document).on('click', '.filter_product', function() {
             store_table.ajax.reload();
@@ -362,5 +409,5 @@
             $('#customer_type_id').val('')
             store_table.ajax.reload();
         });
-    </script>
+</script>
 @endsection

@@ -7,9 +7,16 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+                    <x-page-title>
+
                         <h4>@lang('lang.cash_in_adjustment')</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
                     {!! Form::open(['url' => action('CashInAdjustmentController@update', $cash_in_adjustment->id),
                     'method' => 'put', 'id' =>
                     'sms_form', 'files' => true

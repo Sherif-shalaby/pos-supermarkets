@@ -223,9 +223,16 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h4>@lang('lang.general_settings')</h4>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <div class="card-body">
             {!! Form::open(['url' => action('SettingController@updateGeneralSetting'), 'method' => 'post', 'enctype' =>
             'multipart/form-data']) !!}

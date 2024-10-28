@@ -6,10 +6,8 @@
 
 
 
-
         <x-modal-header>
             <h4 class="modal-title">@lang( 'lang.add_customer_size' )</h4>
-
         </x-modal-header>
 
         <div class="modal-body">

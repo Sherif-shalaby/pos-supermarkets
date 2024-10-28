@@ -7,18 +7,27 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header d-flex align-items-center">
+
+                <x-page-title>
+
                     <h4>@lang('lang.purchase_return')</h4>
-                </div>
+
+
+                    <x-slot name="buttons">
+
+                    </x-slot>
+                </x-page-title>
                 <div class="card-body">
-                    {!! Form::open(['url' => action('PurchaseReturnController@update', $purchase_return->id), 'method' => 'put', 'files' =>
+                    {!! Form::open(['url' => action('PurchaseReturnController@update', $purchase_return->id), 'method'
+                    => 'put', 'files' =>
                     true, 'class' => 'pos-form', 'id' => 'purchase_return_form']) !!}
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="supplier_id">@lang('lang.supplier')</label>
-                                    {!! Form::select('supplier_id', $suppliers, $purchase_return->supplier_id, ['class' => 'form-control',
+                                    {!! Form::select('supplier_id', $suppliers, $purchase_return->supplier_id, ['class'
+                                    => 'form-control',
                                     'data-live-search' => 'true', 'placeholder' => __('lang.please_select'),
                                     'required']) !!}
                                 </div>
@@ -26,7 +35,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="store_id">@lang('lang.store')</label>
-                                    {!! Form::select('store_id', $stores, $purchase_return->store_id, ['class' => 'form-control',
+                                    {!! Form::select('store_id', $stores, $purchase_return->store_id, ['class' =>
+                                    'form-control',
                                     'data-live-search' => 'true', 'placeholder' => __('lang.please_select'),
                                     'required']) !!}
                                 </div>
@@ -63,7 +73,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @include('purchase_return.partials.edit_product_row', ['products' => $purchase_return->purchase_return_lines])
+                                            @include('purchase_return.partials.edit_product_row', ['products' =>
+                                            $purchase_return->purchase_return_lines])
                                         </tbody>
                                         <tfoot>
                                             <tr>
@@ -71,7 +82,9 @@
                                                 <td></td>
                                                 <th style="text-align: right">@lang('lang.total')</th>
                                                 <th></th>
-                                                <th><span class="grand_total_span">{{@num_format($purchase_return->final_total)}}</span></th>
+                                                <th><span
+                                                        class="grand_total_span">{{@num_format($purchase_return->final_total)}}</span>
+                                                </th>
                                             </tr>
                                         </tfoot>
                                     </table>
@@ -81,8 +94,10 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
 
-                                        <input type="hidden" id="final_total" name="final_total" value="{{$purchase_return->final_total}}" />
-                                        <input type="hidden" id="grand_total" name="grand_total" value="{{$purchase_return->grand_total}}" />
+                                        <input type="hidden" id="final_total" name="final_total"
+                                            value="{{$purchase_return->final_total}}" />
+                                        <input type="hidden" id="grand_total" name="grand_total"
+                                            value="{{$purchase_return->grand_total}}" />
 
                                     </div>
                                 </div>
@@ -95,7 +110,8 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('payment_status', __('lang.payment_status'), []) !!}
-                                    {!! Form::select('payment_status', $payment_status_array, $purchase_return->payment_status, ['class' =>
+                                    {!! Form::select('payment_status', $payment_status_array,
+                                    $purchase_return->payment_status, ['class' =>
                                     'form-control', 'placeholder' => __('lang.please_select'), 'required']) !!}
                                 </div>
                             </div>
@@ -118,7 +134,8 @@
                     <div class="col-md-3 due_fields hide">
                         <div class="form-group">
                             {!! Form::label('due_date', __('lang.due_date'). ':', []) !!} <br>
-                            {!! Form::text('due_date', !empty($purchase_return) ? $purchase_return->due_date : null, ['class' =>
+                            {!! Form::text('due_date', !empty($purchase_return) ? $purchase_return->due_date : null,
+                            ['class' =>
                             'form-control datepicker', 'readonly',
                             'placeholder' => __('lang.due_date')]) !!}
                         </div>
@@ -127,7 +144,8 @@
                     <div class="col-md-3 due_fields hide">
                         <div class="form-group">
                             {!! Form::label('notify_before_days', __('lang.notify_before_days'). ':', []) !!} <br>
-                            {!! Form::text('notify_before_days', !empty($purchase_return) ? $purchase_return->notify_before_days : null, ['class' =>
+                            {!! Form::text('notify_before_days', !empty($purchase_return) ?
+                            $purchase_return->notify_before_days : null, ['class' =>
                             'form-control',
                             'placeholder' => __('lang.notify_before_days')]) !!}
                         </div>

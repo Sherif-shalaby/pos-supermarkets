@@ -4,9 +4,15 @@
 @section('content')
 <div class="col-md-12 no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h3 class="print-title">@lang('lang.all_invoices')</h3>
-        </div>
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <div class="card-body">
             <form action="">
                 <div class="row">

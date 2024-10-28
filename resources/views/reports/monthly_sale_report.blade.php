@@ -2,37 +2,50 @@
 @section('title', __('lang.monthly_sale_and_purchase_report'))
 @section('styles')
 <style>
-    .months td{
+    .months td {
         border-bottom: 2px solid rgb(241, 89, 89);
     }
-    .sale-row td{
+
+    .sale-row td {
         border-top: 2px solid rgb(241, 89, 89);
         border-bottom: 2px solid rgb(241, 89, 89);
     }
+
     .sale-row td:first-child {
-    border-left: 2px solid rgb(241, 89, 89);
+        border-left: 2px solid rgb(241, 89, 89);
     }
+
     .sale-row td:last-child {
-    border-right: 2px solid rgb(241, 89, 89);
+        border-right: 2px solid rgb(241, 89, 89);
     }
-    .purchase-row td{
+
+    .purchase-row td {
         border-top: 2px solid rgb(84, 235, 177);
         border-bottom: 2px solid rgb(84, 235, 177);
     }
+
     .purchase-row td:first-child {
-    border-left: 2px solid rgb(84, 235, 177);
+        border-left: 2px solid rgb(84, 235, 177);
     }
+
     .purchase-row td:last-child {
-    border-right: 2px solid rgb(84, 235, 177);
+        border-right: 2px solid rgb(84, 235, 177);
     }
 </style>
 @endsection
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h4>@lang('lang.monthly_sale_and_purchase_report')</h4>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         @if(session('user.is_superadmin'))
         <form action="">
             <div class="col-md-12">
@@ -90,8 +103,10 @@
                             <td><strong>@lang('lang.November')</strong></td>
                             <td><strong>@lang('lang.December')</strong></td>
                         </tr>
-                        <tr  class="sale-row">
-                            <td><h5>@lang('lang.sales')</h5></td>
+                        <tr class="sale-row">
+                            <td>
+                                <h5>@lang('lang.sales')</h5>
+                            </td>
                             @foreach($total_discount_sell as $key => $discount)
                             <td>
                                 @if($discount > 0)
@@ -115,7 +130,9 @@
                         </tr>
 
                         <tr class="purchase-row">
-                            <td><h5>@lang('lang.purchases')</h5></td>
+                            <td>
+                                <h5>@lang('lang.purchases')</h5>
+                            </td>
                             @foreach($total_discount_addstock as $key => $discount)
                             <td>
                                 @if($discount > 0)

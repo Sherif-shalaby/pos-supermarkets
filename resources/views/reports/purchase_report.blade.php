@@ -4,9 +4,16 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h3 class="print-title">@lang('lang.purchase_report')</h3>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
@@ -90,19 +97,23 @@
                                 <td>{{$value}}</td>
                                 <td> {{@num_format($transactions[$key]->total_purchase)}}</td>
                                 <td> {{@num_format($transactions[$key]->total_qty)}}</td>
-                                <td> {{preg_match('/\.\d*[1-9]+/', (string)$transactions[$key]->in_stock) ? $transactions[$key]->in_stock : @num_format($transactions[$key]->in_stock) }}</td>
+                                <td> {{preg_match('/\.\d*[1-9]+/', (string)$transactions[$key]->in_stock) ?
+                                    $transactions[$key]->in_stock : @num_format($transactions[$key]->in_stock) }}</td>
                                 <td>
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"
-                                            aria-haspopup="true" aria-expanded="false">@lang('lang.action')
+                                        <button type="button" class="btn btn-default btn-sm dropdown-toggle"
+                                            data-toggle="dropdown" aria-haspopup="true"
+                                            aria-expanded="false">@lang('lang.action')
                                             <span class="caret"></span>
                                             <span class="sr-only">Toggle Dropdown</span>
                                         </button>
-                                        <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default" user="menu">
+                                        <ul class="dropdown-menu edit-options dropdown-menu-right dropdown-default"
+                                            user="menu">
                                             @can('product_module.product.view')
                                             <li>
                                                 <a data-href="{{action('ProductController@show', $transactions[$key]->id)}}"
-                                                    data-container=".view_modal" class="btn btn-modal"><i class="fa fa-eye"></i>
+                                                    data-container=".view_modal" class="btn btn-modal"><i
+                                                        class="fa fa-eye"></i>
                                                     @lang('lang.view')</a>
                                             </li>
                                             <li class="divider"></li>
@@ -110,8 +121,9 @@
                                             @can('product_module.product.create_and_edit')
                                             <li>
 
-                                                <a href="{{action('ProductController@edit', $transactions[$key]->id)}}" class="btn"><i
-                                                        class="dripicons-document-edit"></i> @lang('lang.edit')</a>
+                                                <a href="{{action('ProductController@edit', $transactions[$key]->id)}}"
+                                                    class="btn"><i class="dripicons-document-edit"></i>
+                                                    @lang('lang.edit')</a>
                                             </li>
                                             <li class="divider"></li>
                                             @endcan

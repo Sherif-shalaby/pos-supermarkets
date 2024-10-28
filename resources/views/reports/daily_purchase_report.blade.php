@@ -4,9 +4,16 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+        <x-page-title>
+
             <h4>@lang('lang.daily_purchase_report')</h4>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         @if(session('user.is_superadmin'))
         <form action="">
             <div class="col-md-12">
@@ -36,11 +43,13 @@
                     style="border-top: 1px solid #dee2e6; border-bottom: 1px solid #dee2e6;">
                     <thead>
                         <tr>
-                            <th><a href="{{url('report/get-daily-purchase-report?year='.$prev_year.'&month='.$prev_month)}}"><i
+                            <th><a
+                                    href="{{url('report/get-daily-purchase-report?year='.$prev_year.'&month='.$prev_month)}}"><i
                                         class="fa fa-arrow-left"></i> {{trans('lang.previous')}}</a></th>
                             <th colspan="5" class="text-center">
                                 {{date("F", strtotime($year.'-'.$month.'-01')).' ' .$year}}</th>
-                            <th><a href="{{url('report/get-daily-purchase-report?year='.$next_year.'&month='.$next_month)}}">{{trans('lang.next')}}
+                            <th><a
+                                    href="{{url('report/get-daily-purchase-report?year='.$next_year.'&month='.$next_month)}}">{{trans('lang.next')}}
                                     <i class="fa fa-arrow-right"></i></a></th>
                         </tr>
                     </thead>
@@ -58,19 +67,18 @@
                         $i = 1;
                         $flag = 0;
                         @endphp
-                        @while ($i <= $number_of_day)
-                        <tr>
-                            @for($j=1 ; $j<=7 ; $j++)
-                            @if($i> $number_of_day)
+                        @while ($i <= $number_of_day) <tr>
+                            @for($j=1 ; $j<=7 ; $j++) @if($i> $number_of_day)
                                 @php
                                 break;
                                 @endphp
-                            @endif
+                                @endif
                                 @if($flag)
-                                    @if($year.'-'.$month.'-'.$i == date('Y').'-'.date('m').'-'.(int)date('d'))
-                                    <td> <p style="color:red"><strong>{{$i}}</strong></p>
+                                @if($year.'-'.$month.'-'.$i == date('Y').'-'.date('m').'-'.(int)date('d'))
+                                <td>
+                                    <p style="color:red"><strong>{{$i}}</strong></p>
                                     @else
-                                    <td>
+                                <td>
                                     <p><strong>{{$i}}</strong></p>
                                     @endif
 
@@ -99,10 +107,11 @@
                                 $i++;
                                 @endphp
                                 @elseif($j == $start_day)
-                                    @if($year.'-'.$month.'-'.$i == date('Y').'-'.date('m').'-'.(int)date('d'))
-                                    <td><p style="color:red"><strong>'.$i.'</strong></p>
+                                @if($year.'-'.$month.'-'.$i == date('Y').'-'.date('m').'-'.(int)date('d'))
+                                <td>
+                                    <p style="color:red"><strong>'.$i.'</strong></p>
                                     @else
-                                    <td>
+                                <td>
                                     <p><strong>{{$i}}</strong></p>
                                     @endif
 
@@ -126,21 +135,21 @@
                                     <strong>@lang("lang.grand_total")</strong><br><span>{{@num_format($grand_total[$i])}}</span><br><br>
                                     @endif
 
-                                    </td>
-                                    @php
-                                    $flag = 1;
-                                    $i++;
-                                    continue;
-                                    @endphp
+                                </td>
+                                @php
+                                $flag = 1;
+                                $i++;
+                                continue;
+                                @endphp
 
                                 @else
                                 <td></td>
                                 @endif
 
-                            @endfor
+                                @endfor
 
-                        </tr>
-                        @endwhile
+                                </tr>
+                                @endwhile
 
                     </tbody>
                 </table>

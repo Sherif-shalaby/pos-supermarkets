@@ -2,174 +2,231 @@
 @section('title', __('lang.sales_list'))
 
 @section('content')
-    <section class="forms pos-section no-print">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header d-flex align-items-center">
-                            <h3 class="print-title">@lang('lang.sales_list')</h3>
-                            <h3 class="print-title-hint" style="display:none;">sale_report</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('product_class_id', session('system_mode') == 'restaurant' ? __('lang.category') : __('lang.product_class') . ':', []) !!}
-                                        {!! Form::select('product_class_id[]', $product_classes, request()->product_class_id, ['class' => 'form-control sale_filter selectpicker', 'data-live-search' => 'true', 'data-actions-box' => 'true', 'placeholder' => __('lang.all'), 'multiple', 'id' => 'product_class_id']) !!}
-                                    </div>
-                                </div>
-                                @if (session('system_mode') != 'restaurant')
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            {!! Form::label('category_id', __('lang.category') . ':', []) !!}
-                                            {!! Form::select('category_id[]', $categories, request()->category_id, ['class' => 'form-control sale_filter selectpicker', 'data-live-search' => 'true', 'data-actions-box' => 'true', 'placeholder' => __('lang.all'), 'multiple', 'id' => 'category_id']) !!}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            {!! Form::label('sub_category_id', __('lang.sub_category') . ':', []) !!}
-                                            {!! Form::select('sub_category_id[]', $sub_categories, request()->sub_category_id, ['class' => 'form-control sale_filter selectpicker', 'data-live-search' => 'true', 'data-actions-box' => 'true', 'placeholder' => __('lang.all'), 'multiple', 'id' => 'sub_category_id']) !!}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            {!! Form::label('brand_id', __('lang.brand') . ':', []) !!}
-                                            {!! Form::select('brand_id[]', $brands, request()->brand_id, ['class' => 'form-control sale_filter selectpicker', 'data-live-search' => 'true', 'data-actions-box' => 'true', 'placeholder' => __('lang.all'), 'multiple', 'id' => 'brand_id']) !!}
-                                        </div>
-                                    </div>
-                                @endif
+<section class="forms pos-section no-print">
+    <div class="container-fluid">
 
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('customer_id', __('lang.customer'), []) !!}
-                                        {!! Form::select('customer_id', $customers, request()->customer_id, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                    </div>
-                                </div>
-                                @if (session('system_mode') == 'restaurant')
-                                    @php
-                                        $customer_types = $customer_types->toArray() + ['dining_in' => __('lang.dining_in')];
-                                    @endphp
-                                @endif
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('customer_type_id', __('lang.customer_type'), []) !!}
-                                        {!! Form::select('customer_type_id', $customer_types, request()->customer_type_id, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                    </div>
-                                </div>
-                                @if (session('system_mode') == 'restaurant')
-                                    <div class="col-md-3 dining_filters hide">
-                                        <div class="form-group">
-                                            {!! Form::label('dining_room_id', __('lang.dining_room'), []) !!}
-                                            {!! Form::select('dining_room_id', $dining_rooms, request()->dining_room_id, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                        </div>
-                                    </div>
-                                    <div class="col-md-3 dining_filters hide">
-                                        <div class="form-group">
-                                            {!! Form::label('dining_table_id', __('lang.dining_table'), []) !!}
-                                            {!! Form::select('dining_table_id', $dining_tables, request()->dining_table_id, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                        </div>
-                                    </div>
-                                @endif
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('store_id', __('lang.store'), []) !!}
-                                        {!! Form::select('store_id', $stores, request()->store_id, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('status', __('lang.status'), []) !!}
-                                        {!! Form::select('status', ['final' => 'Completed', 'pending' => 'Pending'], request()->status, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('method', __('lang.payment_type'), []) !!}
-                                        {!! Form::select('method', $payment_types, request()->method, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('payment_status', __('lang.payment_status'), []) !!}
-                                        {!! Form::select('payment_status', $payment_status_array, request()->payment_status, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('tax_id', __('lang.tax') . ':', []) !!}
-                                        {!! Form::select('tax_id[]', $taxes, request()->tax_id, ['class' => 'form-control sale_filter selectpicker', 'data-live-search' => 'true', 'data-actions-box' => 'true', 'placeholder' => __('lang.all'), 'multiple', 'id' => 'tax_id']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('deliveryman_id', __('lang.deliveryman'), []) !!}
-                                        {!! Form::select('deliveryman_id',['all_delivery' => 'All Delivery'] + $delivery_men, request()->deliveryman_id, ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
-                                    </div>
-                                </div>
+        <x-page-title>
 
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('start_date', __('lang.generation_start_date'), []) !!}
-                                        {!! Form::text('start_date', request()->start_date, ['class' => 'form-control sale_filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('start_time', __('lang.generation_start_time'), []) !!}
-                                        {!! Form::text('start_time', null, ['class' => 'form-control time_picker sale_filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('end_date', __('lang.generation_end_date'), []) !!}
-                                        {!! Form::text('end_date', request()->end_date, ['class' => 'form-control sale_filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('end_time', __('lang.generation_end_time'), []) !!}
-                                        {!! Form::text('end_time', null, ['class' => 'form-control time_picker sale_filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('payment_start_date', __('lang.payment_start_date'), []) !!}
-                                        {!! Form::text('start_date', request()->start_date, ['class' => 'form-control datepicker sale_filter', 'id' => 'payment_start_date']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('payment_start_time', __('lang.payment_start_time'), []) !!}
-                                        {!! Form::text('payment_start_time', null, ['class' => 'form-control time_picker sale_filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('payment_end_date', __('lang.payment_end_date'), []) !!}
-                                        {!! Form::text('end_date', request()->end_date, ['class' => 'form-control sale_filter', 'id' => 'payment_end_date']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('payment_end_time', __('lang.payment_end_time'), []) !!}
-                                        {!! Form::text('payment_end_time', null, ['class' => 'form-control time_picker sale_filter']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="form-group">
-                                        {!! Form::label('created_by', __('lang.cashier'), []) !!}
-                                        {!! Form::select('created_by', $cashiers, false, ['class' => 'form-control sale_filter selectpicker', 'id' => 'created_by', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <button type="button"
-                                        class="btn btn-danger mt-4 ml-2 clear_filter">@lang('lang.clear_filter')</button>
-                                </div>
-                            </div>
+            <h3 class="print-title">@lang('lang.sales_list')</h3>
+            <h3 class="print-title-hint" style="display:none;">sale_report</h3>
+
+        </x-page-title>
+
+        <x-collapse collapse-id="Filter" button-class="d-flex btn-secondary" group-class="mb-1" body-class="py-1">
+
+            <x-slot name="button">
+                {{-- @lang('lang.filter') --}}
+                <div style="width: 20px">
+                    <img class="w-100" src="{{ asset('front/white-filter.png') }}" alt="">
+                </div>
+            </x-slot>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('product_class_id', session('system_mode') == 'restaurant' ?
+                            __('lang.category') : __('lang.product_class') . ':', []) !!}
+                            {!! Form::select('product_class_id[]', $product_classes,
+                            request()->product_class_id, ['class' => 'form-control sale_filter selectpicker',
+                            'data-live-search' => 'true', 'data-actions-box' => 'true', 'placeholder' =>
+                            __('lang.all'), 'multiple', 'id' => 'product_class_id']) !!}
                         </div>
                     </div>
+                    @if (session('system_mode') != 'restaurant')
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('category_id', __('lang.category') . ':', []) !!}
+                            {!! Form::select('category_id[]', $categories, request()->category_id, ['class' =>
+                            'form-control sale_filter selectpicker', 'data-live-search' => 'true',
+                            'data-actions-box' => 'true', 'placeholder' => __('lang.all'), 'multiple', 'id' =>
+                            'category_id']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('sub_category_id', __('lang.sub_category') . ':', []) !!}
+                            {!! Form::select('sub_category_id[]', $sub_categories, request()->sub_category_id,
+                            ['class' => 'form-control sale_filter selectpicker', 'data-live-search' => 'true',
+                            'data-actions-box' => 'true', 'placeholder' => __('lang.all'), 'multiple', 'id' =>
+                            'sub_category_id']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('brand_id', __('lang.brand') . ':', []) !!}
+                            {!! Form::select('brand_id[]', $brands, request()->brand_id, ['class' =>
+                            'form-control sale_filter selectpicker', 'data-live-search' => 'true',
+                            'data-actions-box' => 'true', 'placeholder' => __('lang.all'), 'multiple', 'id' =>
+                            'brand_id']) !!}
+                        </div>
+                    </div>
+                    @endif
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('customer_id', __('lang.customer'), []) !!}
+                            {!! Form::select('customer_id', $customers, request()->customer_id, ['class' =>
+                            'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' =>
+                            'true']) !!}
+                        </div>
+                    </div>
+                    @if (session('system_mode') == 'restaurant')
+                    @php
+                    $customer_types = $customer_types->toArray() + ['dining_in' => __('lang.dining_in')];
+                    @endphp
+                    @endif
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('customer_type_id', __('lang.customer_type'), []) !!}
+                            {!! Form::select('customer_type_id', $customer_types, request()->customer_type_id,
+                            ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'),
+                            'data-live-search' => 'true']) !!}
+                        </div>
+                    </div>
+                    @if (session('system_mode') == 'restaurant')
+                    <div class="col-md-3 dining_filters hide">
+                        <div class="form-group">
+                            {!! Form::label('dining_room_id', __('lang.dining_room'), []) !!}
+                            {!! Form::select('dining_room_id', $dining_rooms, request()->dining_room_id,
+                            ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'),
+                            'data-live-search' => 'true']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3 dining_filters hide">
+                        <div class="form-group">
+                            {!! Form::label('dining_table_id', __('lang.dining_table'), []) !!}
+                            {!! Form::select('dining_table_id', $dining_tables, request()->dining_table_id,
+                            ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'),
+                            'data-live-search' => 'true']) !!}
+                        </div>
+                    </div>
+                    @endif
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('store_id', __('lang.store'), []) !!}
+                            {!! Form::select('store_id', $stores, request()->store_id, ['class' => 'form-control
+                            sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('status', __('lang.status'), []) !!}
+                            {!! Form::select('status', ['final' => 'Completed', 'pending' => 'Pending'],
+                            request()->status, ['class' => 'form-control sale_filter', 'placeholder' =>
+                            __('lang.all'), 'data-live-search' => 'true']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('method', __('lang.payment_type'), []) !!}
+                            {!! Form::select('method', $payment_types, request()->method, ['class' =>
+                            'form-control sale_filter', 'placeholder' => __('lang.all'), 'data-live-search' =>
+                            'true']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('payment_status', __('lang.payment_status'), []) !!}
+                            {!! Form::select('payment_status', $payment_status_array, request()->payment_status,
+                            ['class' => 'form-control sale_filter', 'placeholder' => __('lang.all'),
+                            'data-live-search' => 'true']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('tax_id', __('lang.tax') . ':', []) !!}
+                            {!! Form::select('tax_id[]', $taxes, request()->tax_id, ['class' => 'form-control
+                            sale_filter selectpicker', 'data-live-search' => 'true', 'data-actions-box' =>
+                            'true', 'placeholder' => __('lang.all'), 'multiple', 'id' => 'tax_id']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('deliveryman_id', __('lang.deliveryman'), []) !!}
+                            {!! Form::select('deliveryman_id',['all_delivery' => 'All Delivery'] +
+                            $delivery_men, request()->deliveryman_id, ['class' => 'form-control sale_filter',
+                            'placeholder' => __('lang.all'), 'data-live-search' => 'true']) !!}
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('start_date', __('lang.generation_start_date'), []) !!}
+                            {!! Form::text('start_date', request()->start_date, ['class' => 'form-control
+                            sale_filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('start_time', __('lang.generation_start_time'), []) !!}
+                            {!! Form::text('start_time', null, ['class' => 'form-control time_picker
+                            sale_filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('end_date', __('lang.generation_end_date'), []) !!}
+                            {!! Form::text('end_date', request()->end_date, ['class' => 'form-control
+                            sale_filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('end_time', __('lang.generation_end_time'), []) !!}
+                            {!! Form::text('end_time', null, ['class' => 'form-control time_picker
+                            sale_filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('payment_start_date', __('lang.payment_start_date'), []) !!}
+                            {!! Form::text('start_date', request()->start_date, ['class' => 'form-control
+                            datepicker sale_filter', 'id' => 'payment_start_date']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('payment_start_time', __('lang.payment_start_time'), []) !!}
+                            {!! Form::text('payment_start_time', null, ['class' => 'form-control time_picker
+                            sale_filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('payment_end_date', __('lang.payment_end_date'), []) !!}
+                            {!! Form::text('end_date', request()->end_date, ['class' => 'form-control
+                            sale_filter', 'id' => 'payment_end_date']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            {!! Form::label('payment_end_time', __('lang.payment_end_time'), []) !!}
+                            {!! Form::text('payment_end_time', null, ['class' => 'form-control time_picker
+                            sale_filter']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            {!! Form::label('created_by', __('lang.cashier'), []) !!}
+                            {!! Form::select('created_by', $cashiers, false, ['class' => 'form-control
+                            sale_filter selectpicker', 'id' => 'created_by', 'data-live-search' => 'true',
+                            'placeholder' => __('lang.all')]) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button"
+                            class="btn btn-danger mt-4 ml-2 clear_filter">@lang('lang.clear_filter')</button>
+                    </div>
                 </div>
+            </div>
+        </x-collapse>
+
+        <div
+            class="top-controls py-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+
+        </div>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
                 <div class="table-responsive no-print">
                     <table id="sales_table" class="table" style="min-height: 300px;">
                         <thead>
@@ -191,8 +248,8 @@
                                 <th>@lang('lang.cashier')</th>
                                 <th>@lang('lang.deliveryman')</th>
                                 @if (session('system_mode') == 'restaurant')
-                                    <th>@lang('lang.service')</th>
-                                    <th>@lang('lang.canceled_by')</th>
+                                <th>@lang('lang.service')</th>
+                                <th>@lang('lang.canceled_by')</th>
                                 @endif
                                 <th>@lang('lang.commission')</th>
                                 <th>@lang('lang.products')</th>
@@ -223,22 +280,30 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <div class="col-md-12 text-center">
-                        <h4>@lang('lang.number_of_orders'): <span class="number_of_orders_span" style="margin-right: 15px;">0</span>
-                            @lang('lang.number_of_customer'): <span class="number_of_customer_span" style="margin-right: 15px;">0</span>
-                        </h4>
-                    </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- This will be printed -->
-    <section class="invoice print_section print-only" id="receipt_section"> </section>
+        <div
+            class="bottom-controls mt-1 p-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+            <!-- Pagination and other controls can go here -->
+        </div>
+
+
+        <div class="col-md-12 text-center">
+            <h4>@lang('lang.number_of_orders'): <span class="number_of_orders_span" style="margin-right: 15px;">0</span>
+                @lang('lang.number_of_customer'): <span class="number_of_customer_span"
+                    style="margin-right: 15px;">0</span>
+            </h4>
+        </div>
+    </div>
+</section>
+<!-- This will be printed -->
+<section class="invoice print_section print-only" id="receipt_section"> </section>
 @endsection
 
 @section('javascript')
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
             get_total_details();
             sales_table = $("#sales_table").DataTable({
                 lengthChange: true,
@@ -474,6 +539,16 @@
                             );
                         });
                 },
+                initComplete: function (settings, json) {
+                // Move elements into the .top-controls div after DataTable initializes
+                $('.top-controls').append($('.dataTables_length').addClass('d-flex col-lg-3 col-9 mb-3 mb-lg-0 justify-content-center'));
+                $('.top-controls').append($('.dt-buttons').addClass('col-lg-6 col-12 mb-3 mb-lg-0 d-flex dt-gap justify-content-center'));
+                $('.top-controls').append($('.dataTables_filter').addClass('col-lg-3 col-9'));
+
+
+                $('.bottom-controls').append($('.dataTables_paginate').addClass('col-lg-2 col-9 p-0'));
+                $('.bottom-controls').append($('.dataTables_info'));
+                }
             });
             $(document).on('change', '.sale_filter', function() {
                 sales_table.ajax.reload();
@@ -581,5 +656,5 @@
                 },
             });
         }
-    </script>
+</script>
 @endsection

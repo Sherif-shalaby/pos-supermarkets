@@ -4,16 +4,25 @@
 @section('content')
 <div class="col-md-12  no-print">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+
+        <x-page-title>
+
             <h3 class="print-title">@lang('lang.receivable_report')</h3>
-        </div>
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <form action="">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-2">
                         <div class="form-group">
                             {!! Form::label('start_date', __('lang.start_date'), []) !!}
-                            {!! Form::text('start_date', request()->start_date, ['class' => 'form-control sale_filter']) !!}
+                            {!! Form::text('start_date', request()->start_date, ['class' => 'form-control sale_filter'])
+                            !!}
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -32,7 +41,8 @@
                     <div class="col-md-2">
                         <div class="form-group">
                             {!! Form::label('end_time', __('lang.end_time'), []) !!}
-                            {!! Form::text('end_time', request()->end_time, ['class' => 'form-control sale_filter time_picker
+                            {!! Form::text('end_time', request()->end_time, ['class' => 'form-control sale_filter
+                            time_picker
                             sale_filter']) !!}
                         </div>
                     </div>
@@ -79,7 +89,7 @@
 
                     <div class="col-md-3">
                         <button type="button"
-                        class="btn btn-danger mt-4 ml-2 clear_filter">@lang('lang.clear_filter')</button>
+                            class="btn btn-danger mt-4 ml-2 clear_filter">@lang('lang.clear_filter')</button>
                     </div>
                 </div>
             </div>
@@ -124,7 +134,7 @@
 
 @section('javascript')
 <script>
-       $(document).on('click', '.print-invoice', function(){
+    $(document).on('click', '.print-invoice', function(){
         $.ajax({
             method: 'get',
             url: $(this).data('href'),
@@ -269,6 +279,16 @@
                             );
                         });
                 },
+                initComplete: function (settings, json) {
+                // Move elements into the .top-controls div after DataTable initializes
+                $('.top-controls').append($('.dataTables_length').addClass('d-flex col-lg-3 col-9 mb-3 mb-lg-0 justify-content-center'));
+                $('.top-controls').append($('.dt-buttons').addClass('col-lg-6 col-12 mb-3 mb-lg-0 d-flex dt-gap justify-content-center'));
+                $('.top-controls').append($('.dataTables_filter').addClass('col-lg-3 col-9'));
+
+
+                $('.bottom-controls').append($('.dataTables_paginate').addClass('col-lg-2 col-9 p-0'));
+                $('.bottom-controls').append($('.dataTables_info'));
+                }
             });
             $(document).on('change', '.sale_filter', function() {
                 receivable_report_table.ajax.reload();

@@ -7,22 +7,32 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header d-flex align-items-center">
+
+
+                    <x-page-title>
+
                         <h4>@lang('lang.email')</h4>
-                    </div>
+
+
+                        <x-slot name="buttons">
+
+                        </x-slot>
+                    </x-page-title>
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
                                     {!! Form::label('employee_id', __('lang.employee'), []) !!}
-                                    {!! Form::select('employee_id[]', $employees, explode(',', $email->emails), ['class' => 'form-control
+                                    {!! Form::select('employee_id[]', $employees, explode(',', $email->emails), ['class'
+                                    => 'form-control
                                     selectpicker', 'multiple', 'id' => 'employee_id', 'placeholder' =>
                                     __('lang.please_select')]) !!}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {!! Form::open(['url' => action('EmailController@update', $email->id), 'method' => 'put', 'id' => 'email_form', 'files' => true,
+                    {!! Form::open(['url' => action('EmailController@update', $email->id), 'method' => 'put', 'id' =>
+                    'email_form', 'files' => true,
                     ]) !!}
                     <div class="col-md-12">
                         <div class=" row">
@@ -45,7 +55,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label for="body">{{__('lang.body')}}:</label>
-                                    <textarea name="body" id="body" cols="30" rows="6" class="form-control">{!!$email->body!!}</textarea>
+                                    <textarea name="body" id="body" cols="30" rows="6"
+                                        class="form-control">{!!$email->body!!}</textarea>
                                 </div>
                             </div>
                             <div class="col-md-4">

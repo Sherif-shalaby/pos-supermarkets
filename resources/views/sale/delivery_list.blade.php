@@ -6,9 +6,17 @@
 <br>
 <div class="col-md-12">
     <div class="card">
-        <div class="card-header d-flex align-items-center">
+
+
+        <x-page-title>
             <h3 class="print-title">@lang('lang.delivery_list')</h3>
-        </div>
+
+
+
+            <x-slot name="buttons">
+
+            </x-slot>
+        </x-page-title>
         <div class="card-body">
             <form action="">
                 <div class="row">
@@ -22,14 +30,16 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('status', __('lang.status'), []) !!}
-                            {!! Form::select('status', ['final' => 'Completed', 'pending' => 'Pending'], request()->status, ['class' =>
+                            {!! Form::select('status', ['final' => 'Completed', 'pending' => 'Pending'],
+                            request()->status, ['class' =>
                             'form-control', 'placeholder' => __('lang.all'),'data-live-search'=>"true"]) !!}
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             {!! Form::label('payment_status', __('lang.payment_status'), []) !!}
-                            {!! Form::select('payment_status', $payment_status_array, request()->payment_status, ['class' =>
+                            {!! Form::select('payment_status', $payment_status_array, request()->payment_status,
+                            ['class' =>
                             'form-control', 'placeholder' => __('lang.all'),'data-live-search'=>"true"]) !!}
                         </div>
                     </div>
@@ -77,12 +87,14 @@
             @foreach($sales as $sale)
             <tr>
                 <td>{{@format_date($sale->transaction_date)}}</td>
-                <td>{{$sale->invoice_no}} @if(!empty($sale->return_parent))<a data-href="{{action('SellReturnController@show', $sale->id)}}"
-                    data-container=".view_modal" class="btn btn-modal" style="color: #007bff;">R</a>@endif</td>
+                <td>{{$sale->invoice_no}} @if(!empty($sale->return_parent))<a
+                        data-href="{{action('SellReturnController@show', $sale->id)}}" data-container=".view_modal"
+                        class="btn btn-modal" style="color: #007bff;">R</a>@endif</td>
                 <td>@if(!empty($sale->customer)){{$sale->customer->name}}@endif</td>
                 <td>{{ucfirst($sale->status)}}</td>
                 <td>{{ucfirst($sale->delivery_status)}}</td>
-                <td>@if(!empty($payment_status_array[$sale->payment_status])){{$payment_status_array[$sale->payment_status]}}@endif</td>
+                <td>@if(!empty($payment_status_array[$sale->payment_status])){{$payment_status_array[$sale->payment_status]}}@endif
+                </td>
                 <td>{{@num_format($sale->final_total)}}</td>
                 <td>{{@num_format($sale->transaction_payments->sum('amount'))}}</td>
                 <td>{{@num_format($sale->final_total - $sale->transaction_payments->sum('amount'))}}</td>
@@ -99,25 +111,23 @@
                             <li>
 
                                 <a data-href="{{action('SellController@print', $sale->id)}}"
-                                     class="btn print-invoice"><i
-                                        class="dripicons-print"></i> @lang('lang.generate_invoice')</a>
+                                    class="btn print-invoice"><i class="dripicons-print"></i>
+                                    @lang('lang.generate_invoice')</a>
                             </li>
                             <li class="divider"></li>
                             @endcan
                             @can('sale.pos.view')
                             <li>
 
-                                <a data-href="{{action('SellController@show', $sale->id)}}"
-                                    data-container=".view_modal" class="btn btn-modal"><i
-                                        class="fa fa-eye"></i> @lang('lang.view')</a>
+                                <a data-href="{{action('SellController@show', $sale->id)}}" data-container=".view_modal"
+                                    class="btn btn-modal"><i class="fa fa-eye"></i> @lang('lang.view')</a>
                             </li>
                             <li class="divider"></li>
                             @endcan
                             @can('sale.pos.create_and_edit')
                             <li>
 
-                                <a href="{{action('SellController@edit', $sale->id)}}"
-                                     class="btn"><i
+                                <a href="{{action('SellController@edit', $sale->id)}}" class="btn"><i
                                         class="dripicons-document-edit"></i> @lang('lang.edit')</a>
                             </li>
                             <li class="divider"></li>
@@ -125,16 +135,18 @@
                             @can('sale.pay.create_and_edit')
                             @if($sale->payment_status != 'paid')
                             <li>
-                                <a data-href="{{action('TransactionPaymentController@addPayment', ['id' => $sale->id])}}" data-container=".view_modal"
-                                    class="btn btn-modal"><i class="fa fa-plus"></i> @lang('lang.add_payment')</a>
+                                <a data-href="{{action('TransactionPaymentController@addPayment', ['id' => $sale->id])}}"
+                                    data-container=".view_modal" class="btn btn-modal"><i class="fa fa-plus"></i>
+                                    @lang('lang.add_payment')</a>
                             </li>
                             @endif
                             @endcan
                             @can('sale.pay.view')
                             @if($sale->payment_status != 'pending')
                             <li>
-                                <a data-href="{{action('TransactionPaymentController@show', $sale->id)}}" data-container=".view_modal"
-                                    class="btn btn-modal"><i class="fa fa-money"></i> @lang('lang.view_payments')</a>
+                                <a data-href="{{action('TransactionPaymentController@show', $sale->id)}}"
+                                    data-container=".view_modal" class="btn btn-modal"><i class="fa fa-money"></i>
+                                    @lang('lang.view_payments')</a>
                             </li>
                             @endif
                             @endcan
