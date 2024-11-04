@@ -2,47 +2,37 @@
 @section('title', __('lang.add_expense_category'))
 
 @section('content')
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
 
-                <x-page-title>
+        <x-page-title>
 
-                    <h4>@lang('lang.add_expense_category')</h4>
+            <h4>@lang('lang.add_expense_category')</h4>
 
+        </x-page-title>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                {!! Form::open(['url' => action('ExpenseCategoryController@store'), 'method' => 'post']) !!}
 
-                    <x-slot name="buttons">
-
-                    </x-slot>
-                </x-page-title>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            {!! Form::open(['url' => action('ExpenseCategoryController@store'), 'method' => 'post']) !!}
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="name">@lang('lang.name')</label>
-                                        <input type="text" class="form-control" name="name" id="name">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mt-4">
-                                <div class="col-sm-12">
-                                    <input type="submit" class="btn btn-primary" value="@lang('lang.save')"
-                                        name="submit">
-                                </div>
-                            </div>
-                            {!! Form::close() !!}
+                <div class="row locale_dir">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="locale_label mb-1" for="name">@lang('lang.name')</label>
+                            <input type="text" class="form-control" name="name" id="name">
                         </div>
                     </div>
                 </div>
+                <div class="row mt-4">
+                    <div class="col-sm-12">
+                        <input type="submit" class="btn btn-primary" value="@lang('lang.save')" name="submit">
+                    </div>
+                </div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
-</div>
+
+</section>
 @endsection
 
 @section('javascript')

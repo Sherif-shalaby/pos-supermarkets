@@ -7,24 +7,23 @@
         </x-modal-header>
         {!! Form::open(['url' => action('TermsAndConditionsController@update', $terms_and_condition->id), 'method' =>
         'put']) !!}
-        <div class="modal-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="name">@lang('lang.name')</label>
-                        <input type="text" class="form-control" name="name" id="name"
-                            value="{{$terms_and_condition->name}}" required>
-                    </div>
-                </div>
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="name">@lang('lang.description')</label>
-                        <textarea name="description" id="description" rows="4"
-                            class="form-control">{{$terms_and_condition->description}}</textarea>
-                    </div>
-                </div>
+        <div class="modal-body row locale_dir">
 
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="locale_label mb-1 field_required" for="name">@lang('lang.name')</label>
+                    <input type="text" class="form-control" name="name" id="name" value="{{$terms_and_condition->name}}"
+                        required>
+                </div>
             </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label class="locale_label mb-1 field_required" for="name">@lang('lang.description')</label>
+                    <textarea name="description" id="description" rows="4"
+                        class="form-control">{{$terms_and_condition->description}}</textarea>
+                </div>
+            </div>
+
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-primary col-6">@lang('lang.save')</button>

@@ -14,7 +14,7 @@
 
                     @can('product_module.brand.create_and_edit')
                     <a style="color: white" data-href="{{action('BrandController@create')}}"
-                        data-container=".view_modal" class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
+                        data-container=".view_modal" class="btn btn-modal btn-primary"><i class="dripicons-plus"></i>
                         @lang('lang.add_brand')</a>
                     @endcan
                 </x-slot>

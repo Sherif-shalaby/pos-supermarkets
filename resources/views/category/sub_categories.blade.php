@@ -15,7 +15,7 @@
 
                     @can('product_module.product_class.create_and_edit')
                     <a style="color: white" data-href="{{ action('CategoryController@create') }}?type=sub_category"
-                        data-container=".view_modal" class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
+                        data-container=".view_modal" class="btn btn-modal btn-primary"><i class="dripicons-plus"></i>
                         @lang('lang.add_sub_category')</a>
                     @endcan
                 </x-slot>

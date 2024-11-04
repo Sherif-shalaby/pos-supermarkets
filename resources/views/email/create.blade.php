@@ -2,86 +2,88 @@
 @section('title', __('lang.email'))
 
 @section('content')
-<section class="forms">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
+
+        <x-page-title>
 
 
-                    <x-page-title>
+            <h4>@lang('lang.email')</h4>
 
+            <x-slot name="buttons">
 
-                        <h4>@lang('lang.email')</h4>
-
-                        <x-slot name="buttons">
-
-                        </x-slot>
-                    </x-page-title>
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('employee_id', __('lang.employee'), []) !!}
-                                    {!! Form::select('employee_id[]', $employees, !empty($email) ? $email : false,
-                                    ['class' => 'form-control
-                                    selectpicker', 'multiple', 'data-live-search' =>'true',
-                                    "data-actions-box"=>"true", 'id' => 'employee_id']) !!}
-                                </div>
+            </x-slot>
+        </x-page-title>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="col-md-12">
+                    <div class="row locale_dir">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('employee_id', __('lang.employee'), ['class' =>"locale_label mb-1"]) !!}
+                                {!! Form::select('employee_id[]', $employees, !empty($email) ? $email :
+                                false,
+                                ['class' => 'form-control
+                                selectpicker', 'multiple', 'data-live-search' =>'true',
+                                "data-actions-box"=>"true", 'id' => 'employee_id']) !!}
                             </div>
                         </div>
                     </div>
-                    {!! Form::open(['url' => action('EmailController@store'), 'method' => 'post', 'id' => 'email_form',
-                    'files' => true,
-                    ]) !!}
-                    <div class="col-md-12">
-                        <div class=" row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="to">{{__('lang.to')}}:
-                                        <small>@lang('lang.separated_by_comma')</small></label>
-                                    <input type="text" class="form-control" id="to" name="to" required
-                                        value="@if(!empty($number_string)){{$number_string}}@endif">
-                                </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                {!! Form::open(['url' => action('EmailController@store'), 'method' => 'post', 'id' =>
+                'email_form',
+                'files' => true,
+                ]) !!}
+                <div class="col-md-12">
+                    <div class=" row locale_dir">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="locale_label mb-1" for="to">{{__('lang.to')}}
+                                    <small>@lang('lang.separated_by_comma')</small></label>
+                                <input type="text" class="form-control" id="to" name="to" required
+                                    value="@if(!empty($number_string)){{$number_string}}@endif">
                             </div>
+                        </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="subject">{{__('lang.subject')}}:</label>
-                                    <input type="text" class="form-control" id="name" name="subject" required=""
-                                        value="{{old('subject')}}">
-                                </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="locale_label mb-1" for="subject">{{__('lang.subject')}}</label>
+                                <input type="text" class="form-control" id="name" name="subject" required=""
+                                    value="{{old('subject')}}">
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="body">{{__('lang.body')}}:</label>
-                                    <textarea name="body" id="body" cols="30" rows="6" class="form-control"></textarea>
-                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="locale_label mb-1" for="body">{{__('lang.body')}}</label>
+                                <textarea name="body" id="body" cols="30" rows="6" class="form-control"></textarea>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="body">{{__('lang.attachment')}}:</label> <br>
-                                    <input type="file" name="attachments[]" id="attachments" class="" multiple>
-                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="locale_label mb-1" for="body">{{__('lang.attachment')}}</label> <br>
+                                <input type="file" name="attachments[]" id="attachments" class="" multiple>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="body">{{__('lang.notes')}}:</label> <br>
-                                    <textarea name="notes" id="notes" cols="30" rows="3"
-                                        class="form-control"></textarea>
-                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="locale_label mb-1" for="body">{{__('lang.notes')}}</label> <br>
+                                <textarea name="notes" id="notes" cols="30" rows="3" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-sm-12">
-                        <button type="submit" name="submit" id="print" style="margin: 10px" value="save"
-                            class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.send' )</button>
-
-                    </div>
-                    {!! Form::close() !!}
+                <div class="col-sm-12">
+                    <button type="submit" name="submit" id="print" style="margin: 10px" value="save"
+                        class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.send' )</button>
 
                 </div>
+                {!! Form::close() !!}
+
             </div>
         </div>
     </div>

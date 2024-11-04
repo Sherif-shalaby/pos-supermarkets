@@ -1,92 +1,98 @@
 @extends('layouts.app')
 @section('title', __('lang.redemption_of_point_system'))
 @section('content')
-<section class="forms">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
 
-                    <x-page-title>
+        <x-page-title>
 
-                        <h4>@lang('lang.edit_redemption_of_point_system')</h4>
+            <h4>@lang('lang.edit_redemption_of_point_system')</h4>
 
-
-                        <x-slot name="buttons">
-
-                        </x-slot>
-                    </x-page-title>
-                    <div class="card-body">
-                        <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
-                        {!! Form::open(['url' => action('RedemptionOfPointController@update', $redemption_of_point->id),
-                        'id'
-                        => 'customer-type-form',
-                        'method' =>
-                        'PUT', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('store_ids', __( 'lang.store' ) . ':*') !!}
-                                    {!! Form::select('store_ids[]', $stores, $redemption_of_point->store_ids, ['class'
-                                    =>
-                                    'selectpicker
-                                    form-control', 'data-live-search' => "true", 'multiple', 'required',
-                                    "data-actions-box"=>"true"]) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('earning_of_point_ids', __( 'lang.earning_of_points' ) . ':*') !!}
-                                    {!! Form::select('earning_of_point_ids[]', $earning_of_points,
-                                    $redemption_of_point->earning_of_point_ids, ['class' =>
-                                    'selectpicker
-                                    form-control', 'data-live-search' => "true", 'multiple', 'required',
-                                    "data-actions-box"=>"true"]) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                @include('product_classification_tree.partials.product_selection_tree')
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('value_of_1000_points', __( 'lang.value_of_1000_points' ) .
-                                    ':*') !!}
-                                    {!! Form::text('value_of_1000_points', $redemption_of_point->value_of_1000_points,
-                                    ['class' => 'form-control', 'required']) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('start_date', __( 'lang.start_date' ) . ':') !!}
-                                    {!! Form::text('start_date', $redemption_of_point->start_date, ['class' =>
-                                    'form-control']) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('end_date', __( 'lang.end_date' ) . ':') !!}
-                                    {!! Form::text('end_date', $redemption_of_point->end_date, ['class' =>
-                                    'form-control'])
-                                    !!}
-                                </div>
-                            </div>
+        </x-page-title>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <p class="italic mb-0"><small>@lang('lang.required_fields_info')</small></p>
+            </div>
+        </div>
+        {!! Form::open(['url' => action('RedemptionOfPointController@update', $redemption_of_point->id),
+        'id'
+        => 'customer-type-form',
+        'method' =>
+        'PUT', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="row locale_dir">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('store_ids', __( 'lang.store' ) ,[
+                            'class' =>"locale_label mb-1 field_required"
+                            ]) !!}
+                            {!! Form::select('store_ids[]', $stores, $redemption_of_point->store_ids, ['class'
+                            =>
+                            'selectpicker
+                            form-control', 'data-live-search' => "true", 'multiple', 'required',
+                            "data-actions-box"=>"true"]) !!}
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <input type="submit" value="{{trans('lang.submit')}}" id="submit-btn"
-                                        class="btn btn-primary">
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('earning_of_point_ids', __( 'lang.earning_of_points' ),[
+                            'class' =>"locale_label mb-1 field_required"
+                            ]) !!}
+                            {!! Form::select('earning_of_point_ids[]', $earning_of_points,
+                            $redemption_of_point->earning_of_point_ids, ['class' =>
+                            'selectpicker
+                            form-control', 'data-live-search' => "true", 'multiple', 'required',
+                            "data-actions-box"=>"true"]) !!}
                         </div>
-                        {!! Form::close() !!}
-                        <input type="hidden" name="is_edit_page" id="is_edit_page" value="1">
+                    </div>
+                    <div class="col-md-4">
+                        @include('product_classification_tree.partials.product_selection_tree')
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('value_of_1000_points', __( 'lang.value_of_1000_points' ) ,[
+                            'class' =>"locale_label mb-1 field_required"
+                            ]) !!}
+                            {!! Form::text('value_of_1000_points', $redemption_of_point->value_of_1000_points,
+                            ['class' => 'form-control', 'required']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('start_date', __( 'lang.start_date' ) ,[
+                            'class' =>"locale_label mb-1 "
+                            ]) !!}
+                            {!! Form::text('start_date', $redemption_of_point->start_date, ['class' =>
+                            'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('end_date', __( 'lang.end_date' ) ,[
+                            'class' =>"locale_label mb-1 "
+                            ]) !!}
+                            {!! Form::text('end_date', $redemption_of_point->end_date, ['class' =>
+                            'form-control'])
+                            !!}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" value="{{trans('lang.submit')}}" id="submit-btn"
+                                class="btn btn-primary">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
+        <input type="hidden" name="is_edit_page" id="is_edit_page" value="1">
     </div>
+
 </section>
 @endsection
 

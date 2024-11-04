@@ -10,15 +10,16 @@
         'multipart/form-data']) !!}
         <div class="modal-body">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="name">@lang('lang.type_name')</label>
+                        <label class="locale_label mb-1" for="name">@lang('lang.type_name')</label>
                         <input type="text" class="form-control" name="name" id="name" required>
                     </div>
                 </div>
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="form-group">
-                        <label for="number_of_days_per_year">@lang('lang.number_of_days_per_year')</label>
+                        <label class="locale_label mb-1"
+                            for="number_of_days_per_year">@lang('lang.number_of_days_per_year')</label>
                         <input type="text" class="form-control" name="number_of_days_per_year"
                             id="number_of_days_per_year">
                     </div>

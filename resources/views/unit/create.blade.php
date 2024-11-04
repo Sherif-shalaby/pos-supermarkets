@@ -9,33 +9,46 @@
             <h4 class="modal-title">@lang( 'lang.add_unit' )</h4>
 
         </x-modal-header>
-        <div class="modal-body">
+        <div class="modal-body row locale_dir">
+
             <input type="hidden" name="is_raw_material_unit"
                 value="@if(!empty($is_raw_material_unit)){{1}}@else{{0}}@endif">
             <input type="hidden" name="quick_add" value="{{$quick_add }}">
-            <div class="form-group">
-                {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
+
+            <div class="col-md-6">
+                {!! Form::label('name', __( 'lang.name' ) ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ), 'required'
                 ])
                 !!}
             </div>
             {{-- @if(!empty($is_raw_material_unit)) --}}
-            <div class="form-group">
-                {!! Form::label('info', __( 'lang.info' ). ':') !!}
-                {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => __( 'lang.info' ),
-                'rows' => 3 ])
-                !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('base_unit_multiplier', __( 'lang.times_of' ). ':') !!}
+
+
+            <div class="col-md-6">
+                {!! Form::label('base_unit_multiplier', __( 'lang.times_of' ) ,[
+                'class' =>"locale_label mb-1 "
+                ]) !!}
                 {!! Form::text('base_unit_multiplier', null, ['class' => 'form-control', 'placeholder' => __(
                 'lang.times_of' ) ])
                 !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('base_unit_id', __( 'lang.base_unit' ). ':') !!}
+            <div class="col-md-6">
+                {!! Form::label('base_unit_id', __( 'lang.base_unit' ) ,[
+                'class' =>"locale_label mb-1 "
+                ]) !!}
                 {!! Form::select('base_unit_id', $units, false, ['class' => 'form-control selectpicker', 'placeholder'
                 => __('lang.select_base_unit'), 'data-live-search' => 'true']) !!}
+            </div>
+
+            <div class="col-md-12">
+                {!! Form::label('info', __( 'lang.info' ),[
+                'class' =>"locale_label mb-1 "
+                ]) !!}
+                {!! Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => __( 'lang.info' ),
+                'rows' => 3 ])
+                !!}
             </div>
             {{-- @endif --}}
 

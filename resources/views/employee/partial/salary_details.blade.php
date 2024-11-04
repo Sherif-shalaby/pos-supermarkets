@@ -12,11 +12,15 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <div class="i-checks" style="margin-top: 40px">
-                                <input id="fixed_wage" name="fixed_wage" type="checkbox" value="1" @if
-                                    (!empty($employee->fixed_wage)) checked @endif
+                            <div class="i-checks toggle-pill-color" style="margin-top: 40px">
+                                <input @if (!empty($employee->fixed_wage)) checked @endif id="fixed_wage"
+                                name="fixed_wage" type="checkbox" value="1"
                                 class="form-control-custom salary_checkbox">
-                                <label for="fixed_wage"><strong>@lang('lang.enter_the_fixed_wage')</strong></label>
+                                <label for="fixed_wage">
+                                </label>
+                                <span>
+                                    <strong>@lang('lang.enter_the_fixed_wage')</strong>
+                                </span>
                                 {!! Form::text('fixed_wage_value', !empty($employee->fixed_wage_value) ?
                                 $employee->fixed_wage_value : null, ['class' => 'form-control salary_fields',
                                 'placeholder' => __('lang.enter_the_fixed_wage')]) !!}
@@ -29,10 +33,15 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="i-checks" style="margin-top: 40px">
-                                <input id="commission" name="commission" type="checkbox" value="1" @if
-                                    (!empty($employee->commission)) checked @endif
+                                <input @if (!empty($employee->commission)) checked @endif id="commission"
+                                name="commission" type="checkbox" value="1"
                                 class="form-control-custom salary_checkbox">
-                                <label for="commission"><strong>@lang('lang.enter_the_commission_%')</strong></label>
+                                <label for="commission">
+                                </label>
+                                <span>
+                                    <strong>@lang('lang.enter_the_commission_%')</strong>
+
+                                </span>
                                 {!! Form::text('commission_value', !empty($employee->commission_value) ?
                                 $employee->commission_value : null, ['class' => 'form-control salary_fields',
                                 'placeholder' => __('lang.enter_the_commission_%')]) !!}
@@ -80,7 +89,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary col-6" data-dismiss="modal">@lang('lang.save')</button>
-                <button type="button" class="btn btn-secondary col-6 salary_cancel"
+                <button type="button" class="btn btn-default col-6 salary_cancel"
                     data-dismiss="modal">@lang('lang.cancel')</button>
             </div>
         </div>

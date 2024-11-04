@@ -10,22 +10,28 @@
 
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('store_id', __('lang.store'). ':*', []) !!}
+        <div class="modal-body row locale_dir">
+            <div class="col-md-6">
+                {!! Form::label('store_id', __('lang.store') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::select('store_id', $stores,
                 null, ['class' => 'selectpicker form-control',
                 'data-live-search'=>"true", 'required',
                 'style' =>'width: 80%' , 'placeholder' => __('lang.please_select')]) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('name', __( 'lang.name' ) ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ), 'required'
                 ])
                 !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('user_id', __('lang.user'). ':*', []) !!}
+            <div class="col-md-6">
+                {!! Form::label('user_id', __('lang.user') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::select('user_id', $users,
                 null, ['class' => 'selectpicker form-control',
                 'data-live-search'=>"true", 'required',

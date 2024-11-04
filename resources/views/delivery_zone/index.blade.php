@@ -14,7 +14,7 @@
                 <x-slot name="buttons">
                     @can('settings.delivery_zone.create_and_edit')
                     <a style="color: white" data-href="{{ action('DeliveryZoneController@create') }}"
-                        data-container=".view_modal" class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
+                        data-container=".view_modal" class="btn btn-modal btn-primary"><i class="dripicons-plus"></i>
                         @lang('lang.add_delivery_zone')</a>
                     @endcan
 

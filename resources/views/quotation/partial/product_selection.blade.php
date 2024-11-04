@@ -2,8 +2,7 @@
 $index=$index??'';
 @endphp
 
-<button type="button" class="btn btn-success" data-toggle="modal" data-target="#select_products_modal{{$index?? ''}}"
-    style="margin-top: 15px;">
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#select_products_modal{{$index?? ''}}">
     @lang('lang.select_products')
 </button>
 <div class="modal fade" id="select_products_modal{{$index}}" tabindex="-1" role="dialog"

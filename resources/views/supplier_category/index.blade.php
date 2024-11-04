@@ -13,7 +13,7 @@
                 <x-slot name="buttons">
                     @can('supplier_module.category.create_and_edit')
                     <a style="color: white" data-href="{{action('SupplierCategoryController@create')}}"
-                        data-container=".view_modal" class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
+                        data-container=".view_modal" class="btn btn-modal btn-primary"><i class="dripicons-plus"></i>
                         @lang('lang.add_supplier_category')</a>
                     @endcan
                 </x-slot>

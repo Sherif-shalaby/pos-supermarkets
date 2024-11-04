@@ -2,69 +2,89 @@
 @section('title', __('lang.statement'))
 
 @section('content')
-<div class="container-fluid">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
+        <div class="col-md-12  no-print">
 
-    <div class="col-md-12  no-print">
-        <div class="card">
-            <div class="card-body">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                {!! Form::label('start_date', __('lang.start_date'), []) !!}
-                                {!! Form::text('start_date', request()->start_date, ['class' => 'form-control
-                                sale_filter']) !!}
+            <div class="card mt-1 mb-1">
+                <div class="card-body py-2 px-4">
+                    <div class="col-md-12">
+                        <div class="row locale_dir">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {!! Form::label('start_date', __('lang.start_date'), [
+                                    'class' =>"locale_label mb-1"
+                                    ]) !!}
+                                    {!! Form::text('start_date', request()->start_date, ['class' => 'form-control
+                                    sale_filter']) !!}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="form-group">
-                                {!! Form::label('end_date', __('lang.end_date'), []) !!}
-                                {!! Form::text('end_date', request()->end_date, ['class' => 'form-control sale_filter'])
-                                !!}
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    {!! Form::label('end_date', __('lang.end_date'), [
+                                    'class' =>"locale_label mb-1"
+                                    ]) !!}
+                                    {!! Form::text('end_date', request()->end_date, ['class' => 'form-control
+                                    sale_filter'])
+                                    !!}
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <button type="button"
-                                class="btn btn-danger mt-4 ml-2 clear_filter">@lang('lang.clear_filter')</button>
+                            <div class="col-md-3">
+                                <button type="button"
+                                    class="btn btn-danger mt-4 ml-2 clear_filter">@lang('lang.clear_filter')</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="table-responsive">
-                    <table class="table" id="safe_statement_table">
-                        <thead>
-                            <tr>
-                                <th>@lang('lang.date')</th>
-                                <th>@lang('lang.source')</th>
-                                <th>@lang('lang.job')</th>
-                                <th>@lang('lang.store')</th>
-                                <th>@lang('lang.comments')</th>
-                                <th class="currencies">@lang('lang.currency')</th>
-                                <th>@lang('lang.amount')</th>
-                                <th class="balance">@lang('lang.balance')</th>
-                                <th>@lang('lang.created_by')</th>
-                                <th>@lang('lang.date_and_time')</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <th class="table_totals">@lang('lang.totals')</th>
-                                <td></td>
-                                <td></td>
-                                <td class="footer_balance">{{ @num_format($balance) }}</td>
-                            </tr>
-                        </tfoot>
-                    </table>
+            </div>
+
+            <div
+                class="top-controls py-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+
+            </div>
+            <div class="card mt-1 mb-0">
+                <div class="card-body py-2 px-4">
+                    <div class="table-responsive">
+                        <table class="table" id="safe_statement_table">
+                            <thead>
+                                <tr>
+                                    <th>@lang('lang.date')</th>
+                                    <th>@lang('lang.source')</th>
+                                    <th>@lang('lang.job')</th>
+                                    <th>@lang('lang.store')</th>
+                                    <th>@lang('lang.comments')</th>
+                                    <th class="currencies">@lang('lang.currency')</th>
+                                    <th>@lang('lang.amount')</th>
+                                    <th class="balance">@lang('lang.balance')</th>
+                                    <th>@lang('lang.created_by')</th>
+                                    <th>@lang('lang.date_and_time')</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <th class="table_totals">@lang('lang.totals')</th>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="footer_balance">{{ @num_format($balance) }}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
+            </div>
+            <div
+                class="bottom-controls mt-1 p-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+                <!-- Pagination and other controls can go here -->
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection
 
 @section('javascript')

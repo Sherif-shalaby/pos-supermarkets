@@ -10,41 +10,54 @@
 
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __('lang.name') . ':*') !!}
+        <div class="modal-body row locale_dir">
+            <div class="col-md-6">
+                {!! Form::label('name', __('lang.name') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('name', $tax->name, ['class' => 'form-control', 'placeholder' => __('lang.name'),
                 'required']) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('rate', __('lang.rate_percentage') . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('rate', __('lang.rate_percentage') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('rate', $tax->rate, ['class' => 'form-control', 'placeholder' => __('lang.rate'),
                 'required']) !!}
             </div>
             <input type="hidden" name="type" value="{{ $tax->type }}">
             @if ($tax->type == 'general_tax')
-            <div class="form-group">
-                {!! Form::label('tax_method', __('lang.tax_method') . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('tax_method', __('lang.tax_method') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::select('tax_method', ['inclusive' => __('lang.inclusive'), 'exclusive' =>
                 __('lang.exclusive')], $tax->tax_method, ['class' => 'selectpicker form-control', 'data-live-search' =>
                 'true', 'placeholder' => __('lang.please_select')]) !!}
             </div>
-            <div class="col-md-4">
-                <div class="i-checks">
+            <div class="col-md-6">
+                <div class="d-flex flex-row-reverse" style="gap: 6px">
+                    {!! Form::label('store_ids', __('lang.stores'),[
+                    'class' =>"locale_label mb-1 "
+                    ]) !!} <i class="dripicons-question" data-toggle="tooltip"
+                        title="@lang('lang.tax_status_info')"></i>
+                </div>
+                {!! Form::select('store_ids[]', $stores, $tax->store_ids ?? [], ['class' => 'selectpicker form-control',
+                'data-live-search' => 'true', 'data-actions-box' => 'true', 'multiple']) !!}
+            </div>
+            <div class="col-md-6 mt-2">
+                <div class="i-checks toggle-pill-color flex_center flex-column">
                     <input id="status" name="status" type="checkbox" value="1" @if ($tax->status) checked @endif
                     class="form-control-custom">
                     <label for="status">
+                    </label>
+                    <span>
+
                         <strong>
                             @lang('lang.active')
                         </strong>
-                    </label>
+                    </span>
                 </div>
-            </div>
-            <div class="form-group">
-                {!! Form::label('store_ids', __('lang.stores') . ':', []) !!} <i class="dripicons-question"
-                    data-toggle="tooltip" title="@lang('lang.tax_status_info')"></i>
-                {!! Form::select('store_ids[]', $stores, $tax->store_ids ?? [], ['class' => 'selectpicker form-control',
-                'data-live-search' => 'true', 'data-actions-box' => 'true', 'multiple']) !!}
             </div>
             @endif
         </div>

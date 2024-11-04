@@ -21,8 +21,8 @@
 
                 <x-slot name="buttons">
                     @can('raw_material_module.production.create_and_edit')
-                    <a style="color: white" href="{{action('ManufacturingController@create')}}" class="btn btn-info"><i
-                            class="dripicons-plus"></i>
+                    <a style="color: white" href="{{action('ManufacturingController@create')}}"
+                        class="btn btn-primary"><i class="dripicons-plus"></i>
                         @lang('lang.add_new_production')</a>
                     @endcan
 

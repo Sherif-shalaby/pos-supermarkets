@@ -13,7 +13,7 @@
 
                 @can('coupons_and_gift_cards.gift_card.create_and_edit')
                 <a style="color: white" data-href="{{action('GiftCardController@create')}}" data-container=".view_modal"
-                    class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
+                    class="btn btn-modal btn-primary"><i class="dripicons-plus"></i>
                     @lang('lang.generate_gift_card')</a>
                 @endcan
             </x-slot>

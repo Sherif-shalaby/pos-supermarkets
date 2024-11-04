@@ -10,48 +10,45 @@
             <h4 class="modal-title">@lang( 'lang.edit' )</h4>
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
-                {!! Form::text('name', $brand->name, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ),
-                'required' ])
-                !!}
+        <div class="modal-body row locale_dir">
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('name', __( 'lang.name' ),[
+                    'class' =>"locale_label mb-1 field_required"
+                    ]) !!}
+                    {!! Form::text('name', $brand->name, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ),
+                    'required' ])
+                    !!}
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="projectinput2"> {{ __('categories.image') }}</label>
-                <div class="container mt-3">
-                    <div class="row mx-0" style="border: 1px solid #ddd;padding: 30px 0px;">
-                        <div class="col-12">
-                            <div class="mt-3">
-                                <div class="row">
-                                    <div class="col-10 offset-1">
-                                        <div class="variants">
-                                            <div class='file file--upload w-100'>
-                                                <label for='file-input-edit-brand' class="w-100">
-                                                    <i class="fas fa-cloud-upload-alt"></i>Upload
-                                                </label>
-                                                <input type="file" id="file-input-edit-brand">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="col-md-12">
+                <label for="projectinput2" class="locale_label mb-1"> {{ __('lamg.image') }}</label>
+
+                <div class="col-12">
+                    <div class="variants">
+                        <div class='file file--upload w-100'>
+                            <label for='file-input-edit-brand' class="w-100">
+                                <i class="fas fa-cloud-upload-alt"></i>Upload
+                            </label>
+                            <input type="file" id="file-input-edit-brand">
                         </div>
-                        <div class="col-10 offset-1">
-                            <div class="preview-edit-brand-container">
-                                @if($brand)
-                                <div id="preview{{ $brand->id }}" class="preview">
-                                    @if (!empty($brand->getFirstMediaUrl('brand')))
-                                    <img src="{{ $brand->getFirstMediaUrl('brand') }}" id="img{{  $brand->id }}" alt="">
-                                    @else
-                                    <img src="{{ asset('/uploads/'.session('logo')) }}" alt=""
-                                        id="img{{  $brand->id }}">
-                                    @endif
-                                </div>
-                                @endif
-                            </div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <div class="preview-edit-brand-container">
+                        @if($brand)
+                        <div id="preview{{ $brand->id }}" class="preview">
+                            @if (!empty($brand->getFirstMediaUrl('brand')))
+                            <img src="{{ $brand->getFirstMediaUrl('brand') }}" id="img{{  $brand->id }}" alt="">
+                            @else
+                            <img src="{{ asset('/uploads/'.session('logo')) }}" alt="" id="img{{  $brand->id }}">
+                            @endif
                         </div>
+                        @endif
+
                     </div>
                 </div>
             </div>

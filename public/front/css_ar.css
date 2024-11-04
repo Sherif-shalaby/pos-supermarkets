@@ -1,0 +1,29 @@
+.locale_dir {
+    flex-direction: row-reverse;
+}
+
+.locale_label {
+    display: block;
+    text-align: right;
+}
+
+.field_required {
+    position: relative;
+}
+
+.field_required::after {
+    content: "*";
+    position: absolute;
+    color: red;
+}
+
+.flex_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trans_btn {
+    border-radius: 0 6px 6px 0px;
+    border: 2px solid var(--primary-color);
+}

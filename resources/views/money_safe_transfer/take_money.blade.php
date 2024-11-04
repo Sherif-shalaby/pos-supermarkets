@@ -8,39 +8,53 @@
             <h4 class="modal-title">@lang( 'lang.take_money_from_safe' )</h4>
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('source_type', __('lang.source_type') . ':*') !!}
+        <div class="modal-body row locale_dir">
+            <div class="col-md-6">
+                {!! Form::label('source_type', __('lang.source_type') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::select('source_type', ['employee' => __('lang.employee'), 'safe' => __('lang.safe')],
                 'employee', ['class' => 'form-control selectpicker', 'data-live-search' => 'true', 'required']) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('source_id', __('lang.source') . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('source_id', __('lang.source') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::select('source_id', $emplooyes, false, ['class' => 'form-control selectpicker',
                 'data-live-search' => 'true', 'required', 'placeholder' => __('lang.please_select')]) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('job_type_id', __('lang.job') . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('job_type_id', __('lang.job') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::select('job_type_id', $job_types, false, ['class' => 'form-control', 'required', 'readonly',
                 'placeholder' => __('lang.please_select')]) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('store_id', __('lang.store') . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('store_id', __('lang.store') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::select('store_id', $stores, false, ['class' => 'form-control selectpicker', 'data-live-search'
                 => 'true', 'required', 'placeholder' => __('lang.please_select')]) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('amount', __('lang.amount')) !!}
+            <div class="col-md-6">
+                {!! Form::label('amount', __('lang.amount'),[
+                'class' =>"locale_label mb-1 "
+                ]) !!}
                 {!! Form::text('amount', null, ['class' => 'form-control', 'placeholder' => __('lang.amount')]) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('currency_id', __('lang.currency') . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('currency_id', __('lang.currency'),[
+                'class' =>"locale_label mb-1 "
+                ]) !!}
                 {!! Form::select('currency_id', $currencies, false, ['class' => 'form-control selectpicker',
                 'data-live-search' => 'true', 'required']) !!}
             </div>
 
-            <div class="form-group">
-                {!! Form::label('comments', __('lang.comments')) !!}
+            <div class="col-md-6">
+                {!! Form::label('comments', __('lang.comments'),[
+                'class' =>"locale_label mb-1 "
+                ]) !!}
                 {!! Form::text('comments', null, ['class' => 'form-control', 'placeholder' => __('lang.comments')]) !!}
             </div>
 

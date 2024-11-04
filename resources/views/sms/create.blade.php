@@ -2,102 +2,109 @@
 @section('title', __('lang.sms'))
 
 @section('content')
-<section class="forms">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
 
-                    <x-page-title>
+        <x-page-title>
 
-                        <h4>@lang('lang.sms')</h4>
+            <h4>@lang('lang.sms')</h4>
 
 
-                        <x-slot name="buttons">
+            <x-slot name="buttons">
 
-                        </x-slot>
-                    </x-page-title>
+            </x-slot>
+        </x-page-title>
 
-
-                    <div class="col-md-12">
-                        <input id="select_all" name="select_all" type="checkbox" value="1" class="form-control-custom">
-                        <label for="select_all"><strong>@lang('lang.select_all')</strong></label>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('employee_id', __('lang.employee'), []) !!}
-                                    {!! Form::select('employee_id[]', ['select_all' => __('lang.select_all')] +
-                                    $employees, !empty($employee_mobile_number) ?
-                                    [$employee_mobile_number] : false, ['class' => 'form-control selectpicker',
-                                    'multiple',
-                                    'data-live-search' =>'true' ,'id' => 'employee_id']) !!}
-                                </div>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="col-md-12 toggle-pill-color">
+                    <input id="select_all" name="select_all" type="checkbox" value="1" class="form-control-custom">
+                    <label for="select_all">
+                    </label>
+                    <span>
+                        <strong>@lang('lang.select_all')</strong>
+                    </span>
+                </div>
+                <div class="col-md-12">
+                    <div class="row locale_dir">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('employee_id', __('lang.employee'), [
+                                'class' =>"locale_label mb-1"
+                                ]) !!}
+                                {!! Form::select('employee_id[]', ['select_all' => __('lang.select_all')] +
+                                $employees, !empty($employee_mobile_number) ?
+                                [$employee_mobile_number] : false, ['class' => 'form-control selectpicker',
+                                'multiple',
+                                'data-live-search' =>'true' ,'id' => 'employee_id']) !!}
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('customer_id', __('lang.customer'), []) !!}
-                                    {!! Form::select('customer_id[]', ['select_all' => __('lang.select_all')] +
-                                    $customers, !empty($customer_mobile_number) ?
-                                    [$customer_mobile_number] : false, ['class' => 'form-control selectpicker',
-                                    'multiple',
-                                    'data-live-search' =>'true' ,'id' => 'customer_id']) !!}
-                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('customer_id', __('lang.customer'), [
+                                'class' =>"locale_label mb-1"
+                                ]) !!}
+                                {!! Form::select('customer_id[]', ['select_all' => __('lang.select_all')] +
+                                $customers, !empty($customer_mobile_number) ?
+                                [$customer_mobile_number] : false, ['class' => 'form-control selectpicker',
+                                'multiple',
+                                'data-live-search' =>'true' ,'id' => 'customer_id']) !!}
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('supplier_id', __('lang.supplier'), []) !!}
-                                    {!! Form::select('supplier_id[]', ['select_all' => __('lang.select_all')] +
-                                    $suppliers, !empty($supplier_mobile_number) ?
-                                    [$supplier_mobile_number] : false, ['class' => 'form-control selectpicker',
-                                    'multiple',
-                                    'data-live-search' =>'true' ,'id' => 'supplier_id']) !!}
-                                </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('supplier_id', __('lang.supplier'), [
+                                'class' =>"locale_label mb-1"
+                                ]) !!}
+                                {!! Form::select('supplier_id[]', ['select_all' => __('lang.select_all')] +
+                                $suppliers, !empty($supplier_mobile_number) ?
+                                [$supplier_mobile_number] : false, ['class' => 'form-control selectpicker',
+                                'multiple',
+                                'data-live-search' =>'true' ,'id' => 'supplier_id']) !!}
                             </div>
                         </div>
                     </div>
-                    {!! Form::open(['url' => action('SmsController@store'), 'method' => 'post', 'id' => 'sms_form'
-                    ]) !!}
-                    <div class="col-md-12">
-                        <div class=" row">
-                            <div class="col-md-8">
-                                <div class="form-group">
-                                    <label for="to">{{__('lang.to')}}:
-                                        <small>@lang('lang.separated_by_comma')</small></label>
-                                    <input type="text" class="form-control" id="to" name="to" required
-                                        value="@if(!empty($number_string)){{$number_string}}@endif">
-                                </div>
+                </div>
+                {!! Form::open(['url' => action('SmsController@store'), 'method' => 'post', 'id' => 'sms_form'
+                ]) !!}
+                <div class="col-md-12">
+                    <div class=" row locale_dir">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label class="locale_label mb-1" for="to">{{__('lang.to')}}
+                                    <small>@lang('lang.separated_by_comma')</small></label>
+                                <input type="text" class="form-control" id="to" name="to" required
+                                    value="@if(!empty($number_string)){{$number_string}}@endif">
                             </div>
+                        </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="message">{{__('lang.message')}}:</label>
-                                    <textarea name="message" id="message" cols="30" rows="6" required
-                                        class="form-control"></textarea>
-                                </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="locale_label mb-1" for="message">{{__('lang.message')}}</label>
+                                <textarea name="message" id="message" cols="30" rows="6" required
+                                    class="form-control"></textarea>
                             </div>
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label for="body">{{__('lang.notes')}}:</label> <br>
-                                    <textarea name="notes" id="notes" cols="30" rows="3"
-                                        class="form-control"></textarea>
-                                </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="locale_label mb-1" for="body">{{__('lang.notes')}}</label> <br>
+                                <textarea name="notes" id="notes" cols="30" rows="3" class="form-control"></textarea>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-sm-12">
-                        <button type="submit" name="submit" id="print" style="margin: 10px" value="save"
-                            class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.send' )</button>
-
-                    </div>
-                    {!! Form::close() !!}
+                <div class="col-sm-12">
+                    <button type="submit" name="submit" id="print" style="margin: 10px" value="save"
+                        class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.send' )</button>
 
                 </div>
+                {!! Form::close() !!}
+
             </div>
         </div>
     </div>
+
 </section>
 @endsection
 

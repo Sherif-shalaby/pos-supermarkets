@@ -9,25 +9,33 @@
             <h4 class="modal-title">@lang( 'lang.edit' )</h4>
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __('lang.name') . ':*') !!}
+        <div class="modal-body row locale_dir">
+            <div class="col-md-6">
+                {!! Form::label('name', __('lang.name') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('name', $delivery_zone->name, ['class' => 'form-control', 'placeholder' =>
                 __('lang.name'), 'required']) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('coverage_area', __('lang.coverage_area')) !!}
+            <div class="col-md-6">
+                {!! Form::label('coverage_area', __('lang.coverage_area') ,[
+                'class' =>"locale_label mb-1 "
+                ]) !!}
                 {!! Form::text('coverage_area', $delivery_zone->coverage_area, ['class' => 'form-control', 'placeholder'
                 => __('lang.coverage_area')]) !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('deliveryman_id', __('lang.deliveryman')) !!}
+            <div class="col-md-6">
+                {!! Form::label('deliveryman_id', __('lang.deliveryman') ,[
+                'class' =>"locale_label mb-1 "
+                ]) !!}
                 {!! Form::select('deliveryman_id', $deliverymen, $delivery_zone->deliveryman_id, ['class' =>
                 'form-control selectpicker', 'data-live-search' => 'true', 'placeholder' => __('lang.please_select')])
                 !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('cost', __('lang.cost') . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('cost', __('lang.cost') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('cost', @num_format($delivery_zone->cost), ['class' => 'form-control', 'placeholder' =>
                 __('lang.cost'), 'required']) !!}
             </div>

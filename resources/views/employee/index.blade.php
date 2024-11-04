@@ -12,7 +12,7 @@
 
             <x-slot name="buttons">
                 @can('hr_management.employee.create_and_edit')
-                <a style="color: white" href="{{ action('EmployeeController@create') }}" class="btn btn-info"><i
+                <a style="color: white" href="{{ action('EmployeeController@create') }}" class="btn btn-primary"><i
                         class="dripicons-plus"></i>
                     @lang('lang.add_new_employee')</a>
                 @endcan

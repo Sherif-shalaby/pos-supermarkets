@@ -9,13 +9,9 @@
 
             <h2 class="mb-4 print-title">@lang('lang.list_of_employees_in_forfeit_leave')</h2>
 
-
-            <x-slot name="buttons">
-
-            </x-slot>
         </x-page-title>
 
-        <div class="row" id="sales">
+        <div class="d-flex flex-column" id="sales">
 
             <x-collapse collapse-id="Filter" button-class="d-flex btn-secondary" group-class="mb-1" body-class="py-1">
 

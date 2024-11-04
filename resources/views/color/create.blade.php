@@ -10,16 +10,20 @@
 
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
+        <div class="modal-body row locale_dir">
+            <div class="col-md-6">
+                {!! Form::label('name', __( 'lang.name' ) ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ), 'required'
                 ])
                 !!}
             </div>
             <input type="hidden" name="quick_add" value="{{$quick_add }}">
-            <div class="form-group">
-                {!! Form::label('color_hex', __( 'lang.color_hex' ) . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('color_hex', __( 'lang.color_hex' ) ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('color_hex', null, ['class' => 'form-control', 'placeholder' => __( 'lang.color_hex' )
                 ])
                 !!}

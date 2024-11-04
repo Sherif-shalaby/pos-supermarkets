@@ -13,7 +13,7 @@
             <x-slot name="buttons">
 
                 @can('product_module.consumption.create_and_edit')
-                <a style="color: white" href="{{action('ConsumptionController@create')}}" class="btn btn-info"><i
+                <a style="color: white" href="{{action('ConsumptionController@create')}}" class="btn btn-primary"><i
                         class="dripicons-plus"></i>
                     @lang('lang.add_manual_consumption')</a>
                 @endcan

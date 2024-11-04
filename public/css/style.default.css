@@ -1368,7 +1368,6 @@ button {
 
 .login-page form,
 .register-page form {
-    margin: 2rem auto 1rem;
     max-width: 300px;
 }
 

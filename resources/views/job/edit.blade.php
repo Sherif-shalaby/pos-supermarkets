@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="job_title">@lang('lang.job_title')</label>
+                        <label class="locale_label mb-1" for="job_title">@lang('lang.job_title')</label>
                         <input type="text" class="form-control" value="{{$job->job_title}}" name="job_title"
                             id="job_title" required>
                     </div>

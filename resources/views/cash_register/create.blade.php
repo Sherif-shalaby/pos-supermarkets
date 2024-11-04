@@ -1,75 +1,82 @@
 @extends('layouts.app')
 @section('title', __('lang.cash_in_hand'))
 @section('content')
-<section class="forms">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <x-page-title>
+<section class="forms py-2">
+    <div class="container-fluid px-2">
+        <x-page-title>
 
-                        <h4>@lang('lang.cash_in_hand')</h4>
+            <h4>@lang('lang.cash_in_hand')</h4>
+
+        </x-page-title>
 
 
-                        <x-slot name="buttons">
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <p class="italic mb-0"><small>@lang('lang.required_fields_info')</small></p>
+            </div>
+        </div>
 
-                        </x-slot>
-                    </x-page-title>
-                    <div class="card-body">
-                        <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
-                        {!! Form::open(['url' => action('CashRegisterController@store'), 'id' => 'cash-register-form',
-                        'method' => 'POST', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
+        {!! Form::open(['url' => action('CashRegisterController@store'), 'id' => 'cash-register-form',
+        'method' => 'POST', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
 
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('amount', __('lang.amount') . ':*') !!}
-                                {!! Form::text('amount', null, ['class' => 'form-control', 'placeholder' =>
-                                __('lang.amount'), 'required']) !!}
-                            </div>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="row locale_dir">
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('amount', __('lang.amount') ,[
+                            'class' =>"locale_label mb-1 field_required"
+                            ]) !!}
+                            {!! Form::text('amount', null, ['class' => 'form-control', 'placeholder' =>
+                            __('lang.amount'), 'required']) !!}
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('source_type', __('lang.source_type'), []) !!} <br>
-                                {!! Form::select('source_type', ['user' => __('lang.user'), 'safe' => __('lang.safe')],
-                                'user', ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'style'
-                                => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('source_type', __('lang.source_type'), [
+                            'class' =>"locale_label mb-1"
+                            ]) !!}
+                            {!! Form::select('source_type', ['user' => __('lang.user'), 'safe' => __('lang.safe')],
+                            'user', ['class' => 'selectpicker form-control', 'data-live-search' => 'true', 'style'
+                            => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('source_id', __('lang.source'), []) !!}
-                                {!! Form::select('source_id', $users, false, ['class' => 'selectpicker form-control',
-                                'data-live-search' => 'true', 'required', 'placeholder' => __('lang.please_select')])
-                                !!}
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('source_id', __('lang.source'), ['class' =>"locale_label mb-1"]) !!}
+                            {!! Form::select('source_id', $users, false, ['class' => 'selectpicker form-control',
+                            'data-live-search' => 'true', 'required', 'placeholder' => __('lang.please_select')])
+                            !!}
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('notes', __('lang.notes'), []) !!}
-                                {!! Form::textarea('notes', null, ['class' => 'form-control', 'placeholder' =>
-                                __('lang.notes'), 'rows' => 3]) !!}
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('notes', __('lang.notes'), ['class' =>"locale_label mb-1"]) !!}
+                            {!! Form::textarea('notes', null, ['class' => 'form-control', 'placeholder' =>
+                            __('lang.notes'), 'rows' => 3]) !!}
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('image', __('lang.upload_picture'), []) !!} <br>
-                                {!! Form::file('image', []) !!}
-                            </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            {!! Form::label('image', __('lang.upload_picture'), ['class' =>"locale_label mb-1"]) !!}
+                            {!! Form::file('image', []) !!}
                         </div>
-                        <br>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <input type="submit" value="{{ trans('lang.submit') }}" id="submit-btn"
-                                    class="btn btn-primary">
-                                <input type="submit" value="{{ trans('lang.cancel') }}" id="cancel-submit-btn"
-                                    class="btn btn-danger">
-                            </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <input type="submit" value="{{ trans('lang.submit') }}" id="submit-btn"
+                                class="btn btn-primary">
+                            <input type="submit" value="{{ trans('lang.cancel') }}" id="cancel-submit-btn"
+                                class="btn btn-danger">
                         </div>
-                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </div>
 </section>
 @endsection

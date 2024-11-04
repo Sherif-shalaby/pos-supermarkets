@@ -1,42 +1,34 @@
 @extends('layouts.app')
 @section('title', __('lang.product'))
 @section('content')
-<section class="forms">
-    <div class="container-fluid">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <x-page-title>
+                    <h4>@lang('lang.add_new_product')</h4>
+
+                </x-page-title>
 
 
-                    <x-page-title>
-
-
-                        <h4>@lang('lang.add_new_product')</h4>
-
-                        <x-slot name="buttons">
-
-                        </x-slot>
-                    </x-page-title>
-                    <div class="card-body">
-                        <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
-                        {!! Form::open(['url' => action('ProductController@store'), 'id' => 'product-form', 'method' =>
-                        'POST', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
-                        @include('product.partial.create_product_form')
-                        <div class="row">
-                            <div class="col-md-4 mt-5">
-                                <div class="form-group">
-                                    <input type="button" value="{{ trans('lang.save') }}" id="submit-btn"
-                                        class="btn btn-primary">
-                                </div>
-                            </div>
+                {!! Form::open(['url' => action('ProductController@store'), 'id' => 'product-form', 'method' =>
+                'POST', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
+                @include('product.partial.create_product_form')
+                <div class="row">
+                    <div class="col-md-4 mt-5">
+                        <div class="form-group">
+                            <input type="button" value="{{ trans('lang.save') }}" id="submit-btn"
+                                class="btn btn-primary">
                         </div>
-                        <div id="cropped_images"></div>
-                        {!! Form::close() !!}
                     </div>
                 </div>
+                <div id="cropped_images"></div>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
+
+
 </section>
 
 <div class="modal fade" id="product_cropper_modal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

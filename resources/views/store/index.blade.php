@@ -11,7 +11,7 @@
                 <x-slot name="buttons">
                     @can('settings.store.create_and_edit')
                     <a style="color: white" data-href="{{action('StoreController@create')}}"
-                        data-container=".view_modal" class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
+                        data-container=".view_modal" class="btn btn-modal btn-primary"><i class="dripicons-plus"></i>
                         @lang('lang.add_store')</a>
                     @endcan
                 </x-slot>

@@ -10,7 +10,7 @@
 
 
             <x-slot name="buttons">
-                <a style="color: white" href="{{action('SalesPromotionController@create')}}" class="btn btn-info"><i
+                <a style="color: white" href="{{action('SalesPromotionController@create')}}" class="btn btn-primary"><i
                         class="dripicons-plus"></i>
                     @lang('lang.sales_promotion_formal_discount')</a>
 

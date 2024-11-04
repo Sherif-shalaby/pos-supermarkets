@@ -9,9 +9,11 @@
 
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __('lang.name') . ':*') !!}
+        <div class="modal-body row locale_dir">
+            <div class="col-md-12">
+                {!! Form::label('name', __('lang.name') ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 <div class="input-group my-group">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __('lang.name'),
                     'required']) !!}

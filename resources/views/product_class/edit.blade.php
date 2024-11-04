@@ -10,81 +10,96 @@
 
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __('lang.name') . ':*') !!}
-                <div class="input-group my-group">
-                    {!! Form::text('name', $product_class->name, ['class' => 'form-control', 'placeholder' =>
-                    __('lang.name'), 'required', 'readonly' => $product_class->name == 'Extras' ? true : false]) !!}
-                    <span class="input-group-btn">
-                        <button class="btn btn-default bg-white btn-flat translation_btn" type="button"
-                            data-type="product_class"><i class="dripicons-web text-primary fa-lg"></i></button>
-                    </span>
+        <div class="modal-body row locale_dir">
+            <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('name', __('lang.name') , [
+                    'class' =>"locale_label mb-1 field_required"
+                    ]) !!}
+                    <div class="input-group my-group">
+                        {!! Form::text('name', $product_class->name, ['class' => 'form-control', 'placeholder' =>
+                        __('lang.name'), 'required', 'readonly' => $product_class->name == 'Extras' ? true : false]) !!}
+                        <span class="input-group-btn">
+                            <button class=" btn-default btn-primary btn-flat translation_btn trans_btn" type="button"
+                                data-type="product_class"><i class="dripicons-web text-white fa-lg"></i></button>
+                        </span>
+                    </div>
+                </div>
+                @include('layouts.partials.translation_inputs', [
+                'attribute' => 'name',
+                'translations' => $product_class->translations,
+                'type' => 'product_class',
+                ])
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('description', __('lang.description'), [
+                    'class' =>"locale_label mb-1 "
+                    ]) !!}
+                    {!! Form::text('description', $product_class->description, ['class' => 'form-control', 'placeholder'
+                    =>
+                    __('lang.description')]) !!}
                 </div>
             </div>
-            @include('layouts.partials.translation_inputs', [
-            'attribute' => 'name',
-            'translations' => $product_class->translations,
-            'type' => 'product_class',
-            ])
-            <div class="form-group">
-                {!! Form::label('description', __('lang.description') . ':') !!}
-                {!! Form::text('description', $product_class->description, ['class' => 'form-control', 'placeholder' =>
-                __('lang.description')]) !!}
-            </div>
-            <div class="form-group">
-                {!! Form::label('sort', __('lang.sort') . ':*') !!}
-                {!! Form::number('sort', $product_class->sort, ['class' => 'form-control', 'placeholder' =>
-                __('lang.sort'), 'required']) !!}
-            </div>
-            <div class="form-group">
-                <div class="i-checks">
-                    <input id="status" name="status" type="checkbox" @if ($product_class->status == 1) checked @endif
-                    value="1" class="form-control-custom">
-                    <label for="status"><strong>
-                            @lang('lang.active')
-                        </strong></label>
+            <div class="col-md-6">
+                <div class="form-group">
+                    {!! Form::label('sort', __('lang.sort') , [
+                    'class' =>"locale_label mb-1 field_required"
+                    ]) !!}
+                    {!! Form::number('sort', $product_class->sort, ['class' => 'form-control', 'placeholder' =>
+                    __('lang.sort'), 'required']) !!}
                 </div>
             </div>
-            <div class="form-group">
-                <label for="projectinput2">{{ __('categories.image') }}</label>
+
+            <div class="col-md-6 flex_center">
+                <div class="form-group">
+                    <div class="i-checks toggle-pill-color">
+                        <input id="status" name="status" type="checkbox" @if ($product_class->status == 1) checked
+                        @endif
+                        value="1" class="form-control-custom">
+                        <label for="status">
+                        </label>
+                        <span>
+                            <strong>
+                                @lang('lang.active')
+                            </strong>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-12">
+                <label for="projectinput2" class="locale_label mb-1">{{ __('lang.image') }}</label>
                 {{-- <input type="file" id="projectinput2" class="form-control img" name="image" accept="image/*" />--}}
-                <div class="container mt-3">
-                    <div class="row mx-0" style="border: 1px solid #ddd;padding: 30px 0px;">
-                        <div class="col-12">
-                            <div class="mt-3">
-                                <div class="row">
-                                    <div class="col-10 offset-1">
-                                        <div class="variants">
-                                            <div class='file file--upload w-100'>
-                                                <label for='file-input-edit' class="w-100">
-                                                    <i class="fas fa-cloud-upload-alt"></i>Upload
-                                                </label>
-                                                <!-- <input  id="file-input" multiple type='file' /> -->
-                                                <input type="file" id="file-input-edit">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="cropped_product_class_edit_images"></div>
-                        <div class="col-10 offset-1">
-                            <div class="preview-edit-container">
-                                @if($product_class)
-                                <div id="preview{{ $product_class->id }}" class="preview">
-                                    @if (!empty($product_class->getFirstMediaUrl('product_class')))
-                                    <img src="{{ $product_class->getFirstMediaUrl('product_class') }}"
-                                        id="img{{  $product_class->id }}" alt="">
-                                    @else
-                                    <img src="{{ asset('/uploads/' . session('logo')) }}" alt=""
-                                        id="img{{  $product_class->id }}">
-                                    @endif
-                                </div>
-                                @endif
-                            </div>
+
+
+                <div class="col-12">
+                    <div class="variants">
+                        <div class='file file--upload w-100'>
+                            <label for='file-input-edit' class="w-100">
+                                <i class="fas fa-cloud-upload-alt"></i>Upload
+                            </label>
+                            <!-- <input  id="file-input" multiple type='file' /> -->
+                            <input type="file" id="file-input-edit">
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div id="cropped_product_class_edit_images"></div>
+            <div class="col-12">
+                <div class="preview-edit-container">
+                    @if($product_class)
+                    <div id="preview{{ $product_class->id }}" class="preview">
+                        @if (!empty($product_class->getFirstMediaUrl('product_class')))
+                        <img src="{{ $product_class->getFirstMediaUrl('product_class') }}"
+                            id="img{{  $product_class->id }}" alt="">
+                        @else
+                        <img src="{{ asset('/uploads/' . session('logo')) }}" alt="" id="img{{  $product_class->id }}">
+                        @endif
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -93,31 +108,33 @@
             <button id="sub-button-form" class="btn btn-primary col-6">@lang( 'lang.update' )</button>
             <button type="button" class="btn btn-default col-6" data-dismiss="modal">@lang( 'lang.close' )</button>
         </div>
+    </div>
+</div>
 
-        {!! Form::close() !!}
-        <div class="modal fade" id="imagesModal" tabindex="-1" role="dialog" aria-labelledby="imagesModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
+{!! Form::close() !!}
+<div class="modal fade" id="imagesModal" tabindex="-1" role="dialog" aria-labelledby="imagesModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
 
-                    <x-modal-header>
-                        <h5 class="modal-title" id="imagesModalLabel">Modal title</h5>
+            <x-modal-header>
+                <h5 class="modal-title" id="imagesModalLabel">Modal title</h5>
 
-                    </x-modal-header>
-                    <div class="modal-body">
-                        <div id="croppie-modal-edit" style="display:none">
-                            <div id="croppie-container-edit"></div>
-                            <button data-dismiss="modal" id="croppie-cancel-btn-edit" type="button"
-                                class="btn btn-secondary"><i class="fas fa-times"></i></button>
-                            <button id="croppie-submit-btn-edit" type="button" class="btn btn-primary"><i
-                                    class="fas fa-crop"></i></button>
-                        </div>
-                    </div>
-
+            </x-modal-header>
+            <div class="modal-body">
+                <div id="croppie-modal-edit" style="display:none">
+                    <div id="croppie-container-edit"></div>
+                    <button data-dismiss="modal" id="croppie-cancel-btn-edit" type="button" class="btn btn-secondary"><i
+                            class="fas fa-times"></i></button>
+                    <button id="croppie-submit-btn-edit" type="button" class="btn btn-primary"><i
+                            class="fas fa-crop"></i></button>
                 </div>
             </div>
+
         </div>
-    </div><!-- /.modal-content -->
+    </div>
+</div>
+</div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.js"></script>
 <script>

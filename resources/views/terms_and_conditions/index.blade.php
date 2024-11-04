@@ -26,29 +26,35 @@
                 </x-slot>
             </x-page-title>
 
-            <div class="col-md-12">
-                {!! Form::open(['url' => action('TermsAndConditionsController@updateInvoiceTacSetting'), 'method' =>
-                'POST'])
-                !!}
-                <div class="row ml-2">
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            {!! Form::label('invoice_terms_and_conditions', __('lang.tac_to_be_printed'), []) !!}
-                            {!! Form::select('invoice_terms_and_conditions',
-                            $tac,!empty($invoice_terms_and_conditions) ?
-                            $invoice_terms_and_conditions : null, ['class' =>
-                            'form-control selectpicker', 'data-live-search' => "true", 'placeholder' =>
-                            __('lang.please_select')])
-                            !!}
+            <div class="card mt-1 mb-1">
+                <div class="card-body py-2 px-4">
+                    <div class="col-md-12">
+                        {!! Form::open(['url' => action('TermsAndConditionsController@updateInvoiceTacSetting'),
+                        'method' =>
+                        'POST'])
+                        !!}
+                        <div class="row ml-2">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    {!! Form::label('invoice_terms_and_conditions', __('lang.tac_to_be_printed'), [])
+                                    !!}
+                                    {!! Form::select('invoice_terms_and_conditions',
+                                    $tac,!empty($invoice_terms_and_conditions) ?
+                                    $invoice_terms_and_conditions : null, ['class' =>
+                                    'form-control selectpicker', 'data-live-search' => "true", 'placeholder' =>
+                                    __('lang.please_select')])
+                                    !!}
+                                </div>
+                            </div>
+                            <div class="col-md-1" style="margin-top: 32px;">
+                                <button class="btn btn-success" type="submit">@lang('lang.save')</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-1" style="margin-top: 32px;">
-                        <button class="btn btn-success" type="submit">@lang('lang.save')</button>
+
+                        {!! Form::close() !!}
+
                     </div>
                 </div>
-
-                {!! Form::close() !!}
-
             </div>
 
 

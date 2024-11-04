@@ -12,85 +12,101 @@
             <h4 class="modal-title">@lang( 'lang.add_category' )</h4>
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __('lang.name') . ':*') !!}
-                <div class="input-group my-group">
-                    {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __('lang.name'),
-                    'required']) !!}
-                    <span class="input-group-btn">
-                        <button class="btn btn-default bg-white btn-flat translation_btn" type="button"
-                            data-type="category"><i class="dripicons-web text-primary fa-lg"></i></button>
-                    </span>
+        <div class="modal-body row locale_dir">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    {!! Form::label('name', __('lang.name') ,[
+                    'class' =>"locale_label mb-1 field_required"
+                    ]) !!}
+                    <div class="input-group my-group">
+                        {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => __('lang.name'),
+                        'required']) !!}
+                        <span class="input-group-btn">
+                            <button class=" btn-default btn-primary btn-flat translation_btn trans_btn" type="button"
+                                data-type="category"><i class="dripicons-web text-white fa-lg"></i></button>
+                        </span>
+                    </div>
+                </div>
+                @include('layouts.partials.translation_inputs', [
+                'attribute' => 'name',
+                'translations' => [],
+                'type' => 'category',
+                ])
+            </div>
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    {!! Form::label('description', __('lang.description') ,[
+                    'class' =>"locale_label mb-1"
+                    ]) !!}
+                    {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' =>
+                    __('lang.description')]) !!}
                 </div>
             </div>
-            @include('layouts.partials.translation_inputs', [
-            'attribute' => 'name',
-            'translations' => [],
-            'type' => 'category',
-            ])
-            <div class="form-group">
-                {!! Form::label('description', __('lang.description') . ':') !!}
-                {!! Form::text('description', null, ['class' => 'form-control', 'placeholder' =>
-                __('lang.description')]) !!}
-            </div>
             <input type="hidden" name="quick_add" value="{{ $quick_add }}">
+
             @if ($type == 'category')
-            <div class="form-group">
-                <label for="product_class_id">{{ __('lang.class') }}:</label>
-                <select class="form-control" data-live-search="true" style="width: 100%"
-                    placeholder="{{ __('lang.please_select') }}" required id="cat_product_class_id"
-                    name="product_class_id">
-                    <option value="" selected disabled>{{ __('lang.please_select') }}</option>
-                    @foreach($product_classes as $product_class_id => $product_class)
-                    <option value="{{ $product_class_id }}">{{ $product_class }}</option>
-                    @endforeach
-                </select>
-                <span class="text-danger hide required-class">Tis field is required</span>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label class="locale_label mb-1 field_required" for="product_class_id">{{ __('lang.class')
+                        }}</label>
+                    <select class="form-control" data-live-search="true" style="width: 100%"
+                        placeholder="{{ __('lang.please_select') }}" required id="cat_product_class_id"
+                        name="product_class_id">
+                        <option value="" selected disabled>{{ __('lang.please_select') }}</option>
+                        @foreach($product_classes as $product_class_id => $product_class)
+                        <option value="{{ $product_class_id }}">{{ $product_class }}</option>
+                        @endforeach
+                    </select>
+                    <span class="text-danger hide required-class">Tis field is required</span>
+                </div>
             </div>
             @endif
+
             @if ($type == 'sub_category')
-            <div class="form-group ">
-                {!! Form::label('parent_id', __('lang.parent_category') . ':') !!}
-                {!! Form::select('parent_id', $categories, false, ['class' => 'form-control', 'data-live-search' =>
-                'true', 'style' => 'width: 100%', 'placeholder' => __('lang.please_select'), 'id' => 'parent_id']) !!}
+            <div class="col-md-6">
+                <div class="form-group ">
+                    {!! Form::label('parent_id', __('lang.parent_category') ,[
+                    'class' =>"locale_label mb-1"
+                    ]) !!}
+                    {!! Form::select('parent_id', $categories, false, ['class' => 'form-control', 'data-live-search' =>
+                    'true', 'style' => 'width: 100%', 'placeholder' => __('lang.please_select'), 'id' => 'parent_id'])
+                    !!}
+                </div>
             </div>
             @endif
 
             {{-- @include('layouts.partials.image_crop')--}}
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group">
-                        <label for="file-input-category"> {{ __('lang.image') }}</label>
-                        <div class="container mt-3">
-                            <div class="row mx-0" style="border: 1px solid #ddd;padding: 30px 0px;">
-                                <div class="col-12">
-                                    <div class="mt-3">
-                                        <div class="row">
-                                            <div class="col-10 offset-1">
-                                                <div class="variants">
-                                                    <div class='file file--upload w-100'>
-                                                        <label for='file-input-category' class="w-100">
-                                                            <i class="fas fa-cloud-upload-alt"></i>Upload
-                                                        </label>
-                                                        <!-- <input  id="file-input" multiple type='file' /> -->
-                                                        <input type="file" id="file-input-category">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-10 offset-1">
-                                    <div class="preview-category-container"></div>
-                                </div>
+
+            <div class="col-md-12">
+
+                <label for="file-input-category" class="locale_label mb-1"> {{ __('lang.image') }}</label>
+                <div class="container mt-3">
+
+                    <div class="col-12">
+                        <div class="variants">
+                            <div class='file file--upload w-100'>
+                                <label for='file-input-category' class="w-100">
+                                    <i class="fas fa-cloud-upload-alt"></i>Upload
+                                </label>
+                                <!-- <input  id="file-input" multiple type='file' /> -->
+                                <input type="file" id="file-input-category">
                             </div>
                         </div>
                     </div>
 
+                    <div class="col-12">
+                        <div class="preview-category-container"></div>
+                    </div>
+
                 </div>
 
+
             </div>
+
+
         </div>
 
         <div class="modal-footer">

@@ -2,86 +2,82 @@
 @section('title', __('lang.cash_out_adjustment'))
 
 @section('content')
-<section class="forms">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
 
-                    <x-page-title>
-                        <h4>@lang('lang.cash_out_adjustment')</h4>
+        <x-page-title>
+            <h4>@lang('lang.cash_out_adjustment')</h4>
 
-
-
-                        <x-slot name="buttons">
-
-                        </x-slot>
-                    </x-page-title>
-                    {!! Form::open(['url' => action('CashOutAdjustmentController@update', $cash_out_adjustment->id),
-                    'method' => 'put', 'id' =>
-                    'sms_form', 'files' => true
-                    ]) !!}
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('store_id', __('lang.store'), []) !!}
-                                    {!! Form::select('store_id', $stores, $cash_out_adjustment->store_id, ['class' =>
-                                    'form-control
-                                    selectpicker', 'id' => 'store_id' ,'placeholder' =>
-                                    __('lang.please_select')]) !!}
-                                </div>
+        </x-page-title>
+        {!! Form::open(['url' => action('CashOutAdjustmentController@update', $cash_out_adjustment->id),
+        'method' => 'put', 'id' =>
+        'sms_form', 'files' => true
+        ]) !!}
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="col-md-12">
+                    <div class="row locale_dir">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('store_id', __('lang.store'), ['class' =>"locale_label mb-1"]) !!}
+                                {!! Form::select('store_id', $stores, $cash_out_adjustment->store_id, ['class' =>
+                                'form-control
+                                selectpicker', 'id' => 'store_id' ,'placeholder' =>
+                                __('lang.please_select')]) !!}
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('user_id', __('lang.cashier'), []) !!}
-                                    {!! Form::select('user_id', $users, $cash_out_adjustment->user_id, ['class' =>
-                                    'form-control
-                                    selectpicker', 'id' => 'user_id' ,'placeholder' =>
-                                    __('lang.please_select')]) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('current_cash', __('lang.current_cash'), []) !!}
-                                    {!! Form::text('current_cash', @num_format($cash_out_adjustment->current_cash),
-                                    ['class' => 'form-control', 'id' => 'current_cash' ,'placeholder' =>
-                                    __('lang.current_cash'), 'readonly']) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('amount', __('lang.amount'), []) !!}
-                                    {!! Form::text('amount', @num_format($cash_out_adjustment->amount), ['class' =>
-                                    'form-control', 'id' => 'amount' ,'placeholder' =>
-                                    __('lang.amount')]) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('discrepancy', __('lang.discrepancy'), []) !!}
-                                    {!! Form::text('discrepancy', @num_format($cash_out_adjustment->discrepancy),
-                                    ['class' => 'form-control', 'id' => 'discrepancy' ,'placeholder' =>
-                                    __('lang.discrepancy')]) !!}
-                                </div>
-                            </div>
-                            <input type="hidden" name="cash_register_id" id="cash_register_id"
-                                value="{{$cash_out_adjustment->cash_register_id}}">
-
                         </div>
-                    </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('user_id', __('lang.cashier'), ['class' =>"locale_label mb-1"]) !!}
+                                {!! Form::select('user_id', $users, $cash_out_adjustment->user_id, ['class' =>
+                                'form-control
+                                selectpicker', 'id' => 'user_id' ,'placeholder' =>
+                                __('lang.please_select')]) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('current_cash', __('lang.current_cash'), ['class' =>"locale_label
+                                mb-1"]) !!}
+                                {!! Form::text('current_cash', @num_format($cash_out_adjustment->current_cash),
+                                ['class' => 'form-control', 'id' => 'current_cash' ,'placeholder' =>
+                                __('lang.current_cash'), 'readonly']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('amount', __('lang.amount'), ['class' =>"locale_label mb-1"]) !!}
+                                {!! Form::text('amount', @num_format($cash_out_adjustment->amount), ['class' =>
+                                'form-control', 'id' => 'amount' ,'placeholder' =>
+                                __('lang.amount')]) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('discrepancy', __('lang.discrepancy'), ['class' =>"locale_label mb-1"])
+                                !!}
+                                {!! Form::text('discrepancy', @num_format($cash_out_adjustment->discrepancy),
+                                ['class' => 'form-control', 'id' => 'discrepancy' ,'placeholder' =>
+                                __('lang.discrepancy')]) !!}
+                            </div>
+                        </div>
+                        <input type="hidden" name="cash_register_id" id="cash_register_id"
+                            value="{{$cash_out_adjustment->cash_register_id}}">
 
-                    <div class="col-sm-12">
-                        <button type="submit" id="print" style="margin: 10px"
-                            class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.update' )</button>
-
                     </div>
-                    {!! Form::close() !!}
+                </div>
+
+                <div class="col-sm-12">
+                    <button type="submit" id="print" style="margin: 10px"
+                        class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.update' )</button>
 
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
+
     </div>
+
 </section>
 @endsection
 

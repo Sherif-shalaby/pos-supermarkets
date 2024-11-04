@@ -12,7 +12,7 @@
             <x-slot name="buttons">
 
                 @can('coupons_and_gift_cards.coupon.create_and_edit')
-                <a style="color: white" href="{{action('CouponController@create')}}" class="btn btn-info"><i
+                <a style="color: white" href="{{action('CouponController@create')}}" class="btn btn-primary"><i
                         class="dripicons-plus"></i>
                     @lang('lang.generate_coupon')</a>
                 @endcan

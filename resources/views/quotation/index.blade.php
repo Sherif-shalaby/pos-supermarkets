@@ -12,7 +12,7 @@
                 <h3 class="print-title">@lang('lang.quotation_list')</h3>
                 <x-slot name="buttons">
                     @can('sale.pos.create_and_edit')
-                    <a style="color: white" href="{{action('QuotationController@create')}}" class="btn btn-info"><i
+                    <a style="color: white" href="{{action('QuotationController@create')}}" class="btn btn-primary"><i
                             class="dripicons-plus"></i>
                         @lang('lang.create_quotation')</a>
                     @endcan

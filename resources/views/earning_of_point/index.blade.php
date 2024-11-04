@@ -11,7 +11,7 @@
 
             <x-slot name="buttons">
 
-                <a style="color: white" href="{{action('EarningOfPointController@create')}}" class="btn btn-info"><i
+                <a style="color: white" href="{{action('EarningOfPointController@create')}}" class="btn btn-primary"><i
                         class="dripicons-plus"></i>
                     @lang('lang.earning_of_point_system')</a>
             </x-slot>

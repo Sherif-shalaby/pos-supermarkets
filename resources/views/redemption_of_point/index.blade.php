@@ -10,8 +10,8 @@
 
 
             <x-slot name="buttons">
-                <a style="color: white" href="{{action('RedemptionOfPointController@create')}}" class="btn btn-info"><i
-                        class="dripicons-plus"></i>
+                <a style="color: white" href="{{action('RedemptionOfPointController@create')}}"
+                    class="btn btn-primary"><i class="dripicons-plus"></i>
                     @lang('lang.redemption_of_point_system')</a>
 
             </x-slot>

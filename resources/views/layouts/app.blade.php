@@ -20,6 +20,13 @@
 
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    @if (app()->getLocale() == "ar")
+    <link rel="stylesheet" href="{{ asset('front/css_ar.css') }}">
+    @else
+    <link rel="stylesheet" href="{{ asset('front/css_en.css') }}">
+
+    @endif
     <style>
         .preview-category-container {
             /* display: flex;
@@ -170,12 +177,13 @@
         }
 
         .file--upload>label {
-            color: hsl(204, 86%, 53%);
-            border-color: hsl(204, 86%, 53%);
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+            border-style: dashed;
         }
 
         .file--upload>label:hover {
-            border-color: hsl(204, 86%, 53%);
+            border-color: var(--primary-color);
             background-color: hsl(204, 86%, 96%);
         }
 

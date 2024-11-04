@@ -1,0 +1,19 @@
+.locale_dir {
+    flex-direction: row;
+}
+
+.locale_label {
+    display: block;
+    text-align: right;
+}
+
+.flex_center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.trans_btn {
+    border-radius: 0 6px 6px 0px;
+    border: 2px solid var(--primary-color);
+}

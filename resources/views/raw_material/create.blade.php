@@ -2,43 +2,40 @@
 @section('title', __('lang.raw_materials'))
 
 @section('content')
-<section class="forms">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
+        <x-page-title>
 
+            <h4>@lang('lang.add_new_raw_material')</h4>
 
-                    <x-page-title>
+        </x-page-title>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <p class="italic mb-0"><small>@lang('lang.required_fields_info')</small></p>
+            </div>
+        </div>
 
-                        <h4>@lang('lang.add_new_raw_material')</h4>
-
-
-                        <x-slot name="buttons">
-
-                        </x-slot>
-                    </x-page-title>
-                    <div class="card-body">
-                        <p class="italic"><small>@lang('lang.required_fields_info')</small></p>
-                        {!! Form::open(['url' => action('RawMaterialController@store'), 'id' => 'product-form', 'method'
-                        =>
-                        'POST', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
-                        @include('raw_material.partial.create_raw_material_form')
-                        <input type="hidden" name="active" value="1">
-                        <div class="row">
-                            <div class="col-md-4 mt-5">
-                                <div class="form-group">
-                                    <input type="button" value="{{trans('lang.submit')}}" id="submit-btn"
-                                        class="btn btn-primary">
-                                </div>
-                            </div>
+        {!! Form::open(['url' => action('RawMaterialController@store'), 'id' => 'product-form', 'method'
+        =>
+        'POST', 'class' => '', 'enctype' => 'multipart/form-data']) !!}
+        @include('raw_material.partial.create_raw_material_form')
+        <input type="hidden" name="active" value="1">
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="button" value="{{trans('lang.submit')}}" id="submit-btn"
+                                class="btn btn-primary">
                         </div>
-                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
     </div>
+
+
 </section>
 
 <div class="modal fade" id="product_cropper_modal" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">

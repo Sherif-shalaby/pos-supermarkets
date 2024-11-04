@@ -9,10 +9,10 @@
         {!! Form::open(['url' => action('ExpenseCategoryController@update', $expense_category->id), 'method' => 'put'])
         !!}
         <div class="modal-body">
-            <div class="row">
+            <div class="row locale_dir">
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="name">@lang('lang.name')</label>
+                        <label class="locale_label mb-1" for="name">@lang('lang.name')</label>
                         <input type="text" class="form-control" value="{{$expense_category->name}}" name="name"
                             id="name">
                     </div>

@@ -10,10 +10,10 @@
         {!! Form::open(['url' => action('LeaveController@store'), 'method' => 'post', 'enctype' =>
         'multipart/form-data']) !!}
         <div class="modal-body">
-            <div class="row">
+            <div class="row locale_dir">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="employee_id">@lang('lang.employee')</label>
+                        <label class="locale_label mb-1" for="employee_id">@lang('lang.employee')</label>
                         @if (auth()->user()->can('superadmin') || auth()->user()->is_admin == 1)
                         {!! Form::select('employee_id', $employees, $this_employee_id, ['class' => 'form-control
                         selectpicker', 'id' =>
@@ -42,45 +42,45 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="leave_type_id">@lang('lang.select_type_of_leave')</label>
+                        <label class="locale_label mb-1" for="leave_type_id">@lang('lang.select_type_of_leave')</label>
                         {!! Form::select('leave_type_id', $leave_types, false, ['class' => 'form-control', 'required',
                         'placeholder' => 'Please Select']) !!}
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <label for="start_date">@lang('lang.start_date')</label>
+                    <label class="locale_label mb-1" for="start_date">@lang('lang.start_date')</label>
                     <input class="form-control" type="date" id="start_date" name="start_date" required>
                 </div>
                 <div class="col-md-4">
-                    <label for="end_date">@lang('lang.end_date')</label>
+                    <label class="locale_label mb-1" for="end_date">@lang('lang.end_date')</label>
                     <input class="form-control" type="date" id="end_date" name="end_date" required>
                 </div>
                 <div class="col-md-4">
-                    <label for="rejoining_date">@lang('lang.rejoining_date')</label>
+                    <label class="locale_label mb-1" for="rejoining_date">@lang('lang.rejoining_date')</label>
                     <input class="form-control" type="date" id="rejoining_date" name="rejoining_date" required>
                 </div>
                 <div class="col-md-4">
-                    <label for="paid_or_not_paid">@lang('lang.paid_not_paid')</label>
+                    <label class="locale_label mb-1" for="paid_or_not_paid">@lang('lang.paid_not_paid')</label>
                     {!! Form::select('paid_or_not_paid', ['paid' => 'Paid', 'not_paid' => 'Not Paid'], null, ['class' =>
                     'form-control', 'placeholder' => 'Please Select', 'id' => 'paid_or_not_paid', 'required']) !!}
                 </div>
                 <div class="col-md-4 if_paid hide">
-                    <label for="amount_to_paid">@lang('lang.amount_to_paid')</label>
+                    <label class="locale_label mb-1" for="amount_to_paid">@lang('lang.amount_to_paid')</label>
                     {!! Form::text('amount_to_paid', null, ['class' => 'form-control', 'placeholder' =>
                     __('lang.amount_to_paid'), 'id' => 'amount_to_paid']) !!}
                 </div>
                 <div class="col-md-4 if_paid hide">
-                    <label for="payment_date">@lang('lang.payment_date')</label>
+                    <label class="locale_label mb-1" for="payment_date">@lang('lang.payment_date')</label>
                     {!! Form::text('payment_date', null, ['class' => 'form-control datepicker', 'placeholder' =>
                     __('lang.payment_date'), 'id' => 'payment_date']) !!}
                 </div>
                 <div class="col-md-4">
-                    <label for="upload_files">@lang('lang.upload_files')</label><br>
+                    <label class="locale_label mb-1" for="upload_files">@lang('lang.upload_files')</label><br>
                     {!! Form::file('upload_files', null, ['class' => 'form-control', 'placeholder' =>
                     __('lang.upload_files'), 'id' => 'upload_files']) !!}
                 </div>
                 <div class="col-md-12">
-                    <label for="details">@lang('lang.details')</label>
+                    <label class="locale_label mb-1" for="details">@lang('lang.details')</label>
                     {!! Form::textarea('details', null, ['class' => 'form-control', 'rows' => 3, 'placeholder' =>
                     __('lang.details'), 'id' => 'details']) !!}
                 </div>

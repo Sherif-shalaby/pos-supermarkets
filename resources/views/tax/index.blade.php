@@ -15,7 +15,7 @@
 
             <x-slot name="buttons">
                 <a style="color: white" data-href="{{ action('TaxController@create') }}?type={{ $type }}"
-                    data-container=".view_modal" class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
+                    data-container=".view_modal" class="btn btn-modal btn-primary"><i class="dripicons-plus"></i>
                     @lang('lang.add')</a>
 
             </x-slot>

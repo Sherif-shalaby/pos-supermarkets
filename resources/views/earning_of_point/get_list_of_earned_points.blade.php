@@ -2,24 +2,22 @@
 @section('title', __('lang.list_of_earn_point_by_transactions'))
 
 @section('content')
-<div class="container-fluid no-print">
+<section class="forms py-2">
 
+    <div class="container-fluid px-2 no-print">
 
-    <div class="col-md-12">
-        <div class="card">
+        <x-page-title>
 
+            <h4 class="print-title">@lang('lang.list_of_earn_point_by_transactions')</h4>
 
-            <x-page-title>
+        </x-page-title>
 
-                <h4 class="print-title">@lang('lang.list_of_earn_point_by_transactions')</h4>
+        <div
+            class="top-controls py-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
 
-
-                <x-slot name="buttons">
-
-                </x-slot>
-            </x-page-title>
-            <div class="card-body">
-
+        </div>
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
                 <div class="table-responsive">
                     <table id="store_table" class="table dataTable">
                         <thead>
@@ -68,11 +66,15 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
+        <div
+            class="bottom-controls mt-1 p-1 d-flex justify-content-center justify-content-lg-start align-items-center flex-wrap">
+            <!-- Pagination and other controls can go here -->
+        </div>
+
     </div>
-</div>
+</section>
 @endsection
 
 @section('javascript')

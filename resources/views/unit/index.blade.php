@@ -11,7 +11,7 @@
                 <x-slot name="buttons">
                     @can('product_module.unit.create_and_edit')
                     <a style="color: white" data-href="{{action('UnitController@create')}}" data-container=".view_modal"
-                        class="btn btn-modal btn-info"><i class="dripicons-plus"></i>
+                        class="btn btn-modal btn-primary"><i class="dripicons-plus"></i>
                         @lang('lang.add_unit')</a>
                     @endcan
 

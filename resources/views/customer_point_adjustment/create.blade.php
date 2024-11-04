@@ -2,87 +2,85 @@
 @section('title', __('lang.customer_point_adjustment'))
 
 @section('content')
-<section class="forms">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
 
-                    <x-page-title>
+        <x-page-title>
 
-                        <h4>@lang('lang.customer_point_adjustment')</h4>
+            <h4>@lang('lang.customer_point_adjustment')</h4>
 
-
-                        <x-slot name="buttons">
-
-                        </x-slot>
-                    </x-page-title>
-                    {!! Form::open(['url' => action('CustomerPointAdjustmentController@store'), 'method' => 'post',
-                    'id' =>
-                    'sms_form', 'files' => true
-                    ]) !!}
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('store_id', __('lang.store'), []) !!}
-                                    {!! Form::select('store_id', $stores, false, ['class' => 'form-control
-                                    selectpicker', 'id' => 'store_id' ,'placeholder' =>
-                                    __('lang.please_select'), 'required']) !!}
-                                </div>
+        </x-page-title>
+        {!! Form::open(['url' => action('CustomerPointAdjustmentController@store'), 'method' => 'post',
+        'id' =>
+        'sms_form', 'files' => true
+        ]) !!}
+        <div class="card mt-1 mb-0">
+            <div class="card-body py-2 px-4">
+                <div class="col-md-12">
+                    <div class="row locale_dir">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('store_id', __('lang.store'), ['class' =>"locale_label mb-1"]) !!}
+                                {!! Form::select('store_id', $stores, false, ['class' => 'form-control
+                                selectpicker', 'id' => 'store_id' ,'placeholder' =>
+                                __('lang.please_select'), 'required']) !!}
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('customer_id', __('lang.customer'), []) !!}
-                                    {!! Form::select('customer_id', $customers, !empty(request()->customer_id) ?
-                                    request()->customer_id : false, ['class' => 'form-control
-                                    selectpicker', 'id' => 'customer_id', 'data-live-search' => "true", 'placeholder' =>
-                                    __('lang.please_select'), 'required']) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('current_balance', __('lang.current_balance'), []) !!}
-                                    {!! Form::text('current_balance', null, ['class' => 'form-control', 'id' =>
-                                    'current_balance' ,'placeholder' =>
-                                    __('lang.current_balance'), 'readonly']) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('add_new_balance', __('lang.add_new_balance'), []) !!}
-                                    {!! Form::text('add_new_balance', null, ['class' => 'form-control', 'id' =>
-                                    'add_new_balance' ,'placeholder' =>
-                                    __('lang.add_new_balance')]) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    {!! Form::label('new_balance', __('lang.new_balance'), []) !!}
-                                    {!! Form::text('new_balance', null, ['class' => 'form-control', 'id' =>
-                                    'new_balance' ,'placeholder' =>
-                                    __('lang.new_balance')]) !!}
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                {!! Form::label('notes', __('lang.notes'), []) !!}
-                                {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => 3]) !!}
-                            </div>
-
                         </div>
-                    </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('customer_id', __('lang.customer'), ['class' =>"locale_label mb-1"]) !!}
+                                {!! Form::select('customer_id', $customers, !empty(request()->customer_id) ?
+                                request()->customer_id : false, ['class' => 'form-control
+                                selectpicker', 'id' => 'customer_id', 'data-live-search' => "true", 'placeholder' =>
+                                __('lang.please_select'), 'required']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('current_balance', __('lang.current_balance'), ['class' =>"locale_label
+                                mb-1"]) !!}
+                                {!! Form::text('current_balance', null, ['class' => 'form-control', 'id' =>
+                                'current_balance' ,'placeholder' =>
+                                __('lang.current_balance'), 'readonly']) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('add_new_balance', __('lang.add_new_balance'), ['class' =>"locale_label
+                                mb-1"]) !!}
+                                {!! Form::text('add_new_balance', null, ['class' => 'form-control', 'id' =>
+                                'add_new_balance' ,'placeholder' =>
+                                __('lang.add_new_balance')]) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                {!! Form::label('new_balance', __('lang.new_balance'), ['class' =>"locale_label mb-1"])
+                                !!}
+                                {!! Form::text('new_balance', null, ['class' => 'form-control', 'id' =>
+                                'new_balance' ,'placeholder' =>
+                                __('lang.new_balance')]) !!}
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            {!! Form::label('notes', __('lang.notes'), ['class' =>"locale_label mb-1"]) !!}
+                            {!! Form::textarea('notes', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                        </div>
 
-                    <div class="col-sm-12">
-                        <button type="submit" name="submit" id="print" style="margin: 10px" value="save"
-                            class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.save' )</button>
-
                     </div>
-                    {!! Form::close() !!}
+                </div>
+
+                <div class="col-sm-12">
+                    <button type="submit" name="submit" id="print" style="margin: 10px" value="save"
+                        class="btn btn-primary pull-right btn-flat submit">@lang( 'lang.save' )</button>
 
                 </div>
             </div>
         </div>
+        {!! Form::close() !!}
+
     </div>
+
 </section>
 @endsection
 

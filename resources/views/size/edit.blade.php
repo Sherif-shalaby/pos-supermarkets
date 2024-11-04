@@ -10,15 +10,19 @@
             <h4 class="modal-title">@lang( 'lang.edit' )</h4>
         </x-modal-header>
 
-        <div class="modal-body">
-            <div class="form-group">
-                {!! Form::label('name', __( 'lang.name' ) . ':*') !!}
+        <div class="modal-body row locale_dir">
+            <div class="col-md-6">
+                {!! Form::label('name', __( 'lang.name' ) ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('name', $size->name, ['class' => 'form-control', 'placeholder' => __( 'lang.name' ),
                 'required' ])
                 !!}
             </div>
-            <div class="form-group">
-                {!! Form::label('size_code', __( 'lang.size_code' ) . ':*') !!}
+            <div class="col-md-6">
+                {!! Form::label('size_code', __( 'lang.size_code' ) ,[
+                'class' =>"locale_label mb-1 field_required"
+                ]) !!}
                 {!! Form::text('size_code', $size->size_code, ['class' => 'form-control', 'placeholder' => __(
                 'lang.size_code' )])
                 !!}

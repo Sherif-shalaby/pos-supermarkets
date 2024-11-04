@@ -2,19 +2,19 @@
 @section('title', __('lang.modules'))
 
 @section('content')
-<div class="col-md-12  no-print">
-    <div class="card">
+<section class="forms py-2">
+    <div class="container-fluid px-2">
+        <div class="col-md-12  no-print">
 
-        <x-page-title>
+            <x-page-title>
 
-            <h4>@lang('lang.modules')</h4>
+                <h4>@lang('lang.modules')</h4>
 
 
-            <x-slot name="buttons">
+                <x-slot name="buttons">
 
-            </x-slot>
-        </x-page-title>
-        <div class="card-body">
+                </x-slot>
+            </x-page-title>
             {!! Form::open(['url' => action('SettingController@updateModuleSettings'), 'method' => 'post', 'enctype' =>
             'multipart/form-data']) !!}
             <div class="row">
@@ -25,24 +25,34 @@
                 @continue
                 @endif
                 @endif
-                <div class="col-md-4">
-                    <div class="i-checks">
-                        <input id="{{$loop->index}}" name="module_settings[{{$key}}]" type="checkbox" @if(
-                            !empty($module_settings[$key]) ) checked @endif value="1" class="form-control-custom">
-                        <label for="{{$loop->index}}"><strong>{{__('lang.'.$key)}}</strong></label>
+                <div class="col-md-3">
+                    <div class="card mt-1 mb-0">
+                        <div class="card-body py-2 px-4 flex_center">
+                            <div class="i-checks toggle-pill-color flex_center flex-column">
+                                <input id="{{$loop->index}}" name="module_settings[{{$key}}]" type="checkbox" @if(
+                                    !empty($module_settings[$key]) ) checked @endif value="1"
+                                    class="form-control-custom">
+                                <label for="{{$loop->index}}">
+                                </label>
+                                <span>
+                                    <strong>{{__('lang.'.$key)}}</strong>
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
                 @endforeach
             </div>
-            <br>
+
             <div class="col-md-12">
                 <button type="submit" class="btn btn-primary">@lang('lang.save')</button>
             </div>
             {!! Form::close() !!}
+
         </div>
     </div>
-</div>
+</section>
 
 @endsection
 
