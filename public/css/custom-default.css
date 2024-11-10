@@ -733,9 +733,10 @@ nav.navbar .notifications .mark-read {
     width: 100%;
 }
 
-nav.navbar .nav-item {
+/* nav.navbar .nav-item {
     margin-left: 15px;
-}
+    background-color: #fff;
+} */
 
 nav.navbar .nav-item li.notifications a i {
     color: var(--primary-color);
