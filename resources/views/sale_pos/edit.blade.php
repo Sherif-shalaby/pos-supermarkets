@@ -20,6 +20,7 @@
                     {!! Form::open(['url' => action('SellPosController@update', $transaction->id), 'method' => 'PUT', 'files' => true, 'class' => 'pos-form', 'id' => 'edit_pos_form']) !!}
                     <div class="card">
                         <div class="card-body" style="padding: 0px 10px; !important">
+                            <input type="hidden" name="is_edit" id="is_edit" value="1">
                             <input type="hidden" name="transaction_id" id="transaction_id" value="{{ $transaction->id }}">
                             <input type="hidden" name="store_id" id="store_id" value="{{ $transaction->store_id }}">
                             <input type="hidden" name="customer_size_id_hidden" id="customer_size_id_hidden"
@@ -629,25 +630,25 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 {!! Form::label('start_date', __('lang.start_date'), []) !!}
-                                                {!! Form::text('start_date', null, ['class' => 'form-control', 'id' => 'rt_start_date']) !!}
+                                                {!! Form::text('start_date', null, ['class' => 'form-control filter_transactions', 'id' => 'rt_start_date']) !!}
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 {!! Form::label('end_date', __('lang.end_date'), []) !!}
-                                                {!! Form::text('end_date', null, ['class' => 'form-control', 'id' => 'rt_end_date']) !!}
+                                                {!! Form::text('end_date', null, ['class' => 'form-control filter_transactions', 'id' => 'rt_end_date']) !!}
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 {!! Form::label('rt_customer_id', __('lang.customer'), []) !!}
-                                                {!! Form::select('rt_customer_id', $customers, false, ['class' => 'form-control selectpicker', 'id' => 'rt_customer_id', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
+                                                {!! Form::select('rt_customer_id', $customers, false, ['class' => 'form-control selectpicker filter_transactions', 'id' => 'rt_customer_id', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 {!! Form::label('rt_created_by', __('lang.cashier'), []) !!}
-                                                {!! Form::select('rt_created_by', $cashiers, false, ['class' => 'form-control selectpicker', 'id' => 'rt_created_by', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
+                                                {!! Form::select('rt_created_by', $cashiers, false, ['class' => 'form-control selectpicker filter_transactions', 'id' => 'rt_created_by', 'data-live-search' => 'true', 'placeholder' => __('lang.all')]) !!}
                                             </div>
                                         </div>
                                     </div>
