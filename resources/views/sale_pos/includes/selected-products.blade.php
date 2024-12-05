@@ -53,7 +53,7 @@
         </div>
     </div>
 </div>
-<div class="col-12 totals table_room_hide" style="border-top: 2px solid #e4e6fc; padding-top: 10px;">
+<div class="col-12 px-1 totals table_room_hide " style=" padding-top: 10px;">
     <div class="row @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif justify-content-start align-items-center"
         style="gap: 8px">
         <div class="bg-primary text-white d-flex flex-column justify-content-center align-items-center rounded"
@@ -116,7 +116,7 @@
         </div>
 
 
-        <div class="col-sm-3">
+        <div class="">
             @if(auth()->user()->can('sp_module.sales_promotion.view')
             || auth()->user()->can('sp_module.sales_promotion.create_and_edit')
             || auth()->user()->can('sp_module.sales_promotion.delete'))
@@ -130,18 +130,18 @@
 
 <div class="col-md-12 table_room_show hide" style="border-top: 2px solid #e4e6fc; margin-top: 10px;">
     <div class="row">
-        <div class="col-md-8"></div>
-        <div class="col-md-4">
-            <div class="row">
+
+        <div class="col-md-12 row justify-content-center align-items-center">
+            <div class="row col-md-3 justify-content-center align-items-center">
                 <b>@lang('lang.total'): <span class="subtotal">0.00</span></b>
             </div>
-            <div class="row">
+            <div class="row col-md-3 justify-content-center align-items-center">
                 <b>@lang('lang.discount'): <span class="discount_span">0.00</span></b>
             </div>
-            <div class="row">
+            <div class="row col-md-3 justify-content-center align-items-center">
                 <b>@lang('lang.service'): <span class="service_value_span">0.00</span></b>
             </div>
-            <div class="row">
+            <div class="row col-md-3 justify-content-center align-items-center">
                 <b>@lang('lang.grand_total'): <span class="final_total_span">0.00</span></b>
             </div>
         </div>
@@ -152,28 +152,30 @@
 
 
 
-    <div class="row pt-4">
-        <div class="col-md-8">
-            <div class="row">
-                <button type="button" name="action" value="print" id="dining_table_print" class="btn mr-2 text-white"
-                    style="background: orange;">@lang('lang.print')</button>
+    <div class="row pt-2">
+        <div class="col-md-12">
+            <div class="row justify-content-center">
+                <button type="button" name="action" value="print" id="dining_table_print"
+                    class="btn py-2 col-md-2 mr-2 btn-primary text-white">@lang('lang.print')</button>
                 <button type="button" name="action" value="save" id="dining_table_save"
-                    class="btn mr-2 text-white btn-success">@lang('lang.save')</button>
+                    class="btn py-2 col-md-2 mr-2 btn-primary text-white">@lang('lang.save')</button>
                 <button data-method="cash" style="background: #0082ce" type="button"
-                    class="btn mr-2 payment-btn text-white" data-toggle="modal" data-target="#add-payment"
-                    data-backdrop="static" data-keyboard="false" id="cash-btn">@lang('lang.pay_and_close')</button>
+                    class="btn py-2 col-md-2 mr-2 btn-primary payment-btn text-white" data-toggle="modal"
+                    data-target="#add-payment" data-backdrop="static" data-keyboard="false"
+                    id="cash-btn">@lang('lang.pay_and_close')</button>
                 @if(auth()->user()->can('sp_module.sales_promotion.view')
                 || auth()->user()->can('sp_module.sales_promotion.create_and_edit')
                 || auth()->user()->can('sp_module.sales_promotion.delete'))
-                <button style="background-color: #d63031" type="button" class="btn mr-2 btn-md payment-btn text-white"
+                <button type="button" class="btn py-2 col-md-2 mr-2 btn-md btn-primary payment-btn text-white"
                     data-toggle="modal" data-target="#discount_modal">@lang('lang.random_discount')</button>
                 @endif
             </div>
-        </div>
-        <div class="col-md-4">
-            <button style="background-color: #ff0000;" type="button" class="btn text-white" id="cancel-btn"
+
+
+            <button type="button" class="btn py-2 col-md-2 btn-danger text-white" id="cancel-btn"
                 onclick="return confirmCancel()">
                 @lang('lang.cancel')</button>
+
         </div>
     </div>
 </div>

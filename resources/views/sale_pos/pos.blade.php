@@ -88,7 +88,7 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
 <section class="forms pos-section no-print">
     <div class="container-fluid px-0">
 
-        <div class="d-flex">
+        <div class="row">
             <audio id="mysoundclip1" preload="auto">
                 <source src="{{ asset('audio/beep-timber.mp3') }}">
                 </source>
@@ -102,120 +102,128 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                 </source>
             </audio>
 
-            <div class="@if (session('system_mode') == 'pos') col-md-12 @else col-md-6 @endif">
-
+            <div class="px-1  col-md-7">
                 {!! Form::open(['url' => action('SellPosController@store'), 'method' => 'post', 'files' => true, 'class'
                 => 'pos-form', 'id' => 'add_pos_form']) !!}
 
+                <div class="card">
+                    <input type="hidden" name="default_customer_id" id="default_customer_id"
+                        value="@if (!empty($walk_in_customer)) {{ $walk_in_customer->id }} @endif">
+                    <input type="hidden" name="row_count" id="row_count" value="0">
+                    <input type="hidden" name="customer_size_id_hidden" id="customer_size_id_hidden" value="">
+                    <input type="hidden" name="enable_the_table_reservation" id="enable_the_table_reservation"
+                        value="{{ App\Models\System::getProperty('enable_the_table_reservation') }}">
 
 
-                <div class="d-flex">
-                    <div class="card col-md-10">
-                        <div class="card-body" style="padding: 0px 10px; !important">
-                            <input type="hidden" name="default_customer_id" id="default_customer_id"
-                                value="@if (!empty($walk_in_customer)) {{ $walk_in_customer->id }} @endif">
-                            <input type="hidden" name="row_count" id="row_count" value="0">
-                            <input type="hidden" name="customer_size_id_hidden" id="customer_size_id_hidden" value="">
-                            <input type="hidden" name="enable_the_table_reservation" id="enable_the_table_reservation"
-                                value="{{ App\Models\System::getProperty('enable_the_table_reservation') }}">
+                    <div class="d-flex flex-wrap">
 
-
+                        <div class="col-md-12 main_settings">
                             <div class="row">
-
-                                <div class="col-md-12 main_settings">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                {!! Form::label('store_id', __('lang.store') . ':*', []) !!}
-                                                {!! Form::select('store_id', $stores, $store_pos->store_id, ['class' =>
-                                                'selectpicker form-control', 'data-live-search' => 'true', 'required',
-                                                'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                {!! Form::label('store_pos_id', __('lang.pos') . ':*', []) !!}
-                                                {!! Form::select('store_pos_id', $store_poses, $store_pos->id, ['class'
-                                                =>
-                                                'selectpicker form-control', 'data-live-search' => 'true', 'required',
-                                                'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <input type="hidden" name="setting_invoice_lang"
-                                                    id="setting_invoice_lang"
-                                                    value="{{ !empty(App\Models\System::getProperty('invoice_lang')) ? App\Models\System::getProperty('invoice_lang') : 'en' }}">
-                                                {!! Form::label('invoice_lang', __('lang.invoice_lang') . ':', []) !!}
-                                                {!! Form::select('invoice_lang', $languages + ['ar_and_en' => 'Arabic
-                                                and
-                                                English'], !empty(App\Models\System::getProperty('invoice_lang')) ?
-                                                App\Models\System::getProperty('invoice_lang') : 'en', ['class' =>
-                                                'form-control selectpicker', 'data-live-search' => 'true']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="form-group">
-                                                <input type="hidden" name="exchange_rate" id="exchange_rate" value="1">
-                                                <input type="hidden" name="default_currency_id" id="default_currency_id"
-                                                    value="{{ !empty(App\Models\System::getProperty('currency')) ? App\Models\System::getProperty('currency') : '' }}">
-                                                {!! Form::label('received_currency_id', __('lang.received_currency') .
-                                                ':',
-                                                []) !!}
-                                                {!! Form::select('received_currency_id', $exchange_rate_currencies,
-                                                !empty(App\Models\System::getProperty('currency')) ?
-                                                App\Models\System::getProperty('currency') : null, ['class' =>
-                                                'form-control
-                                                selectpicker', 'data-live-search' => 'true']) !!}
-                                            </div>
-                                        </div>
-
-                                        <div class="col-md-1" style="padding: 0 !important;">
-                                            <div class="form-group" style="margin-top: 31px;">
-                                                <select class="form-control" name="tax_id" id="tax_id">
-                                                    <option value="">No Tax</option>
-                                                    @foreach ($taxes as $tax)
-                                                    <option data-rate="{{ $tax['rate'] }}" @if (!empty($transaction) &&
-                                                        $transaction->tax_id == $tax['id']) selected @endif
-                                                        value="{{ $tax['id'] }}">{{ $tax['name'] }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <input type="hidden" name="tax_id_hidden" id="tax_id_hidden" value="">
-                                                <input type="hidden" name="tax_method" id="tax_method" value="">
-                                                <input type="hidden" name="tax_rate" id="tax_rate" value="0">
-                                                <input type="hidden" name="tax_type" id="tax_type" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-1">
-                                            <button type="button" class="btn btn-link btn-sm"
-                                                style="margin-top: 30px; padding: 0px !important;" data-toggle="modal"
-                                                data-target="#delivery-cost-modal"><img
-                                                    src="{{ asset('images/delivery.jpg') }}" alt="delivery"
-                                                    style="height: 35px; width: 40px;"></button>
-                                        </div>
-                                        @if (session('system_mode') == 'restaurant')
-                                        <div class="col-md-1">
-                                            <button type="button" style="padding: 0px !important;"
-                                                data-href="{{ action('DiningRoomController@getDiningModal') }}"
-                                                data-container="#dining_model"
-                                                class="btn btn-modal pull-right mt-4"><img
-                                                    src="{{ asset('images/black-table.jpg') }}" alt="black-table"
-                                                    style="width: 40px; height: 33px; margin-top: 7px;"></button>
-                                        </div>
-                                        @endif
-
-                                        <div id="offcanvas" class="offcanvas">
-                                            <button id="offcanvas-close" type="button"
-                                                class="offcanvas-close">×</button>
-                                            <h2>Products</h2>
-                                            @include('sale_pos.partials.right_side')
-                                        </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        {!! Form::label('store_id', __('lang.store') . ':*', []) !!}
+                                        {!! Form::select('store_id', $stores, $store_pos->store_id, ['class' =>
+                                        'selectpicker form-control', 'data-live-search' => 'true', 'required',
+                                        'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
                                     </div>
                                 </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        {!! Form::label('store_pos_id', __('lang.pos') . ':*', []) !!}
+                                        {!! Form::select('store_pos_id', $store_poses, $store_pos->id, ['class'
+                                        =>
+                                        'selectpicker form-control', 'data-live-search' => 'true', 'required',
+                                        'style' => 'width: 80%', 'placeholder' => __('lang.please_select')]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input type="hidden" name="setting_invoice_lang" id="setting_invoice_lang"
+                                            value="{{ !empty(App\Models\System::getProperty('invoice_lang')) ? App\Models\System::getProperty('invoice_lang') : 'en' }}">
+                                        {!! Form::label('invoice_lang', __('lang.invoice_lang') . ':', []) !!}
+                                        {!! Form::select('invoice_lang', $languages + ['ar_and_en' => 'Arabic
+                                        and
+                                        English'], !empty(App\Models\System::getProperty('invoice_lang')) ?
+                                        App\Models\System::getProperty('invoice_lang') : 'en', ['class' =>
+                                        'form-control selectpicker', 'data-live-search' => 'true']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input type="hidden" name="exchange_rate" id="exchange_rate" value="1">
+                                        <input type="hidden" name="default_currency_id" id="default_currency_id"
+                                            value="{{ !empty(App\Models\System::getProperty('currency')) ? App\Models\System::getProperty('currency') : '' }}">
+                                        {!! Form::label('received_currency_id', __('lang.received_currency') .
+                                        ':',
+                                        []) !!}
+                                        {!! Form::select('received_currency_id', $exchange_rate_currencies,
+                                        !empty(App\Models\System::getProperty('currency')) ?
+                                        App\Models\System::getProperty('currency') : null, ['class' =>
+                                        'form-control
+                                        selectpicker', 'data-live-search' => 'true']) !!}
+                                    </div>
+                                </div>
+                                <div class="col-md-1 px-0">
 
-                                <div class="col-md-12 main_settings">
-                                    <div class="row table_room_hide">
-                                        <div class="col-md-3">
+                                    {!! Form::label('', "tax" ,
+                                    ['class' => app()->isLocale('ar') ? 'mb-0 label-ar' : 'mb-0 label-en']) !!}
+                                    <select class="form-control" name="tax_id" id="tax_id">
+                                        @if(env('ISNoTax',true))
+                                        <option value="">No Tax</option>
+                                        @endif
+                                        @foreach ($taxes as $tax)
+                                        <option data-rate="{{ $tax['rate'] }}" @if ((!empty($transaction) &&
+                                            $transaction->tax_id ==
+                                            $tax['id'] ) ||
+                                            App\Models\System::getProperty('def_pos_tax_id') == $tax['id'] )
+                                            selected @endif
+                                            value="{{ $tax['id'] }}">{{ $tax['name'] }}</option>
+                                        @endforeach
+                                    </select>
+                                    <input type="hidden" name="tax_id_hidden" id="tax_id_hidden" value="">
+                                    <input type="hidden" name="tax_method" id="tax_method" value="">
+                                    <input type="hidden" name="tax_rate" id="tax_rate" value="0">
+                                    <input type="hidden" name="tax_type" id="tax_type" value="">
+
+                                </div>
+
+
+                                <div class="col-md-3 d-flex justify-content-between align-items-end">
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#delivery-cost-modal"><i class="fas fa-motorcycle"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-primary" data-toggle="modal"
+                                        data-target="#deposit_modal" data-toggle="tooltip"
+                                        title="@lang('lang.insurance_amount')">
+                                        <i class="fas fa-money-bill"></i>
+                                    </button>
+
+                                    <button type="button" class="btn btn-danger" id="print_and_draft"><i
+                                            class="dripicons-print"></i></button>
+                                    <input type="hidden" id="print_and_draft_hidden" name="print_and_draft_hidden"
+                                        value="">
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 main_settings">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex col-md-8 align-items-end px-0 table_room_hide " style="gap: 10px">
+                                    <div class="col-md-5 px-0">
+                                        <div class="d-flex flex-column">
+                                            <div class="text-primary border d-flex justify-content-between align-items-center rounded"
+                                                style="padding: 3px;min-width: 100px;">
+                                                <label class=" mb-0 text-primary p-1 bg-white rounded"
+                                                    style="font-weight:600"
+                                                    for="
+                                                                    customer_type_name">@lang('lang.customer_type'):</label>
+                                                <span style="font-size: 12px !important;font-weight: 600 !important;"
+                                                    class="customer_type_name"></span>
+                                            </div>
                                             {!! Form::label('customer_id', __('lang.customer'), []) !!}
                                             <div class="input-group my-group">
                                                 {!! Form::select('customer_id', $customers, !empty($walk_in_customer) ?
@@ -232,124 +240,104 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                                 </span>
                                             </div>
                                         </div>
-                                        <div class="col-md-1">
-                                            <button type="button" class="btn btn-primary" style="margin-top: 30px;"
-                                                data-toggle="modal"
-                                                data-target="#contact_details_modal">@lang('lang.details')</button>
-                                        </div>
+                                    </div>
 
-                                        <div class="col-md-2 flex_center flex-column">
-                                            <label for="customer_type_name">@lang('lang.customer_type'):
-                                            </label>
-                                            <span class="customer_type_name"></span>
-                                        </div>
-                                        <div class="col-md-1 flex_center flex-column">
-                                            <label for="customer_balance">@lang('lang.balance'):
-                                            </label>
-                                            <span class="customer_balance">{{ @num_format(0) }}</span>
-                                        </div>
-                                        <div class="col-md-1 flex_center flex-column">
-                                            <label for="points">@lang('lang.points'):
-                                            </label>
-                                            <span class="points"><span class="customer_points_span">{{
-                                                    @num_format(0)
-                                                    }}</span></span>
-                                            {{-- <label for="staff_note">@lang('lang.note'): --}}
+                                    <div class=" d-flex justify-content-between align-items-center" style="gap: 10px">
+                                        <div class="d-flex flex-column" style="gap: 3px;margin-top:2px">
+                                            <div class="text-primary border d-flex flex-column justify-content-center align-items-center rounded"
+                                                style="padding: 3px;min-width: 70px;">
+                                                <label class="text-center text-primary w-100 mb-0 px-3 bg-white rounded"
+                                                    style="font-weight:600"
+                                                    for="customer_balance">@lang('lang.balance')</label>
+                                                <span style="font-size: 12px !important;font-weight: 600 !important;"
+                                                    class="customer_balance">{{
+                                                    @num_format(0) }}</span>
+                                            </div>
+                                            <div class="text-primary border d-flex flex-column justify-content-center align-items-center rounded"
+                                                style="padding: 3px;min-width: 70px;">
+                                                <label class="text-center text-primary w-100 mb-0 px-3 bg-white rounded"
+                                                    style="font-weight:600" for="points">@lang('lang.points')</label>
 
+                                                <span style="font-size: 12px !important;font-weight: 600 !important;"
+                                                    class="points"><span class="customer_points_span">{{ @num_format(0)
+                                                        }}</span></span>
                                                 <span class="staff_note small"></span>
-                                        </div>
-                                        <div class="">
-                                            <button type="button" class="btn btn-danger btn-xs pull-right"
-                                                style="margin-top: 38px;" data-toggle="modal"
-                                                data-target="#non_identifiable_item_modal">@lang('lang.non_identifiable_item')</button>
-                                        </div>
-                                        <div class="mx-2">
-                                            <button type="button" class="btn btn-danger btn-xs  pull-right"
-                                                style="margin-top: 38px;" id="print_and_draft"><i
-                                                    class="dripicons-print"></i></button>
-                                            <input type="hidden" id="print_and_draft_hidden"
-                                                name="print_and_draft_hidden" value="">
-                                        </div>
-                                    </div>
-
-
-                                    <div class="row table_room_show hide">
-                                        <div class="col-md-4">
-                                            <div class=""
-                                                style="padding: 5px 5px; background:#0082ce; color: #fff; font-size: 20px; font-weight: bold; text-align: center; border-radius: 5px;">
-                                                <span class="room_name"></span>
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
-                                            <label for=""
-                                                style="font-size: 20px !important; font-weight: bold; text-align: center; margin-top: 3px;">@lang('lang.table'):
-                                                <span class="table_name"></span></label>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="input-group my-group">
-                                                {!! Form::select('service_fee_id', $service_fees, null, ['class' =>
-                                                'form-control', 'placeholder' => __('lang.select_service'), 'id' =>
-                                                'service_fee_id']) !!}
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="service_fee_id_hidden" id="service_fee_id_hidden"
-                                            value="">
-                                        <input type="hidden" name="service_fee_rate" id="service_fee_rate" value="0">
-                                        <input type="hidden" name="service_fee_value" id="service_fee_value" value="0">
                                     </div>
+                                    <div class="px-0 text-center">
+                                        <button type="button" class="btn btn-danger mb-1 mt-1 mb-xl-1 w-100"
+                                            data-toggle="modal"
+                                            data-target="#non_identifiable_item_modal">@lang('lang.non_identifiable_item')</button>
 
-
-                                    @include('sale_pos.includes.search')
-
-                                    @include('sale_pos.includes.selected-products')
-
+                                        <button type="button" class="btn btn-primary w-75" data-toggle="modal"
+                                            data-target="#contact_details_modal">@lang('lang.details')</button>
+                                    </div>
                                 </div>
+
+
+
+
+                                @include('sale_pos.includes.search')
                             </div>
 
-                        </div>
 
-
-                        <div class="payment-amount table_room_hide">
-                            <h2 class="bg-primary text-white">{{ __('lang.grand_total') }} <span
-                                    class="final_total_span">0.00</span></h2>
-                        </div>
-                        @php
-                        $default_invoice_toc = App\Models\System::getProperty('invoice_terms_and_conditions');
-                        if (!empty($default_invoice_toc)) {
-                        $toc_hidden = $default_invoice_toc;
-                        } else {
-                        $toc_hidden = array_key_first($tac);
-                        }
-                        $term=App\Models\TermsAndCondition::where('default','1')->first();
-
-                        @endphp
-                        <input type="hidden" name="terms_and_condition_hidden" id="terms_and_condition_hidden"
-                            value="{{ $toc_hidden }}">
-
-                        @include('sale_pos.includes.terms-and-conditions')
-
-
-                    </div>
-
-                    <div class="col-md-2">
-                        <!-- product list -->
-
-                        <!-- navbar-->
-                        <header class="header">
-                            <nav class="navbar">
-                                <div class="">
-                                    <div class="navbar-holder d-flex align-items-center justify-content-between">
-
-                                        @include('sale_pos.includes.header')
-
+                            <div class="row table_room_show hide col-md-12">
+                                <div class="col-md-3 d-flex justify-content-center align-items-center">
+                                    <div class="w-100"
+                                        style="padding: 5px 5px; background:#0082ce; color: #fff; font-size: 20px; font-weight: bold; text-align: center; border-radius: 5px;">
+                                        <span class="room_name"></span>
                                     </div>
-                            </nav>
-                        </header>
+                                </div>
+                                <div class="col-md-3 d-flex justify-content-center align-items-center">
+                                    <label for=""
+                                        style="font-size: 20px !important; font-weight: bold; text-align: center; margin-top: 3px;">@lang('lang.table'):
+                                        <span class="table_name"></span></label>
+                                </div>
+                                <div class="col-md-3 d-flex justify-content-center align-items-center">
+                                    <div class="input-group my-group">
+                                        {!! Form::select('service_fee_id', $service_fees, null, ['class' =>
+                                        'form-control', 'placeholder' => __('lang.select_service'), 'id' =>
+                                        'service_fee_id']) !!}
+                                    </div>
+                                </div>
+                                <input type="hidden" name="service_fee_id_hidden" id="service_fee_id_hidden" value="">
+                                <input type="hidden" name="service_fee_rate" id="service_fee_rate" value="0">
+                                <input type="hidden" name="service_fee_value" id="service_fee_value" value="0">
+                            </div>
 
+                            @include('sale_pos.includes.selected-products')
 
-                        @include('sale_pos.includes.payment')
+                        </div>
                     </div>
+
+
+
+
+                    {{-- <div class="payment-amount table_room_hide">
+                        <h2 class="bg-primary text-white">{{ __('lang.grand_total') }} <span
+                                class="final_total_span">0.00</span></h2>
+                    </div> --}}
+                    @php
+                    $default_invoice_toc = App\Models\System::getProperty('invoice_terms_and_conditions');
+                    if (!empty($default_invoice_toc)) {
+                    $toc_hidden = $default_invoice_toc;
+                    } else {
+                    $toc_hidden = array_key_first($tac);
+                    }
+                    $term=App\Models\TermsAndCondition::where('default','1')->first();
+
+                    @endphp
+                    <input type="hidden" name="terms_and_condition_hidden" id="terms_and_condition_hidden"
+                        value="{{ $toc_hidden }}">
+
+                    @include('sale_pos.includes.terms-and-conditions')
+
+
+                    @include('sale_pos.includes.payment')
                 </div>
+
+
 
                 @include('sale_pos.partials.payment_modal')
                 @include('sale_pos.partials.discount_modal')
@@ -366,6 +354,21 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
             </div>
 
 
+            <div class="card m-0 px-1  col-md-5">
+                <!-- navbar-->
+                <header class="header">
+                    <nav class="navbar">
+                        <div class="">
+                            <div class="navbar-holder d-flex align-items-center justify-content-between">
+
+                                @include('sale_pos.includes.header')
+
+                            </div>
+                    </nav>
+                </header>
+
+                @include('sale_pos.partials.right_side')
+            </div>
 
             <!-- recent transaction modal -->
             @include('sale_pos.includes.recent-transaction')
