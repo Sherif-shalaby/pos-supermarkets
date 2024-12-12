@@ -45,7 +45,8 @@
                                     <div class="col-md-6 mt-1">
                                         <label>@lang('lang.payment_method'): *</label>
                                         {!! Form::select('payments[0][method]', $payment_types, null, ['class' =>
-                                        'form-control method payment_way', 'required']) !!}
+                                        'form-control method payment_way', 'required','id' => 'payment-method-select'])
+                                        !!}
                                     </div>
                                     <div class="col-md-6 mt-1 text-red">
                                         <label class="discount_lable">@lang('lang.discount'):</label>
