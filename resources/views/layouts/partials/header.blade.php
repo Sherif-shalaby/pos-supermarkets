@@ -51,6 +51,8 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                         </a>
                     </li>
 
+
+
                     <li class="nav-item">
                         <button id="power_off_btn" data-toggle="tooltip" data-title="@lang('lang.shut_down')"
                             style="border-radius:8px;width: 35px;height: 35px;"
@@ -74,7 +76,8 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                     </li>
                     @endcan
 
-                    <li class="nav-item"><a id="btnFullscreen" style="border-radius:8px;width: 35px;height: 35px;"
+                    <li class="nav-item">
+                        <a id="btnFullscreen" style="border-radius:8px;width: 35px;height: 35px;"
                             class="btn bg-white no-print d-flex justify-content-center align-items-center">
                             <i class="dripicons-expand m-0"></i></a>
                     </li>

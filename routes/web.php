@@ -64,9 +64,9 @@ Route::group(['middleware' => ['auth', 'SetSessionData', 'language', 'timezone']
     Route::post('product/convolutions/storeStockRemoved', 'ProductController@storeStockRemoved')->name("storeStockRemoved");
     Route::post('product/convolutions/storeStockDamaged', 'ProductController@storeStockDamaged')->name("storeStockDamaged");
     Route::post('product/convolutions/deleteExpiryRow', 'ProductController@deleteExpiryRow')->name("deleteExpiryRow");
-   Route::get('product/toggle-appearance-pos/{id}', 'ProductController@toggleAppearancePos');
+    Route::get('product/toggle-appearance-pos/{id}', 'ProductController@toggleAppearancePos');
 
-//    Route::post('product/remove_expiry/{id}', 'ProductController@send_remove_damage');
+    //    Route::post('product/remove_expiry/{id}', 'ProductController@send_remove_damage');
     Route::resource('product', ProductController::class);
     Route::post('product/multiDeleteRow', 'ProductController@multiDeleteRow');
     Route::post('/update-column-visibility', 'ProductController@updateColumnVisibility');
@@ -285,7 +285,7 @@ Route::group(['middleware' => ['auth', 'SetSessionData', 'language', 'timezone']
         Route::get('send-login-details/{employee_id}', 'EmployeeController@sendLoginDetails');
         Route::get('toggle-active/{employee_id}', 'EmployeeController@toggleActive');
         Route::get('employee/get-dropdown', 'EmployeeController@getDropdown');
-        Route::get('print/employee-barcode/{id}','EmployeeController@printEmployeeBarcode')->name('print_employee_barcode');
+        Route::get('print/employee-barcode/{id}', 'EmployeeController@printEmployeeBarcode')->name('print_employee_barcode');
         Route::resource('employee', EmployeeController::class);
         Route::resource('leave-type', LeaveTypeController::class);
 
@@ -326,7 +326,7 @@ Route::group(['middleware' => ['auth', 'SetSessionData', 'language', 'timezone']
     Route::get('cash/add-cash-in/{cash_register_id}', 'CashController@addCashIn');
     Route::post('cash/save-add-cash-in', 'CashController@saveAddCashIn');
     Route::get('cash/show-latest-payment-details/{id}', 'CashController@showLatestPaymentDetails');
-    
+
     Route::resource('cash', CashController::class);
     Route::resource('cash-out', CashOutController::class);
     Route::resource('cash-in', CashInController::class);
@@ -400,6 +400,16 @@ Route::group(['middleware' => ['auth', 'SetSessionData', 'language', 'timezone']
 
     Route::resource('settings', SettingController::class);
 
+
+
+    Route::get('payment-method/add-type/{payment_method_id}', 'PaymentMethodTypeController@addType');
+    Route::post('payment-method/store-type', 'PaymentMethodTypeController@storeType');
+    Route::get('payment-method/get-types/{payment_method_id}', 'PaymentMethodTypeController@getTypes');
+    Route::put('payment-method/get-types/{payment_method_id}', 'PaymentMethodTypeController@updateTypes');
+
+
+    Route::get('payment-method-change-status/{dataId}/{status}', 'PaymentMethodController@changeStatus');
+    Route::resource('payment-methods', PaymentMethodController::class);
 
 
 

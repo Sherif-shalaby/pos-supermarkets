@@ -71,6 +71,7 @@
                                             {!! Form::select('payments[0][method]', $payment_types, null, [
                                             'class' => 'modal-input method payment_way',
                                             'required',
+                                            'id' => 'payment-method-select'
                                             ]) !!}
                                         </div>
                                         <div

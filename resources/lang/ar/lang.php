@@ -1462,5 +1462,11 @@ return [
     'invoice' => 'الفاتورة',
     'classification' => 'تصنيف',
     'products_filter' => "فلاتر المنتجات",
-    'products_other_filter' => "فلاتر اخرى للمنتجات"
+    'products_other_filter' => "فلاتر اخرى للمنتجات",
+    'add_types' => 'أضف أنواع',
+    'view_types' => 'عرض الأنواع',
+    'add_payment_method' => 'اضافة وسيلة دفع جديدة',
+    'payment_methods' => 'وسائل الدفع في الكاشير',
+    'is_active' => 'الحالة',
+
 ];

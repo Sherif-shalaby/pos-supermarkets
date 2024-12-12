@@ -9,6 +9,21 @@
 @php
 $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
 @endphp
+@php
+$pay_button_show = App\Models\PaymentMethod::where('name' , '=' ,"Pay")->first()['is_active'];
+$quick_pay_button_show = App\Models\PaymentMethod::where('name' , '=' ,"Quick Pay")->first()['is_active'];
+$other_online_payments_button_show =
+App\Models\PaymentMethod::where('name' , '=' ,"Other Online Payments")->first()['is_active'];
+$draft_button_show = App\Models\PaymentMethod::where('name' , '=' ,"Draft")->first()['is_active'];
+$view_draft_button_show = App\Models\PaymentMethod::where('name' , '=' ,"View Draft")->first()['is_active'];
+$online_orders_button_show = App\Models\PaymentMethod::where('name' , '=' ,"Online Orders")->first()['is_active'];
+$pay_later_button_show = App\Models\PaymentMethod::where('name' , '=' ,"Pay Later")->first()['is_active'];
+$recent_transaction_button_show =
+App\Models\PaymentMethod::where('name' , '=' ,"Recent Transactions")->first()['is_active'];
+$bank_transfer_button_show = App\Models\PaymentMethod::where('name' , '=' ,"Bank Transfer")->first()['is_active'];
+
+$payment_methods = App\Models\PaymentMethod::where('is_default',0)->get();
+@endphp
 <section class="forms pos-section no-print p-0">
     <div class="container-fluid">
 
@@ -936,15 +951,17 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
 
                     <div class="payment-options row table_room_hide"
                         style=" width: @if (session('system_mode') == 'pos' || session('system_mode') == 'garments' || session('system_mode') == 'supermarket') 100%; @else 50%; @endif">
+
                         <div class="col-md-12 flex-wrap d-flex justify-content-start justify-content-lg-center align-items-center mb-3  @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif"
                             style="font-size: 16px;font-weight: 600">
+                            @if ($pay_button_show)
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button data-method="cash"
                                     style="background: var(--secondary-color);display: flex;justify-content: center;gap: 10px;"
-                                    type="button" class="btn btn-custom w-75 pos-button payment-btn" data-toggle="modal"
-                                    data-target="#add-payment" data-backdrop="static" data-keyboard="false"
-                                    id="cash-btn">
+                                    type="button" class="btn btn-custom payment-modal-btn w-75 pos-button payment-btn"
+                                    data-toggle="modal" data-target="#add-payment" data-backdrop="static"
+                                    data-keyboard="false" id="cash-btn">
                                     <div style="width: 18px">
                                         <img class="w-100 h-100"
                                             src="{{ asset('front/images/icons Png/Icon awesome-money-check-alt.png') }}"
@@ -953,15 +970,16 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                     @lang('lang.pay')
                                 </button>
                             </div>
-                            <div
+                            @endif
+                            {{-- <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button data-method="coupon" style="background: var(--secondary-color)" type="button"
                                     class="btn  w-75 pos-button btn-custom" data-toggle="modal"
                                     data-target="#coupon_modal" id="coupon-btn"><i class="fa fa-tag"></i>
                                     @lang('lang.coupon')</button>
-                            </div>
+                            </div> --}}
 
-
+                            @if ($other_online_payments_button_show)
                             @if (session('system_mode') != 'restaurant')
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
@@ -979,6 +997,8 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                 </button>
                             </div>
                             @endif
+                            @endif
+                            @if ($draft_button_show)
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button data-method="draft"
@@ -992,6 +1012,7 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                     @lang('lang.draft')
                                 </button>
                             </div>
+                            @endif
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button style="background-color: #ff0000;" type="button"
@@ -1002,6 +1023,7 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                         </div>
                         <div
                             class="col-md-12 flex-wrap d-flex justify-content-start justify-content-lg-center align-items-center @if (app()->isLocale('ar')) flex-row-reverse @else flex-row @endif">
+                            @if ($recent_transaction_button_show)
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button
@@ -1015,7 +1037,8 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                     @lang('lang.recent_transactions')
                                 </button>
                             </div>
-
+                            @endif
+                            @if ($online_orders_button_show)
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button data-method="online-order"
@@ -1031,7 +1054,8 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                         class="badge badge-danger online-order-badge">0</span>
                                 </button>
                             </div>
-
+                            @endif
+                            @if ($pay_later_button_show)
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button data-method="pay-later"
@@ -1045,6 +1069,8 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                     @lang('lang.pay_later')
                                 </button>
                             </div>
+                            @endif
+                            @if ($view_draft_button_show)
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button data-method="draft"
@@ -1058,6 +1084,8 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                     @lang('lang.view_draft')
                                 </button>
                             </div>
+                            @endif
+                            @if ($quick_pay_button_show)
                             <div
                                 class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
                                 <button data-method="cash" style="background: var(--secondary-color)" type="button"
@@ -1065,6 +1093,23 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                         class="fa fa-money"></i>
                                     @lang('lang.quick_pay')</button>
                             </div>
+                            @endif
+
+                            @foreach ($payment_methods as $method)
+                            @if ($method->is_active)
+
+                            <div
+                                class="col-md-6 col-lg-2 mb-3 mb-lg-1 d-flex justify-content-center align-items-center">
+                                <button data-method="cash" style="background: var(--secondary-color)" type="button"
+                                    data-method-id="{{ $method->id }}"
+                                    data-method-types='@json(App\Models\PaymentMethodType::where("payment_method_id", $method->id)->pluck("name"))'
+                                    class="btn btn-custom pos-button w-75 payment-btn payment-modal-btn"
+                                    data-toggle="modal" data-target="#add-payment" data-backdrop="static"
+                                    data-keyboard="false"><i class="fa fa-money"></i>
+                                    {{ $method->name }}</button>
+                            </div>
+                            @endif
+                            @endforeach
                         </div>
                         {{-- <div class="column-5">
                             <button data-method="card" style="background: #0984e3" type="button"
@@ -1449,5 +1494,35 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                 });
             }
         });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const buttons = document.querySelectorAll('.payment-modal-btn');
+
+    buttons.forEach(button => {
+    button.addEventListener('click', function () {
+ // Get the data attributes
+    const methodId = button.getAttribute('data-method-id');
+    const methodTypes = JSON.parse(button.getAttribute('data-method-types')); // Parse JSON data
+
+// Target the select element
+const paymentSelect = document.querySelector('#payment-method-select');
+
+if (methodId && methodTypes && paymentSelect) {
+// Clear existing options
+paymentSelect.innerHTML = '';
+
+// Add new options from methodTypes
+methodTypes.forEach(type => {
+const option = document.createElement('option');
+option.value = type; // Set value attribute
+option.textContent = type; // Set displayed text
+paymentSelect.appendChild(option);
+});
+}
+
+    });
+    });
+    });
 </script>
 @endsection

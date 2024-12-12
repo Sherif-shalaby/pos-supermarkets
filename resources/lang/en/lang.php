@@ -1477,5 +1477,9 @@ return [
     'welcome' => 'Welcome',
     'classification' => 'Classification',
     'products_filter' => "Products Filter",
-    'products_other_filter' => "Products Other Filter"
+    'products_other_filter' => "Products Other Filter",
+    'add_types' => 'Add Types',
+    'view_types' => 'View Types',
+    'add_payment_method' => 'Add Payment Method',
+    'is_active' => 'Is Active',
 ];
