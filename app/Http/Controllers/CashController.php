@@ -56,7 +56,7 @@ class CashController extends Controller
         // if (!auth()->user()->can('superadmin') || auth()->user()->is_admin == 1 || !auth()->user()->can('cash.view_details.view')) {
         //     $query->where('user_id', Auth::user()->id);
         // }
-        
+
         if (auth()->user()->is_superadmin != 1 && auth()->user()->is_admin != 1 && !auth()->user()->can('cash.view_details.view')) {
             $query->where('user_id', Auth::user()->id);
         }
@@ -108,7 +108,7 @@ class CashController extends Controller
             DB::raw("SUM(IF(transaction_type = 'sell_return' AND pay_method = 'cash' AND cash_register_transactions.type = 'debit', amount, 0)) as total_sell_return"),
             DB::raw("SUM(IF(transaction_type = 'wages_and_compensation' AND pay_method = 'cash' AND cash_register_transactions.type = 'debit', amount, 0)) as total_wages_and_compensation")
         )
-        
+
             ->groupBy('cash_registers.id')->orderBy('cash_registers.created_at', 'desc')->get();
         //  SELECT SUM(amount)
         // FROM cash_register_transactions
@@ -178,7 +178,7 @@ class CashController extends Controller
         $cash_register->total_bank_transfer_sales =  $cash_register->total_bank_transfer_sales - $cash_register->total_refund_bank_transfer;
         $cash_register->total_cheque_sales =  $cash_register->total_cheque_sales - $cash_register->total_refund_cheque;
 
-        
+
         $total_latest_payments= DB::table('cash_register_transactions')
         ->where('cash_register_id', $cash_register->id)
         ->where('transaction_type', 'sell')
@@ -477,7 +477,7 @@ class CashController extends Controller
                     $cash_register->total_purchases - $cash_register->total_expenses - $cash_register->total_wages_and_compensation - $cash_register->total_sell_return;
             }
         }
-        
+
         //  SELECT SUM(amount)
         // FROM cash_register_transactions
         // WHERE cash_register_id = 1509
@@ -639,6 +639,7 @@ class CashController extends Controller
             $cash_register = $cr_query->select(
                 'cash_registers.*',
                 DB::raw("SUM(IF(transaction_type = 'sell', amount, 0)) as total_sale"),
+                DB::raw("SUM(IF(transaction_type = 'refund', amount, 0)) as total_refund"),
                 DB::raw("SUM(IF(transaction_type = 'sell' AND cash_register_transactions.type = 'credit' AND dining_table_id IS NOT NULL, amount, 0)) as total_dining_in"),
                 DB::raw("SUM(IF(transaction_type = 'sell' AND pay_method = 'cash' AND cash_register_transactions.type = 'credit' AND dining_table_id IS NOT NULL, amount, 0)) as total_dining_in_cash"),
                 DB::raw("SUM(IF(transaction_type = 'sell' AND pay_method = 'cash' AND cash_register_transactions.type = 'credit', amount, 0)) as total_cash_sales"),

@@ -86,7 +86,7 @@
 $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
 @endphp
 <section class="forms pos-section no-print">
-    <div class="container-fluid px-0">
+    <div class="container-fluid px-2">
 
         <div class="row">
             <audio id="mysoundclip1" preload="auto">
@@ -164,9 +164,10 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                     </div>
                                 </div>
                                 <div class="col-md-1 px-0">
-
+<div class="form-group">
                                     {!! Form::label('', "tax" ,
-                                    ['class' => app()->isLocale('ar') ? 'mb-0 label-ar' : 'mb-0 label-en']) !!}
+                                    []) !!}
+
                                     <select class="form-control" name="tax_id" id="tax_id">
                                         @if(env('ISNoTax',true))
                                         <option value="">No Tax</option>
@@ -185,6 +186,7 @@ $watsapp_numbers = App\Models\System::getProperty('watsapp_numbers');
                                     <input type="hidden" name="tax_rate" id="tax_rate" value="0">
                                     <input type="hidden" name="tax_type" id="tax_type" value="">
 
+                                </div>
                                 </div>
 
 
