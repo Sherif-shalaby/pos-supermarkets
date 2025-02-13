@@ -42,6 +42,7 @@
                 <div class="card-header d-flex align-items-center">
                     <h4>@lang('lang.yearly_report')</h4>
                 </div>
+
                 <div class="card-body">
                     <canvas id="saleChart" data-sale_chart_value="{{ json_encode($yearly_sale_amount) }}"
                         data-purchase_chart_value="{{ json_encode($yearly_purchase_amount) }}"
