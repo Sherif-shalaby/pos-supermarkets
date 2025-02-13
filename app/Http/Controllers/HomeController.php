@@ -164,7 +164,7 @@ class HomeController extends Controller
             if(in_array(date('m', $start), [4, 6, 9, 11])){
                 $end_date = date("Y") . '-' . date('m', $start) . '-' . '30';
                 } elseif (date('m', $start) == 2) {
-                    $end_date = date("Y") . '-' . date('m', $start) . '-' . '28';
+                $end_date = date("Y") . '-' . date('m', $start) . '-' . date("t", $start);
                 } else {
                     $end_date = date("Y") . '-' . date('m', $start) . '-' . '31';
                 }
