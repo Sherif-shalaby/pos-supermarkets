@@ -157,53 +157,24 @@ class HomeController extends Controller
         }
 
         // yearly report
-        // $start = strtotime(date("Y") . '-01-01');
-        // $end = strtotime(date("Y") . '-12-31');
-        // while ($start < $end) {
-        //     $start_date = date("Y") . '-' . date('m', $start) . '-' . '01';
-        //     if(in_array(date('m', $start), [4, 6, 9, 11])){
-        //         $end_date = date("Y") . '-' . date('m', $start) . '-' . '30';
-        //         } elseif (date('m', $start) == 2) {
-        //             $end_date = date("Y") . '-' . date('m', $start) . '-' . '29';
-        //         } else {
-        //             $end_date = date("Y") . '-' . date('m', $start) . '-' . '31';
-        //         }
-
-        //     $sale_amount =  $this->getSaleAmount($start_date, $end_date, $store_id, $store_pos_id);
-        //     $purchase_amount = $this->getPurchaseAmount($start_date, $end_date, $store_id, $store_pos_id);
-        //     $yearly_sale_amount[] = $sale_amount;
-        //     $yearly_purchase_amount[] = $purchase_amount;
-        //     $start = strtotime("+1 month", $start);
-        // }
-
-
-        $yearly_sale_amount = array_fill(0, 12, 0); // Ensure 12 elements with default value 0
-        $yearly_purchase_amount = array_fill(0, 12, 0); // Ensure 12 elements with default value 0
-
         $start = strtotime(date("Y") . '-01-01');
         $end = strtotime(date("Y") . '-12-31');
-
         while ($start < $end) {
-            $month_index = (int) date('m', $start) - 1; // Get zero-based index (0 for Jan, 1 for Feb, etc.)
+            $start_date = date("Y") . '-' . date('m', $start) . '-' . '01';
+            if(in_array(date('m', $start), [4, 6, 9, 11])){
+                $end_date = date("Y") . '-' . date('m', $start) . '-' . '30';
+                } elseif (date('m', $start) == 2) {
+                    $end_date = date("Y") . '-' . date('m', $start) . '-' . '28';
+                } else {
+                    $end_date = date("Y") . '-' . date('m', $start) . '-' . '31';
+                }
 
-            $start_date = date("Y") . '-' . date('m', $start) . '-01';
-            if (in_array(date('m', $start), [4, 6, 9, 11])) {
-                $end_date = date("Y") . '-' . date('m', $start) . '-30';
-            } elseif (date('m', $start) == 2) {
-                $end_date = date("Y") . '-' . date('m', $start) . '-29';
-            } else {
-                $end_date = date("Y") . '-' . date('m', $start) . '-31';
-            }
-
-            $sale_amount = $this->getSaleAmount($start_date, $end_date, $store_id, $store_pos_id);
+            $sale_amount =  $this->getSaleAmount($start_date, $end_date, $store_id, $store_pos_id);
             $purchase_amount = $this->getPurchaseAmount($start_date, $end_date, $store_id, $store_pos_id);
-
-            $yearly_sale_amount[$month_index] = $sale_amount;
-            $yearly_purchase_amount[$month_index] = $purchase_amount;
-
+            $yearly_sale_amount[] = $sale_amount;
+            $yearly_purchase_amount[] = $purchase_amount;
             $start = strtotime("+1 month", $start);
         }
-
         $start_date = !empty(request()->start_date) ? request()->start_date : new Carbon('first day of this month');
         $end_date = !empty(request()->end_date) ? request()->end_date : new Carbon('last day of this month');
 
